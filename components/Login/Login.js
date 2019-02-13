@@ -10,7 +10,8 @@ export default class Login extends React.Component {
       username: '',
       firstName: '',
       lastName: '',
-      password: ''
+      password: '',
+      passwordConfirmation: ''
     }
   }
 
@@ -60,6 +61,12 @@ export default class Login extends React.Component {
           placeholder='password'
           value={this.state.password}
           onChangeText={(value) => this.setState({password: value})}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder='confirm password'
+          value={this.state.passwordConfirmation}
+          onChangeText={(value) => this.setState({passwordConfirmation: value})}
         />
         <TouchableOpacity
         style={styles.button}

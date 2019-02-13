@@ -1,19 +1,27 @@
 import React from 'react';
 import  Login  from '../Login/Login';
+import Home from '../Home/Home'
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      showLogin: true
+      showLogin: false
     }
   }
+
+  showLogin = () => {
+    this.setState({showLogin: true})
+  }
+
   render() {
     const { showLogin } = this.state;
     let displayComponent;
     if(showLogin) {
        displayComponent = <Login />
+    } else {
+      displayComponent = <Home showLogin={this.showLogin}/>
     }
     return (
       <View style={styles.container}>
