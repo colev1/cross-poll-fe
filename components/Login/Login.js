@@ -3,32 +3,96 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'rea
 
 
 export default class Login extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       newUser: true,
-      username: '',
+      email: '',
       firstName: '',
       lastName: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      error: true,
+      errorMessage: ''
     }
   }
 
-  submitNewUser = (state) => {
-    console.log(state)
+  submitUser = () => {
+    if(this.state.newUser) {
+      this.submitNewUser()
+    } else {
+      this.submitExistingUser()
+    }
+  }
+
+  submitExistingUser = () => {
+    const { email, password } = this.state;
+    const postBody = {
+      email,
+      password
+    }
+    fetch('https://adoptr-be.herokuapp.com/api/v1/sessions', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then( response => response.json())
+    .then( result => this.checkForError(result))
+    .catch(error => console.log(error))
+  }
+
+  checkForError = (result) => {
+    console.log(result)
+    if(result.error) {
+      this.setState({
+        error: true,
+        errorMessage: result.error
+      })
+    } else {
+      this.props.updateUserToken(result.data.attributes.api_token)
+    }
+  }
+
+  submitNewUser = () => {
+    const { firstName, lastName, email, password, passwordConfirmation } = this.state;
+    const postBody = {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      password,
+      password_confirmation: passwordConfirmation
+    }
+    fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then( response => response.json())
+    .then( result => this.checkForError(result))
+    .catch(error => console.log(error))
   }
   
   toggleLogin = () => {
     this.setState({
-      newUser: !this.state.newUser
+      newUser: !this.state.newUser,
+      error: false,
+      errorMessage: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      passwordConfirmation: ''
     })
   }
 
   render() {
     return (
       <View style={styles.form}>
-        <Text style={styles.title}>  ADOPTR </Text>
+        <Text style={styles.title} >  AdoptR </Text>
           <TouchableOpacity onPress={this.toggleLogin}
             style={styles.signInButton}
           >
@@ -51,10 +115,11 @@ export default class Login extends React.Component {
           onChangeText={(value) => this.setState({lastName: value})}
         />
         <TextInput 
+          type='email'
           style={styles.input}
-          placeholder='username'
-          value={this.state.username}
-          onChangeText={(value) => this.setState({username: value})}
+          placeholder='email'
+          value={this.state.email}
+          onChangeText={(value) => this.setState({email: value})}
         />
         <TextInput
           style={styles.input}
@@ -63,14 +128,17 @@ export default class Login extends React.Component {
           onChangeText={(value) => this.setState({password: value})}
         />
         <TextInput
-          style={styles.input}
+          style={this.state.newUser ? styles.input : styles.hidden}
           placeholder='confirm password'
           value={this.state.passwordConfirmation}
           onChangeText={(value) => this.setState({passwordConfirmation: value})}
         />
+        <Text style={this.state.error ? styles.errorMessage : styles.hidden}>
+          {this.state.errorMessage}
+        </Text>
         <TouchableOpacity
         style={styles.button}
-        onPress={()=>this.submitNewUser(this.state)} > 
+        onPress={()=>this.submitUser()} > 
           <Text style={styles.submitButtonText}  > 
           submit 
           </Text>
