@@ -1,11 +1,23 @@
 import React from 'react';
+import  Login  from '../Login/Login';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      login: true
+    }
+  }
   render() {
+    const { login } = this.state;
+    let comp;
+    if(login) {
+       comp = <Login />
+    }
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        {comp}
       </View>
     );
   }
