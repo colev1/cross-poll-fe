@@ -3,11 +3,11 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'rea
 
 
 export default class Login extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       newUser: true,
-      username: '',
+      email: '',
       firstName: '',
       lastName: '',
       password: '',
@@ -15,8 +15,26 @@ export default class Login extends React.Component {
     }
   }
 
+
   submitNewUser = (state) => {
-    console.log(state)
+    const { firstName, lastName, email, password, passwordConfirmation } = state;
+    const postBody = {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      password,
+      password_confirmation: passwordConfirmation
+    }
+    fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then( response => response.json())
+    .then( result => this.props.updateUserToken(result.data.attributes.api_token))
+    .catch(error => console.log(error))
   }
   
   toggleLogin = () => {
@@ -52,9 +70,9 @@ export default class Login extends React.Component {
         />
         <TextInput 
           style={styles.input}
-          placeholder='username'
-          value={this.state.username}
-          onChangeText={(value) => this.setState({username: value})}
+          placeholder='email'
+          value={this.state.email}
+          onChangeText={(value) => this.setState({email: value})}
         />
         <TextInput
           style={styles.input}
@@ -63,7 +81,7 @@ export default class Login extends React.Component {
           onChangeText={(value) => this.setState({password: value})}
         />
         <TextInput
-          style={styles.input}
+          style={this.state.newUser ? styles.input : styles.hidden}
           placeholder='confirm password'
           value={this.state.passwordConfirmation}
           onChangeText={(value) => this.setState({passwordConfirmation: value})}

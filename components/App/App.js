@@ -7,19 +7,27 @@ export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      showLogin: false
+      showLogin: true,
+      userAPIToken: ''
     }
   }
 
   showLogin = () => {
-    this.setState({showLogin: true})
+    this.setState({showLogin: !this.state.showLogin})
+  }
+
+  updateUserToken = (token) => {
+    this.setState({userAPIToken: token})
+    this.showLogin()
   }
 
   render() {
     const { showLogin } = this.state;
     let displayComponent;
     if(showLogin) {
-       displayComponent = <Login />
+       displayComponent = <Login 
+       showLogin={this.showLogin}
+       updateUserToken={this.updateUserToken}/>
     } else {
       displayComponent = <Home showLogin={this.showLogin}/>
     }
