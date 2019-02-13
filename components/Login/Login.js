@@ -44,6 +44,7 @@ export default class Login extends React.Component {
   }
 
   checkForError = (result) => {
+    console.log(result)
     if(result.error) {
       this.setState({
         error: true,
@@ -77,14 +78,21 @@ export default class Login extends React.Component {
   
   toggleLogin = () => {
     this.setState({
-      newUser: !this.state.newUser
+      newUser: !this.state.newUser,
+      error: false,
+      errorMessage: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      passwordConfirmation: ''
     })
   }
 
   render() {
     return (
       <View style={styles.form}>
-        <Text style={styles.title}>  ADOPTR </Text>
+        <Text style={styles.title} >  AdoptR </Text>
           <TouchableOpacity onPress={this.toggleLogin}
             style={styles.signInButton}
           >
@@ -107,6 +115,7 @@ export default class Login extends React.Component {
           onChangeText={(value) => this.setState({lastName: value})}
         />
         <TextInput 
+          type='email'
           style={styles.input}
           placeholder='email'
           value={this.state.email}
