@@ -11,13 +11,51 @@ export default class Login extends React.Component {
       firstName: '',
       lastName: '',
       password: '',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      error: true,
+      errorMessage: ''
     }
   }
 
+  submitUser = () => {
+    if(this.state.newUser) {
+      this.submitNewUser()
+    } else {
+      this.submitExistingUser()
+    }
+  }
 
-  submitNewUser = (state) => {
-    const { firstName, lastName, email, password, passwordConfirmation } = state;
+  submitExistingUser = () => {
+    const { email, password } = this.state;
+    const postBody = {
+      email,
+      password
+    }
+    fetch('https://adoptr-be.herokuapp.com/api/v1/sessions', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then( response => response.json())
+    .then( result => this.checkForError(result))
+    .catch(error => console.log(error))
+  }
+
+  checkForError = (result) => {
+    if(result.error) {
+      this.setState({
+        error: true,
+        errorMessage: result.error
+      })
+    } else {
+      this.props.updateUserToken(result.data.attributes.api_token)
+    }
+  }
+
+  submitNewUser = () => {
+    const { firstName, lastName, email, password, passwordConfirmation } = this.state;
     const postBody = {
       first_name: firstName,
       last_name: lastName,
@@ -33,7 +71,7 @@ export default class Login extends React.Component {
       }
     })
     .then( response => response.json())
-    .then( result => this.props.updateUserToken(result.data.attributes.api_token))
+    .then( result => this.checkForError(result))
     .catch(error => console.log(error))
   }
   
@@ -86,9 +124,12 @@ export default class Login extends React.Component {
           value={this.state.passwordConfirmation}
           onChangeText={(value) => this.setState({passwordConfirmation: value})}
         />
+        <Text style={this.state.error ? styles.errorMessage : styles.hidden}>
+          {this.state.errorMessage}
+        </Text>
         <TouchableOpacity
         style={styles.button}
-        onPress={()=>this.submitNewUser(this.state)} > 
+        onPress={()=>this.submitUser()} > 
           <Text style={styles.submitButtonText}  > 
           submit 
           </Text>
