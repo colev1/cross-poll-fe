@@ -6,6 +6,7 @@ export default class Login extends React.Component {
   constructor() {
     super()
     this.state = {
+      newUser: true,
       username: '',
       firstName: '',
       lastName: '',
@@ -17,18 +18,30 @@ export default class Login extends React.Component {
     console.log(state)
   }
   
+  toggleLogin = () => {
+    this.setState({
+      newUser: !this.state.newUser
+    })
+  }
+
   render() {
     return (
       <View style={styles.form}>
         <Text style={styles.title}>  ADOPTR </Text>
+          <TouchableOpacity onPress={this.toggleLogin}>
+            <Text> sign in </Text>
+          </TouchableOpacity> 
+          <TouchableOpacity  onPress={this.toggleLogin}>
+          <Text> sign up </Text>
+          </TouchableOpacity > 
         <TextInput 
-          style={styles.input}
+          style={this.state.newUser ? styles.input : styles.hidden}
           placeholder='first name'
           value={this.state.firstName}
           onChangeText={(value) => this.setState({firstName: value})}
         />
         <TextInput 
-          style={styles.input}
+          style={this.state.newUser ? styles.input : styles.hidden}
           placeholder='last name'
           value={this.state.lastName}
           onChangeText={(value) => this.setState({lastName: value})}
@@ -48,9 +61,9 @@ export default class Login extends React.Component {
         <TouchableOpacity
         style={styles.button}
         onPress={()=>this.submitNewUser(this.state)} > 
-        <Text style={styles.buttonText}  > 
-        submit 
-        </Text>
+          <Text style={styles.buttonText}  > 
+          submit 
+          </Text>
         </TouchableOpacity>
       </View>
     )
@@ -58,32 +71,42 @@ export default class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  signInButtonsContainer: {
+    alignItems: 'center',
+    color: 'red',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   form: {
     backgroundColor: '#048BA8',
     fontSize: 60,
     width: '100%',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
   },
   input: {
-    fontSize: 48,
     backgroundColor: 'white',
-    shadowColor: '#000',
-    width: 360,
+    borderColor: 'black',
+    borderRadius: 10,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    fontSize: 48,
     height: 80,
-    textAlign: 'center',
+    shadowColor: '#000',
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
-    borderColor: 'black',
-    borderStyle: 'solid',
-    borderRadius: 10,
-    borderWidth: 2,
+    textAlign: 'center',
+    width: 360,
   },
   title: {
     fontSize: 64,
     color: 'white'
+  },
+  hidden: {
+    display: 'none'
   },
   button: {
     backgroundColor: 'white',
