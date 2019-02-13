@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
 
 
 export default class Login extends React.Component {
@@ -45,7 +45,13 @@ export default class Login extends React.Component {
           value={this.state.password}
           onChangeText={(value) => this.setState({password: value})}
         />
-        <Button title='submit' onPress={()=>this.submitNewUser(this.state)} /> 
+        <TouchableOpacity
+        style={styles.button}
+        onPress={()=>this.submitNewUser(this.state)} > 
+        <Text style={styles.buttonText}  > 
+        submit 
+        </Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -53,19 +59,42 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
   form: {
-    backgroundColor: 'blue',
+    backgroundColor: '#048BA8',
     fontSize: 60,
     width: '100%',
-    height: '90%',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
   },
   input: {
-    fontSize: 48
+    fontSize: 48,
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    width: 360,
+    height: 80,
+    textAlign: 'center',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderRadius: 10,
+    borderWidth: 2,
   },
   title: {
     fontSize: 64,
     color: 'white'
+  },
+  button: {
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderRadius: 10,
+    borderWidth: 2,
+    width: 300,
+  },
+  buttonText: {
+    fontSize: 60,
+    textAlign: 'center'
   }
 });
