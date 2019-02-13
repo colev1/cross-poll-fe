@@ -11,13 +11,13 @@ export default class App extends React.Component {
   }
   render() {
     const { login } = this.state;
-    let comp;
+    let displayComponent;
     if(login) {
-       comp = <Login />
+       displayComponent = <Login />
     }
     return (
       <View style={styles.container}>
-        {comp}
+        {displayComponent}
       </View>
     );
   }
@@ -29,5 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
 });
