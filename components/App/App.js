@@ -6,13 +6,13 @@ export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      login: true
+      showLogin: true
     }
   }
   render() {
-    const { login } = this.state;
+    const { showLogin } = this.state;
     let displayComponent;
-    if(login) {
+    if(showLogin) {
        displayComponent = <Login />
     }
     return (

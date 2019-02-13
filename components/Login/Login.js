@@ -28,11 +28,14 @@ export default class Login extends React.Component {
     return (
       <View style={styles.form}>
         <Text style={styles.title}>  ADOPTR </Text>
-          <TouchableOpacity onPress={this.toggleLogin}>
-            <Text> sign in </Text>
+          <TouchableOpacity onPress={this.toggleLogin}
+            style={styles.signInButton}
+          >
+            <Text style={styles.buttonText}> sign in </Text>
           </TouchableOpacity> 
-          <TouchableOpacity  onPress={this.toggleLogin}>
-          <Text> sign up </Text>
+          <TouchableOpacity  onPress={this.toggleLogin}
+          style={styles.signUpButton}>
+          <Text style={styles.buttonText}> sign up </Text>
           </TouchableOpacity > 
         <TextInput 
           style={this.state.newUser ? styles.input : styles.hidden}
@@ -61,7 +64,7 @@ export default class Login extends React.Component {
         <TouchableOpacity
         style={styles.button}
         onPress={()=>this.submitNewUser(this.state)} > 
-          <Text style={styles.buttonText}  > 
+          <Text style={styles.submitButtonText}  > 
           submit 
           </Text>
         </TouchableOpacity>
@@ -78,6 +81,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  buttonText: {
+    fontSize: 32
+  },
   form: {
     backgroundColor: '#048BA8',
     fontSize: 60,
@@ -89,11 +95,11 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: 'white',
     borderColor: 'black',
-    borderRadius: 10,
+    borderRadius: 24,
     borderStyle: 'solid',
     borderWidth: 2,
-    fontSize: 48,
-    height: 80,
+    fontSize: 32,
+    height: 66,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.8,
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 64,
-    color: 'white'
+    color: 'white',
   },
   hidden: {
     display: 'none'
@@ -112,12 +118,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'black',
     borderStyle: 'solid',
-    borderRadius: 10,
+    borderRadius: 24,
     borderWidth: 2,
     width: 300,
   },
-  buttonText: {
+  submitButtonText: {
     fontSize: 60,
-    textAlign: 'center'
+    textAlign: 'center',
   }
 });
