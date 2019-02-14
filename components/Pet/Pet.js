@@ -2,12 +2,14 @@ import React  from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { hamburgerIcon } from '../../assets/Hamburger_icon.svg.png';
+import APIkey from '../apiKey';
+import { cleanShelters } from '../helpers/helpers';
 
 export default class Pet extends React.Component {
   constructor(props) {
     super(props) 
     this.state = {
-      gestureName: ''
+      gestureName: '',
     }
   }
 
@@ -25,7 +27,7 @@ export default class Pet extends React.Component {
   }
 
   onSwipeLeft = () => {
-    console.log('swiping left')
+    this.props.fetchShelter()
   }
 
   render() {
@@ -34,6 +36,7 @@ export default class Pet extends React.Component {
       return <Text>Loading!</Text>
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
+      const { shelterName } = this.props;
       let image = photos[2]
       if (this.props.showInfo) {
         return (
@@ -44,16 +47,20 @@ export default class Pet extends React.Component {
               <Text>{breed}</Text>
               <Text>{age}</Text>
             </ImageBackground>
-            <View>
+            <View styles={styles.description}>
               <Text>{description}</Text>
-              <Text>{name} can be found at {shelterId}</Text>
+              <Text>{name} can be found at {shelterName}</Text>
             </View>
             <TouchableOpacity
             style={styles.contactButton}
           >
-            <Text style={styles.contactButtonText}> Contact {shelterId} </Text>
-          </TouchableOpacity>
-        </View>
+              <Text style={styles.contactButtonText}> Contact {shelterName} </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+            style={styles.backButton}
+          > 
+            </TouchableOpacity>
+          </View>
         )
       } else {
         return (
@@ -69,7 +76,10 @@ export default class Pet extends React.Component {
             </TouchableOpacity>
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
-              <Text style={styles.petName}>{name} </Text>
+            
+                <Text style={styles.petName}>{name}</Text>
+                <Text style={styles.shelterName}>{shelterName}</Text>
+              
             </ImageBackground>
         </GestureRecognizer>
         )
@@ -88,7 +98,7 @@ const styles = StyleSheet.create({
     color: 'white',
     position: 'absolute',
     bottom: 60,
-    left: 50
+    left: 20
   },
   swiper: {
     flex: 1,
@@ -126,6 +136,19 @@ const styles = StyleSheet.create({
     right: 120,
     top: 40,
     marginBottom: 40
+  },
+  description: {
+    height: 200,
+    width: 300
+  },
+  shelterName: {
+    color: 'white',
+    fontSize: 15,
+    position: 'absolute',
+    bottom: 30,
+    left: 20,
+    marginTop: 20
+
   }
 })
 
