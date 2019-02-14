@@ -1,12 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, Slider, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Slider, Button, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { RadioButtons } from 'react-native-radio-buttons'
+
 
 export default class Filter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      miles: 0,
-      animal: '',
+      miles: '',
+      selectedAnimal: '',
       size: ''
     }
   }
@@ -21,19 +23,53 @@ export default class Filter extends React.Component {
     })
   }
 
+  setSelectedAnimal = (selectedAnimal) => {
+    this.setState({
+      selectedAnimal
+    });
+  }
+
+  renderOption = (option, selected, onSelect, index) => {
+    const selectedStyle = selected ? styles.selectedRadio : styles.unselectedRadio
+    return (
+      <TouchableWithoutFeedback onPress={onSelect} key={index}>
+        <Text style={selectedStyle}>{option}</Text>
+      </TouchableWithoutFeedback>
+    )
+  }
+
+  renderContainer = (optionNodes) => {
+    return <View>{optionNodes}</View>;
+  }
+
+
   render() {
+    const animalOptions = [
+      "dogs",
+      "cats",
+      "small furry animals",
+      "barn animals"
+    ];
+
     if(this.props.showFilter) {
       return (
         <View style={styles.filterContainer}>
-          <Text style={styles.sliderTitle}> miles </Text>
+          <Text style={styles.sliderTitle}>miles: {this.state.miles} </Text>
             <Slider
               step={1}
               value={this.state.miles || 40}
               minimumValue={0}
-              maximumValue={100}
+              maximumValue={60}
               onValueChange={this.handleSliderChange}
               />
-              <Text>miles: {this.state.miles} </Text>
+              <RadioButtons
+                options={ animalOptions }
+                onSelection={ this.setSelectedAnimal }
+                selectedOption={this.state.selectedAnimal }
+                renderOption={ this.renderOption }
+                renderContainer={ this.renderContainer }
+              />
+              <Text>  {this.state.selectedAnimal} </Text>
         </View>
       )
     }
@@ -45,13 +81,16 @@ export default class Filter extends React.Component {
 
 const styles = StyleSheet.create({
   sliderTitle: {
-    // backgroundColor: 'blue',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    fontSize: 44,
+    alignSelf: 'center'
   },
   filterContainer: {
     width: 300,
     flex: 1,
     justifyContent: 'center'
+  },
+  selectedRadio: {
+    fontWeight: 'bold'
+
   }
 });
