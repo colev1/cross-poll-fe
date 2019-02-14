@@ -9,12 +9,8 @@ export default class Filter extends React.Component {
     this.state = {
       miles: '',
       selectedAnimal: '',
-      size: ''
+      selectedSize: ''
     }
-  }
-
-  componentDidMount = () => {
-    console.log('filter mounted')
   }
 
   handleSliderChange = (value) => {
@@ -29,31 +25,45 @@ export default class Filter extends React.Component {
     });
   }
 
+  setSelectedSize = (selectedSize) => {
+    this.setState({
+      selectedSize
+    });
+  }
+
   renderOption = (option, selected, onSelect, index) => {
     const selectedStyle = selected ? styles.selectedRadio : styles.unselectedRadio
     return (
-      <TouchableWithoutFeedback onPress={onSelect} key={index}>
+      <TouchableOpacity onPress={onSelect} key={index} style={styles.radioBorder}>
         <Text style={selectedStyle}>{option}</Text>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     )
   }
 
   renderContainer = (optionNodes) => {
-    return <View>{optionNodes}</View>;
+    return (<View style={styles.radioButtons}>
+        {optionNodes}
+          </View>)
   }
-
 
   render() {
     const animalOptions = [
       "dogs",
       "cats",
-      "small furry animals",
+      "furry animals",
       "barn animals"
     ];
+
+    const sizeOptions = [
+      "small",
+      "medium",
+      "large"
+    ]
 
     if(this.props.showFilter) {
       return (
         <View style={styles.filterContainer}>
+          <Text style={styles.adoptrHeader}> Adoptr </Text>
           <Text style={styles.sliderTitle}>miles: {this.state.miles} </Text>
             <Slider
               step={1}
@@ -62,14 +72,26 @@ export default class Filter extends React.Component {
               maximumValue={60}
               onValueChange={this.handleSliderChange}
               />
+              <Text style={styles.sliderTitle}> animal type: </Text>
               <RadioButtons
+                style={styles.radioButtons}
                 options={ animalOptions }
                 onSelection={ this.setSelectedAnimal }
                 selectedOption={this.state.selectedAnimal }
                 renderOption={ this.renderOption }
                 renderContainer={ this.renderContainer }
               />
-              <Text>  {this.state.selectedAnimal} </Text>
+              <Text style={styles.sliderTitle}> animal size: </Text>
+              <RadioButtons
+                options={ sizeOptions }
+                onSelection={ this.setSelectedSize }
+                selectedOption={this.state.selectedSize }
+                renderOption={ this.renderOption }
+                renderContainer={ this.renderContainer }
+              />
+              <TouchableOpacity style={styles.submitBtnContainer} >
+                <Text style={styles.submitBtn}> find a pet! </Text>
+              </TouchableOpacity>
         </View>
       )
     }
@@ -80,17 +102,66 @@ export default class Filter extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  adoptrHeader: {
+    fontFamily: 'Kohinoor Bangla',
+    fontSize: 60,
+    textAlign: 'center'
+  },
   sliderTitle: {
-    fontSize: 44,
+    fontSize: 32,
+    fontFamily: 'Kohinoor Bangla',
     alignSelf: 'center'
   },
   filterContainer: {
     width: 300,
-    flex: 1,
-    justifyContent: 'center'
+    height: 700,
+    justifyContent: 'space-around'
   },
   selectedRadio: {
-    fontWeight: 'bold'
-
-  }
+    fontWeight: 'bold',
+    fontSize: 20,
+    padding: 4,
+    fontFamily: 'Kohinoor Bangla'
+  },
+  radioButtons: {
+    alignItems: 'center',
+    width: '100%',
+    flexDirection: 'row',
+    // flexWrap: 'wrap',
+    // display: 'inline',
+    justifyContent: 'center',
+    padding: 2,
+    minWidth: 120
+    },
+  unselectedRadio: {
+    fontSize: 20,
+    padding: 4,
+    fontFamily: 'Kohinoor Bangla',
+    
+    },
+  radioBorder: {
+      borderRadius: 4,
+      borderWidth: 2,
+      borderColor: 'black',
+      margin: 4,
+      padding: 2,
+      height: 60,
+      alignItems: 'center',
+      // flexDirection: 'row',
+      justifyContent: 'center',
+      backgroundColor: 'white'
+    },
+    submitBtn: {
+      backgroundColor: 'white',
+      borderColor: 'black',
+      borderRadius: 4,
+      borderWidth: 2,
+      fontSize: 28,
+      padding: 16,
+      textAlign: 'center'
+    },
+    submitBtnContainer: {
+      // marginBottom: -80,
+      marginTop: 80
+    }
 });

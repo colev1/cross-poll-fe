@@ -15,7 +15,7 @@ export default class Home extends React.Component {
       petIndex: 0,
       gesture: '',
       showInfo: false,
-      showFilter: false,
+      showFilter: true,
       shelterName: ''
     }
   }
@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   homeContainer: {
+    
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
