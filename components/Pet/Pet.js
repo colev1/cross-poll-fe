@@ -28,34 +28,54 @@ export default class Pet extends React.Component {
   }
 
   render() {
-    if (this.props.pet) {
-      let image = this.props.pet.photos[2]
-      petDisplay = (
-      <ImageBackground source = {{uri: image}} style={styles.image}
-      imageStyle={styles.borderRad}>
-        <Text style={styles.petName}>{this.props.pet.name} </Text>
-      </ImageBackground>
-      )
-    } else {
-      petDisplay = <Text>Loading!</Text>
-    }
-    const config = {
-      velocityThreshold: 0.3,
-      directionalOffsetThreshold: 80
-    };
 
-    return (
-      <GestureRecognizer 
-      style={styles.swiper}
-      onSwipe={(direction, state) => this.onSwipe(direction, state)}
-      onSwipeLeft={(state) => this.onSwipeLeft(state)}
-      config={config}
-      >
-          {petDisplay}
-      </GestureRecognizer> 
-    )
+    if (!this.props.pet) {
+      return <Text>Loading!</Text>
+    } else {
+      const { name, breed, age, description, photos, shelterId } = this.props.pet;
+      let image = photos[2]
+      if (this.props.showInfo) {
+        return (
+          <View>
+            <ImageBackground source = {{uri: image}} style={styles.image}
+          imageStyle={styles.borderRad}>
+              <Text style={styles.petName}>{name} </Text>
+              <Text>{breed}</Text>
+              <Text>{age}</Text>
+            </ImageBackground>
+            <View>
+              <Text>{description}</Text>
+              <Text>{name} can be found at {shelterId}</Text>
+            </View>
+            <TouchableOpacity
+            style={styles.contactButton}
+          >
+            <Text style={styles.contactButtonText}> Contact {shelterId} </Text>
+          </TouchableOpacity>
+        </View>
+        )
+      } else {
+        return (
+          <GestureRecognizer 
+            style={styles.swiper}
+            onSwipe={(direction, state) => this.onSwipe(direction, state)}
+            onSwipeLeft={(state) => this.onSwipeLeft(state)}
+            config={config}
+          >
+            <ImageBackground source = {{uri: image}} style={styles.image}
+            imageStyle={styles.borderRad}>
+              <Text style={styles.petName}>{name} </Text>
+            </ImageBackground>
+        </GestureRecognizer>
+        )
+      }
+    } 
   } 
 }
+  const config = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80
+  };
 
 const styles = StyleSheet.create({
   petName: {
@@ -79,6 +99,12 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 30,
     borderWidth: 2
+  },
+  contactButton: {
+
+  },
+  contactButtonText: {
+
   }
 })
 
