@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import APIkey from '../apiKey';
 import cleanPets from '../helpers/helpers';
 import Pet from '../Pet/Pet';
+import Filter from '../Filter/Filter';
 import {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class Home extends React.Component {
@@ -12,7 +13,8 @@ export default class Home extends React.Component {
       allPets: [],
       petIndex: 0,
       gesture: '',
-      showInfo: false
+      showInfo: false,
+      showFilter: false
     }
   }
 
@@ -36,16 +38,23 @@ export default class Home extends React.Component {
       showInfo: true
     })
   }
+
+  showFilter = () => {
+    this.setState({
+      showFilter: true
+    })
+  }
   
   render() {
     const { allPets, petIndex, showInfo } = this.state;
     return ( 
       <View style={styles.homeContainer}>
-        <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo}/>
+        <Filter />
+        <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo}
+        showFilter={this.showFilter}/>
         <TouchableOpacity onPress={this.showInfo}
-            style={styles.infoButton}
-          >
-            <Text style={styles.infoButtonText}> more information </Text>
+            style={styles.infoButton}>
+          <Text style={styles.infoButtonText}> more information </Text>
         </TouchableOpacity>
       </View>
     )

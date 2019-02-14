@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground } from 'react-native';
+import React  from 'react';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import { hamburgerIcon } from '../../assets/Hamburger_icon.svg.png';
 
 export default class Pet extends React.Component {
   constructor(props) {
@@ -62,6 +63,9 @@ export default class Pet extends React.Component {
             onSwipeLeft={(state) => this.onSwipeLeft(state)}
             config={config}
           >
+            <TouchableOpacity onPress={this.props.showFilter}>
+              <Image source={require('../../assets/Hamburger_icon.svg.png')} style={styles.hamburgerIcon} />
+            </TouchableOpacity>
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
               <Text style={styles.petName}>{name} </Text>
@@ -105,6 +109,14 @@ const styles = StyleSheet.create({
   },
   contactButtonText: {
 
+  },
+  hamburgerIcon: {
+    height: 40,
+    width: 40,
+    position: 'relative',
+    right: 120,
+    top: 40,
+    marginBottom: 40
   }
 })
 
