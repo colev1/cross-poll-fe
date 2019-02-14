@@ -24,7 +24,7 @@ export default class App extends React.Component {
   render() {
     const { showLogin } = this.state;
     let displayComponent;
-    if(showLogin) {
+    if (showLogin) {
        displayComponent = <Login 
        showLogin={this.showLogin}
        updateUserToken={this.updateUserToken}/>

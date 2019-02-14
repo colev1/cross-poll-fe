@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import APIkey from '../apiKey';
-import cleanPets from '../helpers/helpers';
+import { cleanPets } from '../helpers/helpers';
 import Pet from '../Pet/Pet';
 import {swipeDirections} from 'react-native-swipe-gestures';
+import { cleanShelters } from '../helpers/helpers';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class Home extends React.Component {
       allPets: [],
       petIndex: 0,
       gesture: '',
-      showInfo: false
+      showInfo: false,
+      shelterName: ''
     }
   }
 
@@ -21,6 +23,18 @@ export default class Home extends React.Component {
     .then(response => response.json())
     .then(pets => cleanPets(pets.petfinder.pets.pet))
     .then(cleanPets => this.setState({allPets: cleanPets}))
+    .then(cleanPets => this.fetchShelter())
+    .catch(error => console.log(error))
+  }
+
+  fetchShelter = () => {
+    const { allPets, petIndex } = this.state;
+    let shelterId = allPets[petIndex].shelterId;
+    console.log('id', shelterId)
+    fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
+    .then(response => response.json()) 
+    .then(shelter => cleanShelters(shelter.petfinder.shelter))
+    .then(cleanShelter => this.setState({shelterName: cleanShelter.name}))
     .catch(error => console.log(error))
   }
 
@@ -44,12 +58,12 @@ export default class Home extends React.Component {
   }
   
   render() {
-    const { allPets, petIndex, showInfo } = this.state;
+    const { allPets, petIndex, showInfo, shelterName } = this.state;
 
     if (!showInfo) {
       return ( 
         <View style={styles.homeContainer}>
-          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo}/>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} fetchShelter={this.fetchShelter} shelterName={shelterName}/>
           <TouchableOpacity onPress={this.showInfo}
               style={styles.infoButton}
             >
@@ -60,7 +74,7 @@ export default class Home extends React.Component {
     } else {
       return (
         <View style={styles.homeContainer}>
-          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo}/>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelterName={shelterName}/>
           <TouchableOpacity onPress={this.goBack}
               style={styles.infoButton}
             >
