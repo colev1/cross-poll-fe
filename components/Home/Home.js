@@ -57,7 +57,7 @@ export default class Home extends React.Component {
   showFilter = () => {
     this.setState({
       showFilter: true
-  )}
+    })
  }               
                   
   goBack = () => {
