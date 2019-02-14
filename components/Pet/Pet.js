@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class Pet extends React.Component {
@@ -28,8 +28,14 @@ export default class Pet extends React.Component {
   }
 
   render() {
-    if (props.pet) {
-      petDisplay = <Text>{props.pet.name}</Text>
+    if (this.props.pet) {
+      let image = this.props.pet.photos[2]
+      petDisplay = (
+      <ImageBackground source = {{uri: image}} style={styles.image}
+      imageStyle={styles.borderRad}>
+        <Text style={styles.petName}>{this.props.pet.name} </Text>
+      </ImageBackground>
+      )
     } else {
       petDisplay = <Text>Loading!</Text>
     }
@@ -39,17 +45,41 @@ export default class Pet extends React.Component {
     };
 
     return (
-      <GestureRecognizer onSwipe={(direction, state) => this.onSwipe(direction, state)}
+      <GestureRecognizer 
+      style={styles.swiper}
+      onSwipe={(direction, state) => this.onSwipe(direction, state)}
       onSwipeLeft={(state) => this.onSwipeLeft(state)}
       config={config}
       >
-        <View>
           {petDisplay}
-        </View>
       </GestureRecognizer> 
     )
-
   } 
 }
+
+const styles = StyleSheet.create({
+  petName: {
+    fontSize: 40,
+    color: 'white',
+    position: 'absolute',
+    bottom: 60,
+    left: 50
+  },
+  swiper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 500
+  },
+  image: {
+    height: 500,
+    width: 350,
+  },
+  borderRad: {
+    borderColor: 'white',
+    borderRadius: 30,
+    borderWidth: 2
+  }
+})
 
 

@@ -20,7 +20,7 @@ export default class Home extends React.Component {
     .then(response => response.json())
     .then(pets => cleanPets(pets.petfinder.pets.pet))
     .then(cleanPets => this.setState({allPets: cleanPets}))
-    .then(result => console.log(result))
+    .catch(error => console.log(error))
   }
 
   changePet = (gesture) => {
