@@ -21,12 +21,20 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
+    this.fetchAllAnimals();
+  }
+
+  fetchAllAnimals = () => {
     fetch(`http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=80202`)
     .then(response => response.json())
     .then(pets => cleanPets(pets.petfinder.pets.pet))
     .then(cleanPets => this.setState({allPets: cleanPets}))
     .then(cleanPets => this.fetchShelter())
     .catch(error => console.log(error))
+  }
+
+  fetchByFilters = (filterChoices) => {
+    console.log(filterChoices)
   }
 
   fetchShelter = () => {
@@ -85,7 +93,7 @@ export default class Home extends React.Component {
     } else if (showFilter) {
       return (
       <View style={styles.homeContainer}>
-        <Filter showFilter={showFilter} />
+        <Filter showFilter={showFilter} fetchByFilters={this.fetchByFilters} />
       </View>
       )
     } else if (showInfo) {

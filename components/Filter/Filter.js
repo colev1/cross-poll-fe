@@ -9,7 +9,8 @@ export default class Filter extends React.Component {
     this.state = {
       miles: '',
       selectedAnimal: '',
-      selectedSize: ''
+      selectedSize: '',
+      selectedGender: ''
     }
   }
 
@@ -31,6 +32,16 @@ export default class Filter extends React.Component {
     });
   }
 
+  setSelectedGender = (selectedGender) => {
+    this.setState({
+      selectedGender
+    });
+  }
+
+  submitFilterOptions = () => {
+    console.log(this.state)
+  }
+
   renderOption = (option, selected, onSelect, index) => {
     const selectedStyle = selected ? styles.selectedRadio : styles.unselectedRadio
     return (
@@ -46,6 +57,8 @@ export default class Filter extends React.Component {
           </View>)
   }
 
+
+
   render() {
     const animalOptions = [
       "dogs",
@@ -58,6 +71,11 @@ export default class Filter extends React.Component {
       "small",
       "medium",
       "large"
+    ]
+
+    const genderOptions = [
+      "male",
+      "female"
     ]
 
     if(this.props.showFilter) {
@@ -89,7 +107,16 @@ export default class Filter extends React.Component {
                 renderOption={ this.renderOption }
                 renderContainer={ this.renderContainer }
               />
-              <TouchableOpacity style={styles.submitBtnContainer} >
+              <Text style={styles.sliderTitle}> animal sex: </Text>
+              <RadioButtons
+                options={ genderOptions }
+                onSelection={ this.setSelectedGender }
+                selectedOption={this.state.selectedGender }
+                renderOption={ this.renderOption }
+                renderContainer={ this.renderContainer }
+              />
+              <TouchableOpacity style={styles.submitBtnContainer}
+              onPress={()=>this.props.fetchByFilters(this.state)} >
                 <Text style={styles.submitBtn}> find a pet! </Text>
               </TouchableOpacity>
         </View>
@@ -108,7 +135,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   sliderTitle: {
-    fontSize: 32,
+    fontSize: 20,
     fontFamily: 'Kohinoor Bangla',
     alignSelf: 'center'
   },
@@ -137,7 +164,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 4,
     fontFamily: 'Kohinoor Bangla',
-    
     },
   radioBorder: {
       borderRadius: 4,
