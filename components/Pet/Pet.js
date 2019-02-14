@@ -63,7 +63,8 @@ export default class Pet extends React.Component {
             onSwipeLeft={(state) => this.onSwipeLeft(state)}
             config={config}
           >
-            <TouchableOpacity onPress={this.props.showFilter}>
+            <TouchableOpacity  onPress={this.props.showFilter}
+            style={styles.hamburgerContainer}>
               <Image source={require('../../assets/Hamburger_icon.svg.png')} style={styles.hamburgerIcon} />
             </TouchableOpacity>
             <ImageBackground source = {{uri: image}} style={styles.image}
@@ -111,8 +112,16 @@ const styles = StyleSheet.create({
 
   },
   hamburgerIcon: {
-    height: 40,
-    width: 40,
+    height: 50,
+    width: 50,
+    // position: 'relative',
+    // right: 120,
+    // top: 40,
+    marginBottom: 40
+  },
+  hamburgerContainer: {
+    height: 50,
+    width: 50,
     position: 'relative',
     right: 120,
     top: 40,

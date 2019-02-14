@@ -46,18 +46,26 @@ export default class Home extends React.Component {
   }
   
   render() {
-    const { allPets, petIndex, showInfo } = this.state;
-    return ( 
+    const { allPets, petIndex, showInfo, showFilter } = this.state;
+    if(showFilter) {
+      return (
       <View style={styles.homeContainer}>
         <Filter />
-        <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo}
-        showFilter={this.showFilter}/>
-        <TouchableOpacity onPress={this.showInfo}
-            style={styles.infoButton}>
-          <Text style={styles.infoButtonText}> more information </Text>
-        </TouchableOpacity>
       </View>
-    )
+      )
+    } else {
+      return ( 
+        <View style={styles.homeContainer}>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} 
+          showInfo={this.state.showInfo}
+          showFilter={this.showFilter}/>
+          <TouchableOpacity onPress={this.showInfo}
+              style={styles.infoButton}>
+            <Text style={styles.infoButtonText}> more information </Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
   }
 }
 
@@ -79,5 +87,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginBottom: 40
+  },
+  filter: {
+    backgroundColor: 'blue'
   }
 });
