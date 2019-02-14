@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import APIkey from '../apiKey';
 import { cleanPets } from '../helpers/helpers';
 import Pet from '../Pet/Pet';
+import Filter from '../Filter/Filter';
 import {swipeDirections} from 'react-native-swipe-gestures';
 import { cleanShelters } from '../helpers/helpers';
 
@@ -14,6 +15,7 @@ export default class Home extends React.Component {
       petIndex: 0,
       gesture: '',
       showInfo: false,
+      showFilter: false,
       shelterName: ''
     }
   }
@@ -51,6 +53,13 @@ export default class Home extends React.Component {
     })
   }
 
+
+  showFilter = () => {
+    this.setState({
+      showFilter: true
+  )}
+ }               
+                  
   goBack = () => {
     this.setState({
       showInfo: false
@@ -58,22 +67,30 @@ export default class Home extends React.Component {
   }
   
   render() {
-    const { allPets, petIndex, showInfo, shelterName } = this.state;
-
-    if (!showInfo) {
-      return ( 
-        <View style={styles.homeContainer}>
-          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} fetchShelter={this.fetchShelter} shelterName={shelterName}/>
+   const { allPets, petIndex, showInfo, showFilter, shelterName } = this.state;
+    if(!showFilter && !showInfo) {
+      return (
+         <View style={styles.homeContainer}>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} 
+          showInfo={this.state.showInfo}
+          showFilter={this.showFilter}
+          fetchShelter={this.fetchShelter} 
+          shelterName={shelterName}/>
           <TouchableOpacity onPress={this.showInfo}
-              style={styles.infoButton}
-            >
-              <Text style={styles.infoButtonText}> more information </Text>
+              style={styles.infoButton}>
+            <Text style={styles.infoButtonText}> more information </Text>
           </TouchableOpacity>
         </View>
       )
-    } else {
+    } else if (showFilter) {
       return (
-        <View style={styles.homeContainer}>
+      <View style={styles.homeContainer}>
+        <Filter showFilter={showFilter} />
+      </View>
+      )
+    } else if (showInfo) {
+      return (
+      <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelterName={shelterName}/>
           <TouchableOpacity onPress={this.goBack}
               style={styles.infoButton}
@@ -81,10 +98,8 @@ export default class Home extends React.Component {
               <Text style={styles.infoButtonText}> go back </Text>
           </TouchableOpacity>
         </View>
-      
       )
     }
-
   }
 }
 
@@ -105,6 +120,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginBottom: 40
+    marginBottom: 40,
+  },
+  filter: {
+    backgroundColor: 'blue'
   }
 });
