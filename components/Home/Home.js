@@ -14,7 +14,7 @@ export default class Home extends React.Component {
       petIndex: 0,
       gesture: '',
       showInfo: false,
-      showFilter: false
+      showFilter: true
     }
   }
 
@@ -50,7 +50,7 @@ export default class Home extends React.Component {
     if(showFilter) {
       return (
       <View style={styles.homeContainer}>
-        <Filter />
+        <Filter showFilter={showFilter} />
       </View>
       )
     } else {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginBottom: 40
+    marginBottom: 40,
   },
   filter: {
     backgroundColor: 'blue'

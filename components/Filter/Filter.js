@@ -4,24 +4,36 @@ import { StyleSheet, Text, View, Slider, Button, TouchableOpacity } from 'react-
 export default class Filter extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      miles: 0,
+      animal: '',
+      size: ''
+    }
   }
 
   componentDidMount = () => {
     console.log('filter mounted')
   }
 
+  handleSliderChange = (value) => {
+    this.setState({
+      miles: value
+    })
+  }
+
   render() {
     if(this.props.showFilter) {
       return (
-        <View>
-          <Text style={styles.sliderTitle}> SLIDER</Text>
+        <View style={styles.filterContainer}>
+          <Text style={styles.sliderTitle}> miles </Text>
             <Slider
-            step={1}
-            maximumValue={100}
-            // onValueChange={this.change.bind(this)}
-            value={value}
-          />
-          <Text> blah</Text>
+              step={1}
+              value={this.state.miles || 40}
+              minimumValue={0}
+              maximumValue={100}
+              onValueChange={this.handleSliderChange}
+              />
+              <Text>miles: {this.state.miles} </Text>
         </View>
       )
     }
@@ -33,9 +45,13 @@ export default class Filter extends React.Component {
 
 const styles = StyleSheet.create({
   sliderTitle: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // backgroundColor: 'blue',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
+  filterContainer: {
+    width: 300,
+    flex: 1,
+    justifyContent: 'center'
+  }
 });
