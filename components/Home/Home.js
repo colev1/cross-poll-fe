@@ -21,26 +21,27 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchAllAnimals();
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=80202`
+    this.fetchAllAnimals(url);
   }
 
-  fetchAllAnimals = () => {
-    fetch(`http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=80202`)
-    .then(response => response.json())
-    .then(pets => cleanPets(pets.petfinder.pets.pet))
-    .then(cleanPets => this.setState({allPets: cleanPets}))
-    .then(cleanPets => this.fetchShelter())
-    .catch(error => console.log(error))
+  fetchAllAnimals = (url) => {
+    fetch(url)
+      .then(response => response.json())
+      .then(pets => cleanPets(pets.petfinder.pets.pet))
+      .then(cleanPets => this.setState({allPets: cleanPets}))
+      .then(cleanPets => this.fetchShelter())
+      .catch(error => console.log(error))
   }
 
   fetchByFilters = (filterChoices) => {
-    console.log(filterChoices)
+    
+    const url = ``
   }
 
   fetchShelter = () => {
     const { allPets, petIndex } = this.state;
     let shelterId = allPets[petIndex].shelterId;
-    console.log('id', shelterId)
     fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
     .then(response => response.json()) 
     .then(shelter => cleanShelters(shelter.petfinder.shelter))

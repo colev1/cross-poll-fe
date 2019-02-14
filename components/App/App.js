@@ -8,8 +8,15 @@ export default class App extends React.Component {
     super()
     this.state = {
       showLogin: false,
-      userAPIToken: ''
+      userAPIToken: '',
+      userZipCode: ''
     }
+  }
+
+  componentDidMount = () => {
+    fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
+      .then(response => response.json())
+      .then(result => this.setState({userZipCode: result.zip_code}))
   }
 
   showLogin = () => {
