@@ -14,7 +14,7 @@ export default class Home extends React.Component {
       petIndex: 0,
       gesture: '',
       showInfo: false,
-      showFilter: true
+      showFilter: false
     }
   }
 
