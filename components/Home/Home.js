@@ -36,19 +36,41 @@ export default class Home extends React.Component {
       showInfo: true
     })
   }
+
+  goBack = () => {
+    this.setState({
+      showInfo: false
+    })
+  }
   
   render() {
     const { allPets, petIndex, showInfo } = this.state;
-    return ( 
-      <View style={styles.homeContainer}>
-        <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo}/>
-        <TouchableOpacity onPress={this.showInfo}
-            style={styles.infoButton}
-          >
-            <Text style={styles.infoButtonText}> more information </Text>
-        </TouchableOpacity>
-      </View>
-    )
+
+    if (!showInfo) {
+      return ( 
+        <View style={styles.homeContainer}>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo}/>
+          <TouchableOpacity onPress={this.showInfo}
+              style={styles.infoButton}
+            >
+              <Text style={styles.infoButtonText}> more information </Text>
+          </TouchableOpacity>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.homeContainer}>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo}/>
+          <TouchableOpacity onPress={this.goBack}
+              style={styles.infoButton}
+            >
+              <Text style={styles.infoButtonText}> go back </Text>
+          </TouchableOpacity>
+        </View>
+      
+      )
+    }
+
   }
 }
 
