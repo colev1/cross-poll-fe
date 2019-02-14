@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import APIkey from '../apiKey';
+import { cleanShelters } from '../helpers/helpers';
 
 export default class Pet extends React.Component {
   constructor(props) {
     super(props) 
     this.state = {
-      gestureName: ''
+      gestureName: '',
     }
   }
 
@@ -24,7 +26,7 @@ export default class Pet extends React.Component {
   }
 
   onSwipeLeft = () => {
-    console.log('swiping left')
+    this.props.fetchShelter()
   }
 
   render() {
@@ -33,6 +35,7 @@ export default class Pet extends React.Component {
       return <Text>Loading!</Text>
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
+      const { shelterName } = this.props;
       let image = photos[2]
       if (this.props.showInfo) {
         return (
@@ -45,17 +48,16 @@ export default class Pet extends React.Component {
             </ImageBackground>
             <View styles={styles.description}>
               <Text>{description}</Text>
-              <Text>{name} can be found at {shelterId}</Text>
+              <Text>{name} can be found at {shelterName}</Text>
             </View>
             <TouchableOpacity
             style={styles.contactButton}
           >
-              <Text style={styles.contactButtonText}> Contact {shelterId} </Text>
+              <Text style={styles.contactButtonText}> Contact {shelterName} </Text>
             </TouchableOpacity>
             <TouchableOpacity
             style={styles.backButton}
           > 
-              <Text>Back</Text>
             </TouchableOpacity>
           </View>
         )
@@ -69,7 +71,10 @@ export default class Pet extends React.Component {
           >
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
-              <Text style={styles.petName}>{name} </Text>
+            
+                <Text style={styles.petName}>{name}</Text>
+                <Text style={styles.shelterName}>{shelterName}</Text>
+              
             </ImageBackground>
         </GestureRecognizer>
         )
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
     color: 'white',
     position: 'absolute',
     bottom: 60,
-    left: 50
+    left: 20
   },
   swiper: {
     flex: 1,
@@ -114,6 +119,19 @@ const styles = StyleSheet.create({
   description: {
     height: 200,
     width: 300
+  },
+  shelterName: {
+    color: 'white',
+    fontSize: 15,
+    position: 'absolute',
+    bottom: 30,
+    left: 20,
+    marginTop: 20
+
+  },
+  info: {
+    
+    
   }
 })
 
