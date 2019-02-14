@@ -43,16 +43,21 @@ export default class Pet extends React.Component {
               <Text>{breed}</Text>
               <Text>{age}</Text>
             </ImageBackground>
-            <View>
+            <View styles={styles.description}>
               <Text>{description}</Text>
               <Text>{name} can be found at {shelterId}</Text>
             </View>
             <TouchableOpacity
             style={styles.contactButton}
           >
-            <Text style={styles.contactButtonText}> Contact {shelterId} </Text>
-          </TouchableOpacity>
-        </View>
+              <Text style={styles.contactButtonText}> Contact {shelterId} </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+            style={styles.backButton}
+          > 
+              <Text>Back</Text>
+            </TouchableOpacity>
+          </View>
         )
       } else {
         return (
@@ -105,6 +110,10 @@ const styles = StyleSheet.create({
   },
   contactButtonText: {
 
+  },
+  description: {
+    height: 200,
+    width: 300
   }
 })
 
