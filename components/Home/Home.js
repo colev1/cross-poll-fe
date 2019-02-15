@@ -15,13 +15,29 @@ export default class Home extends React.Component {
       petIndex: 0,
       gesture: '',
       showInfo: false,
-      showFilter: true,
-      shelterName: ''
+      showFilter: false,
+      shelterName: '',
+      userZipCode: ''
     }
   }
 
   componentDidMount() {
-    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=80202`
+    this.fetchUserZip()
+  }
+
+  fetchUserZip = () => {
+    fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
+      .then(response => response.json())
+      .then(result => this.fetchByZipCode(result.zip_code))
+      .catch(error => console.log(error))
+  }
+
+  fetchByZipCode = (zipCode) => {
+    console.log(zipCode)
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${zipCode}`
+    this.setState({
+      userZipCode: zipCode
+    })
     this.fetchAllAnimals(url);
   }
 
@@ -35,7 +51,6 @@ export default class Home extends React.Component {
   }
 
   fetchByFilters = (filterChoices) => {
-    
     const url = ``
   }
 

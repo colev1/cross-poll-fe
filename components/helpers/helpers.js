@@ -1,6 +1,7 @@
 export const cleanPhotos = photos => photos.map(photo => photo.$t);
 
 export const cleanPets = (pets) => pets.map((pet) => {
+  console.log(pet)
   let cleanedPhotos;
   if (pet.media.photos.photo) {
     cleanedPhotos = cleanPhotos(pet.media.photos.photo);

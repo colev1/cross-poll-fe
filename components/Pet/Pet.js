@@ -31,7 +31,6 @@ export default class Pet extends React.Component {
   }
 
   render() {
-
     if (!this.props.pet) {
       return <Text>Loading!</Text>
     } else {

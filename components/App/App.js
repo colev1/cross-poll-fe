@@ -14,9 +14,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount = () => {
-    fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
-      .then(response => response.json())
-      .then(result => this.setState({userZipCode: result.zip_code}))
+    // fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
+    //   .then(response => response.json())
+    //   .then(result => this.setState({userZipCode: result.zip_code}))
+    //   .catch(error => console.log(error))
   }
 
   showLogin = () => {
@@ -36,7 +37,7 @@ export default class App extends React.Component {
        showLogin={this.showLogin}
        updateUserToken={this.updateUserToken}/>
     } else {
-      displayComponent = <Home showLogin={this.showLogin}/>
+      displayComponent = <Home showLogin={this.showLogin} userZipCode={this.state.userZipCode}/>
     }
     return (
       <View style={styles.container}>
