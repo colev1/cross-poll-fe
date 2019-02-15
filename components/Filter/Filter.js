@@ -38,10 +38,6 @@ export default class Filter extends React.Component {
     });
   }
 
-  submitFilterOptions = () => {
-    console.log(this.state)
-  }
-
   renderOption = (option, selected, onSelect, index) => {
     const selectedStyle = selected ? styles.selectedRadio : styles.unselectedRadio
     return (
@@ -61,16 +57,16 @@ export default class Filter extends React.Component {
 
   render() {
     const animalOptions = [
-      "dogs",
-      "cats",
-      "furry animals",
-      "barn animals"
+      "dog",
+      "cat",
+      "horse",
+      "reptile"
     ];
 
     const sizeOptions = [
-      "small",
-      "medium",
-      "large"
+      "S",
+      "M",
+      "L"
     ]
 
     const genderOptions = [

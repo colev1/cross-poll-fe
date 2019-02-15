@@ -13,13 +13,6 @@ export default class App extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    // fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
-    //   .then(response => response.json())
-    //   .then(result => this.setState({userZipCode: result.zip_code}))
-    //   .catch(error => console.log(error))
-  }
-
   showLogin = () => {
     this.setState({showLogin: !this.state.showLogin})
   }
@@ -51,7 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     fontFamily: 'Verdana',
-    // backgroundColor: '#fff',
     backgroundColor: '#048BA8',
     alignItems: 'center',
     justifyContent: 'center',

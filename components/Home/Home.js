@@ -33,7 +33,6 @@ export default class Home extends React.Component {
   }
 
   fetchByZipCode = (zipCode) => {
-    console.log(zipCode)
     const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${zipCode}`
     this.setState({
       userZipCode: zipCode
@@ -51,7 +50,21 @@ export default class Home extends React.Component {
   }
 
   fetchByFilters = (filterChoices) => {
-    const url = ``
+    const { selectedAnimal, selectedSize } = filterChoices;
+    let gender;
+    switch(filterChoices.selectedGender) {
+      case 'male':
+        gender = 'M'
+      break;
+      case 'female':
+        gender = 'F'
+      break;
+      default:
+        gender = ''
+    }
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userZipCode}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
+    this.fetchAllAnimals(url)
+    this.setState({showFilter: false})
   }
 
   fetchShelter = () => {
