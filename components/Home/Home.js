@@ -80,7 +80,12 @@ export default class Home extends React.Component {
           shelter={shelter}/>
           <TouchableOpacity onPress={this.showInfo}
               style={styles.infoButton}>
-            <Text style={styles.infoButtonText}> more information </Text>
+            <Text style={styles.infoButtonText}> more information
+              {/* <Icon
+                name='angle-down'
+                type='font-awesome'
+                />  */}
+            </Text>
           </TouchableOpacity>
         </View>
       )

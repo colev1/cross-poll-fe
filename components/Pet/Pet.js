@@ -4,6 +4,7 @@ import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { hamburgerIcon } from '../../assets/Hamburger_icon.svg.png';
 import APIkey from '../apiKey';
 import { cleanShelters } from '../helpers/helpers';
+import { Icon } from 'react-native-elements';
 
 export default class Pet extends React.Component {
   constructor(props) {
@@ -78,7 +79,17 @@ export default class Pet extends React.Component {
           >
             <TouchableOpacity  onPress={this.props.showFilter}
             style={styles.hamburgerContainer}>
-              <Image source={require('../../assets/Hamburger_icon.svg.png')} style={styles.hamburgerIcon} />
+            <Icon
+              name='cog'
+              type='font-awesome'
+              color='#F49D37'
+              style={styles.cog}/>
+              <Icon
+              name='heart'
+              type='font-awesome'
+              color='#D90368'
+              style={styles.cog}/>
+             
             </TouchableOpacity>
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
@@ -172,6 +183,9 @@ const styles = StyleSheet.create({
     height: 100,
     marginLeft: 30,
     marginRight: 10
+  },
+  cog: {
+  
   }
 })
 
