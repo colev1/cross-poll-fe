@@ -1,5 +1,5 @@
 import React  from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { hamburgerIcon } from '../../assets/Hamburger_icon.svg.png';
 import APIkey from '../apiKey';
@@ -49,10 +49,10 @@ export default class Pet extends React.Component {
                 <Text style={{color:'white'}}>{age}</Text>
               </View>
             </ImageBackground>
-            <View styles={styles.description}>
-              <Text>{description}</Text>
-              <Text>{name} can be found at {shelter.name}</Text>
-            </View>
+            <ScrollView>
+              <Text style={{fontSize: 10}}>{description}</Text>
+              <Text style={{fontSize: 10}}>{name} can be found at {shelter.name}</Text>
+            </ScrollView>
             <View styles={styles.shelterInfo}>
               <Text>{shelter.phone}</Text>
               <Text>{shelter.city}{shelter.state}{shelter.zip}</Text>
