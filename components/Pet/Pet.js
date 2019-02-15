@@ -49,9 +49,9 @@ export default class Pet extends React.Component {
                 <Text style={{color:'white'}}>{age}</Text>
               </View>
             </ImageBackground>
-            <ScrollView>
-              <Text style={{fontSize: 10}}>{description}</Text>
-              <Text style={{fontSize: 10}}>{name} can be found at {shelter.name}</Text>
+            <ScrollView style={styles.scroll}>
+              <Text style={{fontSize: 15}}>{description}</Text>
+              <Text style={{fontSize: 15}}>{name} can be found at {shelter.name}</Text>
             </ScrollView>
             <View styles={styles.shelterInfo}>
               <Text>{shelter.phone}</Text>
@@ -163,8 +163,15 @@ const styles = StyleSheet.create({
     left: 20
   },
   moreInfoImage: {
-    height: 400,
-    width: 350
+    height: 300,
+    width: 350,
+    marginTop: 10  
+  },
+  scroll: {
+    width: 300,
+    height: 100,
+    marginLeft: 30,
+    marginRight: 10
   }
 })
 
