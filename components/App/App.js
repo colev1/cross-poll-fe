@@ -36,8 +36,8 @@ export default class App extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-    .then( response => response.json())
-    .then( result => console.log(result))
+    .then(response => response.json())
+    .then(result => console.log(result))
     .catch(error => console.log(error))
   }
 

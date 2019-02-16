@@ -29,7 +29,6 @@ export default class Pet extends React.Component {
     const { addToFavorites, userAPIToken, fetchShelter, pet  } = this.props;
     fetchShelter()
     addToFavorites(pet.id)
-
   }
 
   render() {

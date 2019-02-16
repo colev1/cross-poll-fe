@@ -21,7 +21,8 @@ export default class Home extends React.Component {
       shelterName: '',
       userZipCode: '',
       shelter: {},
-      showFavorites: false
+      showFavorites: false,
+      favorites: []
     }
   }
 
@@ -81,6 +82,29 @@ export default class Home extends React.Component {
     .catch(error => console.log(error))
   }
 
+  fetchFavorites = () => {
+    fetch('https://adoptr-be.herokuapp.com/api/v1/favorites')
+    .then(response => response.json())
+    .then(favorites => this.findFavoritePet(favorites.data))
+    .catch(error => console.log(error))
+  }
+
+  findFavoritePet = (favoritePets) => {
+    const { allPets, favorites } = this.state;
+    const petIds = favoritePets.map((favoritePet) => {
+      return favoritePet.attributes.favorite_id
+    })
+    petIds.forEach((id) => {
+      allPets.forEach((pet) => {
+        if (id === pet.id) {
+          this.setState({
+            favorites: [...favorites, pet]
+          })
+        }
+      })
+    })
+  }
+
   changePet = (gesture) => {
     let newState = this.state.petIndex = this.state.petIndex + 1
     this.setState({
@@ -115,7 +139,7 @@ export default class Home extends React.Component {
   }
   
   render() {
-   const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites } = this.state;
+   const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
    const { addToFavorites, userAPIToken } = this.props;
     if(!showFilter && !showInfo && !showFavorites) {
       return (
@@ -162,7 +186,7 @@ export default class Home extends React.Component {
     } else if (showFavorites) {
       return (
         <View>
-          <Favorites />
+          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} />
         </View>
       )
     }
