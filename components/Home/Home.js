@@ -17,7 +17,9 @@ export default class Home extends React.Component {
       showInfo: false,
       showFilter: false,
       shelterName: '',
-      userZipCode: ''
+      userZipCode: '',
+      loading: false,
+      error: ''
     }
   }
 
@@ -29,7 +31,7 @@ export default class Home extends React.Component {
     fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
       .then(response => response.json())
       .then(result => this.fetchByZipCode(result.zip_code))
-      .catch(error => console.log(error))
+      .catch(error => this.setState({error}))
   }
 
   fetchByZipCode = (zipCode) => {
@@ -46,7 +48,7 @@ export default class Home extends React.Component {
       .then(pets => cleanPets(pets.petfinder.pets.pet))
       .then(cleanPets => this.setState({allPets: cleanPets}))
       .then(cleanPets => this.fetchShelter())
-      .catch(error => console.log(error))
+      .catch(error => this.setState({error}))
   }
 
   fetchByFilters = (filterChoices) => {
@@ -74,7 +76,7 @@ export default class Home extends React.Component {
     .then(response => response.json()) 
     .then(shelter => cleanShelters(shelter.petfinder.shelter))
     .then(cleanShelter => this.setState({shelterName: cleanShelter.name}))
-    .catch(error => console.log(error))
+    .catch(error => this.setState({error}))
   }
 
   changePet = (gesture) => {

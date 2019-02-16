@@ -60,7 +60,8 @@ export default class Filter extends React.Component {
       "dog",
       "cat",
       "horse",
-      "reptile"
+      "reptile",
+      "smallfurry"
     ];
 
     const sizeOptions = [
