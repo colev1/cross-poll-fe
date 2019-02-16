@@ -6,6 +6,8 @@ import Pet from '../Pet/Pet';
 import Filter from '../Filter/Filter';
 import {swipeDirections} from 'react-native-swipe-gestures';
 import { cleanShelters } from '../helpers/helpers';
+import FontAwesome, { Icons } from "react-native-fontawesome";
+import { Icon } from 'react-native-elements';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -17,7 +19,8 @@ export default class Home extends React.Component {
       showInfo: false,
       showFilter: false,
       shelterName: '',
-      userZipCode: ''
+      userZipCode: '',
+      shelter: {}
     }
   }
 
@@ -73,7 +76,7 @@ export default class Home extends React.Component {
     fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
     .then(response => response.json()) 
     .then(shelter => cleanShelters(shelter.petfinder.shelter))
-    .then(cleanShelter => this.setState({shelterName: cleanShelter.name}))
+    .then(cleanShelter => this.setState({shelter: cleanShelter}))
     .catch(error => console.log(error))
   }
 
@@ -104,7 +107,7 @@ export default class Home extends React.Component {
   }
   
   render() {
-   const { allPets, petIndex, showInfo, showFilter, shelterName } = this.state;
+   const { allPets, petIndex, showInfo, showFilter, shelter } = this.state;
     if(!showFilter && !showInfo) {
       return (
          <View style={styles.homeContainer}>
@@ -112,10 +115,15 @@ export default class Home extends React.Component {
           showInfo={this.state.showInfo}
           showFilter={this.showFilter}
           fetchShelter={this.fetchShelter} 
-          shelterName={shelterName}/>
+          shelter={shelter}/>
           <TouchableOpacity onPress={this.showInfo}
               style={styles.infoButton}>
-            <Text style={styles.infoButtonText}> more information </Text>
+            <Text style={styles.infoButtonText}> more information
+              {/* <Icon
+                name='angle-down'
+                type='font-awesome'
+                />  */}
+            </Text>
           </TouchableOpacity>
         </View>
       )
@@ -128,11 +136,14 @@ export default class Home extends React.Component {
     } else if (showInfo) {
       return (
       <View style={styles.homeContainer}>
-          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelterName={shelterName}/>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}/>
           <TouchableOpacity onPress={this.goBack}
-              style={styles.infoButton}
+              style={styles.backButton}
             >
-              <Text style={styles.infoButtonText}> go back </Text>
+            <Icon
+              name='arrow-circle-left'
+              type='font-awesome'
+              color='#F49D37'/>
           </TouchableOpacity>
         </View>
       )
@@ -158,7 +169,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 30,
   },
   filter: {
     backgroundColor: 'blue'

@@ -1,9 +1,10 @@
 import React  from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { hamburgerIcon } from '../../assets/Hamburger_icon.svg.png';
 import APIkey from '../apiKey';
 import { cleanShelters } from '../helpers/helpers';
+import { Icon } from 'react-native-elements';
 
 export default class Pet extends React.Component {
   constructor(props) {
@@ -35,25 +36,31 @@ export default class Pet extends React.Component {
       return <Text>Loading!</Text>
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
-      const { shelterName } = this.props;
+      const { shelter } = this.props;
       let image = photos[2]
       if (this.props.showInfo) {
         return (
           <View>
-            <ImageBackground source = {{uri: image}} style={styles.image}
+            <ImageBackground source = {{uri: image}} style={styles.moreInfoImage}
           imageStyle={styles.borderRad}>
               <Text style={styles.petName}>{name} </Text>
-              <Text>{breed}</Text>
-              <Text>{age}</Text>
+              <View style={styles.petBreedAge}>
+                <Text style={{color:'white'}}>{breed}</Text>
+                <Text style={{color:'white'}}>{age}</Text>
+              </View>
             </ImageBackground>
-            <View styles={styles.description}>
-              <Text>{description}</Text>
-              <Text>{name} can be found at {shelterName}</Text>
+            <ScrollView style={styles.scroll}>
+              <Text style={{fontSize: 15}}>{description}</Text>
+              <Text style={{fontSize: 15}}>{name} can be found at {shelter.name}</Text>
+            </ScrollView>
+            <View styles={styles.shelterInfo}>
+              <Text>{shelter.phone}</Text>
+              <Text>{shelter.city}{shelter.state}{shelter.zip}</Text>
             </View>
             <TouchableOpacity
             style={styles.contactButton}
           >
-              <Text style={styles.contactButtonText}> Contact {shelterName} </Text>
+              <Text style={styles.contactButtonText}> Contact {shelter.name} </Text>
             </TouchableOpacity>
             <TouchableOpacity
             style={styles.backButton}
@@ -71,13 +78,23 @@ export default class Pet extends React.Component {
           >
             <TouchableOpacity  onPress={this.props.showFilter}
             style={styles.hamburgerContainer}>
-              <Image source={require('../../assets/Hamburger_icon.svg.png')} style={styles.hamburgerIcon} />
+            <Icon
+              name='cog'
+              type='font-awesome'
+              color='#F49D37'
+              style={styles.cog}/>
+              <Icon
+              name='heart'
+              type='font-awesome'
+              color='#D90368'
+              style={styles.cog}/>
+             
             </TouchableOpacity>
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
             
                 <Text style={styles.petName}>{name}</Text>
-                <Text style={styles.shelterName}>{shelterName}</Text>
+                <Text style={styles.shelterName}>{shelter.name}</Text>
               
             </ImageBackground>
         </GestureRecognizer>
@@ -123,9 +140,6 @@ const styles = StyleSheet.create({
   hamburgerIcon: {
     height: 50,
     width: 50,
-    // position: 'relative',
-    // right: 120,
-    // top: 40,
     marginBottom: 40
   },
   hamburgerContainer: {
@@ -138,7 +152,9 @@ const styles = StyleSheet.create({
   },
   description: {
     height: 200,
-    width: 300
+    width: 300,
+    flex: 1,
+    textAlign: 'center'
   },
   shelterName: {
     color: 'white',
@@ -147,7 +163,28 @@ const styles = StyleSheet.create({
     bottom: 30,
     left: 20,
     marginTop: 20
+  },
+  shelterInfo: {
 
+  },
+  petBreedAge: {
+    position: 'absolute',
+    top: 340,
+    left: 20
+  },
+  moreInfoImage: {
+    height: 300,
+    width: 350,
+    marginTop: 10  
+  },
+  scroll: {
+    width: 300,
+    height: 100,
+    marginLeft: 30,
+    marginRight: 10
+  },
+  cog: {
+  
   }
 })
 
