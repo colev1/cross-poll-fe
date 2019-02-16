@@ -2,7 +2,7 @@ export const cleanPhotos = photos => photos.map(photo => photo.$t);
 
 export const cleanPets = (pets) => pets.map((pet) => {
   let cleanedPhotos;
-  if (pet.media.photos.photo) {
+  if (pet.media.photos) {
     cleanedPhotos = cleanPhotos(pet.media.photos.photo);
   } else {
     cleanedPhotos = [];
@@ -29,7 +29,6 @@ export const cleanPets = (pets) => pets.map((pet) => {
 });
 
 export const cleanShelters = (shelter) => {
-  console.log('shelter', shelter)
   const cleanedShelter = {
     name: shelter.name.$t,
     id: shelter.id.$t,

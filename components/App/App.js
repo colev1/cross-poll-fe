@@ -8,7 +8,8 @@ export default class App extends React.Component {
     super()
     this.state = {
       showLogin: false,
-      userAPIToken: ''
+      userAPIToken: '',
+      userZipCode: ''
     }
   }
 
@@ -29,7 +30,7 @@ export default class App extends React.Component {
        showLogin={this.showLogin}
        updateUserToken={this.updateUserToken}/>
     } else {
-      displayComponent = <Home showLogin={this.showLogin}/>
+      displayComponent = <Home showLogin={this.showLogin} userZipCode={this.state.userZipCode}/>
     }
     return (
       <View style={styles.container}>
@@ -42,7 +43,8 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    fontFamily: 'Verdana',
+    backgroundColor: '#048BA8',
     alignItems: 'center',
     justifyContent: 'center',
   },

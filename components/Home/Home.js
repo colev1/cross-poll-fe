@@ -18,23 +18,61 @@ export default class Home extends React.Component {
       gesture: '',
       showInfo: false,
       showFilter: false,
+      shelterName: '',
+      userZipCode: '',
       shelter: {}
     }
   }
 
   componentDidMount() {
-    fetch(`http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=80202`)
-    .then(response => response.json())
-    .then(pets => cleanPets(pets.petfinder.pets.pet))
-    .then(cleanPets => this.setState({allPets: cleanPets}))
-    .then(cleanPets => this.fetchShelter())
-    .catch(error => console.log(error))
+    this.fetchUserZip()
+  }
+
+  fetchUserZip = () => {
+    fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
+      .then(response => response.json())
+      .then(result => this.fetchByZipCode(result.zip_code))
+      .catch(error => console.log(error))
+  }
+
+  fetchByZipCode = (zipCode) => {
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${zipCode}`
+    this.setState({
+      userZipCode: zipCode
+    })
+    this.fetchAllAnimals(url);
+  }
+
+  fetchAllAnimals = (url) => {
+    fetch(url)
+      .then(response => response.json())
+      .then(pets => cleanPets(pets.petfinder.pets.pet))
+      .then(cleanPets => this.setState({allPets: cleanPets}))
+      .then(cleanPets => this.fetchShelter())
+      .catch(error => console.log(error))
+  }
+
+  fetchByFilters = (filterChoices) => {
+    const { selectedAnimal, selectedSize } = filterChoices;
+    let gender;
+    switch(filterChoices.selectedGender) {
+      case 'male':
+        gender = 'M'
+      break;
+      case 'female':
+        gender = 'F'
+      break;
+      default:
+        gender = ''
+    }
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userZipCode}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
+    this.fetchAllAnimals(url)
+    this.setState({showFilter: false})
   }
 
   fetchShelter = () => {
     const { allPets, petIndex } = this.state;
     let shelterId = allPets[petIndex].shelterId;
-    console.log('id', shelterId)
     fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
     .then(response => response.json()) 
     .then(shelter => cleanShelters(shelter.petfinder.shelter))
@@ -92,7 +130,7 @@ export default class Home extends React.Component {
     } else if (showFilter) {
       return (
       <View style={styles.homeContainer}>
-        <Filter showFilter={showFilter} />
+        <Filter showFilter={showFilter} fetchByFilters={this.fetchByFilters} />
       </View>
       )
     } else if (showInfo) {
@@ -127,6 +165,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   homeContainer: {
+    
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
