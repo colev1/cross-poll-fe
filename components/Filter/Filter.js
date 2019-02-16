@@ -130,7 +130,11 @@ const styles = StyleSheet.create({
   adoptrHeader: {
     fontFamily: 'Kohinoor Bangla',
     fontSize: 60,
-    textAlign: 'center'
+    textAlign: 'center',
+    shadowColor: 'black',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
   },
   sliderTitle: {
     fontSize: 20,
