@@ -6,8 +6,8 @@ import Pet from '../Pet/Pet';
 import Filter from '../Filter/Filter';
 import {swipeDirections} from 'react-native-swipe-gestures';
 import { cleanShelters } from '../helpers/helpers';
-import FontAwesome, { Icons } from "react-native-fontawesome";
 import { Icon } from 'react-native-elements';
+import Favorites from '../Favorites/Favorites';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -20,7 +20,8 @@ export default class Home extends React.Component {
       showFilter: false,
       shelterName: '',
       userZipCode: '',
-      shelter: {}
+      shelter: {},
+      showFavorites: false
     }
   }
 
@@ -105,17 +106,28 @@ export default class Home extends React.Component {
       showInfo: false
     })
   }
+
+  showFavorites = () => {
+    console.log('favorites!')
+    this.setState({
+      showFavorites: true
+    })
+  }
   
   render() {
-   const { allPets, petIndex, showInfo, showFilter, shelter } = this.state;
-    if(!showFilter && !showInfo) {
+   const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites } = this.state;
+   const { addToFavorites, userAPIToken } = this.props;
+    if(!showFilter && !showInfo && !showFavorites) {
       return (
          <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} 
           showInfo={this.state.showInfo}
           showFilter={this.showFilter}
           fetchShelter={this.fetchShelter} 
-          shelter={shelter}/>
+          shelter={shelter}
+          addToFavorites={addToFavorites}
+          userAPIToken={userAPIToken}
+          showFavorites={this.showFavorites}/>
           <TouchableOpacity onPress={this.showInfo}
               style={styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
@@ -145,6 +157,12 @@ export default class Home extends React.Component {
               type='font-awesome'
               color='#F49D37'/>
           </TouchableOpacity>
+        </View>
+      )
+    } else if (showFavorites) {
+      return (
+        <View>
+          <Favorites />
         </View>
       )
     }
