@@ -1,8 +1,10 @@
 import React  from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { hamburgerIcon } from '../../assets/Hamburger_icon.svg.png';
 import APIkey from '../apiKey';
+import Loading from '../Loading/Loading';
+
 import { cleanShelters } from '../helpers/helpers';
 
 export default class Pet extends React.Component {
@@ -32,7 +34,7 @@ export default class Pet extends React.Component {
 
   render() {
     if (!this.props.pet) {
-      return <Text>Loading!</Text>
+      return <Loading />
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
       const { shelterName } = this.props;
