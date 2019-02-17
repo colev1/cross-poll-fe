@@ -1,7 +1,9 @@
 import React  from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import APIkey from '../apiKey';
+import Loading from '../Loading/Loading';
+import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
 
 export default class Pet extends React.Component {
@@ -33,7 +35,7 @@ export default class Pet extends React.Component {
 
   render() {
     if (!this.props.pet) {
-      return <Text>Loading!</Text>
+      return <Loading />
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
       const { shelter } = this.props;
@@ -95,10 +97,8 @@ export default class Pet extends React.Component {
             
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
-            
                 <Text style={styles.petName}>{name}</Text>
                 <Text style={styles.shelterName}>{shelter.name}</Text>
-              
             </ImageBackground>
         </GestureRecognizer>
         )

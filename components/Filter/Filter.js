@@ -40,8 +40,9 @@ export default class Filter extends React.Component {
 
   renderOption = (option, selected, onSelect, index) => {
     const selectedStyle = selected ? styles.selectedRadio : styles.unselectedRadio
+    const selectedBorder = selected ? styles.selectedRadioBorder : styles.radioBorder
     return (
-      <TouchableOpacity onPress={onSelect} key={index} style={styles.radioBorder}>
+      <TouchableOpacity onPress={onSelect} key={index} style={selectedBorder}>
         <Text style={selectedStyle}>{option}</Text>
       </TouchableOpacity>
     )
@@ -60,7 +61,8 @@ export default class Filter extends React.Component {
       "dog",
       "cat",
       "horse",
-      "reptile"
+      "reptile",
+      "smallfurry"
     ];
 
     const sizeOptions = [
@@ -128,7 +130,11 @@ const styles = StyleSheet.create({
   adoptrHeader: {
     fontFamily: 'Kohinoor Bangla',
     fontSize: 60,
-    textAlign: 'center'
+    textAlign: 'center',
+    shadowColor: 'black',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
   },
   sliderTitle: {
     fontSize: 20,
@@ -144,14 +150,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     padding: 4,
-    fontFamily: 'Kohinoor Bangla'
+    fontFamily: 'Kohinoor Bangla',
   },
   radioButtons: {
     alignItems: 'center',
     width: '100%',
     flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // display: 'inline',
     justifyContent: 'center',
     padding: 2,
     minWidth: 120
@@ -169,21 +173,42 @@ const styles = StyleSheet.create({
       padding: 2,
       height: 60,
       alignItems: 'center',
-      // flexDirection: 'row',
+      justifyContent: 'center',
+      backgroundColor: '#D3D3D3',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
+    },
+    selectedRadioBorder: {
+      borderRadius: 4,
+      borderWidth: 2,
+      borderColor: 'black',
+      margin: 4,
+      padding: 2,
+      height: 60,
+      alignItems: 'center',
+      shadowColor: 'white',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
       justifyContent: 'center',
       backgroundColor: 'white'
     },
     submitBtn: {
-      backgroundColor: 'white',
-      borderColor: 'black',
-      borderRadius: 4,
-      borderWidth: 2,
       fontSize: 28,
       padding: 16,
       textAlign: 'center'
     },
     submitBtnContainer: {
-      // marginBottom: -80,
-      marginTop: 80
+      backgroundColor: '#D3D3D3',
+      marginTop: 40,
+      borderColor: 'black',
+      borderRadius: 8,
+      borderWidth: 2,
+      shadowColor: 'black',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
     }
 });
