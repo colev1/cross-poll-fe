@@ -1,7 +1,6 @@
 import React  from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import { hamburgerIcon } from '../../assets/Hamburger_icon.svg.png';
 import APIkey from '../apiKey';
 import Loading from '../Loading/Loading';
 import { cleanShelters } from '../helpers/helpers';
@@ -29,7 +28,9 @@ export default class Pet extends React.Component {
   }
 
   onSwipeLeft = () => {
-    this.props.fetchShelter()
+    const { addToFavorites, userAPIToken, fetchShelter, pet  } = this.props;
+    fetchShelter()
+    addToFavorites(pet.id)
   }
 
   render() {
@@ -84,13 +85,16 @@ export default class Pet extends React.Component {
               type='font-awesome'
               color='#F49D37'
               style={styles.cog}/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.props.showFavorites}>
               <Icon
               name='heart'
               type='font-awesome'
               color='#D90368'
               style={styles.cog}/>
-             
             </TouchableOpacity>
+             
+            
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
                 <Text style={styles.petName}>{name}</Text>

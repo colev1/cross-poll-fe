@@ -7,7 +7,7 @@ export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      showLogin: false,
+      showLogin: true,
       userAPIToken: '',
       userZipCode: ''
     }
@@ -22,15 +22,34 @@ export default class App extends React.Component {
     this.showLogin()
   }
 
+  addToFavorites = (petId) => {
+    console.log('token', this.state.userAPIToken)
+    const postBody = {
+      apiToken: this.state.userAPIToken,
+      favoriteId: petId
+    }
+
+    fetch('https://adoptr-be.herokuapp.com/api/v1/favorites', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
+  }
+
   render() {
-    const { showLogin } = this.state;
+    const { showLogin, userAPIToken } = this.state;
     let displayComponent;
     if (showLogin) {
        displayComponent = <Login 
        showLogin={this.showLogin}
        updateUserToken={this.updateUserToken}/>
     } else {
-      displayComponent = <Home showLogin={this.showLogin} userZipCode={this.state.userZipCode}/>
+      displayComponent = <Home showLogin={this.showLogin} userZipCode={this.state.userZipCode} addToFavorites={this.addToFavorites} userAPIToken={userAPIToken}/>
     }
     return (
       <View style={styles.container}>

@@ -123,12 +123,14 @@ export default class Login extends React.Component {
         />
         <TextInput
           style={styles.input}
+          secureTextEntry={true}
           placeholder='password'
           value={this.state.password}
           onChangeText={(value) => this.setState({password: value})}
         />
         <TextInput
           style={this.state.newUser ? styles.input : styles.hidden}
+          secureTextEntry={true}
           placeholder='confirm password'
           value={this.state.passwordConfirmation}
           onChangeText={(value) => this.setState({passwordConfirmation: value})}

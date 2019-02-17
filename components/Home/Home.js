@@ -6,8 +6,8 @@ import Pet from '../Pet/Pet';
 import Filter from '../Filter/Filter';
 import {swipeDirections} from 'react-native-swipe-gestures';
 import { cleanShelters } from '../helpers/helpers';
-import FontAwesome, { Icons } from "react-native-fontawesome";
 import { Icon } from 'react-native-elements';
+import Favorites from '../Favorites/Favorites';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -20,9 +20,11 @@ export default class Home extends React.Component {
       showFilter: false,
       shelterName: '',
       userZipCode: '',
+      showFavorites: false,
+      favorites: [],
       loading: false,
       error: '',
-      shelter: {}
+      shelter: {},
     }
   }
 
@@ -82,6 +84,29 @@ export default class Home extends React.Component {
     .catch(error => this.setState({error}))
   }
 
+  fetchFavorites = () => {
+    fetch('https://adoptr-be.herokuapp.com/api/v1/favorites')
+    .then(response => response.json())
+    .then(favorites => this.findFavoritePet(favorites.data))
+    .catch(error => console.log(error))
+  }
+
+  findFavoritePet = (favoritePets) => {
+    const { allPets, favorites } = this.state;
+    const petIds = favoritePets.map((favoritePet) => {
+      return favoritePet.attributes.favorite_id
+    })
+    petIds.forEach((id) => {
+      allPets.forEach((pet) => {
+        if (id === pet.id) {
+          this.setState({
+            favorites: [...favorites, pet]
+          })
+        }
+      })
+    })
+  }
+
   changePet = (gesture) => {
     let newState = this.state.petIndex = this.state.petIndex + 1
     this.setState({
@@ -107,17 +132,28 @@ export default class Home extends React.Component {
       showInfo: false
     })
   }
+
+  showFavorites = () => {
+    console.log('favorites!')
+    this.setState({
+      showFavorites: true
+    })
+  }
   
   render() {
-   const { allPets, petIndex, showInfo, showFilter, shelter } = this.state;
-    if(!showFilter && !showInfo) {
+   const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
+   const { addToFavorites, userAPIToken } = this.props;
+    if(!showFilter && !showInfo && !showFavorites) {
       return (
          <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} 
           showInfo={this.state.showInfo}
           showFilter={this.showFilter}
           fetchShelter={this.fetchShelter} 
-          shelter={shelter}/>
+          shelter={shelter}
+          addToFavorites={addToFavorites}
+          userAPIToken={userAPIToken}
+          showFavorites={this.showFavorites}/>
           <TouchableOpacity onPress={this.showInfo}
               style={styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
@@ -147,6 +183,12 @@ export default class Home extends React.Component {
               type='font-awesome'
               color='#F49D37'/>
           </TouchableOpacity>
+        </View>
+      )
+    } else if (showFavorites) {
+      return (
+        <View>
+          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} />
         </View>
       )
     }
