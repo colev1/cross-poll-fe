@@ -84,6 +84,23 @@ export default class Home extends React.Component {
     .catch(error => this.setState({error}))
   }
 
+  addToFavorites = (petId) => {
+    const postBody = {
+      api_token: this.props.userAPIToken,
+      favorite_id: petId
+    }
+    fetch('https://adoptr-be.herokuapp.com/api/v1/favorites', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => this.fetchFavorites())
+    .catch(error => console.log(error))
+  }
+
   fetchFavorites = () => {
     fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`)
     .then(response => response.json())
@@ -134,15 +151,15 @@ export default class Home extends React.Component {
   }
 
   showFavorites = () => {
-    console.log('favorites!')
     this.setState({
       showFavorites: true
     })
+    this.fetchFavorites()
   }
   
   render() {
    const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
-   const { addToFavorites, userAPIToken } = this.props;
+   const { userAPIToken } = this.props;
     if(!showFilter && !showInfo && !showFavorites) {
       return (
          <View style={styles.homeContainer}>
@@ -151,9 +168,10 @@ export default class Home extends React.Component {
           showFilter={this.showFilter}
           fetchShelter={this.fetchShelter} 
           shelter={shelter}
-          addToFavorites={addToFavorites}
+          addToFavorites={this.addToFavorites}
           userAPIToken={userAPIToken}
-          showFavorites={this.showFavorites}/>
+          showFavorites={this.showFavorites}
+          fetchFavorites={this.fetchFavorites}/>
           <TouchableOpacity onPress={this.showInfo}
               style={styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
@@ -188,7 +206,7 @@ export default class Home extends React.Component {
     } else if (showFavorites) {
       return (
         <View>
-          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} />
+          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} />
         </View>
       )
     }
