@@ -40,7 +40,7 @@ export default class Home extends React.Component {
   }
 
   fetchByZipCode = (zipCode) => {
-    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${zipCode}`
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${zipCode}&count=80`
     this.setState({
       userZipCode: zipCode
     })
@@ -100,7 +100,6 @@ export default class Home extends React.Component {
     .then(result => this.fetchFavorites())
     .catch(error => console.log(error))
     }
-  }
 
   fetchFavorites = () => {
     fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`)
