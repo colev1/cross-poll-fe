@@ -85,7 +85,7 @@ export default class Home extends React.Component {
   }
 
   fetchFavorites = () => {
-    fetch('https://adoptr-be.herokuapp.com/api/v1/favorites')
+    fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`)
     .then(response => response.json())
     .then(favorites => this.findFavoritePet(favorites.data))
     .catch(error => console.log(error))

@@ -23,12 +23,10 @@ export default class App extends React.Component {
   }
 
   addToFavorites = (petId) => {
-    console.log('token', this.state.userAPIToken)
     const postBody = {
-      apiToken: this.state.userAPIToken,
-      favoriteId: petId
+      api_token: this.state.userAPIToken,
+      favorite_id: petId
     }
-
     fetch('https://adoptr-be.herokuapp.com/api/v1/favorites', {
       method: 'POST',
       body: JSON.stringify(postBody),
