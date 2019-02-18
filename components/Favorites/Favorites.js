@@ -10,8 +10,8 @@ export default class Favorites extends React.Component {
     })
   }
 
-  componentDidMount() {
-   
+  showInfo = (petId) => {
+
   }
 
   deleteFavorite = (petId, userToken) => {
@@ -41,15 +41,23 @@ export default class Favorites extends React.Component {
     } else {
       display = favorites.map((favoritePet) => {
          return (
-           <View key={favoritePet.id}>
+           <View key={favoritePet.id} style={styles.favoritePetContainer}>
             <TouchableOpacity onPress={() => this.deleteFavorite(favoritePet.id)}>
               <Icon
                 name='minus-circle'
                 type='font-awesome'
-                color='red'
+                color='#E74544'
+                style={styles.delete}
                 />
             </TouchableOpacity>
-            <Text>{favoritePet.name}</Text>
+            <Text style={styles.name}>{favoritePet.name}</Text>
+            <TouchableOpacity onPress={() => this.showInfo(favoritePet.id)}>
+              <Icon
+                name='angle-right'
+                type='font-awesome'
+                color='#F49D37'
+                />
+            </TouchableOpacity>
            </View>
          ) 
        })
@@ -65,7 +73,30 @@ export default class Favorites extends React.Component {
 
 const styles = StyleSheet.create({
   favoritesContainer: {
+    backgroundColor: '#E5E5E5',
 
+  },
+  favoritePetContainer: {
+    backgroundColor: 'white',
+    borderBottomColor: '#E5E5E5',
+    borderBottomWidth: 5,
+    width: 370,
+    height: 50,
+    textAlign: 'left',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 10
+
+  },
+  name: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#048BA8',
+    marginLeft: 20,
+    marginRight: 230
+  },
+  delete: {
+    marginLeft: 10
   }
 });
 

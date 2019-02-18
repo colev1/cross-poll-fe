@@ -89,7 +89,7 @@ export default class Home extends React.Component {
       api_token: this.props.userAPIToken,
       favorite_id: petId
     }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/favorites', {
+    fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`, {
       method: 'POST',
       body: JSON.stringify(postBody),
       headers:{
@@ -99,6 +99,7 @@ export default class Home extends React.Component {
     .then(response => response.json())
     .then(result => this.fetchFavorites())
     .catch(error => console.log(error))
+    }
   }
 
   fetchFavorites = () => {
