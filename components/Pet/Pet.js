@@ -223,11 +223,10 @@ const styles = StyleSheet.create({
   },
   shelterName: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 16,
     position: 'absolute',
-    top: 415,
+    zIndex: 2,
     left: 20,
-    marginTop: 20,
   },
   shelterInfo: {
     marginTop: 0,
@@ -265,15 +264,15 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 10
   },
-  cog: {
-    position: 'absolute',
-    top: -10
-  },
-  heart: {
-    position: 'absolute',
-    top: -58, 
-    left: 100
-  }
+  // cog: {
+  //   position: 'absolute',
+  //   top: -10
+  // },
+  // heart: {
+  //   position: 'absolute',
+  //   top: -58, 
+  //   left: 100
+  // }
 })
 
 

@@ -166,12 +166,6 @@ export default class Home extends React.Component {
       showFilter: true
     })
  }               
-                  
-  goBack = () => {
-    this.setState({
-      showInfo: false
-    })
-  }
 
   showFavorites = () => {
     this.setState({
@@ -182,7 +176,8 @@ export default class Home extends React.Component {
 
   goBack = () => {
     this.setState({
-      showFavorites: false
+      showFavorites: false,
+      showInfo: false
     })
   }
   

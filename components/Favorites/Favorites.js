@@ -98,19 +98,16 @@ export default class Favorites extends React.Component {
          ) 
        })
     }
-
     return(
       <View style={styles.favoritesContainer}>
         <TouchableOpacity onPress={this.props.goBack} style={styles.backButton}>
               <Icon
-                name='arrow-left'
+                name='arrow-circle-left'
                 type='font-awesome'
                 color='#F49D37'
+                size={48}
                 style={styles.arrowLeft}
                 />
-              <Text style={styles.backButtonText}>
-                back
-              </Text>
             </TouchableOpacity>
         {display}
         <TouchableOpacity onPress={this.goBack} style={styles.icon}>
@@ -125,7 +122,6 @@ export default class Favorites extends React.Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
   favoritesContainer: {
     // backgroundColor: '#E5E5E5',
@@ -143,7 +139,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     // width: '96%',
-
   },
   arrowLeft: {
     position: 'absolute',
@@ -179,10 +174,6 @@ const styles = StyleSheet.create({
     zIndex: 4,
     marginLeft: 10
   },
-  backButtonText: {
-    fontSize: 20,
-    color: '#F49D37',
- },
   icon: {
     backgroundColor: '#048BA8',
     position: 'absolute',
@@ -192,4 +183,3 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
-
