@@ -37,6 +37,8 @@ export const cleanShelters = (shelter) => {
     city: shelter.city.$t,
     phone: shelter.phone.$t,
     email: shelter.email.$t,
+    longitude: shelter.longitude.$t,
+    latitude: shelter.latitude.$t,
   };
   return cleanedShelter;
 };

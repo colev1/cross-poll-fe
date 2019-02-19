@@ -9,7 +9,8 @@ export default class App extends React.Component {
     this.state = {
       showLogin: true,
       userAPIToken: '',
-      userZipCode: ''
+      userZipCode: '',
+      userLocation: {}
     }
   }
 
@@ -49,7 +50,8 @@ export default class App extends React.Component {
        showLogin={this.showLogin}
        updateUserToken={this.updateUserToken}/>
     } else {
-      displayComponent = <Home showLogin={this.showLogin} userZipCode={this.state.userZipCode} addToFavorites={this.addToFavorites} userAPIToken={userAPIToken}/>
+      displayComponent = <Home showLogin={this.showLogin} userZipCode={this.state.userZipCode} addToFavorites={this.addToFavorites} userAPIToken={userAPIToken}
+      userLocation={this.state.userLocation}/>
     }
     return (
       <View style={styles.container}>

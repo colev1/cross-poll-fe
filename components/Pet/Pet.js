@@ -14,7 +14,11 @@ export default class Pet extends React.Component {
     }
   }
 
-  onSwipe = (gestureName, gestureSate) => {
+  componentDidMount = () => {
+    // this.findDistance()
+  }
+
+  onSwipe = (gestureName, gestureState) => {
     const { SWIPE_RIGHT, SWIPE_LEFT } = swipeDirections;
     this.setState({
       gestureName
@@ -38,6 +42,15 @@ export default class Pet extends React.Component {
 
   onSwipeRight = () => {
     console.log('swiping right!')
+  }
+
+  findDistance = () => {
+    console.log('latitude', this.props.userLocation)
+    const {latitude, longitude} = this.props.shelter;
+    const {userLocation} = this.props;
+    fetch(`api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`)
+      .then(response => response.json())
+      .then(result => console.log(result))
   }
 
   emailShelter = () => {
@@ -68,6 +81,7 @@ export default class Pet extends React.Component {
       return <Loading />
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
+      // this.findDistance()
       const { shelter } = this.props;
       console.log(shelter.name)
       let image = photos[2]
