@@ -40,6 +40,28 @@ export default class Pet extends React.Component {
     console.log('swiping right!')
   }
 
+  emailShelter = () => {
+    const {name} = this.props.pet;
+    let message = `Hello! I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
+    let postBody = {
+      api_token: this.props.userAPIToken,
+      shelter_email: 'colevanacore@gmail.com',
+      pet_name: name,
+      message: message
+    }
+    console.log(postBody)
+    fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .then(error => console.log(error))
+  }
+
   render() {
     if (this.props.loading) {
       return <Loading />
@@ -69,7 +91,7 @@ export default class Pet extends React.Component {
             </ScrollView>
             <TouchableOpacity
             style={styles.contactButton}
-          >
+            onPress={this.emailShelter}>
               <Text style={styles.contactButtonText}> Contact {shelter.name} </Text>
             </TouchableOpacity>
             <TouchableOpacity

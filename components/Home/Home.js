@@ -217,7 +217,8 @@ export default class Home extends React.Component {
     } else if (showInfo) {
       return (
       <View style={styles.homeContainer}>
-          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}/>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}
+          userAPIToken={userAPIToken}/>
           <TouchableOpacity onPress={this.goBack}>
             <Icon
               name='arrow-circle-left'
