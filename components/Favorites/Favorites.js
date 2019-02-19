@@ -3,43 +3,39 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Imag
 import { Icon } from 'react-native-elements';
 import APIkey from '../apiKey';
 import { cleanPets } from '../helpers/helpers';
+import FavesInfo from '../FavesInfo/FavesInfo';
 
 export default class Favorites extends React.Component {
   constructor(props) {
     super(props)
     this.state = ({
-      favorites: []
+      favorites: [],
+      currentPet: {},
+      showInfo: false
     })
   }
 
   componentDidMount = () => {
     console.log(this.props.favorites)
-    // this.props.displayFaves();
   }
 
-  // displayFaves = async (favoriteIds) => {
-  //   const pets = await favoriteIds.map(async favorite => {
-  //     const response = await fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`)
-  //     return response.json()
-  //   })
-  //   const finalPets = await Promise.all(pets)
-
-  //   const cleanedPets = this.cleanPets(finalPets)
-  //   this.setState({favorites: cleanedPets})
-  //   // return finalPets
-  // }
+  
 
   showInfo = (petId) => {
+    this.setState({
+      showInfo: true
+    })
+    this.getPet(petId)
+
 
   }
 
-  // cleanPets = (pets) => {
-  //   const realPets = pets.filter(pet => {
-  //       return pet.petfinder.pet
-  //   })
-  //   return realPets.map(currPet => currPet.petfinder.pet)
-  // }
-
+  getPet = (petId) => {
+    fetch(`fetch(http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
+    .then(response => response.json())
+    .then(pet => this.setState({currentPet: pet.petfinder.pet}))
+    .then(error => console.log(error))
+  }
 
 
   deleteFavorite = (petId, userToken) => {
@@ -56,11 +52,11 @@ export default class Favorites extends React.Component {
       }
     })
     .then(response => response.json())
-    .then(result => this.rerenderFavorites())
+    .then(result => this.reRenderFavorites())
     .catch(error => console.log(error))
   }
 
-  rerenderFavorites = () => {
+  reRenderFavorites = () => {
     this.props.fetchFavorites()
     this.props.displayFaves();
   }
@@ -68,8 +64,14 @@ export default class Favorites extends React.Component {
 
   render() {
     const { cleanedFaves } = this.props;
+    const { showInfo, currentPet } = this.state;
     let display;
-    if (cleanedFaves.length === 0) {
+    if (showInfo) {
+      return (
+        <FavesInfo currentPet={currentPet} />
+      )
+
+    } else if (cleanedFaves.length === 0) {
       display = <Text style={styles.noFavesMessage}>You don't have any favorites!</Text>
     } else {
       display = cleanedFaves.map((favoritePet) => {
@@ -111,6 +113,14 @@ export default class Favorites extends React.Component {
               </Text>
             </TouchableOpacity>
         {display}
+        <TouchableOpacity onPress={this.goBack} style={styles.icon}>
+            <Icon
+              name='arrow-circle-left'
+              type='font-awesome'
+              color='#F49D37'
+              size={50}
+              iconStyles={styles.backButton}/>
+          </TouchableOpacity>
       </View>
     )
   }
@@ -172,6 +182,14 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 20,
     color: '#F49D37',
+ },
+  icon: {
+    backgroundColor: '#048BA8',
+    position: 'absolute',
+    bottom: -250,
+  },
+  backButton: {
+    textAlign: 'center'
   }
 });
 
