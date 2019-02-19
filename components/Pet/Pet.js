@@ -199,8 +199,6 @@ const styles = StyleSheet.create({
   },
   borderRad: {
     borderRadius: 30,
-    // borderWidth: 2,
-
   },
   contactButton: {
     backgroundColor: 'white',
