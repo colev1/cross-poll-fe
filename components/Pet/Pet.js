@@ -11,11 +11,18 @@ export default class Pet extends React.Component {
     super(props) 
     this.state = {
       gestureName: '',
+      distance: ''
     }
   }
 
   componentDidMount = () => {
     // this.findDistance()
+  }
+
+  componentWillUnmount = () => {
+    this.setState({
+      distance: ''
+    })
   }
 
   onSwipe = (gestureName, gestureState) => {
@@ -45,12 +52,14 @@ export default class Pet extends React.Component {
   }
 
   findDistance = () => {
-    console.log('latitude', this.props.userLocation)
     const {latitude, longitude} = this.props.shelter;
     const {userLocation} = this.props;
-    fetch(`api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`)
+    const url = `https://adoptr-be.herokuapp.com/api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`
+    console.log('fetched url',url)
+    fetch(url)
       .then(response => response.json())
-      .then(result => console.log(result))
+      .then(result => this.setState({distance: result.distance}))
+      .then(error => console.log(error))
   }
 
   emailShelter = () => {
@@ -80,8 +89,8 @@ export default class Pet extends React.Component {
     if (this.props.loading) {
       return <Loading />
     } else {
+      this.findDistance()
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
-      // this.findDistance()
       const { shelter } = this.props;
       console.log(shelter.name)
       let image = photos[2]
@@ -148,7 +157,7 @@ export default class Pet extends React.Component {
                 color='white'
                 size={16}
                 iconStyle={styles.home}/>
-                  <Text style={styles.shelterName}>{shelter.name}</Text>
+                  <Text style={styles.shelterName}>{shelter.name} {this.state.distance}miles</Text>
                 </View>
             </ImageBackground>
         </GestureRecognizer>

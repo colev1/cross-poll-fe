@@ -78,7 +78,7 @@ export default class Home extends React.Component {
         gender = ''
     }
     const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userLocation.zip_code}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
-    console.log(url)
+    console.log('FILTERS',url)
     this.fetchAllAnimals(url)
     this.setState({showFilter: false})
   }
@@ -202,7 +202,7 @@ export default class Home extends React.Component {
           addToFavorites={this.addToFavorites}
           userAPIToken={userAPIToken}
           showFavorites={this.showFavorites}
-          userLocation={this.props.userLocation}
+          userLocation={this.state.userLocation}
           />
           <TouchableOpacity onPress={this.showInfo}
               style={this.state.loading ? styles.hidden : styles.infoButton}>
@@ -226,7 +226,7 @@ export default class Home extends React.Component {
       <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}
           userAPIToken={userAPIToken}
-          userLocation={this.props.userLocation}/>
+          userLocation={this.state.userLocation}/>
           <TouchableOpacity onPress={this.goBack}>
             <Icon
               name='arrow-circle-left'
