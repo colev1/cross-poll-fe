@@ -6,9 +6,13 @@ import renderer from 'react-test-renderer';
 
 describe('App', () => {
   it.skip('should match the snapshot with all data passed in correctly', () => { 
-    const wrapper = shallow( <App 
-    />);
+    const wrapper = shallow( <App  />);
 
     expect(wrapper).toMatchSnapshot(); 
+  })
+
+  describe('show login', () => {
+  
+
   })
 });

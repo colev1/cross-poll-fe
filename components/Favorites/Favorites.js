@@ -117,7 +117,10 @@ export default class Favorites extends React.Component {
     }
     return(
       <View style={styles.favoritesContainer}>
-        <TouchableOpacity onPress={this.props.goBack} style={styles.backButton}>
+            <ScrollView>
+              {display}
+            </ScrollView>
+        <TouchableOpacity onPress={this.props.returnHome} style={styles.backButton}>
               <Icon
                 name='arrow-circle-left'
                 type='font-awesome'
@@ -126,9 +129,6 @@ export default class Favorites extends React.Component {
                 style={styles.arrowLeft}
                 />
             </TouchableOpacity>
-            <ScrollView>
-              {display}
-            </ScrollView>
       </View>
     )
   }
@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     top: 60,
-    paddingBottom: 40,
+    paddingBottom: 80,
+    paddingTop: 80,
   },
   favoritePetContainer: {
     backgroundColor: 'white',
@@ -157,10 +158,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   arrowLeft: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    marginTop: 20,
+    // position: 'absolute',
+    // left: 0,
+    // top: 100,
+    // marginTop: 20,
   },
   name: {
     fontSize: 22,
@@ -181,22 +182,19 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   backButton: {
-    backgroundColor: 'white',
-    position: 'absolute',
-    top: 10,
+    // backgroundColor: 'white',
+    // position: 'absolute',
+    // top: 200,
     // height: 40,
     // left: 10,
     textAlign: 'center',
     zIndex: 4,
-    marginLeft: 10
+    // marginLeft: 10,
+    marginBottom: 80,
   },
   icon: {
     backgroundColor: '#048BA8',
     position: 'absolute',
-    bottom: -250,
+    // bottom: -250, 
   },
-  backButton: {
-    textAlign: 'center',
-    marginTop: 5
-  }
 });

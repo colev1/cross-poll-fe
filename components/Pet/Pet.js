@@ -11,6 +11,7 @@ export default class Pet extends React.Component {
     super(props) 
     this.state = {
       gestureName: '',
+      distance: ''
     }
   }
 
@@ -18,12 +19,18 @@ export default class Pet extends React.Component {
     // this.findDistance()
   }
 
+  componentWillUnmount = () => {
+    this.setState({
+      distance: ''
+    })
+  }
+
   onSwipe = (gestureName, gestureState) => {
     const { SWIPE_RIGHT, SWIPE_LEFT } = swipeDirections;
     this.setState({
       gestureName
     })
-
+    this.findDistance()
     switch (gestureName) {
       case SWIPE_LEFT:
         this.props.changePet()
@@ -45,12 +52,13 @@ export default class Pet extends React.Component {
   }
 
   findDistance = () => {
-    console.log('latitude', this.props.userLocation)
     const {latitude, longitude} = this.props.shelter;
     const {userLocation} = this.props;
-    fetch(`api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`)
+    const url = `https://adoptr-be.herokuapp.com/api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`
+    fetch(url)
       .then(response => response.json())
-      .then(result => console.log(result))
+      .then(result => this.setState({distance: result.distance}))
+      .then(error => console.log(error))
   }
 
   emailShelter = () => {
@@ -63,7 +71,6 @@ export default class Pet extends React.Component {
       pet_name: name,
       message: message
     }
-    console.log(postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -81,9 +88,7 @@ export default class Pet extends React.Component {
       return <Loading />
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
-      // this.findDistance()
       const { shelter } = this.props;
-      console.log(shelter.name)
       let image = photos[2]
       if (this.props.showInfo) {
         return (
@@ -148,7 +153,7 @@ export default class Pet extends React.Component {
                 color='white'
                 size={16}
                 iconStyle={styles.home}/>
-                  <Text style={styles.shelterName}>{shelter.name}</Text>
+                  <Text style={styles.shelterName}>{shelter.name} - {this.state.distance} miles </Text>
                 </View>
             </ImageBackground>
         </GestureRecognizer>
@@ -190,8 +195,6 @@ const styles = StyleSheet.create({
   },
   borderRad: {
     borderRadius: 30,
-    // borderWidth: 2,
-
   },
   contactButton: {
     backgroundColor: 'white',
@@ -260,6 +263,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 2,
     left: 20,
+    textShadowColor: 'black'
   },
   shelterInfo: {
     marginTop: 0,
