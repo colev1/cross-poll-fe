@@ -94,10 +94,6 @@ export default class Pet extends React.Component {
             onPress={this.emailShelter}>
               <Text style={styles.contactButtonText}> Contact {shelter.name} </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-            style={styles.backButton}
-          > 
-            </TouchableOpacity>
           </View>
         )
       } else {
