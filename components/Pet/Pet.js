@@ -161,7 +161,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 300,
     marginBottom: 35,
-    marginLeft: 23
+    marginLeft: 23,
+    marginTop: 10
   },
   contactButtonText: {
     textAlign: 'center',

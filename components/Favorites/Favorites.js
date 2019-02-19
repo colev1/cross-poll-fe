@@ -101,6 +101,14 @@ export default class Favorites extends React.Component {
     return(
       <View style={styles.favoritesContainer}>
         {display}
+        <TouchableOpacity onPress={this.goBack} style={styles.icon}>
+            <Icon
+              name='arrow-circle-left'
+              type='font-awesome'
+              color='#F49D37'
+              size={50}
+              iconStyles={styles.backButton}/>
+          </TouchableOpacity>
       </View>
     )
   }
@@ -133,8 +141,13 @@ const styles = StyleSheet.create({
   delete: {
     marginLeft: 10
   },
+  icon: {
+    backgroundColor: '#048BA8',
+    position: 'absolute',
+    bottom: -250,
+  },
   backButton: {
-
+    textAlign: 'center'
   }
 });
 
