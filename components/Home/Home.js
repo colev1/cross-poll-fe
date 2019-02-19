@@ -20,7 +20,7 @@ export default class Home extends React.Component {
       showFilter: false,
       shelterName: '',
       userZipCode: '',
-      showFavorites: true,
+      showFavorites: false,
       favorites: [],
       loading: true,
       error: '',
@@ -42,8 +42,8 @@ export default class Home extends React.Component {
   }
 
 
-  fetchByZipCode = (zipCode) => {
-    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${zipCode}&count=50`
+  fetchByZipCode = (result) => {
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${result.zip_code}&count=50`
     console.log('FETCHING',url)
     this.setState({
       userLocation: {
