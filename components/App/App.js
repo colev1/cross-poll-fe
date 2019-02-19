@@ -8,7 +8,7 @@ export default class App extends React.Component {
     super()
     this.state = {
       showLogin: false,
-      userAPIToken: '',
+      userAPIToken: "90f3b9ec-2709-48b9-87e0-b2b8f0fcddbb",
       userZipCode: ''
     }
   }
