@@ -79,11 +79,13 @@ export default class Home extends React.Component {
   fetchShelter = () => {
     const { allPets, petIndex } = this.state;
     let shelterId = allPets[petIndex].shelterId;
+    console.log('id in fetch shelter', shelterId)
     fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
     .then(response => response.json()) 
     .then(shelter => cleanShelters(shelter.petfinder.shelter))
     .then(cleanShelter => this.setState({shelter: cleanShelter}))
     .catch(error => this.setState({error}))
+    
   }
 
   addToFavorites = (petId) => {
@@ -116,9 +118,7 @@ export default class Home extends React.Component {
     return allFaves.map(favorite => {
      return fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`)
       .then(response => response.json())
-      // .then(result => console.log(result.petfinder.pet))
       .then(result => this.setState({favorites: [...this.state.favorites, [result.petfinder.pet.name.$t]]}))
-      // .then(result => console.log(cleanPets([result.petfinder.pet])[0]))
     })
   }
 
@@ -143,23 +143,6 @@ export default class Home extends React.Component {
     return realPets.map(currPet => currPet.petfinder.pet)
   }
 
-
-  // findFavoritePet = (favoritePets) => {
-  //   const { allPets, favorites } = this.state;
-  //   const petIds = favoritePets.map((favoritePet) => {
-  //     return favoritePet.attributes.favorite_id
-  //   })
-  //   petIds.forEach((id) => {
-  //     allPets.forEach((pet) => {
-  //       if (id === pet.id) {
-  //         this.setState({
-  //           favorites: [...favorites, pet]
-  //         })
-  //       }
-  //     })
-  //   })
-  // }
-
   changePet = (gesture) => {
     let newState = this.state.petIndex = this.state.petIndex + 1
     this.setState({
@@ -172,7 +155,6 @@ export default class Home extends React.Component {
       showInfo: true
     })
   }
-
 
   showFilter = () => {
     this.setState({
@@ -229,13 +211,13 @@ export default class Home extends React.Component {
       return (
       <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}/>
-          <TouchableOpacity onPress={this.goBack}
-              style={styles.backButton}
-            >
+          <TouchableOpacity onPress={this.goBack}>
             <Icon
               name='arrow-circle-left'
               type='font-awesome'
-              color='#F49D37'/>
+              color='#F49D37'
+              size={50}
+              iconStyles={styles.backButton}/>
           </TouchableOpacity>
         </View>
       )
@@ -263,13 +245,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   homeContainer: {
-    
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
   filter: {
     backgroundColor: 'blue'
+  },
+  backButton: {
+    marginTop: 5
   }
 });
