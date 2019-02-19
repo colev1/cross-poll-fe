@@ -30,7 +30,7 @@ export default class Pet extends React.Component {
     this.setState({
       gestureName
     })
-
+    this.findDistance()
     switch (gestureName) {
       case SWIPE_LEFT:
         this.props.changePet()
@@ -55,7 +55,6 @@ export default class Pet extends React.Component {
     const {latitude, longitude} = this.props.shelter;
     const {userLocation} = this.props;
     const url = `https://adoptr-be.herokuapp.com/api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`
-    console.log('fetched url',url)
     fetch(url)
       .then(response => response.json())
       .then(result => this.setState({distance: result.distance}))
@@ -72,7 +71,6 @@ export default class Pet extends React.Component {
       pet_name: name,
       message: message
     }
-    console.log(postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -89,10 +87,8 @@ export default class Pet extends React.Component {
     if (this.props.loading) {
       return <Loading />
     } else {
-      this.findDistance()
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
       const { shelter } = this.props;
-      console.log(shelter.name)
       let image = photos[2]
       if (this.props.showInfo) {
         return (
