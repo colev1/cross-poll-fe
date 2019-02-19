@@ -132,6 +132,9 @@ const styles = StyleSheet.create({
   },
   delete: {
     marginLeft: 10
+  },
+  backButton: {
+
   }
 });
 

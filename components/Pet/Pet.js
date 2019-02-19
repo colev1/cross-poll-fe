@@ -39,7 +39,6 @@ export default class Pet extends React.Component {
 
   onSwipeRight = () => {
     console.log('swiping right!')
-
   }
 
   render() {
@@ -48,6 +47,7 @@ export default class Pet extends React.Component {
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
       const { shelter } = this.props;
+      console.log(shelter.name)
       let image = photos[2]
       if (this.props.showInfo) {
         return (
@@ -61,13 +61,13 @@ export default class Pet extends React.Component {
               </View>
             </ImageBackground>
             <ScrollView style={styles.scroll}>
-              <Text style={{fontSize: 15}}>{description}</Text>
-              <Text style={{fontSize: 15}}>{name} can be found at {shelter.name}</Text>
-            </ScrollView>
-            <View styles={styles.shelterInfo}>
-              <Text>{shelter.phone}</Text>
-              <Text>{shelter.city}{shelter.state}{shelter.zip}</Text>
+              <Text style={styles.description}>{description}</Text>
+              <Text style={styles.canBeFound}>{name} can be found at {shelter.name}</Text>
+            <View style={styles.shelterInfo}>
+              <Text style={styles.phone}>{shelter.phone}</Text>
+              <Text style={styles.cityStateZip}>{shelter.city}{shelter.state}{shelter.zip}</Text>
             </View>
+            </ScrollView>
             <TouchableOpacity
             style={styles.contactButton}
           >
@@ -104,12 +104,10 @@ export default class Pet extends React.Component {
               size= {50}
               iconStyle={styles.heart}/>
             </TouchableOpacity>
-             
-            
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
                 <Text style={styles.petName}>{name}</Text>
-                <Text style={styles.shelterName}>{shelter.name}</Text>
+                <Text style={styles.shelterName}>shelter</Text>
             </ImageBackground>
         </GestureRecognizer>
         )
@@ -140,16 +138,35 @@ const styles = StyleSheet.create({
     height: 500,
     width: 350,
   },
+  moreInfoImage: {
+    marginTop: 5
+  },
   borderRad: {
     borderColor: 'white',
     borderRadius: 30,
     borderWidth: 2
   },
   contactButton: {
-
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderRadius: 24,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    fontSize: 20,
+    height: 30,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    textAlign: 'center',
+    width: 300,
+    marginBottom: 35,
+    marginLeft: 23
   },
   contactButtonText: {
-
+    textAlign: 'center',
+    fontSize: 15,
+    marginTop: 3
   },
   hamburgerIcon: {
     height: 50,
@@ -168,22 +185,38 @@ const styles = StyleSheet.create({
     height: 200,
     width: 300,
     flex: 1,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 10,
+    fontSize: 15
+  },
+  canBeFound: {
+    textAlign: 'center',
+    marginTop: 5,
+    marginBottom: 0,
+    fontSize: 15
   },
   shelterName: {
     color: 'white',
     fontSize: 15,
     position: 'absolute',
-    bottom: 30,
+    top: 415,
     left: 20,
     marginTop: 20
   },
   shelterInfo: {
-
+    marginTop: 0,
+    fontSize: 10,
+    textAlign: 'center'
+  },
+  phone: {
+    textAlign: 'center'
+  },
+  cityStateZip: {
+    textAlign: 'center'
   },
   petBreedAge: {
     position: 'absolute',
-    top: 340,
+    top: 240,
     left: 20
   },
   moreInfoImage: {
@@ -193,15 +226,13 @@ const styles = StyleSheet.create({
   },
   scroll: {
     width: 300,
-    height: 100,
+    height: 80,
     marginLeft: 30,
     marginRight: 10
   },
   cog: {
     position: 'absolute',
     top: -10
-
-  
   },
   heart: {
     position: 'absolute',
