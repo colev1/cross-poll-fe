@@ -116,9 +116,7 @@ export default class Home extends React.Component {
     return allFaves.map(favorite => {
      return fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`)
       .then(response => response.json())
-      // .then(result => console.log(result.petfinder.pet))
       .then(result => this.setState({favorites: [...this.state.favorites, [result.petfinder.pet.name.$t]]}))
-      // .then(result => console.log(cleanPets([result.petfinder.pet])[0]))
     })
   }
 

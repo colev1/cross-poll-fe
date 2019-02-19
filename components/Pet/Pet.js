@@ -93,14 +93,16 @@ export default class Pet extends React.Component {
               name='cog'
               type='font-awesome'
               color='#F49D37'
-              style={styles.cog}/>
+              size= {50}
+              iconStyle={styles.cog}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.props.showFavorites}>
               <Icon
               name='heart'
               type='font-awesome'
               color='#D90368'
-              style={styles.cog}/>
+              size= {50}
+              iconStyle={styles.heart}/>
             </TouchableOpacity>
              
             
@@ -196,7 +198,15 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   cog: {
+    position: 'absolute',
+    top: -10
+
   
+  },
+  heart: {
+    position: 'absolute',
+    top: -58, 
+    left: 100
   }
 })
 
