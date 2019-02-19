@@ -60,7 +60,6 @@ export default class Favorites extends React.Component {
     this.props.fetchFavorites()
     this.props.displayFaves();
   }
-  
 
   render() {
     const { cleanedFaves } = this.props;
@@ -109,24 +108,18 @@ export default class Favorites extends React.Component {
                 style={styles.arrowLeft}
                 />
             </TouchableOpacity>
-        {display}
-        <TouchableOpacity onPress={this.goBack} style={styles.icon}>
-            <Icon
-              name='arrow-circle-left'
-              type='font-awesome'
-              color='#F49D37'
-              size={50}
-              iconStyles={styles.backButton}/>
-          </TouchableOpacity>
+            <ScrollView>
+              {display}
+            </ScrollView>
       </View>
     )
   }
 }
 const styles = StyleSheet.create({
   favoritesContainer: {
-    // backgroundColor: '#E5E5E5',
     flex: 1,
-    top: 200
+    top: 60,
+    paddingBottom: 40,
   },
   favoritePetContainer: {
     backgroundColor: 'white',
@@ -166,8 +159,8 @@ const styles = StyleSheet.create({
   },
   backButton: {
     backgroundColor: 'white',
-    position: 'relative',
-    top: -10,
+    position: 'absolute',
+    top: 10,
     // height: 40,
     // left: 10,
     textAlign: 'center',
