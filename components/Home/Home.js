@@ -20,7 +20,7 @@ export default class Home extends React.Component {
       showFilter: false,
       shelterName: '',
       userZipCode: '',
-      showFavorites: false,
+      showFavorites: true,
       favorites: [],
       loading: true,
       error: '',
@@ -41,9 +41,10 @@ export default class Home extends React.Component {
       .catch(error => this.setState({error}))
   }
 
-  fetchByZipCode = (result) => {
-    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${result.zip_code}&count=80`
-    console.log(url)
+
+  fetchByZipCode = (zipCode) => {
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${zipCode}&count=50`
+    console.log('FETCHING',url)
     this.setState({
       userLocation: {
         latitude: result.latitude,
@@ -143,7 +144,6 @@ export default class Home extends React.Component {
     const finalPets = await Promise.all(pets)
     const cleanedPets = this.cleanPets(finalPets)
     this.setState({cleanedFaves: cleanedPets})
-    // return finalPets
   }
 
   cleanPets = (pets) => {
