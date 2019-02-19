@@ -104,6 +104,7 @@ export default class Favorites extends React.Component {
                 name='arrow-left'
                 type='font-awesome'
                 color='#F49D37'
+                style={styles.arrowLeft}
                 />
               <Text style={styles.backButtonText}>
                 back
@@ -131,11 +132,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 10,
-    width: '100%',
+    // width: '96%',
 
   },
+  arrowLeft: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    marginTop: 20
+  },
   name: {
-    fontSize: 25,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#048BA8',
     marginLeft: 20,
@@ -159,11 +166,12 @@ const styles = StyleSheet.create({
     // height: 40,
     // left: 10,
     textAlign: 'center',
-    zIndex: 4 
+    zIndex: 4,
+    marginLeft: 10
   },
   backButtonText: {
     fontSize: 20,
-    color: '#F49D37'
+    color: '#F49D37',
   }
 });
 
