@@ -42,7 +42,7 @@ export default class Pet extends React.Component {
   }
 
   render() {
-    if (!this.props.pet) {
+    if (this.props.loading) {
       return <Loading />
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;

@@ -22,7 +22,7 @@ export default class Home extends React.Component {
       userZipCode: '',
       showFavorites: false,
       favorites: [],
-      loading: false,
+      loading: true,
       error: '',
       shelter: {},
       cleanedFaves: []
@@ -82,7 +82,7 @@ export default class Home extends React.Component {
     fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
     .then(response => response.json()) 
     .then(shelter => cleanShelters(shelter.petfinder.shelter))
-    .then(cleanShelter => this.setState({shelter: cleanShelter}))
+    .then(cleanShelter => this.setState({shelter: cleanShelter, loading: false}))
     .catch(error => this.setState({error}))
   }
 
@@ -205,6 +205,7 @@ export default class Home extends React.Component {
       return (
          <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} 
+          loading={this.state.loading}
           showInfo={this.state.showInfo}
           showFilter={this.showFilter}
           fetchShelter={this.fetchShelter} 
@@ -214,7 +215,7 @@ export default class Home extends React.Component {
           showFavorites={this.showFavorites}
           />
           <TouchableOpacity onPress={this.showInfo}
-              style={styles.infoButton}>
+              style={this.state.loading ? styles.hidden : styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
             </Text>
               <Icon
@@ -262,6 +263,9 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderWidth: 2,
     width: 300,
+  },
+  hidden: {
+    display: 'none'
   },
   infoButtonText: {
     fontSize: 30,
