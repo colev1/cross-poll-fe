@@ -197,6 +197,12 @@ export default class Home extends React.Component {
     })
     this.fetchFavorites()
   }
+
+  goBack = () => {
+    this.setState({
+      showFavorites: false
+    })
+  }
   
   render() {
    const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
@@ -248,7 +254,8 @@ export default class Home extends React.Component {
     } else if (showFavorites) {
       return (
         <View>
-          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves} />
+          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves}
+          goBack={this.goBack} />
         </View>
       )
     }

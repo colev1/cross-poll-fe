@@ -99,7 +99,7 @@ export default class Favorites extends React.Component {
 
     return(
       <View style={styles.favoritesContainer}>
-        <TouchableOpacity onPress={() => this.showInfo(favoritePet.id.$t)} style={styles.backButton}>
+        <TouchableOpacity onPress={this.props.goBack} style={styles.backButton}>
               <Icon
                 name='arrow-left'
                 type='font-awesome'
