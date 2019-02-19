@@ -65,6 +65,12 @@ export default class Favorites extends React.Component {
     this.props.fetchFavorites()
     this.props.displayFaves();
   }
+
+  goBack = () => {
+    this.setState({
+      showInfo: false
+    })
+  }
   
   render() {
     const { cleanedFaves } = this.props;
@@ -74,6 +80,14 @@ export default class Favorites extends React.Component {
       return (
         <View style={styles.homeContainer}>
           <FavesInfo currentPet={currentPet} shelter={shelter} />
+          <TouchableOpacity onPress={this.goBack}>
+            <Icon
+              name='arrow-circle-left'
+              type='font-awesome'
+              color='#F49D37'
+              size={50}
+              iconStyles={styles.backButton}/>
+          </TouchableOpacity>
         </View>
       )
 
@@ -107,14 +121,6 @@ export default class Favorites extends React.Component {
     return(
       <View style={styles.favoritesContainer}>
         {display}
-        <TouchableOpacity onPress={this.goBack} style={styles.icon}>
-            <Icon
-              name='arrow-circle-left'
-              type='font-awesome'
-              color='#F49D37'
-              size={50}
-              iconStyles={styles.backButton}/>
-          </TouchableOpacity>
       </View>
     )
   }
@@ -157,7 +163,8 @@ const styles = StyleSheet.create({
     bottom: -250,
   },
   backButton: {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 5
   }
 });
 

@@ -16,21 +16,22 @@ export default class FavesInfo extends React.Component {
     if (currentPet) {
       return (
         <View>
-          <ImageBackground source = {{uri: image}} style={styles.moreInfoImage}
+            <ImageBackground source = {{uri: image}} style={styles.moreInfoImage}
           imageStyle={styles.borderRad}>
-            <Text style={styles.petName}>{currentPet.name} </Text>
-            <View style={styles.currentPetBreedAge}>
-              <Text style={{color:'white'}}>{currentPet.breed}</Text>
-              <Text style={{color:'white'}}>{currentPet.age}</Text>
-            </View>
-          </ImageBackground>
+              <Text style={styles.petName}>{currentPet.name} </Text>
+              <View style={styles.petBreedAge}>
+                <Text style={{color:'white'}}>{currentPet.breed}</Text>
+                <Text style={{color:'white'}}>{currentPet.age}</Text>
+              </View>
+            </ImageBackground>
             <ScrollView style={styles.scroll}>
-              <Text style={{fontSize: 15}}>{currentPet.description}</Text>
-              <Text style={{fontSize: 15}}>{currentPet.name} can be found at </Text>
-              <View style={styles.shelterInfo}>
+              <Text style={styles.description}>{currentPet.description}</Text>
+              <Text style={styles.canBeFound}>{currentPet.name} can be found at {shelter.name}</Text>
+            <View style={styles.shelterInfo}>
               <Text style={styles.phone}>{shelter.phone}</Text>
               <Text style={styles.cityStateZip}>{shelter.city}{shelter.state}{shelter.zip}</Text>
             </View>
+            </ScrollView>
             <TouchableOpacity
             style={styles.contactButton}>
               <Text style={styles.contactButtonText}> Contact {shelter.name} </Text>
@@ -38,9 +39,9 @@ export default class FavesInfo extends React.Component {
             <TouchableOpacity
             style={styles.backButton}> 
             </TouchableOpacity>
-            </ScrollView>
-        </View>
-      )
+          </View>
+        )
+
     } else {
       return (
         <Loading  />
