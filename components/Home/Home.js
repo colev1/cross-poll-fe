@@ -25,6 +25,7 @@ export default class Home extends React.Component {
       loading: false,
       error: '',
       shelter: {},
+      cleanedFaves: []
     }
   }
 
@@ -107,6 +108,7 @@ export default class Home extends React.Component {
     fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`)
     .then(response => response.json())
     .then(favorites => this.setState({favorites: favorites.data}))
+    .then(result => this.displayFaves())
     .catch(error => console.log(error))
   }
 
@@ -118,6 +120,27 @@ export default class Home extends React.Component {
       .then(result => this.setState({favorites: [...this.state.favorites, [result.petfinder.pet.name.$t]]}))
       // .then(result => console.log(cleanPets([result.petfinder.pet])[0]))
     })
+  }
+
+  displayFaves = async () => {
+    const pets = await this.state.favorites.map(async favorite => {
+      let url = `http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`
+      console.log('the url', url)
+      const response = await fetch(url)
+      return response.json()
+    })
+    const finalPets = await Promise.all(pets)
+    const cleanedPets = this.cleanPets(finalPets)
+    this.setState({cleanedFaves: cleanedPets})
+    // return finalPets
+  }
+
+  cleanPets = (pets) => {
+    const realPets = pets.filter(pet => {
+        return pet.petfinder.pet
+    })
+    console.log('REALPETS', realPets)
+    return realPets.map(currPet => currPet.petfinder.pet)
   }
 
 
@@ -219,7 +242,7 @@ export default class Home extends React.Component {
     } else if (showFavorites) {
       return (
         <View>
-          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} />
+          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves} />
         </View>
       )
     }

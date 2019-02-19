@@ -14,31 +14,31 @@ export default class Favorites extends React.Component {
 
   componentDidMount = () => {
     console.log(this.props.favorites)
-    this.displayFaves(this.props.favorites)
+    // this.props.displayFaves();
   }
 
-  displayFaves = async (favoriteIds) => {
-    const pets = await favoriteIds.map(async favorite => {
-      const response = await fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`)
-      return response.json()
-    })
-    const finalPets = await Promise.all(pets)
+  // displayFaves = async (favoriteIds) => {
+  //   const pets = await favoriteIds.map(async favorite => {
+  //     const response = await fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`)
+  //     return response.json()
+  //   })
+  //   const finalPets = await Promise.all(pets)
 
-    const cleanedPets = this.cleanPets(finalPets)
-    this.setState({favorites: cleanedPets})
-    // return finalPets
-  }
+  //   const cleanedPets = this.cleanPets(finalPets)
+  //   this.setState({favorites: cleanedPets})
+  //   // return finalPets
+  // }
 
   showInfo = (petId) => {
 
   }
 
-  cleanPets = (pets) => {
-    const realPets = pets.filter(pet => {
-        return pet.petfinder.pet
-    })
-    return realPets.map(currPet => currPet.petfinder.pet)
-  }
+  // cleanPets = (pets) => {
+  //   const realPets = pets.filter(pet => {
+  //       return pet.petfinder.pet
+  //   })
+  //   return realPets.map(currPet => currPet.petfinder.pet)
+  // }
 
 
 
@@ -62,17 +62,17 @@ export default class Favorites extends React.Component {
 
   rerenderFavorites = () => {
     this.props.fetchFavorites()
-    this.displayFaves(this.props.favorites)
+    this.props.displayFaves();
   }
   
 
   render() {
-    const { favorites } = this.state;
+    const { cleanedFaves } = this.props;
     let display;
-    if (favorites.length === 0) {
-      display = <Text>You don't have any favorites!</Text>
+    if (cleanedFaves.length === 0) {
+      display = <Text>You don't have any cleanedFaves!</Text>
     } else {
-      display = favorites.map((favoritePet) => {
+      display = cleanedFaves.map((favoritePet) => {
          return (
            <View key={favoritePet.id.$t} style={styles.favoritePetContainer}>
             <TouchableOpacity onPress={() => this.deleteFavorite(favoritePet.id.$t)}>
