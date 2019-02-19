@@ -42,7 +42,8 @@ export default class Pet extends React.Component {
 
   emailShelter = () => {
     const {name} = this.props.pet;
-    let message = `Hello! I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
+    let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
+    const shelterEmail = this.props.shelter.email
     let postBody = {
       api_token: this.props.userAPIToken,
       shelter_email: 'colevanacore@gmail.com',
