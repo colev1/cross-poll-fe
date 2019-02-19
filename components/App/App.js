@@ -2,8 +2,6 @@ import React from 'react';
 import  Login  from '../Login/Login';
 import Home from '../Home/Home'
 import { StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createAppContainer } from "react-navigation";
-
 
 export default class App extends React.Component {
   constructor() {

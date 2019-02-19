@@ -3,9 +3,6 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'rea
 import { RadioButtons } from 'react-native-radio-buttons'
 import { Icon } from 'react-native-elements';
 
-
-
-
 export default class Login extends React.Component {
   constructor(props) {
     super(props)
@@ -109,6 +106,15 @@ export default class Login extends React.Component {
   setSelected = (selectedOption) => {
     this.setState({
       selectedOption
+    })
+    this.setState({
+      error: false,
+      errorMessage: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      passwordConfirmation: ''
     })
   }
 
@@ -231,7 +237,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     margin: 10,
     paddingTop: 60,
-    paddingBottom: 10,
+    paddingBottom: 100,
     // paddingBottom: 100
   },
   formSignIn: {
@@ -244,7 +250,7 @@ const styles = StyleSheet.create({
     fontSize: 60,
     height: 200,
     margin: 10,
-    paddingBottom: 10,
+    paddingBottom: 100,
     paddingTop: 100,
     width: '96%',
   },
@@ -304,7 +310,7 @@ const styles = StyleSheet.create({
     bottom: 50,
   },
   submitButtonText: {
-    fontSize: 40,
+    fontSize: 32,
     textAlign: 'center',
     fontFamily: 'Kohinoor Bangla'
   },
@@ -329,6 +335,10 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   errorMessage: {
-    color: 'red'
+    color: 'red',
+    fontSize: 20,
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: 16
   }
 });
