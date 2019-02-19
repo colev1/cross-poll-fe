@@ -33,7 +33,6 @@ export default class Pet extends React.Component {
   onSwipeLeft = () => {
     const { addToFavorites, userAPIToken, fetchShelter, pet  } = this.props;
     fetchShelter()
-    console.log(pet.id)
     addToFavorites(pet.id)
   }
 
@@ -42,7 +41,7 @@ export default class Pet extends React.Component {
   }
 
   render() {
-    if (!this.props.pet) {
+    if (this.props.loading) {
       return <Loading />
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
@@ -87,13 +86,14 @@ export default class Pet extends React.Component {
             onSwipeLeft={(state) => this.onSwipeLeft(state)}
             config={config}
           >
+          <View style={styles.navContainer}>
             <TouchableOpacity  onPress={this.props.showFilter}
             style={styles.hamburgerContainer}>
             <Icon
               name='cog'
               type='font-awesome'
               color='#F49D37'
-              size= {50}
+              size={48}
               iconStyle={styles.cog}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.props.showFavorites}>
@@ -101,13 +101,22 @@ export default class Pet extends React.Component {
               name='heart'
               type='font-awesome'
               color='#D90368'
-              size= {50}
+              size={48}
               iconStyle={styles.heart}/>
             </TouchableOpacity>
+            </View> 
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
                 <Text style={styles.petName}>{name}</Text>
-                <Text style={styles.shelterName}>{shelter.name}</Text>
+                <View style={styles.shelterContainer}>
+                  <Icon
+                name='home'
+                type='font-awesome'
+                color='white'
+                size={16}
+                iconStyle={styles.home}/>
+                  <Text style={styles.shelterName}>{shelter.name}</Text>
+                </View>
             </ImageBackground>
         </GestureRecognizer>
         )
@@ -132,19 +141,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 500
+    width: 500,
+    marginBottom: 40,
   },
   image: {
-    height: 500,
-    width: 350,
+    height: 600,
+    width: 400,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
   },
   moreInfoImage: {
     marginTop: 5
   },
   borderRad: {
-    borderColor: 'white',
     borderRadius: 30,
-    borderWidth: 2
+    // borderWidth: 2,
+
   },
   contactButton: {
     backgroundColor: 'white',
@@ -169,18 +183,29 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 3
   },
+  home: {
+    marginRight: 4,
+  },
+  navContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    top: 80,
+    justifyContent: 'space-between',
+    width: 360,
+    height: 100
+  },
   hamburgerIcon: {
     height: 50,
     width: 50,
-    marginBottom: 40
+    // marginBottom: 40
   },
   hamburgerContainer: {
-    height: 50,
-    width: 50,
-    position: 'relative',
-    right: 120,
-    top: 40,
-    marginBottom: 40
+    // height: 50,
+    // width: 50,
+    // position: 'relative',
+    // right: 120,
+    // top: 40,
+    // marginBottom: 40
   },
   description: {
     height: 200,
@@ -198,11 +223,10 @@ const styles = StyleSheet.create({
   },
   shelterName: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 16,
     position: 'absolute',
-    top: 415,
+    zIndex: 2,
     left: 20,
-    marginTop: 20
   },
   shelterInfo: {
     marginTop: 0,
@@ -214,6 +238,15 @@ const styles = StyleSheet.create({
   },
   cityStateZip: {
     textAlign: 'center'
+  },
+  shelterContainer: {
+    position: 'absolute',
+    bottom: 30,
+    left: 20,
+    marginTop: 20,
+    flex: 1,
+    flexDirection: 'row',
+    color: 'white'
   },
   petBreedAge: {
     position: 'absolute',
@@ -231,15 +264,15 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 10
   },
-  cog: {
-    position: 'absolute',
-    top: -10
-  },
-  heart: {
-    position: 'absolute',
-    top: -58, 
-    left: 100
-  }
+  // cog: {
+  //   position: 'absolute',
+  //   top: -10
+  // },
+  // heart: {
+  //   position: 'absolute',
+  //   top: -58, 
+  //   left: 100
+  // }
 })
 
 
