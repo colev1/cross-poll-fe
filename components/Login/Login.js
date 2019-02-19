@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
+import { RadioButtons } from 'react-native-radio-buttons'
+
 
 
 export default class Login extends React.Component {
@@ -13,12 +15,13 @@ export default class Login extends React.Component {
       password: '',
       passwordConfirmation: '',
       error: true,
-      errorMessage: ''
+      errorMessage: '',
+      selectedOption: 'sign up'
     }
   }
 
   submitUser = () => {
-    if(this.state.newUser) {
+    if(this.state.selectedOption === 'sign up') {
       this.submitNewUser()
     } else {
       this.submitExistingUser()
@@ -44,7 +47,6 @@ export default class Login extends React.Component {
   }
 
   checkForError = (result) => {
-    console.log(result)
     if(result.error) {
       this.setState({
         error: true,
@@ -78,7 +80,7 @@ export default class Login extends React.Component {
   
   toggleLogin = () => {
     this.setState({
-      newUser: !this.state.newUser,
+      newUser: false,
       error: false,
       errorMessage: '',
       email: '',
@@ -89,33 +91,72 @@ export default class Login extends React.Component {
     })
   }
 
+  toggleSignUp = () => {
+    this.setState({
+      newUser: true,
+      error: false,
+      errorMessage: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      passwordConfirmation: ''
+    })
+  }
+
+  setSelected = (selectedOption) => {
+    this.setState({
+      selectedOption
+    })
+  }
+
+  renderOption = (option, selected, onSelect, index) => {
+    const selectedRadio = selected ? styles.selectedRadio : styles.unselectedRadio
+    const selectedText = selected ? styles.selectedText : styles.unselectedText
+    return (
+      <TouchableOpacity onPress={onSelect} key={index} style={selectedRadio} >
+        <Text style={selectedText}>{option}</Text>
+      </TouchableOpacity>
+    )
+  }
+
+  renderContainer = (optionNodes) => {
+    return (<View style={styles.radioButtons}>
+        {optionNodes}
+          </View>)
+  }
+
   render() {
+    const selectOptions = ["sign in", "sign up"]
+
     return (
       <View style={styles.form}>
         <Text style={styles.title} >  AdoptR </Text>
-          <TouchableOpacity onPress={this.toggleLogin}
-            style={styles.signInButton}
-          >
-            <Text style={styles.buttonText}> sign in </Text>
-          </TouchableOpacity> 
-          <TouchableOpacity  onPress={this.toggleLogin}
-          style={styles.signUpButton}>
-          <Text style={styles.buttonText}> sign up </Text>
-          </TouchableOpacity > 
+          <RadioButtons
+                style={styles.radioButtons}
+                options={ selectOptions }
+                onSelection={ this.setSelected }
+                selectedOption={this.state.selectedOption }
+                renderOption={ this.renderOption }
+                renderContainer={ this.renderContainer }
+              />
         <TextInput 
-          style={this.state.newUser ? styles.input : styles.hidden}
+          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
           placeholder='first name'
+          autoCapitalize={"none"}
           value={this.state.firstName}
           onChangeText={(value) => this.setState({firstName: value})}
         />
         <TextInput 
-          style={this.state.newUser ? styles.input : styles.hidden}
+          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
           placeholder='last name'
+          autoCapitalize={"none"}
           value={this.state.lastName}
           onChangeText={(value) => this.setState({lastName: value})}
         />
         <TextInput 
           type='email'
+          autoCapitalize={"none"}
           style={styles.input}
           placeholder='email'
           value={this.state.email}
@@ -125,11 +166,12 @@ export default class Login extends React.Component {
           style={styles.input}
           secureTextEntry={true}
           placeholder='password'
+          autoCapitalize={"none"}
           value={this.state.password}
           onChangeText={(value) => this.setState({password: value})}
         />
         <TextInput
-          style={this.state.newUser ? styles.input : styles.hidden}
+          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
           secureTextEntry={true}
           placeholder='confirm password'
           value={this.state.passwordConfirmation}
@@ -151,13 +193,6 @@ export default class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  signInButtonsContainer: {
-    alignItems: 'center',
-    color: 'red',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   buttonText: {
     fontSize: 32
   },
@@ -168,6 +203,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    paddingTop: 200,
+    paddingBottom: 100
   },
   input: {
     backgroundColor: 'white',
@@ -187,6 +224,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 64,
     color: 'white',
+    position: 'absolute',
+    top: 60,
+    zIndex: 3
   },
   hidden: {
     display: 'none'
@@ -198,9 +238,29 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderWidth: 2,
     width: 300,
+    position: 'absolute',
+    bottom: 50,
   },
   submitButtonText: {
     fontSize: 60,
     textAlign: 'center',
+  },
+  selectedText: {
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    fontSize: 28
+  },
+  unselectedText: {
+    fontSize: 28,
+  },
+  radioButtons: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: 260,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 160,
+    zIndex: 2
   }
 });
