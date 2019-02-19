@@ -4,6 +4,8 @@ import { Icon } from 'react-native-elements';
 import APIkey from '../apiKey';
 import { cleanPets } from '../helpers/helpers';
 import FavesInfo from '../FavesInfo/FavesInfo';
+import { cleanPet } from '../helpers/helpers';
+import { cleanShelters } from '../helpers/helpers'
 
 export default class Favorites extends React.Component {
   constructor(props) {
@@ -11,32 +13,35 @@ export default class Favorites extends React.Component {
     this.state = ({
       favorites: [],
       currentPet: {},
-      showInfo: false
+      showInfo: false,
+      shelter: {}
     })
   }
 
   componentDidMount = () => {
-    console.log(this.props.favorites)
-  }
-
-  
-
-  showInfo = (petId) => {
-    this.setState({
-      showInfo: true
-    })
-    this.getPet(petId)
-
-
   }
 
   getPet = (petId) => {
-    fetch(`fetch(http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
+    // const { currentPet } = this.state;
+    console.log('petId', petId)
+    console.log('getting pet!')
+    fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
     .then(response => response.json())
-    .then(pet => this.setState({currentPet: pet.petfinder.pet}))
+    .then(pet => cleanPet(pet.petfinder.pet))
+    .then(cleanPet => this.setState({currentPet: cleanPet}))
+    .then(currentPet => this.fetchShelter(this.state.currentPet.shelterId))
+    .then(currentPet => this.setState({showInfo: true}))
     .then(error => console.log(error))
   }
 
+  fetchShelter = (shelterId) => {
+    console.log('id in favorites fetch shelter', shelterId)
+    fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
+    .then(response => response.json()) 
+    .then(shelter => cleanShelters(shelter.petfinder.shelter))
+    .then(cleanShelter => this.setState({shelter: cleanShelter}))
+    .catch(error => this.setState({error}))
+  }
 
   deleteFavorite = (petId, userToken) => {
     const { userAPIToken } = this.props;
@@ -61,13 +66,29 @@ export default class Favorites extends React.Component {
     this.props.displayFaves();
   }
 
+  goBack = () => {
+    this.setState({
+      showInfo: false
+    })
+  }
+  
   render() {
     const { cleanedFaves } = this.props;
-    const { showInfo, currentPet } = this.state;
+    const { showInfo, currentPet, shelter } = this.state;
     let display;
     if (showInfo) {
       return (
-        <FavesInfo currentPet={currentPet} />
+        <View style={styles.homeContainer}>
+          <FavesInfo currentPet={currentPet} shelter={shelter} />
+          <TouchableOpacity onPress={this.goBack}>
+            <Icon
+              name='arrow-circle-left'
+              type='font-awesome'
+              color='#F49D37'
+              size={50}
+              iconStyles={styles.backButton}/>
+          </TouchableOpacity>
+        </View>
       )
 
     } else if (cleanedFaves.length === 0) {
@@ -85,8 +106,8 @@ export default class Favorites extends React.Component {
                 />
             </TouchableOpacity>
             <Text style={styles.name}>{favoritePet.name.$t}</Text>
-            <TouchableOpacity onPress={() => this.showInfo(favoritePet.id.$t)}
-            style={styles.arrowRight}>
+            <TouchableOpacity onPress={() => this.getPet(favoritePet.id.$t)}
+    style={styles.arrowRight}>
               <Icon
                 name='angle-right'
                 type='font-awesome'
@@ -117,7 +138,13 @@ export default class Favorites extends React.Component {
 }
 const styles = StyleSheet.create({
   favoritesContainer: {
+    backgroundColor: '#E5E5E5',
+  },
+  homeContainer: {
     flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginBottom: 20,
     top: 60,
     paddingBottom: 40,
   },
@@ -130,14 +157,13 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 10,
-    // width: '96%',
+    paddingLeft: 10
   },
   arrowLeft: {
     position: 'absolute',
     left: 0,
     top: 0,
-    marginTop: 20
+    marginTop: 20,
   },
   name: {
     fontSize: 22,
@@ -173,6 +199,7 @@ const styles = StyleSheet.create({
     bottom: -250,
   },
   backButton: {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 5
   }
 });

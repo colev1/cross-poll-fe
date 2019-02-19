@@ -28,7 +28,38 @@ export const cleanPets = (pets) => pets.map((pet) => {
   };
 });
 
+export const cleanPet = (pet) => {
+  let cleanedPhotos;
+  if (pet.media.photos) {
+    cleanedPhotos = cleanPhotos(pet.media.photos.photo);
+  } else {
+    cleanedPhotos = [];
+  }
+  const cleanPet = {
+    name: pet.name.$t,
+    age: pet.age.$t,
+    animal: pet.animal.$t,
+    breed: pet.breeds.breed.$t,
+    id: pet.id.$t,
+    sex: pet.sex.$t,
+    shelterId: pet.shelterId.$t,
+    size: pet.size.$t,
+    description: pet.description.$t,
+    contactInfo: {
+      address: pet.contact.address1.$t,
+      zip: pet.contact.zip.$t,
+      state: pet.contact.state.$t,
+      email: pet.contact.email.$t,
+      city: pet.contact.city.$t,
+    },
+    photos: cleanedPhotos,
+  };
+
+  return cleanPet
+}
+
 export const cleanShelters = (shelter) => {
+  console.log('YOO', shelter)
   const cleanedShelter = {
     name: shelter.name.$t,
     id: shelter.id.$t,
@@ -38,6 +69,7 @@ export const cleanShelters = (shelter) => {
     phone: shelter.phone.$t,
     email: shelter.email.$t,
   };
+  console.log('cleaned', cleanedShelter)
   return cleanedShelter;
 };
 

@@ -116,7 +116,7 @@ export default class Pet extends React.Component {
                 size={16}
                 iconStyle={styles.home}/>
                   <Text style={styles.shelterName}>{shelter.name}</Text>
-                  </View>
+                </View>
             </ImageBackground>
         </GestureRecognizer>
         )

@@ -20,7 +20,7 @@ export default class Home extends React.Component {
       showFilter: false,
       shelterName: '',
       userZipCode: '',
-      showFavorites: false,
+      showFavorites: true,
       favorites: [],
       loading: true,
       error: '',
@@ -138,7 +138,6 @@ export default class Home extends React.Component {
     const finalPets = await Promise.all(pets)
     const cleanedPets = this.cleanPets(finalPets)
     this.setState({cleanedFaves: cleanedPets})
-    // return finalPets
   }
 
   cleanPets = (pets) => {
