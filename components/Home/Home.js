@@ -30,6 +30,7 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.fetchUserZip()
+    this.fetchFavorites()
   }
 
   fetchUserZip = () => {
@@ -101,28 +102,40 @@ export default class Home extends React.Component {
     .catch(error => console.log(error))
     }
 
+    
   fetchFavorites = () => {
     fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`)
     .then(response => response.json())
-    .then(favorites => this.findFavoritePet(favorites.data))
+    .then(favorites => this.setState({favorites: favorites.data}))
     .catch(error => console.log(error))
   }
 
-  findFavoritePet = (favoritePets) => {
-    const { allPets, favorites } = this.state;
-    const petIds = favoritePets.map((favoritePet) => {
-      return favoritePet.attributes.favorite_id
-    })
-    petIds.forEach((id) => {
-      allPets.forEach((pet) => {
-        if (id === pet.id) {
-          this.setState({
-            favorites: [...favorites, pet]
-          })
-        }
-      })
+  getFavoriteIds = (allFaves) => {
+    return allFaves.map(favorite => {
+     return fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`)
+      .then(response => response.json())
+      // .then(result => console.log(result.petfinder.pet))
+      .then(result => this.setState({favorites: [...this.state.favorites, [result.petfinder.pet.name.$t]]}))
+      // .then(result => console.log(cleanPets([result.petfinder.pet])[0]))
     })
   }
+
+
+  // findFavoritePet = (favoritePets) => {
+  //   const { allPets, favorites } = this.state;
+  //   const petIds = favoritePets.map((favoritePet) => {
+  //     return favoritePet.attributes.favorite_id
+  //   })
+  //   petIds.forEach((id) => {
+  //     allPets.forEach((pet) => {
+  //       if (id === pet.id) {
+  //         this.setState({
+  //           favorites: [...favorites, pet]
+  //         })
+  //       }
+  //     })
+  //   })
+  // }
 
   changePet = (gesture) => {
     let newState = this.state.petIndex = this.state.petIndex + 1
@@ -171,7 +184,7 @@ export default class Home extends React.Component {
           addToFavorites={this.addToFavorites}
           userAPIToken={userAPIToken}
           showFavorites={this.showFavorites}
-          fetchFavorites={this.fetchFavorites}/>
+          />
           <TouchableOpacity onPress={this.showInfo}
               style={styles.infoButton}>
             <Text style={styles.infoButtonText}> more information

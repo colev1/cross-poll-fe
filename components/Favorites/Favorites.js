@@ -1,18 +1,46 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
+import APIkey from '../apiKey';
+import { cleanPets } from '../helpers/helpers';
 
 export default class Favorites extends React.Component {
   constructor(props) {
     super(props)
     this.state = ({
-      reRender: false
+      favorites: []
     })
+  }
+
+  componentDidMount = () => {
+    console.log(this.props.favorites)
+    this.displayFaves(this.props.favorites)
+  }
+
+  displayFaves = async (favoriteIds) => {
+    const pets = await favoriteIds.map(async favorite => {
+      const response = await fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`)
+      return response.json()
+    })
+    const finalPets = await Promise.all(pets)
+
+    const cleanedPets = this.cleanPets(finalPets)
+    this.setState({favorites: cleanedPets})
+    // return finalPets
   }
 
   showInfo = (petId) => {
 
   }
+
+  cleanPets = (pets) => {
+    const realPets = pets.filter(pet => {
+        return pet.petfinder.pet
+    })
+    return realPets.map(currPet => currPet.petfinder.pet)
+  }
+
+
 
   deleteFavorite = (petId, userToken) => {
     const { userAPIToken } = this.props;
@@ -28,21 +56,26 @@ export default class Favorites extends React.Component {
       }
     })
     .then(response => response.json())
-    .then(result => this.props.fetchFavorites())
+    .then(result => this.rerenderFavorites())
     .catch(error => console.log(error))
+  }
+
+  rerenderFavorites = () => {
+    this.props.fetchFavorites()
+    this.displayFaves(this.props.favorites)
   }
   
 
   render() {
-    const { favorites } = this.props;
+    const { favorites } = this.state;
     let display;
     if (favorites.length === 0) {
       display = <Text>You don't have any favorites!</Text>
     } else {
       display = favorites.map((favoritePet) => {
          return (
-           <View key={favoritePet.id} style={styles.favoritePetContainer}>
-            <TouchableOpacity onPress={() => this.deleteFavorite(favoritePet.id)}>
+           <View key={favoritePet.id.$t} style={styles.favoritePetContainer}>
+            <TouchableOpacity onPress={() => this.deleteFavorite(favoritePet.id.$t)}>
               <Icon
                 name='minus-circle'
                 type='font-awesome'
@@ -50,8 +83,8 @@ export default class Favorites extends React.Component {
                 style={styles.delete}
                 />
             </TouchableOpacity>
-            <Text style={styles.name}>{favoritePet.name}</Text>
-            <TouchableOpacity onPress={() => this.showInfo(favoritePet.id)}>
+            <Text style={styles.name}>{favoritePet.name.$t}</Text>
+            <TouchableOpacity onPress={() => this.showInfo(favoritePet.id.$t)}>
               <Icon
                 name='angle-right'
                 type='font-awesome'

@@ -21,7 +21,7 @@ export default class Login extends React.Component {
   }
 
   submitUser = () => {
-    if(this.state.newUser) {
+    if(this.state.selectedOption === 'sign up') {
       this.submitNewUser()
     } else {
       this.submitExistingUser()
