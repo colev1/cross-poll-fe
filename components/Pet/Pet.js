@@ -38,7 +38,7 @@ export default class Pet extends React.Component {
 
   onSwipeRight = () => {
     console.log('swiping right!')
-    
+
   }
 
   render() {
@@ -86,27 +86,37 @@ export default class Pet extends React.Component {
             onSwipeLeft={(state) => this.onSwipeLeft(state)}
             config={config}
           >
+          <View style={styles.navContainer}>
             <TouchableOpacity  onPress={this.props.showFilter}
             style={styles.hamburgerContainer}>
             <Icon
               name='cog'
               type='font-awesome'
               color='#F49D37'
-              style={styles.cog}/>
+              size={40}
+              iconStyle={styles.cog}/>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.props.showFavorites}>
               <Icon
               name='heart'
               type='font-awesome'
               color='#D90368'
-              style={styles.cog}/>
+              size={40}
+              iconStyle={styles.cog}/>
             </TouchableOpacity>
-             
-            
+            </View> 
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
                 <Text style={styles.petName}>{name}</Text>
-                <Text style={styles.shelterName}>{shelter.name}</Text>
+                <View style={styles.shelterContainer}>
+                  <Icon
+                name='home'
+                type='font-awesome'
+                color='white'
+                size={16}
+                iconStyle={styles.home}/>
+                  <Text style={styles.shelterName}>{shelter.name}</Text>
+                  </View>
             </ImageBackground>
         </GestureRecognizer>
         )
@@ -131,16 +141,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 500
+    width: 500,
+    marginBottom: 100,
   },
   image: {
     height: 500,
     width: 350,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
   },
   borderRad: {
-    borderColor: 'white',
     borderRadius: 30,
-    borderWidth: 2
+    // borderWidth: 2,
+
   },
   contactButton: {
 
@@ -148,18 +163,29 @@ const styles = StyleSheet.create({
   contactButtonText: {
 
   },
+  home: {
+    marginRight: 4,
+  },
+  navContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    top: 80,
+    justifyContent: 'space-between',
+    width: 360,
+    height: 100
+  },
   hamburgerIcon: {
     height: 50,
     width: 50,
-    marginBottom: 40
+    // marginBottom: 40
   },
   hamburgerContainer: {
-    height: 50,
-    width: 50,
-    position: 'relative',
-    right: 120,
-    top: 40,
-    marginBottom: 40
+    // height: 50,
+    // width: 50,
+    // position: 'relative',
+    // right: 120,
+    // top: 40,
+    // marginBottom: 40
   },
   description: {
     height: 200,
@@ -170,13 +196,18 @@ const styles = StyleSheet.create({
   shelterName: {
     color: 'white',
     fontSize: 15,
-    position: 'absolute',
-    bottom: 30,
-    left: 20,
-    marginTop: 20
   },
   shelterInfo: {
 
+  },
+  shelterContainer: {
+    position: 'absolute',
+    bottom: 30,
+    left: 20,
+    marginTop: 20,
+    flex: 1,
+    flexDirection: 'row',
+    color: 'white'
   },
   petBreedAge: {
     position: 'absolute',
