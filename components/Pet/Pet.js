@@ -59,8 +59,8 @@ export default class Pet extends React.Component {
       }
     })
       .then(response => response.json())
-      .then(result => console.log(result))
-      .then(error => console.log(error))
+      .then(result => console.log('result',result))
+      .then(error => console.log('error',error))
   }
 
   render() {
