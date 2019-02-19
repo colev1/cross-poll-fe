@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 
 
 describe('App', () => {
-  it('should match the snapshot with all data passed in correctly', () => { 
+  it.skip('should match the snapshot with all data passed in correctly', () => { 
     const wrapper = shallow( <App 
     />);
 
