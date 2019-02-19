@@ -123,11 +123,16 @@ export default class Home extends React.Component {
   }
 
   displayFaves = async () => {
+    
     const pets = await this.state.favorites.map(async favorite => {
+      try {
       let url = `http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`
       console.log('the url', url)
       const response = await fetch(url)
       return response.json()
+      } catch(err) {
+        console.log(err)
+      }
     })
     const finalPets = await Promise.all(pets)
     const cleanedPets = this.cleanPets(finalPets)
@@ -211,11 +216,11 @@ export default class Home extends React.Component {
           <TouchableOpacity onPress={this.showInfo}
               style={styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
-              {/* <Icon
+            </Text>
+              <Icon
                 name='angle-down'
                 type='font-awesome'
-                />  */}
-            </Text>
+                /> 
           </TouchableOpacity>
         </View>
       )
@@ -263,7 +268,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   homeContainer: {
-    
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',

@@ -33,13 +33,12 @@ export default class Pet extends React.Component {
   onSwipeLeft = () => {
     const { addToFavorites, userAPIToken, fetchShelter, pet  } = this.props;
     fetchShelter()
-    console.log(pet.id)
     addToFavorites(pet.id)
   }
 
   onSwipeRight = () => {
     console.log('swiping right!')
-
+    
   }
 
   render() {

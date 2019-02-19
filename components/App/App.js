@@ -2,6 +2,8 @@ import React from 'react';
 import  Login  from '../Login/Login';
 import Home from '../Home/Home'
 import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+
 
 export default class App extends React.Component {
   constructor() {
@@ -22,7 +24,24 @@ export default class App extends React.Component {
     this.showLogin()
   }
 
- 
+  addToFavorites = (petId) => {
+    console.log('token', this.state.userAPIToken)
+    const postBody = {
+      apiToken: this.state.userAPIToken,
+      favoriteId: petId
+    }
+
+    fetch('https://adoptr-be.herokuapp.com/api/v1/favorites', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
+  }
 
   render() {
     const { showLogin, userAPIToken } = this.state;
