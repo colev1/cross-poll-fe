@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons'
-
-
+import { Icon } from 'react-native-elements';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -108,6 +107,15 @@ export default class Login extends React.Component {
     this.setState({
       selectedOption
     })
+    this.setState({
+      error: false,
+      errorMessage: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+      passwordConfirmation: ''
+    })
   }
 
   renderOption = (option, selected, onSelect, index) => {
@@ -131,7 +139,19 @@ export default class Login extends React.Component {
 
     return (
       <View style={styles.form}>
-        <Text style={styles.title} >  AdoptR </Text>
+        <View style={styles.title}> 
+          <Icon
+              name='paw'
+              type='font-awesome'
+              color='white'
+              size= {60}
+              iconStyle={styles.pawprint}
+            />
+          <Text style={styles.titleText}> 
+            AdoptR 
+          </Text>
+        </View>
+        <View style={this.state.selectedOption === 'sign up' ? styles.formSignUp : styles.formSignIn}>
           <RadioButtons
                 style={styles.radioButtons}
                 options={ selectOptions }
@@ -180,6 +200,7 @@ export default class Login extends React.Component {
         <Text style={this.state.error ? styles.errorMessage : styles.hidden}>
           {this.state.errorMessage}
         </Text>
+        </View>
         <TouchableOpacity
         style={styles.button}
         onPress={()=>this.submitUser()} > 
@@ -203,30 +224,77 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    paddingTop: 200,
-    paddingBottom: 100
+    paddingTop: 160,
+    paddingBottom: 140
+  },
+  formSignUp: {
+    backgroundColor: 'white',
+    fontSize: 60,
+    width: '96%',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    borderRadius: 16,
+    margin: 10,
+    paddingTop: 60,
+    paddingBottom: 100,
+    // paddingBottom: 100
+  },
+  formSignIn: {
+    // justifyContent: 'space-around',
+    // paddingBottom: 100
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 16,
+    flex: 1,
+    fontSize: 60,
+    height: 200,
+    margin: 10,
+    paddingBottom: 100,
+    paddingTop: 100,
+    width: '96%',
   },
   input: {
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderRadius: 24,
+    // backgroundColor: 'rgba(255,255,255, 0.8)',
+    borderBottomColor: 'black',
+    // borderRadius: 24,
     borderStyle: 'solid',
-    borderWidth: 2,
-    fontSize: 32,
+    borderBottomWidth: 2,
+    fontSize: 28,
     height: 66,
-    shadowColor: '#000',
+    // shadowColor: '#000',
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
-    textAlign: 'center',
-    width: 360,
+    textAlign: 'left',
+    width: 320,
+    fontFamily: 'Kohinoor Bangla'
   },
   title: {
-    fontSize: 64,
     color: 'white',
     position: 'absolute',
     top: 60,
-    zIndex: 3
+    zIndex: 3,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    fontFamily: 'Kohinoor Bangla',
+    fontSize: 60,
+    textAlign: 'center',
+    shadowColor: 'black',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
+  },
+  titleText: {
+    fontFamily: 'Kohinoor Bangla',
+    fontSize: 60,
+    textAlign: 'center',
+  },
+  pawprint: {
+    color: 'black',
+    marginRight: 20
   },
   hidden: {
     display: 'none'
@@ -242,16 +310,19 @@ const styles = StyleSheet.create({
     bottom: 50,
   },
   submitButtonText: {
-    fontSize: 60,
+    fontSize: 32,
     textAlign: 'center',
+    fontFamily: 'Kohinoor Bangla'
   },
   selectedText: {
     fontWeight: 'bold',
     textDecorationLine: 'underline',
-    fontSize: 28
+    fontSize: 28,
+    fontFamily: 'Kohinoor Bangla'
   },
   unselectedText: {
     fontSize: 28,
+    fontFamily: 'Kohinoor Bangla'
   },
   radioButtons: {
     display: 'flex',
@@ -260,7 +331,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     position: 'absolute',
-    top: 160,
+    top: 10,
     zIndex: 2
+  },
+  errorMessage: {
+    color: 'red',
+    fontSize: 20,
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: 16
   }
 });

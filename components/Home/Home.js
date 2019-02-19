@@ -22,7 +22,7 @@ export default class Home extends React.Component {
       userZipCode: '',
       showFavorites: false,
       favorites: [],
-      loading: false,
+      loading: true,
       error: '',
       shelter: {},
       cleanedFaves: []
@@ -83,7 +83,7 @@ export default class Home extends React.Component {
     fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
     .then(response => response.json()) 
     .then(shelter => cleanShelters(shelter.petfinder.shelter))
-    .then(cleanShelter => this.setState({shelter: cleanShelter}))
+    .then(cleanShelter => this.setState({shelter: cleanShelter, loading: false}))
     .catch(error => this.setState({error}))
     
   }
@@ -123,11 +123,16 @@ export default class Home extends React.Component {
   }
 
   displayFaves = async () => {
+    
     const pets = await this.state.favorites.map(async favorite => {
+      try {
       let url = `http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`
       console.log('the url', url)
       const response = await fetch(url)
       return response.json()
+      } catch(err) {
+        console.log(err)
+      }
     })
     const finalPets = await Promise.all(pets)
     const cleanedPets = this.cleanPets(finalPets)
@@ -161,18 +166,19 @@ export default class Home extends React.Component {
       showFilter: true
     })
  }               
-                  
-  goBack = () => {
-    this.setState({
-      showInfo: false
-    })
-  }
 
   showFavorites = () => {
     this.setState({
       showFavorites: true
     })
     this.fetchFavorites()
+  }
+
+  goBack = () => {
+    this.setState({
+      showFavorites: false,
+      showInfo: false
+    })
   }
   
   render() {
@@ -182,6 +188,7 @@ export default class Home extends React.Component {
       return (
          <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} 
+          loading={this.state.loading}
           showInfo={this.state.showInfo}
           showFilter={this.showFilter}
           fetchShelter={this.fetchShelter} 
@@ -191,13 +198,13 @@ export default class Home extends React.Component {
           showFavorites={this.showFavorites}
           />
           <TouchableOpacity onPress={this.showInfo}
-              style={styles.infoButton}>
+              style={this.state.loading ? styles.hidden : styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
-              {/* <Icon
+            </Text>
+              <Icon
                 name='angle-down'
                 type='font-awesome'
-                />  */}
-            </Text>
+                /> 
           </TouchableOpacity>
         </View>
       )
@@ -224,7 +231,8 @@ export default class Home extends React.Component {
     } else if (showFavorites) {
       return (
         <View>
-          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves} />
+          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves}
+          goBack={this.goBack} />
         </View>
       )
     }
@@ -239,6 +247,9 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderWidth: 2,
     width: 300,
+  },
+  hidden: {
+    display: 'none'
   },
   infoButtonText: {
     fontSize: 30,

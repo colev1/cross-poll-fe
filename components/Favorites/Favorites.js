@@ -72,7 +72,7 @@ export default class Favorites extends React.Component {
       )
 
     } else if (cleanedFaves.length === 0) {
-      display = <Text>You don't have any cleanedFaves!</Text>
+      display = <Text style={styles.noFavesMessage}>You don't have any favorites!</Text>
     } else {
       display = cleanedFaves.map((favoritePet) => {
          return (
@@ -86,7 +86,8 @@ export default class Favorites extends React.Component {
                 />
             </TouchableOpacity>
             <Text style={styles.name}>{favoritePet.name.$t}</Text>
-            <TouchableOpacity onPress={() => this.showInfo(favoritePet.id.$t)}>
+            <TouchableOpacity onPress={() => this.showInfo(favoritePet.id.$t)}
+            style={styles.arrowRight}>
               <Icon
                 name='angle-right'
                 type='font-awesome'
@@ -97,9 +98,17 @@ export default class Favorites extends React.Component {
          ) 
        })
     }
-
     return(
       <View style={styles.favoritesContainer}>
+        <TouchableOpacity onPress={this.props.goBack} style={styles.backButton}>
+              <Icon
+                name='arrow-circle-left'
+                type='font-awesome'
+                color='#F49D37'
+                size={48}
+                style={styles.arrowLeft}
+                />
+            </TouchableOpacity>
         {display}
         <TouchableOpacity onPress={this.goBack} style={styles.icon}>
             <Icon
@@ -113,11 +122,11 @@ export default class Favorites extends React.Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
   favoritesContainer: {
-    backgroundColor: '#E5E5E5',
-
+    // backgroundColor: '#E5E5E5',
+    flex: 1,
+    top: 200
   },
   favoritePetContainer: {
     backgroundColor: 'white',
@@ -128,17 +137,41 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 10
-
+    paddingLeft: 10,
+    // width: '96%',
+  },
+  arrowLeft: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    marginTop: 20
   },
   name: {
-    fontSize: 25,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#048BA8',
     marginLeft: 20,
-    marginRight: 230
+    // marginRight: 230
+  },
+  arrowRight: {
+    position: 'absolute',
+    right: 10
   },
   delete: {
+    marginLeft: 10
+  },
+  noFavesMessage: {
+    fontSize: 40,
+    textAlign: 'center'
+  },
+  backButton: {
+    backgroundColor: 'white',
+    position: 'relative',
+    top: -10,
+    // height: 40,
+    // left: 10,
+    textAlign: 'center',
+    zIndex: 4,
     marginLeft: 10
   },
   icon: {
@@ -150,4 +183,3 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
-
