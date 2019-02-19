@@ -155,10 +155,16 @@ export default class Home extends React.Component {
   }
 
   changePet = (gesture) => {
-    let newState = this.state.petIndex = this.state.petIndex + 1
-    this.setState({
-      petIndex: newState
-    })
+    if (this.state.petIndex > 48) {
+      this.setState({
+        petIndex: 0
+      })
+    } else {
+      let newState = this.state.petIndex = this.state.petIndex + 1
+      this.setState({
+        petIndex: newState
+      })
+    }
   }
 
   showInfo = () => {

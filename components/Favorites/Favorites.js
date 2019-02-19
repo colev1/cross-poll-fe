@@ -18,9 +18,6 @@ export default class Favorites extends React.Component {
     })
   }
 
-  componentDidMount = () => {
-  }
-
   getPet = (petId) => {
     // const { currentPet } = this.state;
     console.log('petId', petId)
