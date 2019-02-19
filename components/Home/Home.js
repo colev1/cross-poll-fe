@@ -180,7 +180,7 @@ export default class Home extends React.Component {
     this.fetchFavorites()
   }
 
-  goBack = () => {
+  returnHome = () => {
     this.setState({
       showFavorites: false,
       showInfo: false
@@ -227,7 +227,7 @@ export default class Home extends React.Component {
           <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}
           userAPIToken={userAPIToken}
           userLocation={this.state.userLocation}/>
-          <TouchableOpacity onPress={this.goBack}>
+          <TouchableOpacity onPress={this.returnHome}>
             <Icon
               name='arrow-circle-left'
               type='font-awesome'
@@ -241,7 +241,7 @@ export default class Home extends React.Component {
       return (
         <View>
           <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves}
-          goBack={this.goBack} />
+          returnHome={this.returnHome} />
         </View>
       )
     }

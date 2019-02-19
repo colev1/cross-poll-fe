@@ -157,7 +157,7 @@ export default class Pet extends React.Component {
                 color='white'
                 size={16}
                 iconStyle={styles.home}/>
-                  <Text style={styles.shelterName}>{shelter.name} {this.state.distance}miles</Text>
+                  <Text style={styles.shelterName}>{shelter.name} - {this.state.distance} miles </Text>
                 </View>
             </ImageBackground>
         </GestureRecognizer>
@@ -267,6 +267,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 2,
     left: 20,
+    textShadowColor: 'black'
   },
   shelterInfo: {
     marginTop: 0,
