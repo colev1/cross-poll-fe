@@ -14,7 +14,11 @@ export default class Pet extends React.Component {
     }
   }
 
-  onSwipe = (gestureName, gestureSate) => {
+  componentDidMount = () => {
+    // this.findDistance()
+  }
+
+  onSwipe = (gestureName, gestureState) => {
     const { SWIPE_RIGHT, SWIPE_LEFT } = swipeDirections;
     this.setState({
       gestureName
@@ -40,11 +44,44 @@ export default class Pet extends React.Component {
     console.log('swiping right!')
   }
 
+  findDistance = () => {
+    console.log('latitude', this.props.userLocation)
+    const {latitude, longitude} = this.props.shelter;
+    const {userLocation} = this.props;
+    fetch(`api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`)
+      .then(response => response.json())
+      .then(result => console.log(result))
+  }
+
+  emailShelter = () => {
+    const {name} = this.props.pet;
+    let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
+    const shelterEmail = this.props.shelter.email
+    let postBody = {
+      api_token: this.props.userAPIToken,
+      shelter_email: 'colevanacore@gmail.com',
+      pet_name: name,
+      message: message
+    }
+    console.log(postBody)
+    fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => console.log('result',result))
+      .then(error => console.log('error',error))
+  }
+
   render() {
     if (this.props.loading) {
       return <Loading />
     } else {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
+      // this.findDistance()
       const { shelter } = this.props;
       console.log(shelter.name)
       let image = photos[2]
@@ -69,12 +106,8 @@ export default class Pet extends React.Component {
             </ScrollView>
             <TouchableOpacity
             style={styles.contactButton}
-          >
+            onPress={this.emailShelter}>
               <Text style={styles.contactButtonText}> Contact {shelter.name} </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-            style={styles.backButton}
-          > 
             </TouchableOpacity>
           </View>
         )

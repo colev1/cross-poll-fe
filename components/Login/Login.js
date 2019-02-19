@@ -65,6 +65,7 @@ export default class Login extends React.Component {
       password,
       password_confirmation: passwordConfirmation
     }
+    console.log(postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
       method: 'POST',
       body: JSON.stringify(postBody),

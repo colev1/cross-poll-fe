@@ -37,15 +37,20 @@ export default class Home extends React.Component {
   fetchUserZip = () => {
     fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
       .then(response => response.json())
-      .then(result => this.fetchByZipCode(result.zip_code))
+      .then(result => this.fetchByZipCode(result))
       .catch(error => this.setState({error}))
   }
+
 
   fetchByZipCode = (zipCode) => {
     const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${zipCode}&count=50`
     console.log('FETCHING',url)
     this.setState({
-      userZipCode: zipCode
+      userLocation: {
+        latitude: result.latitude,
+        longitude: result.longitude,
+        zip_code: result.zip_code
+      }
     })
     this.fetchAllAnimals(url);
   }
@@ -72,7 +77,8 @@ export default class Home extends React.Component {
       default:
         gender = ''
     }
-    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userZipCode}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userLocation.zip_code}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
+    console.log(url)
     this.fetchAllAnimals(url)
     this.setState({showFilter: false})
   }
@@ -196,6 +202,7 @@ export default class Home extends React.Component {
           addToFavorites={this.addToFavorites}
           userAPIToken={userAPIToken}
           showFavorites={this.showFavorites}
+          userLocation={this.props.userLocation}
           />
           <TouchableOpacity onPress={this.showInfo}
               style={this.state.loading ? styles.hidden : styles.infoButton}>
@@ -217,7 +224,9 @@ export default class Home extends React.Component {
     } else if (showInfo) {
       return (
       <View style={styles.homeContainer}>
-          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}/>
+          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}
+          userAPIToken={userAPIToken}
+          userLocation={this.props.userLocation}/>
           <TouchableOpacity onPress={this.goBack}>
             <Icon
               name='arrow-circle-left'
