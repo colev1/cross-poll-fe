@@ -4,6 +4,8 @@ import { Icon } from 'react-native-elements';
 import APIkey from '../apiKey';
 import { cleanPets } from '../helpers/helpers';
 import FavesInfo from '../FavesInfo/FavesInfo';
+import { cleanPet } from '../helpers/helpers';
+import { cleanShelters } from '../helpers/helpers'
 
 export default class Favorites extends React.Component {
   constructor(props) {
@@ -11,32 +13,35 @@ export default class Favorites extends React.Component {
     this.state = ({
       favorites: [],
       currentPet: {},
-      showInfo: false
+      showInfo: false,
+      shelter: {}
     })
   }
 
   componentDidMount = () => {
-    console.log(this.props.favorites)
-  }
-
-  
-
-  showInfo = (petId) => {
-    this.setState({
-      showInfo: true
-    })
-    this.getPet(petId)
-
-
   }
 
   getPet = (petId) => {
-    fetch(`fetch(http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
+    // const { currentPet } = this.state;
+    console.log('petId', petId)
+    console.log('getting pet!')
+    fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
     .then(response => response.json())
-    .then(pet => this.setState({currentPet: pet.petfinder.pet}))
+    .then(pet => cleanPet(pet.petfinder.pet))
+    .then(cleanPet => this.setState({currentPet: cleanPet}))
+    .then(currentPet => this.fetchShelter(this.state.currentPet.shelterId))
+    .then(currentPet => this.setState({showInfo: true}))
     .then(error => console.log(error))
   }
 
+  fetchShelter = (shelterId) => {
+    console.log('id in favorites fetch shelter', shelterId)
+    fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
+    .then(response => response.json()) 
+    .then(shelter => cleanShelters(shelter.petfinder.shelter))
+    .then(cleanShelter => this.setState({shelter: cleanShelter}))
+    .catch(error => this.setState({error}))
+  }
 
   deleteFavorite = (petId, userToken) => {
     const { userAPIToken } = this.props;
@@ -61,14 +66,15 @@ export default class Favorites extends React.Component {
     this.props.displayFaves();
   }
   
-
   render() {
     const { cleanedFaves } = this.props;
-    const { showInfo, currentPet } = this.state;
+    const { showInfo, currentPet, shelter } = this.state;
     let display;
     if (showInfo) {
       return (
-        <FavesInfo currentPet={currentPet} />
+        <View style={styles.homeContainer}>
+          <FavesInfo currentPet={currentPet} shelter={shelter} />
+        </View>
       )
 
     } else if (cleanedFaves.length === 0) {
@@ -86,7 +92,7 @@ export default class Favorites extends React.Component {
                 />
             </TouchableOpacity>
             <Text style={styles.name}>{favoritePet.name.$t}</Text>
-            <TouchableOpacity onPress={() => this.showInfo(favoritePet.id.$t)}>
+            <TouchableOpacity onPress={() => this.getPet(favoritePet.id.$t)}>
               <Icon
                 name='angle-right'
                 type='font-awesome'
@@ -117,7 +123,12 @@ export default class Favorites extends React.Component {
 const styles = StyleSheet.create({
   favoritesContainer: {
     backgroundColor: '#E5E5E5',
-
+  },
+  homeContainer: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   favoritePetContainer: {
     backgroundColor: 'white',
@@ -129,7 +140,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 10
-
   },
   name: {
     fontSize: 25,

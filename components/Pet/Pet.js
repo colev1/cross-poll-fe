@@ -107,7 +107,7 @@ export default class Pet extends React.Component {
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
                 <Text style={styles.petName}>{name}</Text>
-                <Text style={styles.shelterName}>shelter</Text>
+                <Text style={styles.shelterName}>{shelter.name}</Text>
             </ImageBackground>
         </GestureRecognizer>
         )
