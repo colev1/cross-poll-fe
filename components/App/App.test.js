@@ -4,9 +4,9 @@ import Home from '../Home/Home';
 import renderer from 'react-test-renderer';
 
 
-describe('Card', () => {
-  it('should match the snapshot with all data passed in correctly', () => { 
-    const wrapper = shallow( <Home 
+describe('App', () => {
+  it.skip('should match the snapshot with all data passed in correctly', () => { 
+    const wrapper = shallow( <App 
     />);
 
     expect(wrapper).toMatchSnapshot(); 
