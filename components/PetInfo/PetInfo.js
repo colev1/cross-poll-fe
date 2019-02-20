@@ -9,6 +9,15 @@ import { Icon } from 'react-native-elements';
 export default class PetInfo extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      sendText: false
+    }
+  }
+
+  textAFriend = () => {
+    let postObj = {
+      recipient_phone
+    }
   }
 
   render() {
@@ -39,13 +48,15 @@ export default class PetInfo extends React.Component {
             </View>
             <TouchableOpacity
             style={styles.contactButton}
-            onPress={this.emailShelter}>
+            onPress={this.textAFriend}>
               <Text style={styles.contactButtonText}> Email {shelter.name} </Text>
             </TouchableOpacity>
             <TouchableOpacity
             style={styles.textButton}
             onPress={this.emailShelter}>
               <Text style={styles.contactButtonText}> Send a text about {name}! </Text>
+              <TextInput style={this.state.sendText ? styles.phoneInput : styles.hidden}>
+              </TextInput>
             </TouchableOpacity>
           </View>
     )
@@ -180,5 +191,8 @@ const styles = StyleSheet.create({
   moreInfoImage: {
     height: 200,
     width: 350,
+  },
+  hidden: {
+    display: 'none',
   },
 })

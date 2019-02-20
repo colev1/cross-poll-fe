@@ -84,6 +84,26 @@ export default class Pet extends React.Component {
       .then(error => console.log('error',error))
   }
 
+  textAFriend = ({textObj}) => {
+    let postBody = {
+      api_token: this.props.userAPIToken,
+      recipient_phone,
+      pic,
+      pet_name,
+      shelter_name
+    }
+    fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => console.log('result',result))
+      .then(error => console.log('error',error))
+  }
+
   render() {
     if (this.props.loading) {
       return <Loading />
@@ -93,7 +113,7 @@ export default class Pet extends React.Component {
       let image = photos[2]
       if (this.props.showInfo) {
         return (
-          <PetInfo pet={this.props.pet} shelter={shelter}/>
+          <PetInfo pet={this.props.pet} shelter={shelter} textAFriend={this.textAFriend}/>
         )
       } else {
         return (
