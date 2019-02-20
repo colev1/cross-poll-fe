@@ -5,6 +5,7 @@ import APIkey from '../apiKey';
 import Loading from '../Loading/Loading';
 import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
+import PetInfo from '../PetInfo/PetInfo'
 
 export default class Pet extends React.Component {
   constructor(props) {
@@ -92,29 +93,7 @@ export default class Pet extends React.Component {
       let image = photos[2]
       if (this.props.showInfo) {
         return (
-          <View>
-            <ImageBackground source = {{uri: image}} style={styles.moreInfoImage}
-          imageStyle={styles.borderRad}>
-              <Text style={styles.petName}>{name} </Text>
-              <View style={styles.petBreedAge}>
-                <Text style={{color:'white'}}>{breed}</Text>
-                <Text style={{color:'white'}}>{age}</Text>
-              </View>
-            </ImageBackground>
-            <ScrollView style={styles.scroll}>
-              <Text style={styles.description}>{description}</Text>
-              <Text style={styles.canBeFound}>{name} can be found at {shelter.name}</Text>
-            <View style={styles.shelterInfo}>
-              <Text style={styles.phone}>{shelter.phone}</Text>
-              <Text style={styles.cityStateZip}>{shelter.city}{shelter.state}{shelter.zip}</Text>
-            </View>
-            </ScrollView>
-            <TouchableOpacity
-            style={styles.contactButton}
-            onPress={this.emailShelter}>
-              <Text style={styles.contactButtonText}> Contact {shelter.name} </Text>
-            </TouchableOpacity>
-          </View>
+          <PetInfo pet={this.props.pet} shelter={shelter}/>
         )
       } else {
         return (
@@ -286,31 +265,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 15
   },
-  canBeFound: {
-    textAlign: 'center',
-    marginTop: 5,
-    marginBottom: 0,
-    fontSize: 15
-  },
-  shelterName: {
-    color: 'white',
-    fontSize: 16,
-    // position: 'absolute',
-    zIndex: 2,
-    left: 20,
-    textShadowColor: 'black'
-  },
-  shelterInfo: {
-    marginTop: 0,
-    fontSize: 10,
-    textAlign: 'center'
-  },
-  phone: {
-    textAlign: 'center'
-  },
-  cityStateZip: {
-    textAlign: 'center'
-  },
   shelterContainer: {
     position: 'absolute',
     bottom: 30,
@@ -318,22 +272,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 360,
     borderRadius: 4,
-    // flex: 1,
-    // width: 100
     backgroundColor: '#F49D37',
     paddingLeft: 8,
-    // flexDirection: 'co',
     color: 'white'
-  },
-  petBreedAge: {
-    position: 'absolute',
-    top: 240,
-    left: 20
-  },
-  moreInfoImage: {
-    height: 300,
-    width: 350,
-    marginTop: 10  
   },
   scroll: {
     width: 300,
@@ -341,15 +282,6 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 10
   },
-  // cog: {
-  //   position: 'absolute',
-  //   top: -10
-  // },
-  // heart: {
-  //   position: 'absolute',
-  //   top: -58, 
-  //   left: 100
-  // }
 })
 
 
