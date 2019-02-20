@@ -141,16 +141,16 @@ export default class Login extends React.Component {
     return (
       <View style={styles.form}>
         <View style={styles.title}> 
+          <Text style={styles.titleText}> 
+            AdoptR 
+          </Text>
           <Icon
               name='paw'
               type='font-awesome'
               color='white'
-              size= {60}
+              size= {48}
               iconStyle={styles.pawprint}
             />
-          <Text style={styles.titleText}> 
-            AdoptR 
-          </Text>
         </View>
         <View style={this.state.selectedOption === 'sign up' ? styles.formSignUp : styles.formSignIn}>
           <RadioButtons
@@ -280,30 +280,35 @@ const styles = StyleSheet.create({
     fontFamily: 'Kohinoor Bangla'
   },
   title: {
+    borderRadius: 24,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    alignItems: 'center',
+    backgroundColor: '#048BA8',
     color: 'white',
-    position: 'absolute',
-    top: 60,
-    zIndex: 3,
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
     fontFamily: 'Kohinoor Bangla',
-    fontSize: 60,
-    textAlign: 'center',
+    fontSize: 50,
+    justifyContent: 'center',
+    position: 'absolute',
+    padding: 10,
     shadowColor: 'black',
-      shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.8,
-      shadowRadius: 2,
+    textAlign: 'center',
+    top: 60,
+    zIndex: 3,
   },
   titleText: {
     fontFamily: 'Kohinoor Bangla',
-    fontSize: 60,
+    fontSize: 52,
     textAlign: 'center',
+    color: 'white',
+    // margin: 4,
   },
   pawprint: {
-    color: 'black',
-    marginRight: 20
+    color: 'white',
+    marginLeft: 20
   },
   hidden: {
     display: 'none'
@@ -313,13 +318,18 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderStyle: 'solid',
     borderRadius: 24,
-    borderWidth: 2,
+    shadowColor: 'black',
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: .8,
+    shadowRadius: 4,
+    // borderWidth: 2,
     width: 300,
     position: 'absolute',
     bottom: 50,
   },
   submitButtonText: {
     fontSize: 32,
+    color: 'white',
     textAlign: 'center',
     fontFamily: 'Kohinoor Bangla'
   },

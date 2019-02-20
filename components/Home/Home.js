@@ -44,7 +44,6 @@ export default class Home extends React.Component {
 
   fetchByZipCode = (result) => {
     const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${result.zip_code}&count=50`
-    console.log('FETCHING',url)
     this.setState({
       userLocation: {
         latitude: result.latitude,
