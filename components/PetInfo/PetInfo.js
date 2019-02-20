@@ -29,14 +29,15 @@ export default class PetInfo extends React.Component {
             </ImageBackground>
             <ScrollView style={styles.shelterContainer}>
               {/* <View style={styles.shelterContainer}> */}
-              <Text style={styles.description}>{description}</Text>
-              <Text style={styles.canBeFound}>{name} can be found at {shelter.name}</Text>
-            <View style={styles.shelterInfo}>
-              <Text style={styles.phone}>{shelter.phone}</Text>
-              <Text style={styles.cityStateZip}>{shelter.city}{shelter.state}{shelter.zip}</Text>
-            </View>
-              {/* </View> */}
+              <Text style={styles.description}>{description} </Text>
             </ScrollView>
+            <View style={styles.shelterInfo}>
+              <Text style={styles.canBeFound}>
+                {shelter.name}
+              </Text>
+              <Text style={styles.phone}>{shelter.phone}</Text>
+              <Text style={styles.cityStateZip}>{shelter.city}, {shelter.state} - {shelter.zip}</Text>
+            </View>
             <TouchableOpacity
             style={styles.contactButton}
             onPress={this.emailShelter}>
