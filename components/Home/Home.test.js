@@ -36,16 +36,54 @@ describe('Home', () => {
   
       const wrapper = shallow(<Home showLogin={jest.fn()} addToFavorites={jest.fn()} userAPIToken={mockToken}
       userLocation={mockLocation}/>);
-      // const mockIdea = { title: 'sweaters for pugs', body: 'why not?', id: Date.now() }; 
-      wrapper.state().showInfo = true
-      const expected = false;
   
-      // Execution 
+      const expected = true
+
       wrapper.instance().showInfo();
 
-  
-      // Expectation 
-      expect(wrapper.state('showInfo')).toEqual(expected);
+      expect(wrapper.instance().state.showInfo).toEqual(expected);
     });
-  })
+  });
+
+  describe('ShowFilter', () => {
+    it('should update state with true when ShowFilter is called', () => { 
+  
+      const wrapper = shallow(<Home showLogin={jest.fn()} addToFavorites={jest.fn()} userAPIToken={mockToken}
+      userLocation={mockLocation}/>);
+  
+      const expected = true
+
+      wrapper.instance().showFilter();
+      
+      expect(wrapper.instance().state.showFilter).toEqual(expected);
+    });
+  });
+
+  describe('ShowFavorites', () => {
+    it('should update state with true when ShowFavorites is called', () => { 
+  
+      const wrapper = shallow(<Home showLogin={jest.fn()} addToFavorites={jest.fn()} userAPIToken={mockToken}
+      userLocation={mockLocation}/>);
+  
+      const expected = true
+
+      wrapper.instance().showFavorites();
+      
+      expect(wrapper.instance().state.showFavorites).toEqual(expected);
+    });
+  });
+
+  describe('returnHome', () => {
+    it('should update state with showFavorites to be false and showInfo to be false when returnHome is called', () => { 
+  
+      const wrapper = shallow(<Home showLogin={jest.fn()} addToFavorites={jest.fn()} userAPIToken={mockToken}
+      userLocation={mockLocation}/>);
+
+      wrapper.instance().returnHome();
+      
+      expect(wrapper.instance().state.showFavorites).toEqual(false);
+      expect(wrapper.instance().state.showInfo).toEqual(false);
+    });
+  });
+  
 });
