@@ -24,4 +24,18 @@ describe('App', () => {
       expect(wrapper.instance().state.showLogin).toEqual(expected);
     });
   });
+
+  describe('updateUserToken', () => {
+    it('should update state with user token', () => { 
+  
+      const wrapper = shallow( <App  />);
+
+      wrapper.instance().updateUserToken('aksd8246dajX');
+
+      const expected = 'aksd8246dajX'
+      
+      expect(wrapper.instance().state.userAPIToken).toEqual(expected);
+    });
+  });
+
 });

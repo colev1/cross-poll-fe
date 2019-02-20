@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import APIkey from '../apiKey';
 import { cleanPets } from '../helpers/helpers';
 import Pet from '../Pet/Pet';
@@ -148,7 +148,6 @@ export default class Home extends React.Component {
     const realPets = pets.filter(pet => {
         return pet.petfinder.pet
     })
-    console.log('REALPETS', realPets)
     return realPets.map(currPet => currPet.petfinder.pet)
   }
 

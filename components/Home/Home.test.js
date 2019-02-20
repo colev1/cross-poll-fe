@@ -85,5 +85,7 @@ describe('Home', () => {
       expect(wrapper.instance().state.showInfo).toEqual(false);
     });
   });
+
+ 
   
 });
