@@ -28,7 +28,7 @@ export default class PetInfo extends React.Component {
   }
 
   render() {
-    if(this.props.pet) {
+    if(this.props.pet && this.props.shelter) {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
         const { shelter } = this.props;
         let image = photos[2]
@@ -90,6 +90,14 @@ export default class PetInfo extends React.Component {
             })}>
               <Text style={styles.contactButtonText}> Send a text about {name}! </Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={this.props.returnHome}>
+            <Icon
+              name='arrow-circle-left'
+              type='font-awesome'
+              color='#F49D37'
+              size={50}
+              iconStyles={styles.backButton}/>
+          </TouchableOpacity>
           </View>
     )
     } else {
@@ -170,6 +178,9 @@ const styles = StyleSheet.create({
     marginTop: 40,
     width: 200,
     // height: 30,
+  },
+  backButton: {
+    marginTop: 5
   },
   sendButtonText: {
     textAlign: 'center',

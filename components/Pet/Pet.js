@@ -113,7 +113,7 @@ export default class Pet extends React.Component {
       let image = photos[2]
       if (this.props.showInfo) {
         return (
-          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter}/>
+          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter} returnHome={this.props.returnHome}/>
         )
       } else {
         return (

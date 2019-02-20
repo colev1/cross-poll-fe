@@ -5,7 +5,8 @@ import APIkey from '../apiKey';
 import { cleanPets } from '../helpers/helpers';
 import FavesInfo from '../FavesInfo/FavesInfo';
 import { cleanPet } from '../helpers/helpers';
-import { cleanShelters } from '../helpers/helpers'
+import { cleanShelters } from '../helpers/helpers';
+import PetInfo from '../PetInfo/PetInfo'
 
 export default class Favorites extends React.Component {
   constructor(props) {
@@ -73,17 +74,7 @@ export default class Favorites extends React.Component {
     let display;
     if (showInfo) {
       return (
-        <View style={styles.homeContainer}>
-          <FavesInfo currentPet={currentPet} shelter={shelter} />
-          <TouchableOpacity onPress={this.goBack}>
-            <Icon
-              name='arrow-circle-left'
-              type='font-awesome'
-              color='#F49D37'
-              size={50}
-              iconStyles={styles.backButton}/>
-          </TouchableOpacity>
-        </View>
+          <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome}  />
       )
 
     } else if (cleanedFaves.length === 0) {

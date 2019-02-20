@@ -37,7 +37,7 @@ export default class Home extends React.Component {
     fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
       .then(response => response.json())
       .then(result => this.fetchByZipCode(result))
-      .catch(error => this.setState({error}))
+      .catch(error => this.setState({error: error.message}))
   }
 
 
@@ -202,6 +202,7 @@ export default class Home extends React.Component {
           showFilter={this.showFilter}
           fetchShelter={this.fetchShelter} 
           shelter={shelter}
+          returnHome={this.returnHome}
           addToFavorites={this.addToFavorites}
           userAPIToken={this.props.userAPIToken}
           showFavorites={this.showFavorites}
@@ -225,15 +226,17 @@ export default class Home extends React.Component {
       <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}
           userAPIToken={this.props.userAPIToken}
-          userLocation={this.state.userLocation}/>
-          <TouchableOpacity onPress={this.returnHome}>
+          userLocation={this.state.userLocation}
+          returnHome={this.returnHome}
+          showFavorites={this.showFavorites}/>
+          {/* <TouchableOpacity onPress={this.returnHome}>
             <Icon
               name='arrow-circle-left'
               type='font-awesome'
               color='#F49D37'
               size={50}
               iconStyles={styles.backButton}/>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       )
     } else if (showFavorites) {
