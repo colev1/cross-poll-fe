@@ -1,9 +1,7 @@
 import React  from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import APIkey from '../apiKey';
 import Loading from '../Loading/Loading';
-import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
 import PetInfo from '../PetInfo/PetInfo'
 
@@ -15,7 +13,6 @@ export default class Pet extends React.Component {
       distance: '',
     }
   }
-
 
   componentWillUnmount = () => {
     this.setState({
@@ -91,7 +88,6 @@ export default class Pet extends React.Component {
       shelter_name,
       pet_id
     }
-    console.log('TEXT OBJECT', postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -100,7 +96,7 @@ export default class Pet extends React.Component {
       }
     })
       .then(response => response.json())
-      .then(result => console.log('result',result))
+      .then(result => console.log('text send',result))
       .then(error => console.log('error',error))
   }
 
@@ -113,7 +109,7 @@ export default class Pet extends React.Component {
       let image = photos[2]
       if (this.props.showInfo) {
         return (
-          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter}/>
+          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter} returnHome={this.props.returnHome} loading={this.props.loading}/>
         )
       } else {
         return (

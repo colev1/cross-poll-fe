@@ -5,7 +5,9 @@ import APIkey from '../apiKey';
 import { cleanPets } from '../helpers/helpers';
 import FavesInfo from '../FavesInfo/FavesInfo';
 import { cleanPet } from '../helpers/helpers';
-import { cleanShelters } from '../helpers/helpers'
+import { cleanShelters } from '../helpers/helpers';
+import PetInfo from '../PetInfo/PetInfo'
+import Loading from '../Loading/Loading';
 
 export default class Favorites extends React.Component {
   constructor(props) {
@@ -32,10 +34,9 @@ export default class Favorites extends React.Component {
     let url = `http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`
     fetch(url)
       .then(response => response.json()) 
-      .then(shelter => console.log('shelter',shelter))
-    .then(shelter => cleanShelters(shelter.petfinder.shelter))
-    .then(cleanShelter => this.setState({shelter: cleanShelter}))
-    .catch(error => this.setState({error}))
+      .then(shelter => cleanShelters(shelter.petfinder.shelter))
+      .then(cleanShelter => this.setState({shelter: cleanShelter}))
+      .catch(error => this.setState({error: error.message}))
   }
 
   deleteFavorite = (petId, userToken) => {
@@ -72,20 +73,11 @@ export default class Favorites extends React.Component {
     const { showInfo, currentPet, shelter } = this.state;
     let display;
     if (showInfo) {
-      return (
-        <View style={styles.homeContainer}>
-          <FavesInfo currentPet={currentPet} shelter={shelter} />
-          <TouchableOpacity onPress={this.goBack}>
-            <Icon
-              name='arrow-circle-left'
-              type='font-awesome'
-              color='#F49D37'
-              size={50}
-              iconStyles={styles.backButton}/>
-          </TouchableOpacity>
-        </View>
-      )
-
+        return (
+          <View style={styles.homeContainer}>
+            <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome}  loading={this.props.loading} />
+          </View>
+        )
     } else if (cleanedFaves.length === 0) {
       display = <Text style={styles.noFavesMessage}>You don't have any favorites!</Text>
     } else {
@@ -137,12 +129,12 @@ const styles = StyleSheet.create({
   },
   homeContainer: {
     flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginBottom: 20,
-    top: 60,
-    paddingBottom: 80,
-    paddingTop: 80,
+    // justifyContent: 'space-around',
+    // alignItems: 'center',
+    // marginBottom: 20,
+    // top: 60,
+    // paddingBottom: 80,
+    // paddingTop: 80,
   },
   favoritePetContainer: {
     backgroundColor: 'white',
