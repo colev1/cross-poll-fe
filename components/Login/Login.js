@@ -148,7 +148,7 @@ export default class Login extends React.Component {
               name='paw'
               type='font-awesome'
               color='white'
-              size= {48}
+              size= {36}
               iconStyle={styles.pawprint}
             />
         </View>
@@ -287,7 +287,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#048BA8',
     color: 'white',
-    flex: 1,
+    // flex: 1,
+    width: 280,
     flexDirection: 'row',
     fontFamily: 'Kohinoor Bangla',
     fontSize: 50,
@@ -304,7 +305,6 @@ const styles = StyleSheet.create({
     fontSize: 52,
     textAlign: 'center',
     color: 'white',
-    // margin: 4,
   },
   pawprint: {
     color: 'white',
@@ -317,13 +317,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#048BA8',
     borderColor: 'black',
     borderStyle: 'solid',
-    borderRadius: 24,
+    borderRadius: 16,
     shadowColor: 'black',
     shadowOffset: { width: 1, height: 2 },
     shadowOpacity: .8,
     shadowRadius: 4,
     // borderWidth: 2,
-    width: 300,
+    width: 280,
     position: 'absolute',
     bottom: 50,
   },
