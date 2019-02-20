@@ -86,13 +86,13 @@ export default class Pet extends React.Component {
   }
 
   sendText = (textObj) => {
-    const {recipient_phone, pic, pet_name, shelter_name} = textObj;
+    const {recipient_phone, pet_name, shelter_name, pet_id} = textObj;
     let postBody = {
       api_token: this.props.userAPIToken,
       recipient_phone,
-      pic,
       pet_name,
-      shelter_name
+      shelter_name,
+      pet_id
     }
     console.log('TEXT OBJECT', postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {

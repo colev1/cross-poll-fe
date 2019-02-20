@@ -17,12 +17,12 @@ export default class PetInfo extends React.Component {
   }
 
   sendText = () => {
-    let {photos, name} = this.props.pet;
+    let { name, id} = this.props.pet;
     let textObj = {
       recipient_phone: this.state.recipientPhone,
-      pic: photos[2],
       pet_name: name,
-      shelter_name: this.props.shelter.name
+      shelter_name: this.props.shelter.name,
+      pet_id: id
     }
     this.props.sendText(textObj)
   }
