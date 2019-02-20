@@ -27,7 +27,25 @@ describe('Home', () => {
     expect(wrapper).toMatchSnapshot(); 
   })
 
-  it.skip('should render a pet component', () => {
+  it('should render a pet component', () => {
     expect(wrapper.find(Pet).length).toEqual(1)
+  })
+
+  describe('ShowInfo', () => {
+    it('should update state with false when ShowInfo is called', () => { 
+  
+      const wrapper = shallow(<Home showLogin={jest.fn()} addToFavorites={jest.fn()} userAPIToken={mockToken}
+      userLocation={mockLocation}/>);
+      // const mockIdea = { title: 'sweaters for pugs', body: 'why not?', id: Date.now() }; 
+      wrapper.state().showInfo = true
+      const expected = false;
+  
+      // Execution 
+      wrapper.instance().showInfo();
+
+  
+      // Expectation 
+      expect(wrapper.state('showInfo')).toEqual(expected);
+    });
   })
 });

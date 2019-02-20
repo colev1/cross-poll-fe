@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import APIkey from '../apiKey';
 import { cleanPets } from '../helpers/helpers';
 import Pet from '../Pet/Pet';
 import Filter from '../Filter/Filter';
-import {swipeDirections} from 'react-native-swipe-gestures';
 import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
 import Favorites from '../Favorites/Favorites';
@@ -194,7 +193,7 @@ export default class Home extends React.Component {
   
   render() {
    const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
-   const { userAPIToken } = this.props;
+   const { userAPIToken, signOut } = this.props;
     if(!showFilter && !showInfo && !showFavorites) {
       return (
          <View style={styles.homeContainer}>
@@ -213,18 +212,13 @@ export default class Home extends React.Component {
               style={this.state.loading ? styles.hidden : styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
             </Text>
-              {/* <Icon
-                name='angle-down'
-                type='font-awesome'
-                iconStyle={styles.arrowDown}
-                />  */}
           </TouchableOpacity>
         </View>
       )
     } else if (showFilter) {
       return (
       <View style={styles.homeContainer}>
-        <Filter showFilter={showFilter} fetchByFilters={this.fetchByFilters} />
+        <Filter showFilter={showFilter} fetchByFilters={this.fetchByFilters} signOut={signOut} />
       </View>
       )
     } else if (showInfo) {
@@ -245,7 +239,7 @@ export default class Home extends React.Component {
       )
     } else if (showFavorites) {
       return (
-        <View>
+        <View style={styles.favoritesContainer}>
           <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves}
           returnHome={this.returnHome} />
         </View>
@@ -271,8 +265,6 @@ const styles = StyleSheet.create({
     margin: 0
   },
   infoButtonText: {
-    // fontSize: 30,
-    // textAlign: 'center',
     fontSize: 28,
       padding: 16,
       textAlign: 'center',
@@ -290,5 +282,8 @@ const styles = StyleSheet.create({
   },
   backButton: {
     marginTop: 5
+  },
+  favoritesContainer: {
+    marginTop: 100
   }
 });

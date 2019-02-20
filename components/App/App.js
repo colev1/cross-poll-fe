@@ -42,6 +42,13 @@ export default class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+  signOut = () => {
+    console.log('signingout!')
+    this.setState({
+      showLogin: true
+    })
+  }
+
   render() {
     const { showLogin, userAPIToken } = this.state;
     let displayComponent;
@@ -51,7 +58,8 @@ export default class App extends React.Component {
        updateUserToken={this.updateUserToken}/>
     } else {
       displayComponent = <Home showLogin={this.showLogin} addToFavorites={this.addToFavorites} userAPIToken={userAPIToken}
-      userLocation={this.state.userLocation}/>
+      userLocation={this.state.userLocation}
+      signOut={this.signOut}/>
     }
     return (
       <View style={styles.container}>
