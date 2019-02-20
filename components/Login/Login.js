@@ -216,11 +216,11 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
   buttonText: {
-    fontSize: 32
+    fontSize: 20
   },
   form: {
     backgroundColor: '#E5E5E5',
-    fontSize: 60,
+    fontSize: 50,
     width: '100%',
     flex: 1,
     alignItems: 'center',
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     // borderRadius: 24,
     borderStyle: 'solid',
     borderBottomWidth: 2,
-    fontSize: 28,
+    fontSize: 20,
     height: 66,
     // shadowColor: '#000',
     // shadowOffset: { width: 1, height: 2 },
@@ -338,11 +338,11 @@ const styles = StyleSheet.create({
     color: '#048BA8',
     textDecorationLine: 'underline',
     textDecorationColor: '#048BA8',
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: 'Kohinoor Bangla'
   },
   unselectedText: {
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: 'Kohinoor Bangla'
   },
   radioButtons: {
