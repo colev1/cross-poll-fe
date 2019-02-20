@@ -29,7 +29,7 @@ Users can swipe through adobtable pets, favorite pets they are interested in, fi
 
 ![signup](https://user-images.githubusercontent.com/39889553/53131574-67547e80-352a-11e9-80dc-563408b42d33.png)
 ![signin](https://user-images.githubusercontent.com/39889553/53131578-6885ab80-352a-11e9-8f58-36ea6b164c71.png)
-![swipe](https://user-images.githubusercontent.com/39889553/53130099-9537c400-3526-11e9-9b68-d1bfc1ebdac6.png)
+![swipe](https://user-images.githubusercontent.com/39889553/53131647-98cd4a00-352a-11e9-967f-11d4f1430bf4.png)
 ![filter](https://user-images.githubusercontent.com/39889553/53131473-1fcdf280-352a-11e9-89e2-ea8bfde1d6e8.png)
 ![moreinfo](https://user-images.githubusercontent.com/39889553/53130147-b1d3fc00-3526-11e9-9415-7344a58ce10a.png)
 ![text](https://user-images.githubusercontent.com/39889553/53130167-bbf5fa80-3526-11e9-8c5e-fdcb2ae93574.png)
