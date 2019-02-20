@@ -17,7 +17,7 @@ export default class Home extends React.Component {
       petIndex: 0,
       gesture: '',
       showInfo: false,
-      showFilter: true,
+      showFilter: false,
       shelterName: '',
       userZipCode: '',
       showFavorites: false,
@@ -213,10 +213,11 @@ export default class Home extends React.Component {
               style={this.state.loading ? styles.hidden : styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
             </Text>
-              <Icon
+              {/* <Icon
                 name='angle-down'
                 type='font-awesome'
-                /> 
+                iconStyle={styles.arrowDown}
+                />  */}
           </TouchableOpacity>
         </View>
       )
@@ -255,19 +256,28 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
   infoButton: {
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderStyle: 'solid',
-    borderRadius: 24,
-    borderWidth: 2,
-    width: 300,
+    backgroundColor: '#048BA8',
+      borderRadius: 16,
+      shadowColor: 'black',
+      shadowOffset: { width: 1, height: 2 },
+      shadowOpacity: 0.8,
+      shadowRadius: 4,
   },
   hidden: {
     display: 'none'
   },
+  arrowDown: {
+    color: 'white',
+    margin: 0
+  },
   infoButtonText: {
-    fontSize: 30,
-    textAlign: 'center',
+    // fontSize: 30,
+    // textAlign: 'center',
+    fontSize: 28,
+      padding: 16,
+      textAlign: 'center',
+      color: 'white',
+      fontFamily: 'Kohinoor Bangla',
   },
   homeContainer: {
     flex: 1,

@@ -242,6 +242,8 @@ const styles = StyleSheet.create({
     // right: 120,
     // top: 40,
     // marginBottom: 40
+    borderColor: 'white',
+    backgroundColor: 'white',
   },
   description: {
     height: 200,
