@@ -7,7 +7,7 @@ export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      showLogin: true,
+      showLogin: false,
       userAPIToken: '',
       userZipCode: '',
       userLocation: {}
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     fontFamily: 'Verdana',
-    backgroundColor: '#048BA8',
+    backgroundColor: '#E5E5E5',
     alignItems: 'center',
     justifyContent: 'center',
   },

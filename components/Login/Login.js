@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     flex: 1,
     fontSize: 60,
-    height: 200,
+    // height: 200,
     margin: 10,
     paddingBottom: 100,
     paddingTop: 100,
