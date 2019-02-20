@@ -1,9 +1,7 @@
 import React  from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import APIkey from '../apiKey';
 import Loading from '../Loading/Loading';
-import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
 import PetInfo from '../PetInfo/PetInfo'
 
@@ -15,7 +13,6 @@ export default class Pet extends React.Component {
       distance: '',
     }
   }
-
 
   componentWillUnmount = () => {
     this.setState({
