@@ -134,7 +134,7 @@ export default class Pet extends React.Component {
               size={48}
               iconStyle={styles.cog}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.props.showFavorites}>
+            <TouchableOpacity onPress={this.props.showFavorites} style={styles.hamburgerContainer}>
               <Icon
               name='heart'
               type='font-awesome'
@@ -239,9 +239,16 @@ const styles = StyleSheet.create({
     // height: 50,
     // width: 50,
     // position: 'relative',
+    padding: 10,
     // right: 120,
     // top: 40,
     // marginBottom: 40
+    borderRadius: 50,
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 70,
+    height: 70,
     borderColor: 'white',
     backgroundColor: 'white',
   },
