@@ -229,14 +229,6 @@ export default class Home extends React.Component {
           userLocation={this.state.userLocation}
           returnHome={this.returnHome}
           showFavorites={this.showFavorites}/>
-          {/* <TouchableOpacity onPress={this.returnHome}>
-            <Icon
-              name='arrow-circle-left'
-              type='font-awesome'
-              color='#F49D37'
-              size={50}
-              iconStyles={styles.backButton}/>
-          </TouchableOpacity> */}
         </View>
       )
     } else if (showFavorites) {

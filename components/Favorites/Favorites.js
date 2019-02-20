@@ -7,6 +7,7 @@ import FavesInfo from '../FavesInfo/FavesInfo';
 import { cleanPet } from '../helpers/helpers';
 import { cleanShelters } from '../helpers/helpers';
 import PetInfo from '../PetInfo/PetInfo'
+import Loading from '../Loading/Loading';
 
 export default class Favorites extends React.Component {
   constructor(props) {
@@ -33,10 +34,9 @@ export default class Favorites extends React.Component {
     let url = `http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`
     fetch(url)
       .then(response => response.json()) 
-      .then(shelter => console.log('shelter',shelter))
-    .then(shelter => cleanShelters(shelter.petfinder.shelter))
-    .then(cleanShelter => this.setState({shelter: cleanShelter}))
-    .catch(error => this.setState({error}))
+      .then(shelter => cleanShelters(shelter.petfinder.shelter))
+      .then(cleanShelter => this.setState({shelter: cleanShelter}))
+      .catch(error => this.setState({error: error.message}))
   }
 
   deleteFavorite = (petId, userToken) => {
@@ -73,9 +73,13 @@ export default class Favorites extends React.Component {
     const { showInfo, currentPet, shelter } = this.state;
     let display;
     if (showInfo) {
-      return (
-          <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome}  />
-      )
+      if(currentPet) {
+        return (
+            <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome}  />
+        )
+      } else {
+        return ( <Loading /> )
+      }
 
     } else if (cleanedFaves.length === 0) {
       display = <Text style={styles.noFavesMessage}>You don't have any favorites!</Text>
