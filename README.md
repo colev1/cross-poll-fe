@@ -7,24 +7,23 @@ Users can swipe through adobtable pets, favorite pets they are interested in, fi
 
 
 ### Tech Stack
-.
 * The front-end was built in JavaScript with React-Native and tested with Jest/Enzyme. Expo was used to help build the project.
 * The back-end was builtwith Rails, Google API, RSpec, ShouldaMatchers, Capybara, Launchy, SimpleCov, BCrypt, PostreSQL, Figaro.
 
 
 ### Local Setup:
-To view this application, you first need to run the backend server by following these instructions (the front end will run after the backend starts off of a static public file):
 
 * clone down the repository
+
 * cd into directory
 
 * run `$ npm install`
 
-* run `npm install nodemon`
+* to view it on an iOS simulator download Expo. Installation instructions can be found [here](https://expo.io/learn).
 
-* run `nodemon server.js`
+* run `expo start`
 
-* Open http://localhost:3000 to view it in the browser.
+
 
 ### Screenshots 
 
@@ -40,6 +39,7 @@ To view this application, you first need to run the backend server by following 
 ### Contributors:
 
 Cole Vanacore: https://github.com/colev1
+
 Ashley Levi: https://github.com/ashleylevi
 
 
