@@ -38,13 +38,13 @@ Users can swipe through adobtable pets, favorite pets they are interested in, fi
 
 ### Contributors:
 
-* Front-End:
+# Front-End:
 
 Cole Vanacore: https://github.com/colev1
 
 Ashley Levi: https://github.com/ashleylevi
 
-* Back-End:
+# Back-End:
 
 Meghan Stang: https://github.com/mstang15
 
