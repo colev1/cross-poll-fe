@@ -59,7 +59,6 @@ export const cleanPet = (pet) => {
 }
 
 export const cleanShelters = (shelter) => {
-  console.log('YOO', shelter)
   const cleanedShelter = {
     name: shelter.name.$t,
     id: shelter.id.$t,
@@ -71,7 +70,6 @@ export const cleanShelters = (shelter) => {
     longitude: shelter.longitude.$t,
     latitude: shelter.latitude.$t,
   };
-  console.log('cleaned', cleanedShelter)
   return cleanedShelter;
 };
 
