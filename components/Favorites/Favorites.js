@@ -19,9 +19,6 @@ export default class Favorites extends React.Component {
   }
 
   getPet = (petId) => {
-    // const { currentPet } = this.state;
-    console.log('petId', petId)
-    console.log('getting pet!')
     fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
     .then(response => response.json())
     .then(pet => cleanPet(pet.petfinder.pet))
@@ -32,9 +29,10 @@ export default class Favorites extends React.Component {
   }
 
   fetchShelter = (shelterId) => {
-    console.log('id in favorites fetch shelter', shelterId)
-    fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
-    .then(response => response.json()) 
+    let url = `http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`
+    fetch(url)
+      .then(response => response.json()) 
+      .then(shelter => console.log('shelter',shelter))
     .then(shelter => cleanShelters(shelter.petfinder.shelter))
     .then(cleanShelter => this.setState({shelter: cleanShelter}))
     .catch(error => this.setState({error}))

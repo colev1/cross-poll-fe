@@ -65,7 +65,6 @@ export default class Login extends React.Component {
       password,
       password_confirmation: passwordConfirmation
     }
-    console.log(postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -76,32 +75,6 @@ export default class Login extends React.Component {
     .then( response => response.json())
     .then( result => this.checkForError(result))
     .catch(error => console.log(error))
-  }
-  
-  toggleLogin = () => {
-    this.setState({
-      newUser: false,
-      error: false,
-      errorMessage: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      passwordConfirmation: ''
-    })
-  }
-
-  toggleSignUp = () => {
-    this.setState({
-      newUser: true,
-      error: false,
-      errorMessage: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      passwordConfirmation: ''
-    })
   }
 
   setSelected = (selectedOption) => {
