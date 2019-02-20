@@ -65,7 +65,6 @@ export default class Login extends React.Component {
       password,
       password_confirmation: passwordConfirmation
     }
-    console.log(postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -76,32 +75,6 @@ export default class Login extends React.Component {
     .then( response => response.json())
     .then( result => this.checkForError(result))
     .catch(error => console.log(error))
-  }
-  
-  toggleLogin = () => {
-    this.setState({
-      newUser: false,
-      error: false,
-      errorMessage: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      passwordConfirmation: ''
-    })
-  }
-
-  toggleSignUp = () => {
-    this.setState({
-      newUser: true,
-      error: false,
-      errorMessage: '',
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      passwordConfirmation: ''
-    })
   }
 
   setSelected = (selectedOption) => {
@@ -141,16 +114,16 @@ export default class Login extends React.Component {
     return (
       <View style={styles.form}>
         <View style={styles.title}> 
+          <Text style={styles.titleText}> 
+            AdoptR 
+          </Text>
           <Icon
               name='paw'
               type='font-awesome'
               color='white'
-              size= {60}
+              size= {36}
               iconStyle={styles.pawprint}
             />
-          <Text style={styles.titleText}> 
-            AdoptR 
-          </Text>
         </View>
         <View style={this.state.selectedOption === 'sign up' ? styles.formSignUp : styles.formSignIn}>
           <RadioButtons
@@ -216,11 +189,11 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
   buttonText: {
-    fontSize: 32
+    fontSize: 20
   },
   form: {
-    backgroundColor: '#048BA8',
-    fontSize: 60,
+    backgroundColor: '#E5E5E5',
+    fontSize: 50,
     width: '100%',
     flex: 1,
     alignItems: 'center',
@@ -239,6 +212,10 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 60,
     paddingBottom: 100,
+    shadowColor: 'black',
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: .8,
+    shadowRadius: 4,
     // paddingBottom: 100
   },
   formSignIn: {
@@ -249,80 +226,96 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     flex: 1,
     fontSize: 60,
-    height: 200,
+    // height: 200,
     margin: 10,
     paddingBottom: 100,
     paddingTop: 100,
     width: '96%',
+    shadowColor: 'black',
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: .8,
+    shadowRadius: 4,
   },
   input: {
     // backgroundColor: 'rgba(255,255,255, 0.8)',
-    borderBottomColor: 'black',
+    borderBottomColor: '#048BA8',
     // borderRadius: 24,
     borderStyle: 'solid',
     borderBottomWidth: 2,
-    fontSize: 28,
+    fontSize: 20,
     height: 66,
     // shadowColor: '#000',
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
+    // shadowOffset: { width: 1, height: 2 },
+    // shadowOpacity: .8,
+    // shadowRadius: 4,
     textAlign: 'left',
     width: 320,
     fontFamily: 'Kohinoor Bangla'
   },
   title: {
+    borderRadius: 24,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    alignItems: 'center',
+    backgroundColor: '#048BA8',
     color: 'white',
+    // flex: 1,
+    width: 280,
+    flexDirection: 'row',
+    fontFamily: 'Kohinoor Bangla',
+    fontSize: 50,
+    justifyContent: 'center',
     position: 'absolute',
+    padding: 10,
+    shadowColor: 'black',
+    textAlign: 'center',
     top: 60,
     zIndex: 3,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    fontFamily: 'Kohinoor Bangla',
-    fontSize: 60,
-    textAlign: 'center',
-    shadowColor: 'black',
-      shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.8,
-      shadowRadius: 2,
   },
   titleText: {
     fontFamily: 'Kohinoor Bangla',
-    fontSize: 60,
+    fontSize: 52,
     textAlign: 'center',
+    color: 'white',
   },
   pawprint: {
-    color: 'black',
-    marginRight: 20
+    color: 'white',
+    marginLeft: 20
   },
   hidden: {
     display: 'none'
   },
   button: {
-    backgroundColor: 'white',
+    backgroundColor: '#048BA8',
     borderColor: 'black',
     borderStyle: 'solid',
-    borderRadius: 24,
-    borderWidth: 2,
-    width: 300,
+    borderRadius: 16,
+    shadowColor: 'black',
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: .8,
+    shadowRadius: 4,
+    // borderWidth: 2,
+    width: 280,
     position: 'absolute',
     bottom: 50,
   },
   submitButtonText: {
     fontSize: 32,
+    color: 'white',
     textAlign: 'center',
     fontFamily: 'Kohinoor Bangla'
   },
   selectedText: {
     fontWeight: 'bold',
+    color: '#048BA8',
     textDecorationLine: 'underline',
-    fontSize: 28,
+    textDecorationColor: '#048BA8',
+    fontSize: 32,
     fontFamily: 'Kohinoor Bangla'
   },
   unselectedText: {
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: 'Kohinoor Bangla'
   },
   radioButtons: {

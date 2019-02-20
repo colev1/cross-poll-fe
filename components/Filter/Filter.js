@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Slider, Button, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-import { RadioButtons } from 'react-native-radio-buttons'
+import { RadioButtons } from 'react-native-radio-buttons';
+import { Icon } from 'react-native-elements';
+
 
 
 export default class Filter extends React.Component {
@@ -79,16 +81,27 @@ export default class Filter extends React.Component {
     if(this.props.showFilter) {
       return (
         <View style={styles.filterContainer}>
-          <Text style={styles.adoptrHeader}> Adoptr </Text>
+          <View style={styles.title}> 
+          <Text style={styles.titleText}> 
+            AdoptR 
+          </Text>
+          <Icon
+              name='paw'
+              type='font-awesome'
+              color='white'
+              size= {36}
+              iconStyle={styles.pawprint}
+            />
+        </View>
           <Text style={styles.sliderTitle}>miles: {this.state.miles} </Text>
             <Slider
               step={1}
-              value={this.state.miles || 40}
+              value={this.state.miles}
               minimumValue={0}
               maximumValue={60}
               onValueChange={this.handleSliderChange}
               />
-              <Text style={styles.sliderTitle}> animal type: </Text>
+              <Text style={styles.sliderTitle}> type: </Text>
               <RadioButtons
                 style={styles.radioButtons}
                 options={ animalOptions }
@@ -97,7 +110,7 @@ export default class Filter extends React.Component {
                 renderOption={ this.renderOption }
                 renderContainer={ this.renderContainer }
               />
-              <Text style={styles.sliderTitle}> animal size: </Text>
+              <Text style={styles.sliderTitle}>  size: </Text>
               <RadioButtons
                 options={ sizeOptions }
                 onSelection={ this.setSelectedSize }
@@ -105,7 +118,7 @@ export default class Filter extends React.Component {
                 renderOption={ this.renderOption }
                 renderContainer={ this.renderContainer }
               />
-              <Text style={styles.sliderTitle}> animal sex: </Text>
+              <Text style={styles.sliderTitle}>  sex: </Text>
               <RadioButtons
                 options={ genderOptions }
                 onSelection={ this.setSelectedGender }
@@ -149,6 +162,7 @@ const styles = StyleSheet.create({
   selectedRadio: {
     fontWeight: 'bold',
     fontSize: 20,
+    color: 'white',
     padding: 4,
     fontFamily: 'Kohinoor Bangla',
   },
@@ -167,14 +181,13 @@ const styles = StyleSheet.create({
     },
   radioBorder: {
       borderRadius: 4,
-      borderWidth: 2,
       borderColor: 'black',
       margin: 4,
       padding: 2,
       height: 60,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#D3D3D3',
+      backgroundColor: 'white',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.8,
@@ -182,8 +195,8 @@ const styles = StyleSheet.create({
     },
     selectedRadioBorder: {
       borderRadius: 4,
-      borderWidth: 2,
-      borderColor: 'black',
+      // borderWidth: 2,
+      // borderColor: 'black',
       margin: 4,
       padding: 2,
       height: 60,
@@ -193,22 +206,53 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.8,
       shadowRadius: 2,
       justifyContent: 'center',
-      backgroundColor: 'white'
+      backgroundColor: '#048BA8'
     },
     submitBtn: {
       fontSize: 28,
       padding: 16,
-      textAlign: 'center'
+      textAlign: 'center',
+      color: 'white',
+      fontFamily: 'Kohinoor Bangla',
     },
     submitBtnContainer: {
-      backgroundColor: '#D3D3D3',
+      backgroundColor: '#048BA8',
+      borderRadius: 16,
       marginTop: 40,
-      borderColor: 'black',
-      borderRadius: 8,
-      borderWidth: 2,
       shadowColor: 'black',
-      shadowOffset: { width: 0, height: 1 },
+      shadowOffset: { width: 1, height: 2 },
       shadowOpacity: 0.8,
-      shadowRadius: 2,
-    }
+      shadowRadius: 4,
+    },
+    title: {
+      borderRadius: 24,
+      shadowOffset: { width: 1, height: 2 },
+      shadowOpacity: 0.8,
+      shadowRadius: 4,
+      alignItems: 'center',
+      backgroundColor: '#048BA8',
+      color: 'white',
+      // flex: 1,
+      width: 280,
+      flexDirection: 'row',
+      fontFamily: 'Kohinoor Bangla',
+      fontSize: 50,
+      justifyContent: 'center',
+      // position: 'absolute',
+      padding: 10,
+      shadowColor: 'black',
+      textAlign: 'center',
+      // top: 60,
+      zIndex: 3,
+    },
+    titleText: {
+      fontFamily: 'Kohinoor Bangla',
+      fontSize: 52,
+      textAlign: 'center',
+      color: 'white',
+    },
+    pawprint: {
+      color: 'white',
+      marginLeft: 20
+    },
 });
