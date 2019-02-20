@@ -43,7 +43,6 @@ export default class App extends React.Component {
   }
 
   signOut = () => {
-    console.log('signingout!')
     this.setState({
       showLogin: true
     })
