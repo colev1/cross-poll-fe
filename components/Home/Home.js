@@ -7,6 +7,7 @@ import Filter from '../Filter/Filter';
 import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
 import Favorites from '../Favorites/Favorites';
+import Error from '../Error/Error'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -185,7 +186,6 @@ export default class Home extends React.Component {
 
   returnHome = () => {
     this.setState({
-      showFavorites: false,
       showInfo: false
     })
   }
@@ -193,6 +193,11 @@ export default class Home extends React.Component {
   render() {
    const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
    const { userAPIToken, signOut } = this.props;
+   if(this.state.error) {
+     return (
+       <Error />
+     )
+   }
     if(!showFilter && !showInfo && !showFavorites) {
       return (
          <View style={styles.homeContainer}>
