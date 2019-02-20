@@ -12,7 +12,7 @@ export default class Pet extends React.Component {
     super(props) 
     this.state = {
       gestureName: '',
-      distance: ''
+      distance: '',
     }
   }
 
@@ -72,6 +72,7 @@ export default class Pet extends React.Component {
       pet_name: name,
       message: message
     }
+    console.log('TEXT OBJECT', postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -84,7 +85,8 @@ export default class Pet extends React.Component {
       .then(error => console.log('error',error))
   }
 
-  textAFriend = ({textObj}) => {
+  sendText = (textObj) => {
+    const {recipient_phone, pic, pet_name, shelter_name} = textObj;
     let postBody = {
       api_token: this.props.userAPIToken,
       recipient_phone,
@@ -92,6 +94,7 @@ export default class Pet extends React.Component {
       pet_name,
       shelter_name
     }
+    console.log('TEXT OBJECT', postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -113,7 +116,7 @@ export default class Pet extends React.Component {
       let image = photos[2]
       if (this.props.showInfo) {
         return (
-          <PetInfo pet={this.props.pet} shelter={shelter} textAFriend={this.textAFriend}/>
+          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter}/>
         )
       } else {
         return (

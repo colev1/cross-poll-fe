@@ -205,7 +205,7 @@ export default class Home extends React.Component {
           fetchShelter={this.fetchShelter} 
           shelter={shelter}
           addToFavorites={this.addToFavorites}
-          userAPIToken={userAPIToken}
+          userAPIToken={this.props.userAPIToken}
           showFavorites={this.showFavorites}
           userLocation={this.state.userLocation}
           />
@@ -231,7 +231,7 @@ export default class Home extends React.Component {
       return (
       <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}
-          userAPIToken={userAPIToken}
+          userAPIToken={this.props.userAPIToken}
           userLocation={this.state.userLocation}/>
           <TouchableOpacity onPress={this.returnHome}>
             <Icon

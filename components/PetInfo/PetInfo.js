@@ -11,17 +11,20 @@ export default class PetInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      sendText: false
+      sendText: false,
+      recipientPhone: ''
     }
   }
 
-  textAFriend = () => {
-    this.setState({
-      sendText: true
-    })
-    // let postObj = {
-    //   recipient_phone
-    // }
+  sendText = () => {
+    let {photos, name} = this.props.pet;
+    let textObj = {
+      recipient_phone: this.state.recipientPhone,
+      pic: photos[2],
+      pet_name: name,
+      shelter_name: this.props.shelter.name
+    }
+    this.props.sendText(textObj)
   }
 
   render() {
@@ -39,15 +42,20 @@ export default class PetInfo extends React.Component {
               onBackdropPress={()=>this.setState({sendText: false})}
               >
                 <Text style={styles.textFriends}>
-                  Text your friend about {name}!
+                  Send a text about {name}!
                 </Text>
                 <TextInput
-                style={styles.inputNumber}
-                title='enter number'>
+                  style={styles.inputNumber}
+                  title='enter number'
+                  placeholder='0000000000'
+                  autoCapitalize={"none"}
+                  value={this.state.recipientPhone}
+                  onChangeText={(value) => this.setState({recipientPhone: value})}
+                >
                 </TextInput>
                 <TouchableOpacity
                     style={styles.sendTextBtn}
-                    onPress={this.props.sendText}>
+                    onPress={this.sendText}>
               <Text style={styles.sendButtonText}> send text </Text>
             </TouchableOpacity>
                   </Modal>
@@ -77,7 +85,9 @@ export default class PetInfo extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
             style={styles.textButton}
-            onPress={this.textAFriend}>
+            onPress={()=>this.setState({
+              sendText: true
+            })}>
               <Text style={styles.contactButtonText}> Send a text about {name}! </Text>
             </TouchableOpacity>
           </View>
@@ -118,8 +128,11 @@ const styles = StyleSheet.create({
   },
   inputNumber: {
     backgroundColor: 'white',
-    fontSize: 24,
+    color: '#F49D37',
+    fontSize: 36,
     width: 240,
+    borderRadius: 16,
+    fontFamily: 'Kohinoor Bangla',
   },
   borderRad: {
     borderRadius: 30,
@@ -129,7 +142,7 @@ const styles = StyleSheet.create({
     top: 200,
     borderWidth: 1,
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     borderColor: 'black',
     backgroundColor: '#048BA8',
@@ -144,7 +157,9 @@ const styles = StyleSheet.create({
   },
   textFriends: {
     fontSize: 28,
-    color: 'white'
+    color: 'white',
+    textAlign: 'center',
+    fontFamily: 'Kohinoor Bangla',
   },
   sendTextBtn: {
     backgroundColor: 'white',
@@ -153,6 +168,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     fontSize: 20,
     marginTop: 40,
+    width: 200,
     // height: 30,
   },
   sendButtonText: {
@@ -161,6 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     fontSize: 14,
     color: '#048BA8',
+    margin: 20,
     // marginTop: 6
   },
   contactButton: {
@@ -198,7 +215,8 @@ const styles = StyleSheet.create({
     left: 0,
     fontSize: 14,
     color: 'white',
-    marginTop: 6
+    marginTop: 6,
+    fontFamily: 'Kohinoor Bangla',
   },
   description: {
     width: 360,
@@ -258,9 +276,6 @@ const styles = StyleSheet.create({
   moreInfoImage: {
     height: 200,
     width: 350,
-  },
-  hiddenBackground: {
-
   },
   hidden: {
     display: 'none',
