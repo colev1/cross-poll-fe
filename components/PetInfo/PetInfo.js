@@ -1,10 +1,11 @@
 import React  from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView, TextInput } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import APIkey from '../apiKey';
 import Loading from '../Loading/Loading';
 import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
+import Modal from "react-native-modal";
 
 export default class PetInfo extends React.Component {
   constructor(props) {
@@ -15,9 +16,12 @@ export default class PetInfo extends React.Component {
   }
 
   textAFriend = () => {
-    let postObj = {
-      recipient_phone
-    }
+    this.setState({
+      sendText: true
+    })
+    // let postObj = {
+    //   recipient_phone
+    // }
   }
 
   render() {
@@ -27,6 +31,26 @@ export default class PetInfo extends React.Component {
         let image = photos[2]
     return (
       <View style={styles.petInfoContainer}>
+              <Modal 
+              transparent={true}
+              animationType="slide"
+              visible={this.state.sendText}
+              style={styles.textModal}
+              onBackdropPress={()=>this.setState({sendText: false})}
+              >
+                <Text style={styles.textFriends}>
+                  Text your friend about {name}!
+                </Text>
+                <TextInput
+                style={styles.inputNumber}
+                title='enter number'>
+                </TextInput>
+                <TouchableOpacity
+                    style={styles.sendTextBtn}
+                    onPress={this.props.sendText}>
+              <Text style={styles.sendButtonText}> send text </Text>
+            </TouchableOpacity>
+                  </Modal>
                 <View style={styles.titlesContainer}>
                   <Text style={styles.petName}> {name} </Text>
                   <Text style={styles.petDescription}>{breed}</Text>
@@ -48,15 +72,13 @@ export default class PetInfo extends React.Component {
             </View>
             <TouchableOpacity
             style={styles.contactButton}
-            onPress={this.textAFriend}>
+            onPress={this.props.emailShelter}>
               <Text style={styles.contactButtonText}> Email {shelter.name} </Text>
             </TouchableOpacity>
             <TouchableOpacity
             style={styles.textButton}
-            onPress={this.emailShelter}>
+            onPress={this.textAFriend}>
               <Text style={styles.contactButtonText}> Send a text about {name}! </Text>
-              <TextInput style={this.state.sendText ? styles.phoneInput : styles.hidden}>
-              </TextInput>
             </TouchableOpacity>
           </View>
     )
@@ -73,9 +95,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 80,
   },
+  modalContainer: {
+    paddingTop: 100
+  },
   petName: {
     textAlign: 'center',
-    fontSize: 52,
+    fontSize: 44,
     color: 'black',
     marginBottom: 0,
     fontFamily: 'Kohinoor Bangla',
@@ -91,8 +116,52 @@ const styles = StyleSheet.create({
   moreInfoImage: {
     marginTop: 5
   },
+  inputNumber: {
+    backgroundColor: 'white',
+    fontSize: 24,
+    width: 240,
+  },
   borderRad: {
     borderRadius: 30,
+  },
+  textModal: {
+    position: 'absolute',
+    top: 200,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'black',
+    backgroundColor: '#048BA8',
+    alignSelf: 'center',
+    width: 300,
+    height: 300,
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+  },
+  textFriends: {
+    fontSize: 28,
+    color: 'white'
+  },
+  sendTextBtn: {
+    backgroundColor: 'white',
+    color: '#048BA8',
+    borderRadius: 24,
+    borderStyle: 'solid',
+    fontSize: 20,
+    marginTop: 40,
+    // height: 30,
+  },
+  sendButtonText: {
+    textAlign: 'center',
+    // left: 0,
+    borderRadius: 24,
+    fontSize: 14,
+    color: '#048BA8',
+    // marginTop: 6
   },
   contactButton: {
     backgroundColor: '#048BA8',
@@ -185,12 +254,13 @@ const styles = StyleSheet.create({
     top: 60,
     left: 20,
     width: 300,
-    // bottom: 60,
-    // left: 20,
   },
   moreInfoImage: {
     height: 200,
     width: 350,
+  },
+  hiddenBackground: {
+
   },
   hidden: {
     display: 'none',
