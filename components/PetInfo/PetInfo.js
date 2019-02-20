@@ -28,7 +28,6 @@ export default class PetInfo extends React.Component {
               imageStyle={styles.borderRad}>
             </ImageBackground>
             <ScrollView style={styles.shelterContainer}>
-              {/* <View style={styles.shelterContainer}> */}
               <Text style={styles.description}>{description} </Text>
             </ScrollView>
             <View style={styles.shelterInfo}>
@@ -66,7 +65,8 @@ const styles = StyleSheet.create({
   petName: {
     textAlign: 'center',
     fontSize: 52,
-    color: '#048BA8',
+    color: 'black',
+    marginBottom: 0,
     fontFamily: 'Kohinoor Bangla',
   },
   image: {
@@ -115,15 +115,19 @@ const styles = StyleSheet.create({
   },
   contactButtonText: {
     textAlign: 'center',
+    left: 0,
     fontSize: 14,
     color: 'white',
     marginTop: 6
   },
   description: {
     width: 360,
-    textAlign: 'center',
+    textAlign: 'auto',
     fontSize: 16,
-    color: 'white',
+    margin: 8,
+    color: 'black',
+    fontFamily: 'Kohinoor Bangla',
+    lineHeight: 20,
   },
   canBeFound: {
     textAlign: 'center',
@@ -133,14 +137,16 @@ const styles = StyleSheet.create({
   },
   petDescription: {
     fontSize: 28,
+    marginTop: 0,
+    paddingTop: 0,
     textAlign: 'center',
-    color: '#048BA8',
+    color: 'black',
     fontFamily: 'Kohinoor Bangla',
   },
   shelterInfo: {
     marginTop: 0,
     fontSize: 10,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   phone: {
     textAlign: 'center',
@@ -154,14 +160,14 @@ const styles = StyleSheet.create({
     width: 400,
   },
   shelterContainer: {
-    backgroundColor: '#F49D37',
+    backgroundColor: 'white',
     borderRadius: 4,
-    color: 'white',
+    color: 'black',
     marginTop: 4,
-    paddingLeft: 8,
     height: 600,
-    padding: 4,
-    width: 360,
+    textAlign: 'center',
+    // padding: 4,
+    width: 400,
   },
   petBreedAge: {
     position: 'absolute',
