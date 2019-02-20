@@ -145,15 +145,26 @@ export default class Pet extends React.Component {
             </View> 
             <ImageBackground source = {{uri: image}} style={styles.image}
             imageStyle={styles.borderRad}>
-                <Text style={styles.petName}>{name}</Text>
                 <View style={styles.shelterContainer}>
+                <Text style={styles.petTitle}> {name} </Text>
+                <View style={styles.petDescription}> 
                   <Icon
-                name='home'
-                type='font-awesome'
-                color='white'
-                size={16}
-                iconStyle={styles.home}/>
-                  <Text style={styles.shelterName}>{shelter.name} - {this.state.distance} miles </Text>
+                      name='home'
+                      type='font-awesome'
+                      color='white'
+                      size={20}
+                      iconStyle={styles.home}/>
+                  <Text style={styles.petText}> {shelter.name} </Text> 
+                </View>
+                <View style={styles.petDescription}>
+                  <Icon
+                      name='map-marker'
+                      type='font-awesome'
+                      color='white'
+                      size={20}
+                      iconStyle={styles.home}/> 
+                  <Text style={styles.petText}>  {this.state.distance} miles away </Text>
+                </View>  
                 </View>
             </ImageBackground>
         </GestureRecognizer>
@@ -173,7 +184,9 @@ const styles = StyleSheet.create({
     color: 'white',
     position: 'absolute',
     bottom: 60,
-    left: 20
+    left: 20,
+    fontFamily: 'Kohinoor Bangla',
+    textAlign: 'center',
   },
   swiper: {
     flex: 1,
@@ -236,13 +249,7 @@ const styles = StyleSheet.create({
     // marginBottom: 40
   },
   hamburgerContainer: {
-    // height: 50,
-    // width: 50,
-    // position: 'relative',
     padding: 10,
-    // right: 120,
-    // top: 40,
-    // marginBottom: 40
     borderRadius: 50,
     textAlign: 'center',
     justifyContent: 'center',
@@ -251,6 +258,25 @@ const styles = StyleSheet.create({
     height: 70,
     borderColor: 'white',
     backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 3 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+  },
+  petTitle: {
+    fontSize: 32,
+    color: 'white',
+    fontFamily: 'Kohinoor Bangla',
+  },
+  petDescription: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  petText: {
+    fontSize: 16,
+    color: 'white',
+    fontFamily: 'Kohinoor Bangla',
+    marginLeft: 4,
   },
   description: {
     height: 200,
@@ -269,7 +295,7 @@ const styles = StyleSheet.create({
   shelterName: {
     color: 'white',
     fontSize: 16,
-    position: 'absolute',
+    // position: 'absolute',
     zIndex: 2,
     left: 20,
     textShadowColor: 'black'
@@ -290,8 +316,13 @@ const styles = StyleSheet.create({
     bottom: 30,
     left: 20,
     marginTop: 20,
-    flex: 1,
-    flexDirection: 'row',
+    width: 360,
+    borderRadius: 4,
+    // flex: 1,
+    // width: 100
+    backgroundColor: '#F49D37',
+    paddingLeft: 8,
+    // flexDirection: 'co',
     color: 'white'
   },
   petBreedAge: {
