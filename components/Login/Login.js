@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     fontSize: 32
   },
   form: {
-    backgroundColor: '#048BA8',
+    backgroundColor: '#E5E5E5',
     fontSize: 60,
     width: '100%',
     flex: 1,
@@ -239,6 +239,10 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingTop: 60,
     paddingBottom: 100,
+    shadowColor: 'black',
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: .8,
+    shadowRadius: 4,
     // paddingBottom: 100
   },
   formSignIn: {
@@ -254,19 +258,23 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
     paddingTop: 100,
     width: '96%',
+    shadowColor: 'black',
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: .8,
+    shadowRadius: 4,
   },
   input: {
     // backgroundColor: 'rgba(255,255,255, 0.8)',
-    borderBottomColor: 'black',
+    borderBottomColor: '#048BA8',
     // borderRadius: 24,
     borderStyle: 'solid',
     borderBottomWidth: 2,
     fontSize: 28,
     height: 66,
     // shadowColor: '#000',
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
+    // shadowOffset: { width: 1, height: 2 },
+    // shadowOpacity: .8,
+    // shadowRadius: 4,
     textAlign: 'left',
     width: 320,
     fontFamily: 'Kohinoor Bangla'
@@ -301,7 +309,7 @@ const styles = StyleSheet.create({
     display: 'none'
   },
   button: {
-    backgroundColor: 'white',
+    backgroundColor: '#048BA8',
     borderColor: 'black',
     borderStyle: 'solid',
     borderRadius: 24,
@@ -317,7 +325,9 @@ const styles = StyleSheet.create({
   },
   selectedText: {
     fontWeight: 'bold',
+    color: '#048BA8',
     textDecorationLine: 'underline',
+    textDecorationColor: '#048BA8',
     fontSize: 28,
     fontFamily: 'Kohinoor Bangla'
   },
