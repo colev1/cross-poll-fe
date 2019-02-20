@@ -235,7 +235,7 @@ export default class Home extends React.Component {
       return (
         <View style={styles.favoritesContainer}>
           <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves}
-          returnHome={this.returnHome} />
+          returnHome={this.returnHome} loading={this.state.loading} />
         </View>
       )
     }

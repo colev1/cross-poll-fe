@@ -91,7 +91,6 @@ export default class Pet extends React.Component {
       shelter_name,
       pet_id
     }
-    console.log('TEXT OBJECT', postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -100,7 +99,7 @@ export default class Pet extends React.Component {
       }
     })
       .then(response => response.json())
-      .then(result => console.log('result',result))
+      .then(result => console.log('text send',result))
       .then(error => console.log('error',error))
   }
 
@@ -113,7 +112,7 @@ export default class Pet extends React.Component {
       let image = photos[2]
       if (this.props.showInfo) {
         return (
-          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter} returnHome={this.props.returnHome}/>
+          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter} returnHome={this.props.returnHome} loading={this.props.loading}/>
         )
       } else {
         return (

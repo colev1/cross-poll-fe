@@ -73,14 +73,11 @@ export default class Favorites extends React.Component {
     const { showInfo, currentPet, shelter } = this.state;
     let display;
     if (showInfo) {
-      if(currentPet) {
         return (
-            <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome}  />
+          <View style={styles.homeContainer}>
+            <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome}  loading={this.props.loading} />
+          </View>
         )
-      } else {
-        return ( <Loading /> )
-      }
-
     } else if (cleanedFaves.length === 0) {
       display = <Text style={styles.noFavesMessage}>You don't have any favorites!</Text>
     } else {
@@ -132,12 +129,12 @@ const styles = StyleSheet.create({
   },
   homeContainer: {
     flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginBottom: 20,
-    top: 60,
-    paddingBottom: 80,
-    paddingTop: 80,
+    // justifyContent: 'space-around',
+    // alignItems: 'center',
+    // marginBottom: 20,
+    // top: 60,
+    // paddingBottom: 80,
+    // paddingTop: 80,
   },
   favoritePetContainer: {
     backgroundColor: 'white',

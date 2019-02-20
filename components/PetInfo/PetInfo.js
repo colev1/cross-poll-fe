@@ -28,6 +28,9 @@ export default class PetInfo extends React.Component {
   }
 
   render() {
+    if(this.props.loading) {
+      return <Loading />
+    }
     if(this.props.pet && this.props.shelter) {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
         const { shelter } = this.props;
