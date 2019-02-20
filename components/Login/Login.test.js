@@ -36,5 +36,33 @@ describe('Login', () => {
   
   })
 
+  describe('submitExistingUser', () => {
+    it.skip('calls fetch with the correct data when logging in', () => { 
+
+      const mockUser = {
+        email: 'ashplevi@yahoo.com',
+        password: 'password'
+      }
+      window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+        json: () => Promise.resolve({
+          mockUser
+        })
+      }))
+
+      const expectedFetchBody = {
+        method: 'POST',
+        body: JSON.stringify({mockUser}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      wrapper.instance().submitExistingUser()
+
+      expect(window.fetch).toHaveBeenCalledWith('https://adoptr-be.herokuapp.com/api/v1/sessions', expectedFetchBody)
+
+    });
+  });
+
 
 });

@@ -130,6 +130,7 @@ export default class Filter extends React.Component {
               onPress={()=>this.props.fetchByFilters(this.state)} >
                 <Text style={styles.submitBtn}> find a pet! </Text>
               </TouchableOpacity>
+              <TouchableOpacity onPress={this.props.signOut}><Text style={styles.signOut}>Sign Out</Text></TouchableOpacity>
         </View>
       )
     }
@@ -195,8 +196,6 @@ const styles = StyleSheet.create({
     },
     selectedRadioBorder: {
       borderRadius: 4,
-      // borderWidth: 2,
-      // borderColor: 'black',
       margin: 4,
       padding: 2,
       height: 60,
@@ -232,17 +231,14 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#048BA8',
       color: 'white',
-      // flex: 1,
       width: 280,
       flexDirection: 'row',
       fontFamily: 'Kohinoor Bangla',
       fontSize: 50,
       justifyContent: 'center',
-      // position: 'absolute',
       padding: 10,
       shadowColor: 'black',
       textAlign: 'center',
-      // top: 60,
       zIndex: 3,
     },
     titleText: {
@@ -255,4 +251,10 @@ const styles = StyleSheet.create({
       color: 'white',
       marginLeft: 20
     },
+    signOut: {
+      color: '#048BA8',
+      marginTop: 20,
+      fontWeight: 'bold',
+      textAlign: 'center'
+    }
 });

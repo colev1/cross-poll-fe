@@ -16,9 +16,6 @@ export default class Pet extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    // this.findDistance()
-  }
 
   componentWillUnmount = () => {
     this.setState({

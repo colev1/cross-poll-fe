@@ -153,20 +153,13 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 10
-  },
-  arrowLeft: {
-    // position: 'absolute',
-    // left: 0,
-    // top: 100,
-    // marginTop: 20,
+    paddingLeft: 10,
   },
   name: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#048BA8',
     marginLeft: 20,
-    // marginRight: 230
   },
   arrowRight: {
     position: 'absolute',
@@ -180,19 +173,12 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   backButton: {
-    // backgroundColor: 'white',
-    // position: 'absolute',
-    // top: 200,
-    // height: 40,
-    // left: 10,
     textAlign: 'center',
     zIndex: 4,
-    // marginLeft: 10,
     marginBottom: 80,
   },
   icon: {
     backgroundColor: '#048BA8',
-    position: 'absolute',
-    // bottom: -250, 
+    position: 'absolute'
   },
 });
