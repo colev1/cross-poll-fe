@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import Loading from '../Loading/Loading';
 import { Icon } from 'react-native-elements';
+import { showMessage } from "react-native-flash-message";
 import Modal from "react-native-modal";
 
 export default class PetInfo extends React.Component {
@@ -21,6 +22,13 @@ export default class PetInfo extends React.Component {
       shelter_name: this.props.shelter.name,
       pet_id: id
     }
+    showMessage({
+      message: "Success!",
+      description: `Message sent to ${this.state.recipientPhone}`,
+      type: "success",
+      floating: true
+    });
+    this.setState({ sendText: false })
     this.props.sendText(textObj)
   }
 

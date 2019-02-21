@@ -240,7 +240,7 @@ export default class Home extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log('text sent', result))
-      .catch(error => this.props.displayError())
+      .catch(error => this.displayError())
   }
 
 

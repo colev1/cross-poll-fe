@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     borderRadius: 16,
-    margin: 10,
+    marginTop: 20,
     paddingTop: 60,
     paddingBottom: 100,
     shadowColor: 'black',
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     flex: 1,
     fontSize: 60,
-    margin: 10,
+    marginTop: 20,
     paddingBottom: 100,
     paddingTop: 100,
     width: '96%',
@@ -243,23 +243,23 @@ const styles = StyleSheet.create({
     fontFamily: 'Kohinoor Bangla'
   },
   title: {
-    borderRadius: 24,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
     alignItems: 'center',
     backgroundColor: '#048BA8',
+    borderRadius: 24,
     color: 'white',
-    width: 280,
     flexDirection: 'row',
     fontFamily: 'Kohinoor Bangla',
     fontSize: 50,
     justifyContent: 'center',
-    position: 'absolute',
     padding: 10,
+    position: 'absolute',
     shadowColor: 'black',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
     textAlign: 'center',
     top: 60,
+    width: 280,
     zIndex: 3,
   },
   titleText: {
@@ -304,7 +304,8 @@ const styles = StyleSheet.create({
   },
   unselectedText: {
     fontSize: 32,
-    fontFamily: 'Kohinoor Bangla'
+    fontFamily: 'Kohinoor Bangla',
+    color: 'grey',
   },
   radioButtons: {
     display: 'flex',
@@ -317,8 +318,9 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   errorMessage: {
+    fontFamily: 'Kohinoor Bangla',
     color: 'red',
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
     position: 'absolute',
     bottom: 16
