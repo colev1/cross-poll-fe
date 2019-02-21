@@ -20,7 +20,7 @@ export default class Login extends React.Component {
   }
 
   submitUser = () => {
-    if(this.state.selectedOption === 'sign up') {
+    if (this.state.selectedOption === 'sign up') {
       this.submitNewUser()
     } else {
       this.submitExistingUser()
@@ -36,17 +36,17 @@ export default class Login extends React.Component {
     fetch('https://adoptr-be.herokuapp.com/api/v1/sessions', {
       method: 'POST',
       body: JSON.stringify(postBody),
-      headers:{
+      headers: {
         'Content-Type': 'application/json'
       }
     })
-    .then( response => response.json())
-    .then( result => this.checkForError(result))
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(result => this.checkForError(result))
+      .catch(error => console.log(error))
   }
 
   checkForError = (result) => {
-    if(result.error) {
+    if (result.error) {
       this.setState({
         error: true,
         errorMessage: result.error
@@ -68,13 +68,13 @@ export default class Login extends React.Component {
     fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
       method: 'POST',
       body: JSON.stringify(postBody),
-      headers:{
+      headers: {
         'Content-Type': 'application/json'
       }
     })
-    .then( response => response.json())
-    .then( result => this.checkForError(result))
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(result => this.checkForError(result))
+      .catch(error => console.log(error))
   }
 
   setSelected = (selectedOption) => {
@@ -104,8 +104,8 @@ export default class Login extends React.Component {
 
   renderContainer = (optionNodes) => {
     return (<View style={styles.radioButtons}>
-        {optionNodes}
-          </View>)
+      {optionNodes}
+    </View>)
   }
 
   render() {
@@ -113,73 +113,73 @@ export default class Login extends React.Component {
 
     return (
       <View style={styles.form}>
-        <View style={styles.title}> 
-          <Text style={styles.titleText}> 
-            AdoptR 
+        <View style={styles.title}>
+          <Text style={styles.titleText}>
+            AdoptR
           </Text>
           <Icon
-              name='paw'
-              type='font-awesome'
-              color='white'
-              size= {36}
-              iconStyle={styles.pawprint}
-            />
+            name='paw'
+            type='font-awesome'
+            color='white'
+            size={36}
+            iconStyle={styles.pawprint}
+          />
         </View>
         <View style={this.state.selectedOption === 'sign up' ? styles.formSignUp : styles.formSignIn}>
           <RadioButtons
-                style={styles.radioButtons}
-                options={ selectOptions }
-                onSelection={ this.setSelected }
-                selectedOption={this.state.selectedOption }
-                renderOption={ this.renderOption }
-                renderContainer={ this.renderContainer }
-              />
-        <TextInput 
-          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
-          placeholder='first name'
-          autoCapitalize={"none"}
-          value={this.state.firstName}
-          onChangeText={(value) => this.setState({firstName: value})}
-        />
-        <TextInput 
-          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
-          placeholder='last name'
-          autoCapitalize={"none"}
-          value={this.state.lastName}
-          onChangeText={(value) => this.setState({lastName: value})}
-        />
-        <TextInput 
-          type='email'
-          autoCapitalize={"none"}
-          style={styles.input}
-          placeholder='email'
-          value={this.state.email}
-          onChangeText={(value) => this.setState({email: value})}
-        />
-        <TextInput
-          style={styles.input}
-          secureTextEntry={true}
-          placeholder='password'
-          autoCapitalize={"none"}
-          value={this.state.password}
-          onChangeText={(value) => this.setState({password: value})}
-        />
-        <TextInput
-          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
-          secureTextEntry={true}
-          placeholder='confirm password'
-          value={this.state.passwordConfirmation}
-          onChangeText={(value) => this.setState({passwordConfirmation: value})}
-        />
-        <Text style={this.state.error ? styles.errorMessage : styles.hidden}>
-          {this.state.errorMessage}
-        </Text>
+            style={styles.radioButtons}
+            options={selectOptions}
+            onSelection={this.setSelected}
+            selectedOption={this.state.selectedOption}
+            renderOption={this.renderOption}
+            renderContainer={this.renderContainer}
+          />
+          <TextInput
+            style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
+            placeholder='first name'
+            autoCapitalize={"none"}
+            value={this.state.firstName}
+            onChangeText={(value) => this.setState({ firstName: value })}
+          />
+          <TextInput
+            style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
+            placeholder='last name'
+            autoCapitalize={"none"}
+            value={this.state.lastName}
+            onChangeText={(value) => this.setState({ lastName: value })}
+          />
+          <TextInput
+            type='email'
+            autoCapitalize={"none"}
+            style={styles.input}
+            placeholder='email'
+            value={this.state.email}
+            onChangeText={(value) => this.setState({ email: value })}
+          />
+          <TextInput
+            style={styles.input}
+            secureTextEntry={true}
+            placeholder='password'
+            autoCapitalize={"none"}
+            value={this.state.password}
+            onChangeText={(value) => this.setState({ password: value })}
+          />
+          <TextInput
+            style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
+            secureTextEntry={true}
+            placeholder='confirm password'
+            value={this.state.passwordConfirmation}
+            onChangeText={(value) => this.setState({ passwordConfirmation: value })}
+          />
+          <Text style={this.state.error ? styles.errorMessage : styles.hidden}>
+            {this.state.errorMessage}
+          </Text>
         </View>
         <TouchableOpacity
-        style={styles.button}
-        onPress={()=>this.submitUser()} > 
-          <Text style={styles.submitButtonText}  > 
-          submit 
+          style={styles.button}
+          onPress={() => this.submitUser()} >
+          <Text style={styles.submitButtonText}  >
+            submit
           </Text>
         </TouchableOpacity>
       </View>
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     borderRadius: 16,
-    margin: 10,
+    marginTop: 20,
     paddingTop: 60,
     paddingBottom: 100,
     shadowColor: 'black',
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     flex: 1,
     fontSize: 60,
-    margin: 10,
+    marginTop: 20,
     paddingBottom: 100,
     paddingTop: 100,
     width: '96%',
@@ -243,23 +243,23 @@ const styles = StyleSheet.create({
     fontFamily: 'Kohinoor Bangla'
   },
   title: {
-    borderRadius: 24,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
     alignItems: 'center',
     backgroundColor: '#048BA8',
+    borderRadius: 24,
     color: 'white',
-    width: 280,
     flexDirection: 'row',
     fontFamily: 'Kohinoor Bangla',
     fontSize: 50,
     justifyContent: 'center',
-    position: 'absolute',
     padding: 10,
+    position: 'absolute',
     shadowColor: 'black',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
     textAlign: 'center',
     top: 60,
+    width: 280,
     zIndex: 3,
   },
   titleText: {
@@ -304,7 +304,8 @@ const styles = StyleSheet.create({
   },
   unselectedText: {
     fontSize: 32,
-    fontFamily: 'Kohinoor Bangla'
+    fontFamily: 'Kohinoor Bangla',
+    color: 'grey',
   },
   radioButtons: {
     display: 'flex',
@@ -317,8 +318,9 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   errorMessage: {
+    fontFamily: 'Kohinoor Bangla',
     color: 'red',
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
     position: 'absolute',
     bottom: 16

@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import PetInfo from './PetInfo';
 import { shallow } from 'enzyme';
 import { TouchableOpacity } from 'react-native';
@@ -18,14 +18,14 @@ describe('pet info', () => {
     mockEmailShelter = jest.fn()
     mockPet = {
       animal: 'Cat',
-      breed: 'Domestic Short Hair',contactInfo: {},
+      breed: 'Domestic Short Hair', contactInfo: {},
       description: '12 year old..',
       id: '42736275',
       name: 'Zoey',
       photos: ['http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=60&-pnt.jpg',
-      'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=95&-fpm.jpg',
-      'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=500&-x.jpg',
-      'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=300&-pn.jpg'],
+        'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=95&-fpm.jpg',
+        'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=500&-x.jpg',
+        'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=300&-pn.jpg'],
       sex: 'F',
       shelterId: 'CO186',
       size: 'M'
@@ -42,7 +42,7 @@ describe('pet info', () => {
       state: 'CO',
       zip: '80210'
     };
-    wrapper = shallow( <PetInfo 
+    wrapper = shallow(<PetInfo
       pet={mockPet}
       shelter={mockShelter}
       sendText={mockSendText}
@@ -52,8 +52,8 @@ describe('pet info', () => {
     />);
   })
 
-  it('should match the snapshot with all data passed in correctly', () => { 
-    expect(wrapper).toMatchSnapshot(); 
+  it('should match the snapshot with all data passed in correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   })
 
   it('should be initialized with state of false', () => {
@@ -63,7 +63,6 @@ describe('pet info', () => {
     }
     expect(wrapper.state('sendText')).toEqual(mockState.sendText)
     expect(wrapper.state('recipientPhone')).toEqual(mockState.recipientPhone)
-
   })
 
   it('should set state of send text true on button press', () => {

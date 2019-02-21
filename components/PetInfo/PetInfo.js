@@ -1,7 +1,8 @@
-import React  from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import Loading from '../Loading/Loading';
 import { Icon } from 'react-native-elements';
+import { showMessage } from "react-native-flash-message";
 import Modal from "react-native-modal";
 
 export default class PetInfo extends React.Component {
@@ -14,92 +15,109 @@ export default class PetInfo extends React.Component {
   }
 
   sendText = () => {
-    let { name, id} = this.props.pet;
+    let { name, id } = this.props.pet;
     let textObj = {
       recipient_phone: this.state.recipientPhone,
       pet_name: name,
       shelter_name: this.props.shelter.name,
       pet_id: id
     }
+    showMessage({
+      message: "Success!",
+      description: `Text message sent to ${this.state.recipientPhone}`,
+      type: "success",
+      floating: true
+    });
+    this.setState({ sendText: false })
     this.props.sendText(textObj)
   }
 
+  emailShelter = () => {
+    showMessage({
+      message: "Success!",
+      description: `Email sent to ${this.props.shelter.name}`,
+      type: "success",
+      floating: true
+    });
+    this.props.emailShelter(this.props.pet.name)
+  }
+
   render() {
-    if(this.props.loading) {
+    if (this.props.loading) {
       return <Loading />
     }
-    if(this.props.pet && this.props.shelter) {
+    if (this.props.pet && this.props.shelter) {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
       const { shelter } = this.props;
       let image = photos[2]
-    return (
-      <View style={styles.petInfoContainer}>
-              <Modal 
-              transparent={true}
-              animationType="slide"
-              visible={this.state.sendText}
-              style={styles.textModal}
-              onBackdropPress={()=>this.setState({sendText: false})}
-              >
-                <Text style={styles.textFriends}>
-                  Send a text about {name}!
+      return (
+        <View style={styles.petInfoContainer}>
+          <Modal
+            transparent={true}
+            animationType="slide"
+            visible={this.state.sendText}
+            style={styles.textModal}
+            onBackdropPress={() => this.setState({ sendText: false })}
+          >
+            <Text style={styles.textFriends}>
+              Send a text about {name}!
                 </Text>
-                <TextInput
-                  style={styles.inputNumber}
-                  title='enter number'
-                  placeholder='0000000000'
-                  autoCapitalize={"none"}
-                  value={this.state.recipientPhone}
-                  onChangeText={(value) => this.setState({recipientPhone: value})}
-                >
-                </TextInput>
-                <TouchableOpacity
-                    style={styles.sendTextBtn}
-                    onPress={this.sendText}>
+            <TextInput
+              style={styles.inputNumber}
+              title='enter number'
+              placeholder='0000000000'
+              autoCapitalize={"none"}
+              value={this.state.recipientPhone}
+              onChangeText={(value) => this.setState({ recipientPhone: value })}
+            >
+            </TextInput>
+            <TouchableOpacity
+              style={styles.sendTextBtn}
+              onPress={this.sendText}>
               <Text style={styles.sendButtonText}> send text </Text>
-              </TouchableOpacity>
-                  </Modal>
-                <View style={styles.titlesContainer}>
-                  <Text style={styles.petName}> {name} </Text>
-                  <Text style={styles.petDescription}>{breed}</Text>
-                  <Text style={styles.petDescription}>{age}</Text>
-                </View>
-            <ImageBackground source = {{uri: image}} 
-              style={styles.moreInfoImage}
-              imageStyle={styles.borderRad}>
-            </ImageBackground>
-            <ScrollView style={styles.shelterContainer}>
-              <Text style={styles.description}>{description} </Text>
-            </ScrollView>
-            <View style={styles.shelterInfo}>
-              <Text style={styles.canBeFound}>
-                {shelter.name}
-              </Text>
-              <Text style={styles.phone}>{shelter.phone}</Text>
-              <Text style={styles.cityStateZip}>{shelter.city}, {shelter.state} - {shelter.zip}</Text>
-            </View>
-            <TouchableOpacity
-            style={styles.contactButton}
-            onPress={this.props.emailShelter}>
-              <Text style={styles.contactButtonText}> Email {shelter.name} </Text>
             </TouchableOpacity>
-            <TouchableOpacity
+          </Modal>
+          <View style={styles.titlesContainer}>
+            <Text style={styles.petName}> {name} </Text>
+            <Text style={styles.petDescription}>{breed}</Text>
+            <Text style={styles.petDescription}>{age}</Text>
+          </View>
+          <ImageBackground source={{ uri: image }}
+            style={styles.moreInfoImage}
+            imageStyle={styles.borderRad}>
+          </ImageBackground>
+          <ScrollView style={styles.shelterContainer}>
+            <Text style={styles.description}>{description} </Text>
+          </ScrollView>
+          <View style={styles.shelterInfo}>
+            <Text style={styles.canBeFound}>
+              {shelter.name}
+            </Text>
+            <Text style={styles.phone}>{shelter.phone}</Text>
+            <Text style={styles.cityStateZip}>{shelter.city}, {shelter.state} - {shelter.zip}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.contactButton}
+            onPress={this.emailShelter}>
+            <Text style={styles.contactButtonText}> Email {shelter.name} </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={styles.textButton}
-            onPress={()=>this.setState({
+            onPress={() => this.setState({
               sendText: true
             })}>
-              <Text style={styles.contactButtonText}> Send a text about {name}! </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.props.returnHome}>
+            <Text style={styles.contactButtonText}> Send a text about {name}! </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.props.returnHome}>
             <Icon
               name='arrow-circle-left'
               type='font-awesome'
               color='#F49D37'
               size={50}
-              iconStyles={styles.backButton}/>
+              iconStyles={styles.backButton} />
           </TouchableOpacity>
-          </View>
-    )
+        </View>
+      )
     } else {
       return <Loading />
     }

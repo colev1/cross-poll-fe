@@ -20,20 +20,20 @@ export default class Favorites extends React.Component {
   getPet = (petId) => {
     this.props.loadDelete()
     fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
-    .then(response => response.json())
-    .then(pet => cleanPet(pet.petfinder.pet))
-    .then(cleanPet => this.setState({currentPet: cleanPet}))
-    .then(currentPet => this.fetchShelter(this.state.currentPet.shelterId))
-    .then(currentPet => this.setState({showInfo: true}))
-    .catch(error => this.props.displayError())
+      .then(response => response.json())
+      .then(pet => cleanPet(pet.petfinder.pet))
+      .then(cleanPet => this.setState({ currentPet: cleanPet }))
+      .then(currentPet => this.fetchShelter(this.state.currentPet.shelterId))
+      .then(currentPet => this.setState({ showInfo: true }))
+      .catch(error => this.props.displayError())
   }
 
   fetchShelter = (shelterId) => {
     let url = `http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`
     fetch(url)
-      .then(response => response.json()) 
+      .then(response => response.json())
       .then(shelter => cleanShelters(shelter.petfinder.shelter))
-      .then(cleanShelter => this.setState({shelter: cleanShelter}))
+      .then(cleanShelter => this.setState({ shelter: cleanShelter }))
       .catch(error => this.props.displayError())
   }
 
@@ -47,13 +47,13 @@ export default class Favorites extends React.Component {
     fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${userAPIToken}`, {
       method: 'DELETE',
       body: JSON.stringify(postBody),
-      headers:{
+      headers: {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => response.json())
-    .then(result => this.reRenderFavorites())
-    .catch(error => this.props.displayError())
+      .then(response => response.json())
+      .then(result => this.reRenderFavorites())
+      .catch(error => this.props.displayError())
   }
 
   reRenderFavorites = () => {
@@ -61,67 +61,64 @@ export default class Favorites extends React.Component {
     this.props.displayFaves();
   }
 
-  goBack = () => {
-    this.setState({
-      showInfo: false
-    })
-  }
-  
+
   render() {
     const { cleanedFaves } = this.props;
     const { showInfo, currentPet, shelter } = this.state;
     let display;
-    let icon = (<Icon
-    name={this.props.loadingFaves ? 'minus-circle' : 'plus-circle'}
-    type='font-awesome'
-    color='#E74544'
-    style={styles.delete}
+    let icon = ( <Icon
+      name='minus-circle'
+      type='font-awesome'
+      color='#E74544'
+      style={styles.delete}
     />)
-    if(this.props.loadingFaves) {
+    if (this.props.loadingFaves) {
       icon = <ActivityIndicator size="small" color="red" />
     }
     if (showInfo) {
-        return (
-          <View style={styles.homeContainer}>
-            <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome}  loading={this.props.loading} />
-          </View>
-        )
+      return (
+        <View style={styles.homeContainer}>
+          <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome} loading={this.props.loading}
+          sendText={this.props.sendText}
+          emailShelter={this.props.emailShelter} />
+        </View>
+      )
     } else if (cleanedFaves.length === 0) {
       display = <Text style={styles.noFavesMessage}>You don't have any favorites!</Text>
     } else {
       display = cleanedFaves.map((favoritePet) => {
-         return (
-           <View key={favoritePet.id.$t} style={styles.favoritePetContainer}>
+        return (
+          <View key={favoritePet.id.$t} style={styles.favoritePetContainer}>
             <TouchableOpacity onPress={() => this.deleteFavorite(favoritePet.id.$t)}>
               {icon}
             </TouchableOpacity>
             <Text style={styles.name}>{favoritePet.name.$t}</Text>
             <TouchableOpacity onPress={() => this.getPet(favoritePet.id.$t)}
-    style={styles.arrowRight}>
+              style={styles.arrowRight}>
               <Icon
                 name='angle-right'
                 type='font-awesome'
                 color='#F49D37'
-                />
+              />
             </TouchableOpacity>
-           </View>
-         ) 
-       })
+          </View>
+        )
+      })
     }
-    return(
+    return (
       <View style={styles.favoritesContainer}>
-            <ScrollView>
-              {display}
-            </ScrollView>
+        <ScrollView>
+          {display}
+        </ScrollView>
         <TouchableOpacity onPress={this.props.returnHome} style={styles.backButton}>
-              <Icon
-                name='arrow-circle-left'
-                type='font-awesome'
-                color='#F49D37'
-                size={48}
-                style={styles.arrowLeft}
-                />
-            </TouchableOpacity>
+          <Icon
+            name='arrow-circle-left'
+            type='font-awesome'
+            color='#F49D37'
+            size={48}
+            style={styles.arrowLeft}
+          />
+        </TouchableOpacity>
       </View>
     )
   }
@@ -131,7 +128,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5E5E5',
   },
   homeContainer: {
-    flex: 1
+    flex: 1,
+    marginTop: -100,
   },
   favoritePetContainer: {
     backgroundColor: 'white',
