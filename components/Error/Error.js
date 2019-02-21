@@ -1,23 +1,23 @@
-import React  from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 
 const Error = () => {
-    return (
-      <View style={styles.container}>
-        <Icon
-              name='paw'
-              type='font-awesome'
-              color='black'
-              size= {36}
-              iconStyle={styles.pawprint}
-            />
-        <Text style={styles.errorMessage}>
-          Oops, your connection seems off...
+  return (
+    <View style={styles.container}>
+      <Icon
+        name='paw'
+        type='font-awesome'
+        color='black'
+        size={36}
+        iconStyle={styles.pawprint}
+      />
+      <Text style={styles.errorMessage}>
+        Oops, your connection seems off...
         </Text>
-      </View> 
-    )
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

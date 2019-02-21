@@ -20,7 +20,7 @@ export default class Login extends React.Component {
   }
 
   submitUser = () => {
-    if(this.state.selectedOption === 'sign up') {
+    if (this.state.selectedOption === 'sign up') {
       this.submitNewUser()
     } else {
       this.submitExistingUser()
@@ -36,17 +36,17 @@ export default class Login extends React.Component {
     fetch('https://adoptr-be.herokuapp.com/api/v1/sessions', {
       method: 'POST',
       body: JSON.stringify(postBody),
-      headers:{
+      headers: {
         'Content-Type': 'application/json'
       }
     })
-    .then( response => response.json())
-    .then( result => this.checkForError(result))
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(result => this.checkForError(result))
+      .catch(error => console.log(error))
   }
 
   checkForError = (result) => {
-    if(result.error) {
+    if (result.error) {
       this.setState({
         error: true,
         errorMessage: result.error
@@ -68,13 +68,13 @@ export default class Login extends React.Component {
     fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
       method: 'POST',
       body: JSON.stringify(postBody),
-      headers:{
+      headers: {
         'Content-Type': 'application/json'
       }
     })
-    .then( response => response.json())
-    .then( result => this.checkForError(result))
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(result => this.checkForError(result))
+      .catch(error => console.log(error))
   }
 
   setSelected = (selectedOption) => {
@@ -104,8 +104,8 @@ export default class Login extends React.Component {
 
   renderContainer = (optionNodes) => {
     return (<View style={styles.radioButtons}>
-        {optionNodes}
-          </View>)
+      {optionNodes}
+    </View>)
   }
 
   render() {
@@ -113,73 +113,73 @@ export default class Login extends React.Component {
 
     return (
       <View style={styles.form}>
-        <View style={styles.title}> 
-          <Text style={styles.titleText}> 
-            AdoptR 
+        <View style={styles.title}>
+          <Text style={styles.titleText}>
+            AdoptR
           </Text>
           <Icon
-              name='paw'
-              type='font-awesome'
-              color='white'
-              size= {36}
-              iconStyle={styles.pawprint}
-            />
+            name='paw'
+            type='font-awesome'
+            color='white'
+            size={36}
+            iconStyle={styles.pawprint}
+          />
         </View>
         <View style={this.state.selectedOption === 'sign up' ? styles.formSignUp : styles.formSignIn}>
           <RadioButtons
-                style={styles.radioButtons}
-                options={ selectOptions }
-                onSelection={ this.setSelected }
-                selectedOption={this.state.selectedOption }
-                renderOption={ this.renderOption }
-                renderContainer={ this.renderContainer }
-              />
-        <TextInput 
-          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
-          placeholder='first name'
-          autoCapitalize={"none"}
-          value={this.state.firstName}
-          onChangeText={(value) => this.setState({firstName: value})}
-        />
-        <TextInput 
-          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
-          placeholder='last name'
-          autoCapitalize={"none"}
-          value={this.state.lastName}
-          onChangeText={(value) => this.setState({lastName: value})}
-        />
-        <TextInput 
-          type='email'
-          autoCapitalize={"none"}
-          style={styles.input}
-          placeholder='email'
-          value={this.state.email}
-          onChangeText={(value) => this.setState({email: value})}
-        />
-        <TextInput
-          style={styles.input}
-          secureTextEntry={true}
-          placeholder='password'
-          autoCapitalize={"none"}
-          value={this.state.password}
-          onChangeText={(value) => this.setState({password: value})}
-        />
-        <TextInput
-          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
-          secureTextEntry={true}
-          placeholder='confirm password'
-          value={this.state.passwordConfirmation}
-          onChangeText={(value) => this.setState({passwordConfirmation: value})}
-        />
-        <Text style={this.state.error ? styles.errorMessage : styles.hidden}>
-          {this.state.errorMessage}
-        </Text>
+            style={styles.radioButtons}
+            options={selectOptions}
+            onSelection={this.setSelected}
+            selectedOption={this.state.selectedOption}
+            renderOption={this.renderOption}
+            renderContainer={this.renderContainer}
+          />
+          <TextInput
+            style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
+            placeholder='first name'
+            autoCapitalize={"none"}
+            value={this.state.firstName}
+            onChangeText={(value) => this.setState({ firstName: value })}
+          />
+          <TextInput
+            style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
+            placeholder='last name'
+            autoCapitalize={"none"}
+            value={this.state.lastName}
+            onChangeText={(value) => this.setState({ lastName: value })}
+          />
+          <TextInput
+            type='email'
+            autoCapitalize={"none"}
+            style={styles.input}
+            placeholder='email'
+            value={this.state.email}
+            onChangeText={(value) => this.setState({ email: value })}
+          />
+          <TextInput
+            style={styles.input}
+            secureTextEntry={true}
+            placeholder='password'
+            autoCapitalize={"none"}
+            value={this.state.password}
+            onChangeText={(value) => this.setState({ password: value })}
+          />
+          <TextInput
+            style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
+            secureTextEntry={true}
+            placeholder='confirm password'
+            value={this.state.passwordConfirmation}
+            onChangeText={(value) => this.setState({ passwordConfirmation: value })}
+          />
+          <Text style={this.state.error ? styles.errorMessage : styles.hidden}>
+            {this.state.errorMessage}
+          </Text>
         </View>
         <TouchableOpacity
-        style={styles.button}
-        onPress={()=>this.submitUser()} > 
-          <Text style={styles.submitButtonText}  > 
-          submit 
+          style={styles.button}
+          onPress={() => this.submitUser()} >
+          <Text style={styles.submitButtonText}  >
+            submit
           </Text>
         </TouchableOpacity>
       </View>

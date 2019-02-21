@@ -1,8 +1,7 @@
-import React from 'react'; 
+import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Login from '../Login/Login';
-import renderer from 'react-test-renderer';
-import { StyleSheet, TextInput , View, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { TextInput, TouchableOpacity, } from 'react-native';
 
 
 describe('Login', () => {
@@ -13,16 +12,16 @@ describe('Login', () => {
   beforeEach(() => {
     mockShowLogin = jest.fn()
     mockUpdateUserToken = jest.fn()
-    wrapper = shallow( <Login
+    wrapper = shallow(<Login
       showLogin={mockShowLogin}
       newUser={true}
       updateUserToken={mockUpdateUserToken}
-      selectedOption= 'sign up'
+      selectedOption='sign up'
     />);
   })
 
-  it('should match the snapshot with all data passed in correctly', () => { 
-    expect(wrapper).toMatchSnapshot(); 
+  it('should match the snapshot with all data passed in correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   })
   describe('check for error', () => {
     it('should call show update user token if no error', () => {
@@ -36,7 +35,7 @@ describe('Login', () => {
       wrapper.instance().checkForError(mockResult)
       expect(mockUpdateUserToken).toHaveBeenCalledWith(mockResult.data.attributes.api_token)
     })
-  
+
     it('should udpate state if error', () => {
       let mockResult = {
         error: 'errored',
@@ -47,14 +46,14 @@ describe('Login', () => {
     })
   })
 
-  it('should call the submit user func when clicked', () => { 
+  it('should call the submit user func when clicked', () => {
     const submitUserMock = jest.fn();
     const spy = wrapper.spyOn('')
 
     let submitUser = wrapper.instance().submitUser()
     wrapper.find(TouchableOpacity).simulate('press')
-    expect(submitUser).toHaveBeenCalled(); 
-  }); 
+    expect(submitUser).toHaveBeenCalled();
+  });
 
   it('should update state and reset error message when setSelected is called', () => {
     wrapper.instance().setSelected('sign up');
@@ -74,7 +73,7 @@ describe('Login', () => {
   })
 
   describe('submitExistingUser', () => {
-    it.skip('calls fetch with the correct data when logging in', () => { 
+    it.skip('calls fetch with the correct data when logging in', () => {
       const mockUser = {
         email: 'ashplevi@yahoo.com',
         password: 'password'
@@ -87,7 +86,7 @@ describe('Login', () => {
 
       const expectedFetchBody = {
         method: 'POST',
-        body: JSON.stringify({mockUser}),
+        body: JSON.stringify({ mockUser }),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -101,10 +100,10 @@ describe('Login', () => {
   });
 
   describe('setSelected', () => {
-    it('should update state with selected option, error: false, and clear everything in state', () => { 
+    it('should update state with selected option, error: false, and clear everything in state', () => {
 
       wrapper.instance().setSelected('signup');
-  
+
 
       expect(wrapper.instance().state.selectedOption).toEqual('signup');
       expect(wrapper.instance().state.error).toEqual(false);
