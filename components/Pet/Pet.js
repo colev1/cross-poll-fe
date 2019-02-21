@@ -1,9 +1,11 @@
 import React  from 'react';
+import PetInfo from '../PetInfo/PetInfo';
+import Loading from '../Loading/Loading';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import Loading from '../Loading/Loading';
 import { Icon } from 'react-native-elements';
-import PetInfo from '../PetInfo/PetInfo'
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 
 export default class Pet extends React.Component {
   constructor(props) {
@@ -27,23 +29,35 @@ export default class Pet extends React.Component {
     })
     this.findDistance()
     switch (gestureName) {
-      case SWIPE_LEFT:
+      case SWIPE_RIGHT:
+        showMessage({
+          message: "Liked!",
+          description: 'Pet added to favorites',
+          type: "success",
+          floating: true
+        });
         this.props.changePet()
         break;
-      case SWIPE_RIGHT:
+      case SWIPE_LEFT:
+      showMessage({
+        message: "Disliked!",
+        description: 'Keep swiping to find a pet!',
+        type: "danger",
+        floating: true
+      });
         this.props.changePet()
         break;
     }
   }
 
-  onSwipeLeft = () => {
+  onSwipeRight = () => {
     const { addToFavorites, userAPIToken, fetchShelter, pet  } = this.props;
     fetchShelter()
     addToFavorites(pet.id)
   }
 
-  onSwipeRight = () => {
-    console.log('swiping right!')
+  onSwipeLeft = () => {
+    console.log('swiping left!')
   }
 
   findDistance = () => {
@@ -53,13 +67,12 @@ export default class Pet extends React.Component {
     fetch(url)
       .then(response => response.json())
       .then(result => this.setState({distance: result.distance}))
-      .then(error => this.props.displayError())
+      .catch(error => this.props.displayError())
   }
 
   emailShelter = () => {
     const {name} = this.props.pet;
     let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
-    const shelterEmail = this.props.shelter.email
     let postBody = {
       api_token: this.props.userAPIToken,
       shelter_email: 'colevanacore@gmail.com',
@@ -75,7 +88,7 @@ export default class Pet extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log('result',result))
-      .then(error => this.props.displayError())
+      .catch(error => this.props.displayError())
   }
 
   sendText = (textObj) => {
@@ -96,7 +109,7 @@ export default class Pet extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log('text send',result))
-      .then(error => this.props.displayError())
+      .catch(error => this.props.displayError())
   }
 
   render() {
@@ -115,7 +128,7 @@ export default class Pet extends React.Component {
           <GestureRecognizer 
             style={styles.swiper}
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
-            onSwipeLeft={(state) => this.onSwipeLeft(state)}
+            onSwipeRight={(state) => this.onSwipeRight(state)}
             config={config}
           >
           <View style={styles.navContainer}>

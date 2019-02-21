@@ -1,8 +1,7 @@
 import React from 'react'; 
-import { shallow, mount } from 'enzyme';
 import PetInfo from './PetInfo';
-import renderer from 'react-test-renderer';
-import { TouchableOpacity, Text } from 'react-native';
+import { shallow } from 'enzyme';
+import { TouchableOpacity } from 'react-native';
 
 describe('pet info', () => {
   let mockPet;
