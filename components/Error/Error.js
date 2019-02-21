@@ -6,13 +6,13 @@ import { Icon } from 'react-native-elements';
 const Error = () => {
     return (
       <View style={styles.container}>
-        <Text>
+        <Text style={styles.errorMessage}>
           Oops, your connection seems off...
         </Text>
         <Icon
               name='paw'
               type='font-awesome'
-              color='white'
+              color='black'
               size= {36}
               iconStyle={styles.pawprint}
             />
@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center'
   },
+  errorMessage: {
+    fontSize: 28,
+    color: 'black',
+    textAlign: 'center',
+  }
 })
 
 export default Error;

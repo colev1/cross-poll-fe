@@ -67,7 +67,7 @@ export default class Pet extends React.Component {
     fetch(url)
       .then(response => response.json())
       .then(result => this.setState({distance: result.distance}))
-      .then(error => this.props.displayError())
+      .catch(error => this.props.displayError())
   }
 
   emailShelter = () => {
@@ -88,7 +88,7 @@ export default class Pet extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log('result',result))
-      .then(error => this.props.displayError())
+      .catch(error => this.props.displayError())
   }
 
   sendText = (textObj) => {
@@ -109,7 +109,7 @@ export default class Pet extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log('text send',result))
-      .then(error => this.props.displayError())
+      .catch(error => this.props.displayError())
   }
 
   render() {
