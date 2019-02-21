@@ -64,5 +64,21 @@ describe('Login', () => {
     });
   });
 
+  describe('setSelected', () => {
+    it('should update state with selected option, error: false, and clear everything in state', () => { 
+
+      wrapper.instance().setSelected('signup');
+  
+
+      expect(wrapper.instance().state.selectedOption).toEqual('signup');
+      expect(wrapper.instance().state.error).toEqual(false);
+      expect(wrapper.instance().state.email).toEqual('');
+      expect(wrapper.instance().state.firstName).toEqual('');
+      expect(wrapper.instance().state.lastName).toEqual('');
+      expect(wrapper.instance().state.password).toEqual('');
+      expect(wrapper.instance().state.passwordConfirmation).toEqual('');
+    });
+  });
+
 
 });
