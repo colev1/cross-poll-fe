@@ -1,11 +1,13 @@
 # **Adoptr**
 
 ### About
+
 * Adoptr is a full stack application that allows users to create an account and search for adoptable animals in their area. 
 Users can swipe through adobtable pets, favorite pets they are interested in, filter their search, send inquiry emails to shelters, and share their findings with friends through SMS.
 * The front end was built to work with the Adoptr back end that can be found [here](https://github.com/geoffreyadebonojo/cross-poll-be).
 
 ### Tech Stack
+
 * The front-end was built in JavaScript with React-Native and tested with Jest/Enzyme. Expo was used to help build the project.
 * The back-end was builtwith Rails, Google API, RSpec, ShouldaMatchers, Capybara, Launchy, SimpleCov, BCrypt, PostreSQL, Figaro.
 
@@ -34,13 +36,11 @@ Users can swipe through adobtable pets, favorite pets they are interested in, fi
 ### Contributors:
 
 #### Front-End:
-
 Cole Vanacore: https://github.com/colev1
 
 Ashley Levi: https://github.com/ashleylevi
 
 #### Back-End:
-
 Meghan Stang: https://github.com/mstang15
 
 Geoffrey Adebonojo: https://github.com/geoffreyadebonojo
