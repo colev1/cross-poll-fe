@@ -201,8 +201,7 @@ export default class Home extends React.Component {
     })
   }
 
-  emailShelter = () => {
-    const { name } = this.props.pet;
+  emailShelter = (name) => {
     let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
     let postBody = {
       api_token: this.props.userAPIToken,
@@ -219,7 +218,7 @@ export default class Home extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log(result))
-      .catch(error => this.props.displayError())
+      .catch(error => console.log(error))
   }
 
   sendText = (textObj) => {
@@ -240,7 +239,7 @@ export default class Home extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log('text sent', result))
-      .catch(error => this.displayError())
+      .catch(error => console.log(error))
   }
 
 

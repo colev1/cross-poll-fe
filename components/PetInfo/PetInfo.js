@@ -24,12 +24,22 @@ export default class PetInfo extends React.Component {
     }
     showMessage({
       message: "Success!",
-      description: `Message sent to ${this.state.recipientPhone}`,
+      description: `Text message sent to ${this.state.recipientPhone}`,
       type: "success",
       floating: true
     });
     this.setState({ sendText: false })
     this.props.sendText(textObj)
+  }
+
+  emailShelter = () => {
+    showMessage({
+      message: "Success!",
+      description: `Email sent to ${this.props.shelter.name}`,
+      type: "success",
+      floating: true
+    });
+    this.props.emailShelter(this.props.pet.name)
   }
 
   render() {
@@ -88,7 +98,7 @@ export default class PetInfo extends React.Component {
           </View>
           <TouchableOpacity
             style={styles.contactButton}
-            onPress={this.props.emailShelter}>
+            onPress={this.emailShelter}>
             <Text style={styles.contactButtonText}> Email {shelter.name} </Text>
           </TouchableOpacity>
           <TouchableOpacity
