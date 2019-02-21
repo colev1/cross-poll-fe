@@ -9,6 +9,7 @@ describe('Home', () => {
   let wrapper;
   let mockToken;
   let mockLocation;
+  let mockFetchUserZip;
   
   beforeEach(() => {
     window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
@@ -30,6 +31,19 @@ describe('Home', () => {
 
   it('should match the snapshot with all data passed in correctly', () => { 
     expect(wrapper).toMatchSnapshot(); 
+  })
+
+  describe('component did mount', () => {
+    it.only('calls fetch user zip and fetch favorites', () => {
+      const mockFetchUserZip = jest.fn()
+      const mockFetchFavorites = jest.fn()
+      wrapper.instance().fetchUserZip = mockFetchUserZip;
+      wrapper.instance().fetchFavorites = mockFetchFavorites;
+      wrapper.instance().componentDidMount();
+      expect(mockFetchUserZip).toHaveBeenCalled();
+      expect(mockFetchFavorites).toHaveBeenCalled();
+    })
+
   })
 
   it('should render a pet component', () => {
