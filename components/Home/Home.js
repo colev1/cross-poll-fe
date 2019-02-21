@@ -5,7 +5,6 @@ import { cleanPets } from '../helpers/helpers';
 import Pet from '../Pet/Pet';
 import Filter from '../Filter/Filter';
 import { cleanShelters } from '../helpers/helpers';
-import { Icon } from 'react-native-elements';
 import Favorites from '../Favorites/Favorites';
 import Error from '../Error/Error'
 

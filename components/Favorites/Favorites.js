@@ -1,11 +1,9 @@
+import APIkey from '../apiKey';
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
-import APIkey from '../apiKey';
-import { cleanPet } from '../helpers/helpers';
-import { cleanShelters } from '../helpers/helpers';
+import { cleanPet, cleanShelters } from '../helpers/helpers';
 import PetInfo from '../PetInfo/PetInfo'
-import Loading from '../Loading/Loading';
 
 export default class Favorites extends React.Component {
   constructor(props) {

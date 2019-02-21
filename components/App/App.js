@@ -1,8 +1,8 @@
 import React from 'react';
 import  Login  from '../Login/Login';
 import Home from '../Home/Home'
-import { StyleSheet, View } from 'react-native';
 import FlashMessage from "react-native-flash-message";
+import { StyleSheet, View } from 'react-native';
 
 
 export default class App extends React.Component {

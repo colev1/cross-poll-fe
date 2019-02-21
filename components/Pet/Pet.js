@@ -1,9 +1,9 @@
 import React  from 'react';
+import PetInfo from '../PetInfo/PetInfo';
+import Loading from '../Loading/Loading';
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import Loading from '../Loading/Loading';
 import { Icon } from 'react-native-elements';
-import PetInfo from '../PetInfo/PetInfo';
 import { showMessage, hideMessage } from "react-native-flash-message";
 
 
