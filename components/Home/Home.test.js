@@ -11,6 +11,11 @@ describe('Home', () => {
   let mockLocation;
   
   beforeEach(() => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      ok: false,
+      statusText: 'Something went wrong'
+    }))
+
     mockToken = 'aaaaaa'
     mockLocation = {
       zip_code: '80202',
@@ -85,6 +90,15 @@ describe('Home', () => {
       expect(wrapper.instance().state.showInfo).toEqual(false);
     });
   });
+
+  describe('fetch calls', () => {
+    it('fetch user zip is called with the correct params', async () => {
+      let mockUrl = 'https://adoptr-be.herokuapp.com/api/v1/locations'
+      await wrapper.instance().fetchUserZip()
+      expect(window.fetch).toHaveBeenCalled()
+    })
+  
+  })
 
  
   

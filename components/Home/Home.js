@@ -146,7 +146,6 @@ export default class Home extends React.Component {
     const pets = await this.state.favorites.map(async favorite => {
       try {
         let url = `http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`
-        console.log('the url', url)
         const response = await fetch(url)
         return response.json()
       } catch (err) {
