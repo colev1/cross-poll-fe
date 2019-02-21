@@ -1,8 +1,7 @@
-import React from 'react'; 
-import { shallow, mount } from 'enzyme';
+import React from 'react';
 import Pet from './Pet';
-import renderer from 'react-test-renderer';
-import { TouchableOpacity } from 'react-native'; 
+import { shallow } from 'enzyme';
+import { TouchableOpacity } from 'react-native';
 
 describe('Pet', () => {
   let mockPet;
@@ -21,9 +20,9 @@ describe('Pet', () => {
       id: '42736275',
       name: 'Zoey',
       photos: ['http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=60&-pnt.jpg',
-      'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=95&-fpm.jpg',
-      'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=500&-x.jpg',
-      'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=300&-pn.jpg'],
+        'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=95&-fpm.jpg',
+        'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=500&-x.jpg',
+        'http://photos.petfinder.com/photos/pets/42736275/1/?bust=1536778269&width=300&-pn.jpg'],
       sex: 'F',
       shelterId: 'CO186',
       size: 'M'
@@ -40,9 +39,9 @@ describe('Pet', () => {
       state: 'CO',
       zip: '80210'
     };
-    mockUserAPIToken= 'ajgd87sa6';
+    mockUserAPIToken = 'ajgd87sa6';
 
-    wrapper = shallow( <Pet
+    wrapper = shallow(<Pet
       pet={mockPet}
       changePet={jest.fn()}
       loading={false}
@@ -56,8 +55,8 @@ describe('Pet', () => {
     />);
   })
 
-  it('should match the snapshot with all data passed in correctly', () => { 
-    expect(wrapper).toMatchSnapshot(); 
+  it('should match the snapshot with all data passed in correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   })
 
   it('should call show filter on press of hamburger button', () => {
