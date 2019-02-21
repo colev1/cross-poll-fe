@@ -25,9 +25,9 @@
         <span class='fraction'>7/35</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>6/18</span>
+        <span class='fraction'>9/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">14.29% </span>
@@ -378,8 +378,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -451,24 +451,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -477,14 +467,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -697,7 +697,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons'
 import { Icon } from 'react-native-elements';
 &nbsp;
@@ -711,7 +711,7 @@ export default class Login extends React.Component {
       lastName: '',
       password: '',
       passwordConfirmation: '',
-      error: true,
+      error: false,
       errorMessage: '',
       selectedOption: 'sign up'
     }
@@ -823,7 +823,7 @@ export default class Login extends React.Component {
               iconStyle={styles.pawprint}
             /&gt;
         &lt;/View&gt;
-        &lt;View style={this.state.selectedOption === 'sign up' ? styles.formSignUp : <span class="branch-1 cbranch-no" title="branch not covered" >styles.formSignIn}</span>&gt;
+        &lt;View style={this.state.selectedOption === 'sign up' ? styles.formSignUp : styles.formSignIn}&gt;
           &lt;RadioButtons
                 style={styles.radioButtons}
                 options={ selectOptions }
@@ -833,14 +833,14 @@ export default class Login extends React.Component {
                 renderContainer={ this.renderContainer }
               /&gt;
         &lt;TextInput 
-          style={this.state.selectedOption === 'sign up' ? styles.input : <span class="branch-1 cbranch-no" title="branch not covered" >styles.hidden}</span>
+          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
           placeholder='first name'
           autoCapitalize={"none"}
           value={this.state.firstName}
           onChangeText={<span class="fstat-no" title="function not covered" >(v</span>alue) =&gt; <span class="cstat-no" title="statement not covered" >this.setState({firstName: value})}</span>
         /&gt;
         &lt;TextInput 
-          style={this.state.selectedOption === 'sign up' ? styles.input : <span class="branch-1 cbranch-no" title="branch not covered" >styles.hidden}</span>
+          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
           placeholder='last name'
           autoCapitalize={"none"}
           value={this.state.lastName}
@@ -863,13 +863,13 @@ export default class Login extends React.Component {
           onChangeText={<span class="fstat-no" title="function not covered" >(v</span>alue) =&gt; <span class="cstat-no" title="statement not covered" >this.setState({password: value})}</span>
         /&gt;
         &lt;TextInput
-          style={this.state.selectedOption === 'sign up' ? styles.input : <span class="branch-1 cbranch-no" title="branch not covered" >styles.hidden}</span>
+          style={this.state.selectedOption === 'sign up' ? styles.input : styles.hidden}
           secureTextEntry={true}
           placeholder='confirm password'
           value={this.state.passwordConfirmation}
           onChangeText={<span class="fstat-no" title="function not covered" >(v</span>alue) =&gt; <span class="cstat-no" title="statement not covered" >this.setState({passwordConfirmation: value})}</span>
         /&gt;
-        &lt;Text style={this.state.error ? styles.errorMessage : styles.hidden}&gt;
+        &lt;Text style={this.state.error ? <span class="branch-0 cbranch-no" title="branch not covered" >styles.errorMessage </span>: styles.hidden}&gt;
           {this.state.errorMessage}
         &lt;/Text&gt;
         &lt;/View&gt;
@@ -1027,7 +1027,7 @@ const styles = StyleSheet.create({
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 20 2019 18:37:31 GMT-0700 (Mountain Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 20 2019 21:03:57 GMT-0700 (Mountain Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
