@@ -12,7 +12,7 @@ export default class Pet extends React.Component {
     super(props)
     this.state = {
       gestureName: '',
-      distance: '',
+      distance: 0,
     }
   }
 
@@ -66,48 +66,6 @@ export default class Pet extends React.Component {
       .catch(error => this.props.displayError())
   }
 
-  emailShelter = () => {
-    const { name } = this.props.pet;
-    let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
-    let postBody = {
-      api_token: this.props.userAPIToken,
-      shelter_email: 'colevanacore@gmail.com',
-      pet_name: name,
-      message: message
-    }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(result => console.log(result))
-      .catch(error => this.props.displayError())
-  }
-
-  sendText = (textObj) => {
-    const { recipient_phone, pet_name, shelter_name, pet_id } = textObj;
-    let postBody = {
-      api_token: this.props.userAPIToken,
-      recipient_phone,
-      pet_name,
-      shelter_name,
-      pet_id
-    }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => response.json())
-      .then(result => console.log('text sent', result))
-      .catch(error => this.props.displayError())
-  }
-
   render() {
     if (this.props.loading) {
       return <Loading />
@@ -117,7 +75,7 @@ export default class Pet extends React.Component {
       let image = photos[2]
       if (this.props.showInfo) {
         return (
-          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter} returnHome={this.props.returnHome} loading={this.props.loading} />
+          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.props.sendText} emailShelter={this.props.emailShelter} returnHome={this.props.returnHome} loading={this.props.loading} />
         )
       } else {
         return (

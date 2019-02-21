@@ -83,7 +83,9 @@ export default class Favorites extends React.Component {
     if (showInfo) {
       return (
         <View style={styles.homeContainer}>
-          <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome} loading={this.props.loading} />
+          <PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome} loading={this.props.loading}
+          sendText={this.props.sendText}
+          emailShelter={this.props.emailShelter} />
         </View>
       )
     } else if (cleanedFaves.length === 0) {

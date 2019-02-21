@@ -135,14 +135,6 @@ export default class Home extends React.Component {
       .catch(error => this.displayError())
   }
 
-  getFavoriteIds = (allFaves) => {
-    return allFaves.map(favorite => {
-      return fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`)
-        .then(response => response.json())
-        .then(result => this.setState({ favorites: [...this.state.favorites, [result.petfinder.pet.name.$t]] }))
-    })
-  }
-
   displayFaves = async () => {
     this.setState({ loadingFaves: true })
     const pets = await this.state.favorites.map(async favorite => {
@@ -209,6 +201,48 @@ export default class Home extends React.Component {
     })
   }
 
+  emailShelter = () => {
+    const { name } = this.props.pet;
+    let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
+    let postBody = {
+      api_token: this.props.userAPIToken,
+      shelter_email: 'colevanacore@gmail.com',
+      pet_name: name,
+      message: message
+    }
+    fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => console.log(result))
+      .catch(error => this.props.displayError())
+  }
+
+  sendText = (textObj) => {
+    const { recipient_phone, pet_name, shelter_name, pet_id } = textObj;
+    let postBody = {
+      api_token: this.props.userAPIToken,
+      recipient_phone,
+      pet_name,
+      shelter_name,
+      pet_id
+    }
+    fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
+      method: 'POST',
+      body: JSON.stringify(postBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(result => console.log('text sent', result))
+      .catch(error => this.props.displayError())
+  }
+
 
   render() {
     const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
@@ -223,6 +257,8 @@ export default class Home extends React.Component {
         <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet}
             loading={this.state.loading}
+            sendText={this.sendText}
+            emailShelter={this.emailShelter}
             showInfo={this.state.showInfo}
             showFilter={this.showFilter}
             fetchShelter={this.fetchShelter}
@@ -255,7 +291,9 @@ export default class Home extends React.Component {
             userLocation={this.state.userLocation}
             returnHome={this.returnHome}
             showFavorites={this.showFavorites}
-            displayError={this.displayError} />
+            displayError={this.displayError}
+            sendText={this.sendText}
+            emailShelter={this.emailShelter} />
         </View>
       )
     } else if (showFavorites) {
@@ -267,7 +305,9 @@ export default class Home extends React.Component {
             loadDelete={this.loadDelete}
             unLoadDelete={this.unLoadDelete}
             displayError={this.displayError}
-            loadingFaves={this.state.loadingFaves} />
+            loadingFaves={this.state.loadingFaves}
+            sendText={this.sendText}
+            emailShelter={this.emailShelter} />
         </View>
       )
     }
