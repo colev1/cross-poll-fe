@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import APIkey from '../apiKey';
-import { cleanPets } from '../helpers/helpers';
-import FavesInfo from '../FavesInfo/FavesInfo';
 import { cleanPet } from '../helpers/helpers';
 import { cleanShelters } from '../helpers/helpers';
 import PetInfo from '../PetInfo/PetInfo'
@@ -27,7 +25,7 @@ export default class Favorites extends React.Component {
     .then(cleanPet => this.setState({currentPet: cleanPet}))
     .then(currentPet => this.fetchShelter(this.state.currentPet.shelterId))
     .then(currentPet => this.setState({showInfo: true}))
-    .then(error => console.log(error))
+    .catch(error => this.props.displayError())
   }
 
   fetchShelter = (shelterId) => {
@@ -36,7 +34,7 @@ export default class Favorites extends React.Component {
       .then(response => response.json()) 
       .then(shelter => cleanShelters(shelter.petfinder.shelter))
       .then(cleanShelter => this.setState({shelter: cleanShelter}))
-      .catch(error => this.setState({error: error.message}))
+      .catch(error => this.props.displayError())
   }
 
   deleteFavorite = (petId, userToken) => {
@@ -54,7 +52,7 @@ export default class Favorites extends React.Component {
     })
     .then(response => response.json())
     .then(result => this.reRenderFavorites())
-    .catch(error => console.log(error))
+    .catch(error => this.props.displayError())
   }
 
   reRenderFavorites = () => {

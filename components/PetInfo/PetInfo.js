@@ -1,9 +1,6 @@
 import React  from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView, TextInput } from 'react-native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import APIkey from '../apiKey';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import Loading from '../Loading/Loading';
-import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
 import Modal from "react-native-modal";
 
@@ -33,8 +30,8 @@ export default class PetInfo extends React.Component {
     }
     if(this.props.pet && this.props.shelter) {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
-        const { shelter } = this.props;
-        let image = photos[2]
+      const { shelter } = this.props;
+      let image = photos[2]
     return (
       <View style={styles.petInfoContainer}>
               <Modal 
