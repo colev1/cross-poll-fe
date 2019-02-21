@@ -1,22 +1,25 @@
 import React from 'react'; 
 import { shallow, mount } from 'enzyme';
-import Pet from './Pet';
+import PetInfo from './PetInfo';
 import renderer from 'react-test-renderer';
-import { TouchableOpacity } from 'react-native'; 
+import { TouchableOpacity, Text } from 'react-native';
 
-describe('Pet', () => {
+describe('pet info', () => {
   let mockPet;
   let mockShelter;
-  let mockUserAPIToken;
+  let mockEmailShelter;
+  let mockReturnHome;
+  let mockSendText;
   let wrapper;
-  let mockShowFilter;
+  let mockLoading;
 
   beforeEach(() => {
-    mockShowFilter = jest.fn();
+    mockLoading = false;
+    mockSendText = jest.fn()
+    mockEmailShelter = jest.fn()
     mockPet = {
       animal: 'Cat',
-      breed: 'Domestic Short Hair',
-      contactInfo: {},
+      breed: 'Domestic Short Hair',contactInfo: {},
       description: '12 year old..',
       id: '42736275',
       name: 'Zoey',
@@ -40,19 +43,13 @@ describe('Pet', () => {
       state: 'CO',
       zip: '80210'
     };
-    mockUserAPIToken= 'ajgd87sa6';
-
-    wrapper = shallow( <Pet
+    wrapper = shallow( <PetInfo 
       pet={mockPet}
-      changePet={jest.fn()}
-      loading={false}
-      showInfo={false}
-      showFilter={mockShowFilter}
-      fetchShelter={jest.fn()}
       shelter={mockShelter}
-      addToFavorites={jest.fn()}
-      userAPIToken={mockUserAPIToken}
-      showFavorites={false}
+      sendText={mockSendText}
+      emailShelter={mockEmailShelter}
+      returnHome={mockReturnHome}
+      loading={false}
     />);
   })
 
@@ -60,9 +57,28 @@ describe('Pet', () => {
     expect(wrapper).toMatchSnapshot(); 
   })
 
-  it('should call show filter on press of hamburger button', () => {
-    console.log(wrapper)
+  it('should be initialized with state of false', () => {
+    let mockState = {
+      sendText: false,
+      recipientPhone: ''
+    }
+    expect(wrapper.state('sendText')).toEqual(mockState.sendText)
+    expect(wrapper.state('recipientPhone')).toEqual(mockState.recipientPhone)
+
+  })
+
+  it('should set state of send text true on button press', () => {
+    wrapper.find(TouchableOpacity).at(2).simulate('press')
+    expect(wrapper.state('sendText')).toEqual(true)
+  })
+
+  it('should call send text on button press', () => {
     wrapper.find(TouchableOpacity).at(0).simulate('press')
-    expect(mockShowFilter).toHaveBeenCalled()
+    expect(mockSendText).toHaveBeenCalled()
+  })
+
+  it('should call email shelter on button press', () => {
+    wrapper.find(TouchableOpacity).at(1).simulate('press')
+    expect(mockEmailShelter).toHaveBeenCalled()
   })
 });

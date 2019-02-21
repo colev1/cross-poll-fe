@@ -57,7 +57,7 @@ export default class PetInfo extends React.Component {
                     style={styles.sendTextBtn}
                     onPress={this.sendText}>
               <Text style={styles.sendButtonText}> send text </Text>
-            </TouchableOpacity>
+              </TouchableOpacity>
                   </Modal>
                 <View style={styles.titlesContainer}>
                   <Text style={styles.petName}> {name} </Text>
