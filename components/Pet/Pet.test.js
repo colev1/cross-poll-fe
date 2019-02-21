@@ -1,23 +1,22 @@
 import React from 'react'; 
 import { shallow, mount } from 'enzyme';
-import Pet from '../Pet/Pet';
+import Pet from './Pet';
 import renderer from 'react-test-renderer';
-
-
-
-
-
-//           userLocation={this.props.userLocation}
+import { TouchableOpacity } from 'react-native'; 
 
 describe('Pet', () => {
   let mockPet;
   let mockShelter;
   let mockUserAPIToken;
+  let wrapper;
+  let mockShowFilter;
 
   beforeEach(() => {
+    mockShowFilter = jest.fn();
     mockPet = {
       animal: 'Cat',
-      breed: 'Domestic Short Hair',contactInfo: {},
+      breed: 'Domestic Short Hair',
+      contactInfo: {},
       description: '12 year old..',
       id: '42736275',
       name: 'Zoey',
@@ -41,30 +40,29 @@ describe('Pet', () => {
       state: 'CO',
       zip: '80210'
     };
-
     mockUserAPIToken= 'ajgd87sa6';
 
-    mockUserLocation= {};
-
-
-  })
-
-  it('should match the snapshot with all data passed in correctly', () => { 
-
-    const wrapper = shallow( <Pet
+    wrapper = shallow( <Pet
       pet={mockPet}
       changePet={jest.fn()}
       loading={false}
       showInfo={false}
-      showFilter={false}
+      showFilter={mockShowFilter}
       fetchShelter={jest.fn()}
       shelter={mockShelter}
       addToFavorites={jest.fn()}
       userAPIToken={mockUserAPIToken}
       showFavorites={false}
-      userLocation={mockUserLocation}
     />);
+  })
 
+  it('should match the snapshot with all data passed in correctly', () => { 
     expect(wrapper).toMatchSnapshot(); 
+  })
+
+  it('should call show filter on press of hamburger button', () => {
+    console.log(wrapper)
+    wrapper.find(TouchableOpacity).at(0).simulate('press')
+    expect(mockShowFilter).toHaveBeenCalled()
   })
 });

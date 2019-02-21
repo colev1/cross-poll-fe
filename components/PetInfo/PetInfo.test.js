@@ -11,8 +11,10 @@ describe('pet info', () => {
   let mockReturnHome;
   let mockSendText;
   let wrapper;
+  let mockLoading;
 
   beforeEach(() => {
+    mockLoading = false;
     mockSendText = jest.fn()
     mockEmailShelter = jest.fn()
     mockPet = {
