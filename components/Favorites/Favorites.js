@@ -61,11 +61,6 @@ export default class Favorites extends React.Component {
     this.props.displayFaves();
   }
 
-  goBack = () => {
-    this.setState({
-      showInfo: false
-    })
-  }
 
   render() {
     const { cleanedFaves } = this.props;
@@ -133,7 +128,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5E5E5',
   },
   homeContainer: {
-    flex: 1
+    flex: 1,
+    marginTop: -100,
   },
   favoritePetContainer: {
     backgroundColor: 'white',

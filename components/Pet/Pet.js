@@ -6,7 +6,6 @@ import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 import { Icon } from 'react-native-elements';
 import { showMessage } from "react-native-flash-message";
 
-
 export default class Pet extends React.Component {
   constructor(props) {
     super(props)
@@ -91,7 +90,7 @@ export default class Pet extends React.Component {
                 <Icon
                   name='cog'
                   type='font-awesome'
-                  color='#F49D37'
+                  color='#048BA8'
                   size={48}
                   iconStyle={styles.cog} />
               </TouchableOpacity>
@@ -99,7 +98,7 @@ export default class Pet extends React.Component {
                 <Icon
                   name='heart'
                   type='font-awesome'
-                  color='#D90368'
+                  color='#048BA8'
                   size={48}
                   iconStyle={styles.heart} />
               </TouchableOpacity>
@@ -112,7 +111,7 @@ export default class Pet extends React.Component {
                   <Icon
                     name='home'
                     type='font-awesome'
-                    color='white'
+                    color='black'
                     size={20}
                     iconStyle={styles.home} />
                   <Text style={styles.petText}> {shelter.name} </Text>
@@ -121,7 +120,7 @@ export default class Pet extends React.Component {
                   <Icon
                     name='map-marker'
                     type='font-awesome'
-                    color='white'
+                    color='black'
                     size={20}
                     iconStyle={styles.home} />
                   <Text style={styles.petText}>  {this.state.distance} miles away </Text>
@@ -207,6 +206,7 @@ const styles = StyleSheet.create({
   hamburgerIcon: {
     height: 50,
     width: 50,
+    color: 'black',
   },
   hamburgerContainer: {
     padding: 10,
@@ -225,16 +225,19 @@ const styles = StyleSheet.create({
   },
   petTitle: {
     fontSize: 32,
-    color: 'white',
+    color: 'black',
+    marginLeft: 8,
     fontFamily: 'Kohinoor Bangla',
   },
   petDescription: {
     display: 'flex',
     flexDirection: 'row',
+    marginLeft: 8,
   },
   petText: {
     fontSize: 16,
-    color: 'white',
+    textAlign: 'center',
+    color: 'black',
     fontFamily: 'Kohinoor Bangla',
     marginLeft: 4,
   },
@@ -253,9 +256,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 360,
     borderRadius: 4,
-    backgroundColor: '#F49D37',
+    backgroundColor: 'rgba(255, 255, 255, .8)',
     paddingLeft: 8,
-    color: 'white'
   },
   scroll: {
     width: 300,
