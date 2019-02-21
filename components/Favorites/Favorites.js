@@ -17,24 +17,32 @@ export default class Favorites extends React.Component {
     })
   }
 
-  getPet = (petId) => {
-    this.props.loadDelete()
-    fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
-      .then(response => response.json())
-      .then(pet => cleanPet(pet.petfinder.pet))
-      .then(cleanPet => this.setState({ currentPet: cleanPet }))
-      .then(currentPet => this.fetchShelter(this.state.currentPet.shelterId))
-      .then(currentPet => this.setState({ showInfo: true }))
-      .catch(error => this.props.displayError())
+  getPet = async (petId) => {
+    try {
+      const response = await fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
+      const pet = await response.json()
+      const cleanedPet = cleanPet(pet.petfinder.pet)
+      await this.fetchShelter(cleanedPet.shelterId)
+      this.setState({
+        currentPet: cleanedPet,
+        showInfo: true
+      })
+    } catch(error)  {
+      this.props.displayError()
+    }
   }
 
-  fetchShelter = (shelterId) => {
-    let url = `http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`
-    fetch(url)
-      .then(response => response.json())
-      .then(shelter => cleanShelters(shelter.petfinder.shelter))
-      .then(cleanShelter => this.setState({ shelter: cleanShelter }))
-      .catch(error => this.props.displayError())
+  fetchShelter = async (shelterId) => {
+    try {
+      let url = `http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`
+  
+      const response = await fetch(url)
+      const shelter = await response.json()
+      const cleanShelter = await cleanShelters(shelter.petfinder.shelter)
+      this.setState({shelter: cleanShelter})
+    } catch(error) {
+      this.props.displayError()
+    }
   }
 
   deleteFavorite = (petId, userToken) => {
