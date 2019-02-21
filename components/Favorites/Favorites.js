@@ -19,7 +19,9 @@ export default class Favorites extends React.Component {
 
   getPet = async (petId) => {
     try {
-      const response = await fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
+      let url = `http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`
+
+      const response = await fetch(url)
       const pet = await response.json()
       const cleanedPet = cleanPet(pet.petfinder.pet)
       await this.fetchShelter(cleanedPet.shelterId)
@@ -45,23 +47,28 @@ export default class Favorites extends React.Component {
     }
   }
 
-  deleteFavorite = (petId, userToken) => {
-    this.props.loadDelete()
-    const { userAPIToken } = this.props;
-    const postBody = {
-      api_token: userToken,
-      favorite_id: petId
-    }
-    fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${userAPIToken}`, {
-      method: 'DELETE',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  deleteFavorite = async (petId, userToken) => {
+    try {
+      this.props.loadDelete()
+      const { userAPIToken } = this.props;
+      const postBody = {
+        api_token: userToken,
+        favorite_id: petId
       }
-    })
-      .then(response => response.json())
-      .then(result => this.reRenderFavorites())
-      .catch(error => this.props.displayError())
+      let url = `https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${userAPIToken}`
+
+      const response = await fetch(url, {
+        method: 'DELETE',
+        body: JSON.stringify(postBody),
+        headers: {
+        'Content-Type': 'application/json'
+        }
+      })
+      await response.json()
+      await this.reRenderFavorites()
+    } catch(error) {
+      this.props.displayError()
+    }
   }
 
   reRenderFavorites = () => {
