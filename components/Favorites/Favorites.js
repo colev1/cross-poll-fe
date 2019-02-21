@@ -71,8 +71,8 @@ export default class Favorites extends React.Component {
     const { cleanedFaves } = this.props;
     const { showInfo, currentPet, shelter } = this.state;
     let display;
-    let icon = (<Icon
-      name={this.props.loadingFaves ? 'minus-circle' : 'plus-circle'}
+    let icon = ( <Icon
+      name='minus-circle'
       type='font-awesome'
       color='#E74544'
       style={styles.delete}
