@@ -13,7 +13,7 @@ export default class Login extends React.Component {
       lastName: '',
       password: '',
       passwordConfirmation: '',
-      error: true,
+      error: false,
       errorMessage: '',
       selectedOption: 'sign up'
     }

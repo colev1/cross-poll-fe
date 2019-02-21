@@ -1,7 +1,7 @@
 import React from 'react';
 import  Login  from '../Login/Login';
 import Home from '../Home/Home'
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import FlashMessage from "react-native-flash-message";
 
 
@@ -26,7 +26,6 @@ export default class App extends React.Component {
   }
 
   addToFavorites = (petId) => {
-    console.log('token', this.state.userAPIToken)
     const postBody = {
       apiToken: this.state.userAPIToken,
       favoriteId: petId

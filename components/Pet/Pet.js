@@ -41,7 +41,7 @@ export default class Pet extends React.Component {
       case SWIPE_LEFT:
       showMessage({
         message: "Disliked!",
-        description: 'We hope you find a pet :( ',
+        description: 'Keep swiping to find a pet!',
         type: "danger",
         floating: true
       });
@@ -128,7 +128,7 @@ export default class Pet extends React.Component {
           <GestureRecognizer 
             style={styles.swiper}
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
-            onSwipeLeft={(state) => this.onSwipeLeft(state)}
+            onSwipeRight={(state) => this.onSwipeRight(state)}
             config={config}
           >
           <View style={styles.navContainer}>

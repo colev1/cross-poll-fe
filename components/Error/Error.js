@@ -6,9 +6,6 @@ import { Icon } from 'react-native-elements';
 const Error = () => {
     return (
       <View style={styles.container}>
-        <Text style={styles.errorMessage}>
-          Oops, your connection seems off...
-        </Text>
         <Icon
               name='paw'
               type='font-awesome'
@@ -16,6 +13,9 @@ const Error = () => {
               size= {36}
               iconStyle={styles.pawprint}
             />
+        <Text style={styles.errorMessage}>
+          Oops, your connection seems off...
+        </Text>
       </View> 
     )
 }

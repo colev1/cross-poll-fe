@@ -23,7 +23,7 @@ export default class Home extends React.Component {
       showFavorites: false,
       favorites: [],
       loading: true,
-      error: '',
+      error: false,
       shelter: {},
       cleanedFaves: []
     }
