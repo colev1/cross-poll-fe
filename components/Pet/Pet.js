@@ -1,5 +1,5 @@
 import React  from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import Loading from '../Loading/Loading';
 import { Icon } from 'react-native-elements';
@@ -53,7 +53,7 @@ export default class Pet extends React.Component {
     fetch(url)
       .then(response => response.json())
       .then(result => this.setState({distance: result.distance}))
-      .then(error => console.log(error))
+      .then(error => this.props.displayError())
   }
 
   emailShelter = () => {
@@ -66,7 +66,6 @@ export default class Pet extends React.Component {
       pet_name: name,
       message: message
     }
-    console.log('TEXT OBJECT', postBody)
     fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
       method: 'POST',
       body: JSON.stringify(postBody),
@@ -76,7 +75,7 @@ export default class Pet extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log('result',result))
-      .then(error => console.log('error',error))
+      .then(error => this.props.displayError())
   }
 
   sendText = (textObj) => {
@@ -97,19 +96,19 @@ export default class Pet extends React.Component {
     })
       .then(response => response.json())
       .then(result => console.log('text send',result))
-      .then(error => console.log('error',error))
+      .then(error => this.props.displayError())
   }
 
   render() {
     if (this.props.loading) {
       return <Loading />
     } else {
-      const { name, breed, age, description, photos, shelterId } = this.props.pet;
+      const { name, photos } = this.props.pet;
       const { shelter } = this.props;
       let image = photos[2]
       if (this.props.showInfo) {
         return (
-          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter} returnHome={this.props.returnHome} loading={this.props.loading}/>
+          <PetInfo pet={this.props.pet} shelter={shelter} sendText={this.sendText} emailShelter={this.emailShelter} returnHome={this.props.returnHome} loading={this.props.loading} />
         )
       } else {
         return (
@@ -241,7 +240,6 @@ const styles = StyleSheet.create({
   hamburgerIcon: {
     height: 50,
     width: 50,
-    // marginBottom: 40
   },
   hamburgerContainer: {
     padding: 10,

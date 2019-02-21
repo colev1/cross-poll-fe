@@ -34,11 +34,17 @@ export default class Home extends React.Component {
     this.fetchFavorites()
   }
 
+  displayError = () => {
+    this.setState({
+      error: true
+    })
+  }
+
   fetchUserZip = () => {
     fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
       .then(response => response.json())
       .then(result => this.fetchByZipCode(result))
-      .catch(error => this.setState({error: error.message}))
+      .catch(error => this.displayError())
   }
 
 
@@ -60,7 +66,7 @@ export default class Home extends React.Component {
       .then(pets => cleanPets(pets.petfinder.pets.pet))
       .then(cleanPets => this.setState({allPets: cleanPets}))
       .then(cleanPets => this.fetchShelter())
-      .catch(error => this.setState({error}))
+      .catch(error => this.displayError())
   }
 
   fetchByFilters = (filterChoices) => {
@@ -77,7 +83,7 @@ export default class Home extends React.Component {
         gender = ''
     }
     const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userLocation.zip_code}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
-    console.log('FILTERS',url)
+
     this.fetchAllAnimals(url)
     this.setState({showFilter: false})
   }
@@ -85,13 +91,11 @@ export default class Home extends React.Component {
   fetchShelter = () => {
     const { allPets, petIndex } = this.state;
     let shelterId = allPets[petIndex].shelterId;
-    console.log('id in fetch shelter', shelterId)
     fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
     .then(response => response.json()) 
     .then(shelter => cleanShelters(shelter.petfinder.shelter))
     .then(cleanShelter => this.setState({shelter: cleanShelter, loading: false}))
-    .catch(error => this.setState({error}))
-    
+    .catch(error => this.displayError())
   }
 
   addToFavorites = (petId) => {
@@ -108,7 +112,7 @@ export default class Home extends React.Component {
     })
     .then(response => response.json())
     .then(result => this.fetchFavorites())
-    .catch(error => console.log(error))
+    .catch(error => this.displayError())
     }
 
     
@@ -117,7 +121,7 @@ export default class Home extends React.Component {
     .then(response => response.json())
     .then(favorites => this.setState({favorites: favorites.data}))
     .then(result => this.displayFaves())
-    .catch(error => console.log(error))
+    .catch(error => this.displayError())
   }
 
   getFavoriteIds = (allFaves) => {
@@ -186,9 +190,11 @@ export default class Home extends React.Component {
 
   returnHome = () => {
     this.setState({
-      showInfo: false
+      showInfo: false,
+      showFavorites: false
     })
   }
+
   
   render() {
    const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
@@ -212,6 +218,7 @@ export default class Home extends React.Component {
           userAPIToken={this.props.userAPIToken}
           showFavorites={this.showFavorites}
           userLocation={this.state.userLocation}
+          displayError={this.displayError}
           />
           <TouchableOpacity onPress={this.showInfo}
               style={this.state.loading ? styles.hidden : styles.infoButton}>
@@ -233,14 +240,17 @@ export default class Home extends React.Component {
           userAPIToken={this.props.userAPIToken}
           userLocation={this.state.userLocation}
           returnHome={this.returnHome}
-          showFavorites={this.showFavorites}/>
+          showFavorites={this.showFavorites}
+          displayError={this.displayError}/>
         </View>
       )
     } else if (showFavorites) {
       return (
         <View style={styles.favoritesContainer}>
           <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves}
-          returnHome={this.returnHome} loading={this.state.loading} />
+          returnHome={this.returnHome} 
+          loading={this.state.loading}
+          displayError={this.displayError} />
         </View>
       )
     }

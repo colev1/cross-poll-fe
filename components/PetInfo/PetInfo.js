@@ -1,9 +1,6 @@
 import React  from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ActivityIndicator, ScrollView, TextInput } from 'react-native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import APIkey from '../apiKey';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
 import Loading from '../Loading/Loading';
-import { cleanShelters } from '../helpers/helpers';
 import { Icon } from 'react-native-elements';
 import Modal from "react-native-modal";
 
@@ -33,8 +30,8 @@ export default class PetInfo extends React.Component {
     }
     if(this.props.pet && this.props.shelter) {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
-        const { shelter } = this.props;
-        let image = photos[2]
+      const { shelter } = this.props;
+      let image = photos[2]
     return (
       <View style={styles.petInfoContainer}>
               <Modal 
@@ -180,19 +177,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 40,
     width: 200,
-    // height: 30,
   },
   backButton: {
     marginTop: 5
   },
   sendButtonText: {
     textAlign: 'center',
-    // left: 0,
     borderRadius: 24,
     fontSize: 14,
     color: '#048BA8',
     margin: 20,
-    // marginTop: 6
   },
   contactButton: {
     backgroundColor: '#048BA8',
@@ -278,7 +272,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
     height: 600,
     textAlign: 'center',
-    // padding: 4,
     width: 400,
   },
   petBreedAge: {
