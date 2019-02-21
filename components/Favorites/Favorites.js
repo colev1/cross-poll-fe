@@ -2,8 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import APIkey from '../apiKey';
-import { cleanPets } from '../helpers/helpers';
-import FavesInfo from '../FavesInfo/FavesInfo';
 import { cleanPet } from '../helpers/helpers';
 import { cleanShelters } from '../helpers/helpers';
 import PetInfo from '../PetInfo/PetInfo'

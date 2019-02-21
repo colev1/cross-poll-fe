@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">27.03% </span>
+        <span class="strong">27.78% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/37</span>
+        <span class='fraction'>10/36</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">12.5% </span>
+        <span class="strong">13.04% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>3/24</span>
+        <span class='fraction'>3/23</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">27.03% </span>
+        <span class="strong">27.78% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/37</span>
+        <span class='fraction'>10/36</span>
       </div>
     </div>
     <p class="quiet">
@@ -220,17 +220,7 @@
 <a name='L172'></a><a href='#L172'>172</a>
 <a name='L173'></a><a href='#L173'>173</a>
 <a name='L174'></a><a href='#L174'>174</a>
-<a name='L175'></a><a href='#L175'>175</a>
-<a name='L176'></a><a href='#L176'>176</a>
-<a name='L177'></a><a href='#L177'>177</a>
-<a name='L178'></a><a href='#L178'>178</a>
-<a name='L179'></a><a href='#L179'>179</a>
-<a name='L180'></a><a href='#L180'>180</a>
-<a name='L181'></a><a href='#L181'>181</a>
-<a name='L182'></a><a href='#L182'>182</a>
-<a name='L183'></a><a href='#L183'>183</a>
-<a name='L184'></a><a href='#L184'>184</a>
-<a name='L185'></a><a href='#L185'>185</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L175'></a><a href='#L175'>175</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -261,7 +251,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -305,15 +294,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -418,10 +398,10 @@
 import { StyleSheet, Text, View, Button, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import APIkey from '../apiKey';
-import { cleanPets } from '../helpers/helpers';
-import FavesInfo from '../FavesInfo/FavesInfo';
 import { cleanPet } from '../helpers/helpers';
-import { cleanShelters } from '../helpers/helpers'
+import { cleanShelters } from '../helpers/helpers';
+import PetInfo from '../PetInfo/PetInfo'
+import Loading from '../Loading/Loading';
 &nbsp;
 export default class Favorites extends React.Component {
   constructor(props) {
@@ -448,10 +428,9 @@ export default class Favorites extends React.Component {
     let url = <span class="cstat-no" title="statement not covered" >`http://api.petfinder.com/shelter.get?format=json&amp;key=${APIkey}&amp;id=${shelterId}`</span>
 <span class="cstat-no" title="statement not covered" >    fetch(url)</span>
       .then(<span class="fstat-no" title="function not covered" >re</span>sponse =&gt; <span class="cstat-no" title="statement not covered" >response.json()) </span>
-      .then(<span class="fstat-no" title="function not covered" >sh</span>elter =&gt; <span class="cstat-no" title="statement not covered" >console.log('shelter',shelter))</span>
-    .then(<span class="fstat-no" title="function not covered" >sh</span>elter =&gt; <span class="cstat-no" title="statement not covered" >cleanShelters(shelter.petfinder.shelter))</span>
-    .then(<span class="fstat-no" title="function not covered" >cl</span>eanShelter =&gt; <span class="cstat-no" title="statement not covered" >this.setState({shelter: cleanShelter}))</span>
-    .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >this.setState({error}))</span>
+      .then(<span class="fstat-no" title="function not covered" >sh</span>elter =&gt; <span class="cstat-no" title="statement not covered" >cleanShelters(shelter.petfinder.shelter))</span>
+      .then(<span class="fstat-no" title="function not covered" >cl</span>eanShelter =&gt; <span class="cstat-no" title="statement not covered" >this.setState({shelter: cleanShelter}))</span>
+      .catch(<span class="fstat-no" title="function not covered" >er</span>ror =&gt; <span class="cstat-no" title="statement not covered" >this.setState({error: error.message}))</span>
   }
 &nbsp;
   deleteFavorite = <span class="fstat-no" title="function not covered" >(p</span>etId, userToken) =&gt; {
@@ -488,20 +467,11 @@ export default class Favorites extends React.Component {
     const { showInfo, currentPet, shelter } = this.state;
     let display;
     <span class="missing-if-branch" title="if path not taken" >I</span>if (showInfo) {
-<span class="cstat-no" title="statement not covered" >      return (</span>
-        &lt;View style={styles.homeContainer}&gt;
-          &lt;FavesInfo currentPet={currentPet} shelter={shelter} /&gt;
-          &lt;TouchableOpacity onPress={this.goBack}&gt;
-            &lt;Icon
-              name='arrow-circle-left'
-              type='font-awesome'
-              color='#F49D37'
-              size={50}
-              iconStyles={styles.backButton}/&gt;
-          &lt;/TouchableOpacity&gt;
-        &lt;/View&gt;
-      )
-&nbsp;
+<span class="cstat-no" title="statement not covered" >        return (</span>
+          &lt;View style={styles.homeContainer}&gt;
+            &lt;PetInfo pet={currentPet} shelter={shelter} returnHome={this.props.returnHome}  loading={this.props.loading} /&gt;
+          &lt;/View&gt;
+        )
     } else <span class="missing-if-branch" title="else path not taken" >E</span>if (cleanedFaves.length === 0) {
       display = &lt;Text style={styles.noFavesMessage}&gt;You don't have any favorites!&lt;/Text&gt;
     } else {
@@ -553,12 +523,12 @@ const styles = StyleSheet.create({
   },
   homeContainer: {
     flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginBottom: 20,
-    top: 60,
-    paddingBottom: 80,
-    paddingTop: 80,
+    // justifyContent: 'space-around',
+    // alignItems: 'center',
+    // marginBottom: 20,
+    // top: 60,
+    // paddingBottom: 80,
+    // paddingTop: 80,
   },
   favoritePetContainer: {
     backgroundColor: 'white',
@@ -604,7 +574,7 @@ const styles = StyleSheet.create({
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 20 2019 14:33:56 GMT-0700 (Mountain Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Feb 20 2019 17:41:18 GMT-0700 (Mountain Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
