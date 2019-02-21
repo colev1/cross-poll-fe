@@ -190,12 +190,11 @@ export default class Home extends React.Component {
 
   returnHome = () => {
     this.setState({
-      showInfo: false
+      showInfo: false,
+      showFavorites: false
     })
   }
 
-  //show favs true
-  // show info false
   
   render() {
    const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;

@@ -126,13 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5E5E5',
   },
   homeContainer: {
-    flex: 1,
-    // justifyContent: 'space-around',
-    // alignItems: 'center',
-    // marginBottom: 20,
-    // top: 60,
-    // paddingBottom: 80,
-    // paddingTop: 80,
+    flex: 1
   },
   favoritePetContainer: {
     backgroundColor: 'white',

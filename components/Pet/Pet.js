@@ -240,7 +240,6 @@ const styles = StyleSheet.create({
   hamburgerIcon: {
     height: 50,
     width: 50,
-    // marginBottom: 40
   },
   hamburgerContainer: {
     padding: 10,
