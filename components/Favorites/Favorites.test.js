@@ -12,7 +12,6 @@ describe('Favorites', () => {
     mockFavorites = [];
     mockToken = 'a1ag45';
     mockCleanedFaves = [];
-
   })
 
   it('should match the snapshot with all data passed in correctly', () => { 

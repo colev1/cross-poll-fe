@@ -2,6 +2,8 @@ import React from 'react';
 import  Login  from '../Login/Login';
 import Home from '../Home/Home'
 import { StyleSheet, Text, View } from 'react-native';
+import FlashMessage from "react-native-flash-message";
+
 
 export default class App extends React.Component {
   constructor() {
@@ -63,6 +65,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         {displayComponent}
+        <FlashMessage position="top" />
       </View>
     );
   }
