@@ -1,6 +1,6 @@
 import APIkey from '../apiKey';
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { cleanPet, cleanShelters } from '../helpers/helpers';
 import PetInfo from '../PetInfo/PetInfo'
@@ -12,11 +12,13 @@ export default class Favorites extends React.Component {
       favorites: [],
       currentPet: {},
       showInfo: false,
-      shelter: {}
+      shelter: {},
+      loading: false,
     })
   }
 
   getPet = (petId) => {
+    this.props.loadDelete()
     fetch(`http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${petId}`)
     .then(response => response.json())
     .then(pet => cleanPet(pet.petfinder.pet))
@@ -36,6 +38,7 @@ export default class Favorites extends React.Component {
   }
 
   deleteFavorite = (petId, userToken) => {
+    this.props.loadDelete()
     const { userAPIToken } = this.props;
     const postBody = {
       api_token: userToken,
@@ -68,6 +71,15 @@ export default class Favorites extends React.Component {
     const { cleanedFaves } = this.props;
     const { showInfo, currentPet, shelter } = this.state;
     let display;
+    let icon = (<Icon
+    name={this.props.loadingFaves ? 'minus-circle' : 'plus-circle'}
+    type='font-awesome'
+    color='#E74544'
+    style={styles.delete}
+    />)
+    if(this.props.loadingFaves) {
+      icon = <ActivityIndicator size="small" color="red" />
+    }
     if (showInfo) {
         return (
           <View style={styles.homeContainer}>
@@ -81,12 +93,7 @@ export default class Favorites extends React.Component {
          return (
            <View key={favoritePet.id.$t} style={styles.favoritePetContainer}>
             <TouchableOpacity onPress={() => this.deleteFavorite(favoritePet.id.$t)}>
-              <Icon
-                name='minus-circle'
-                type='font-awesome'
-                color='#E74544'
-                style={styles.delete}
-                />
+              {icon}
             </TouchableOpacity>
             <Text style={styles.name}>{favoritePet.name.$t}</Text>
             <TouchableOpacity onPress={() => this.getPet(favoritePet.id.$t)}

@@ -24,7 +24,8 @@ export default class Home extends React.Component {
       loading: true,
       error: false,
       shelter: {},
-      cleanedFaves: []
+      cleanedFaves: [],
+      loadingFaves: false
     }
   }
 
@@ -46,6 +47,17 @@ export default class Home extends React.Component {
       .catch(error => this.displayError())
   }
 
+  loadDelete = () => {
+    this.setState({
+      loadingFaves: true
+    })
+  }
+
+  unLoadDelete = () => {
+    this.setState({
+      loadingFaves: false
+    })
+  }
 
   fetchByZipCode = (result) => {
     const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${result.zip_code}&count=50`
@@ -132,7 +144,7 @@ export default class Home extends React.Component {
   }
 
   displayFaves = async () => {
-    
+    this.setState({loadingFaves: true})
     const pets = await this.state.favorites.map(async favorite => {
       try {
       let url = `http://api.petfinder.com/pet.get?format=json&key=${APIkey}&id=${favorite.attributes.favorite_id}`
@@ -145,7 +157,8 @@ export default class Home extends React.Component {
     })
     const finalPets = await Promise.all(pets)
     const cleanedPets = this.cleanPets(finalPets)
-    this.setState({cleanedFaves: cleanedPets})
+    this.setState({cleanedFaves: cleanedPets,
+    loadingFaves: false})
   }
 
   cleanPets = (pets) => {
@@ -249,7 +262,10 @@ export default class Home extends React.Component {
           <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves}
           returnHome={this.returnHome} 
           loading={this.state.loading}
-          displayError={this.displayError} />
+          loadDelete={this.loadDelete}
+          unLoadDelete={this.unLoadDelete}
+          displayError={this.displayError}
+          loadingFaves={this.state.loadingFaves} />
         </View>
       )
     }
