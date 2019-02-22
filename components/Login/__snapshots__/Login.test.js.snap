@@ -1,3 +1,361 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Login renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#E5E5E5",
+      "flex": 1,
+      "fontSize": 50,
+      "justifyContent": "space-evenly",
+      "paddingBottom": 140,
+      "paddingTop": 160,
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#048BA8",
+        "borderRadius": 24,
+        "color": "white",
+        "flexDirection": "row",
+        "fontFamily": "Kohinoor Bangla",
+        "fontSize": 50,
+        "justifyContent": "center",
+        "padding": 10,
+        "position": "absolute",
+        "shadowColor": "black",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.8,
+        "shadowRadius": 2,
+        "textAlign": "center",
+        "top": 60,
+        "width": 280,
+        "zIndex": 3,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Kohinoor Bangla",
+          "fontSize": 52,
+          "textAlign": "center",
+        }
+      }
+    >
+      AdoptR
+    </Text>
+    <View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "justifyContent": "center",
+          }
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "disabled": "hsl(208, 8%, 90%)",
+              "divider": "#bcbbc1",
+              "error": "#ff190c",
+              "grey0": "#393e42",
+              "grey1": "#43484d",
+              "grey2": "#5e6977",
+              "grey3": "#86939e",
+              "grey4": "#bdc6cf",
+              "grey5": "#e1e8ee",
+              "greyOutline": "#bbb",
+              "platform": Object {
+                "android": Object {
+                  "error": "#f44336",
+                  "primary": "#2196f3",
+                  "secondary": "#9C27B0",
+                  "success": "#4caf50",
+                  "warning": "#ffeb3b",
+                },
+                "ios": Object {
+                  "error": "#ff3b30",
+                  "primary": "#007aff",
+                  "secondary": "#5856d6",
+                  "success": "#4cd964",
+                  "warning": "#ffcc00",
+                },
+              },
+              "primary": "#2089dc",
+              "searchBg": "#303337",
+              "secondary": "#8F0CE8",
+              "success": "#52c41a",
+              "warning": "#faad14",
+            },
+          }
+        }
+        underlayColor="white"
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "borderRadius": 16,
+        "flex": 1,
+        "fontSize": 60,
+        "justifyContent": "space-around",
+        "marginTop": 20,
+        "paddingBottom": 100,
+        "paddingTop": 60,
+        "shadowColor": "black",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 1,
+        },
+        "shadowOpacity": 0.8,
+        "shadowRadius": 4,
+        "width": "96%",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "position": "absolute",
+          "top": 10,
+          "width": 260,
+          "zIndex": 2,
+        }
+      }
+    >
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "grey",
+              "fontFamily": "Kohinoor Bangla",
+              "fontSize": 32,
+            }
+          }
+        >
+          sign in
+        </Text>
+      </View>
+      <View
+        accessible={true}
+        isTVSelectable={true}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#048BA8",
+              "fontFamily": "Kohinoor Bangla",
+              "fontSize": 32,
+              "fontWeight": "bold",
+              "textDecorationColor": "#048BA8",
+              "textDecorationLine": "underline",
+            }
+          }
+        >
+          sign up
+        </Text>
+      </View>
+    </View>
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      onChangeText={[Function]}
+      placeholder="first name"
+      style={
+        Object {
+          "borderBottomColor": "#048BA8",
+          "borderBottomWidth": 2,
+          "borderStyle": "solid",
+          "fontFamily": "Kohinoor Bangla",
+          "fontSize": 20,
+          "height": 66,
+          "textAlign": "left",
+          "width": 320,
+        }
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      onChangeText={[Function]}
+      placeholder="last name"
+      style={
+        Object {
+          "borderBottomColor": "#048BA8",
+          "borderBottomWidth": 2,
+          "borderStyle": "solid",
+          "fontFamily": "Kohinoor Bangla",
+          "fontSize": 20,
+          "height": 66,
+          "textAlign": "left",
+          "width": 320,
+        }
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      onChangeText={[Function]}
+      placeholder="email"
+      style={
+        Object {
+          "borderBottomColor": "#048BA8",
+          "borderBottomWidth": 2,
+          "borderStyle": "solid",
+          "fontFamily": "Kohinoor Bangla",
+          "fontSize": 20,
+          "height": 66,
+          "textAlign": "left",
+          "width": 320,
+        }
+      }
+      type="email"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      allowFontScaling={true}
+      autoCapitalize="none"
+      onChangeText={[Function]}
+      placeholder="password"
+      secureTextEntry={true}
+      style={
+        Object {
+          "borderBottomColor": "#048BA8",
+          "borderBottomWidth": 2,
+          "borderStyle": "solid",
+          "fontFamily": "Kohinoor Bangla",
+          "fontSize": 20,
+          "height": 66,
+          "textAlign": "left",
+          "width": 320,
+        }
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="confirm password"
+      secureTextEntry={true}
+      style={
+        Object {
+          "borderBottomColor": "#048BA8",
+          "borderBottomWidth": 2,
+          "borderStyle": "solid",
+          "fontFamily": "Kohinoor Bangla",
+          "fontSize": 20,
+          "height": 66,
+          "textAlign": "left",
+          "width": 320,
+        }
+      }
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <Text
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      
+    </Text>
+  </View>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#048BA8",
+        "borderColor": "black",
+        "borderRadius": 16,
+        "borderStyle": "solid",
+        "bottom": 50,
+        "opacity": 1,
+        "position": "absolute",
+        "shadowColor": "black",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 1,
+        },
+        "shadowOpacity": 0.8,
+        "shadowRadius": 4,
+        "width": 280,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "Kohinoor Bangla",
+          "fontSize": 32,
+          "textAlign": "center",
+        }
+      }
+    >
+      submit
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`Login should match the snapshot with all data passed in correctly 1`] = `ShallowWrapper {}`;
