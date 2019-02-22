@@ -60,6 +60,7 @@ describe('Favorites', () => {
         wrapper.instance().forceUpdate()
         wrapper.find('TouchableOpacity').at(1).simulate('press')
         expect(spy).toHaveBeenCalled();
+        expect(mockLoadDelete).toHaveBeenCalled();
       });
 
       it('should initially have state of show info false', () => {
@@ -95,6 +96,7 @@ describe('Favorites', () => {
         const spy = jest.spyOn(wrapper.instance(), 'deleteFavorite')
         wrapper.find('TouchableOpacity').at(0).simulate('press')
         expect(spy).toHaveBeenCalled();
+        expect(mockLoadDelete).toHaveBeenCalled();
     })
 
     it('should call return home if show info is shown and button is pressed', () => {
