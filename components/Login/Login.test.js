@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Login from '../Login/Login';
 import { TextInput, TouchableOpacity, } from 'react-native';
+import renderer from 'react-test-renderer';
 
 
 describe('Login', () => {
@@ -19,6 +20,13 @@ describe('Login', () => {
       selectedOption='sign up'
     />);
   })
+
+  it('renders correctly', () => {
+    const tree = renderer.create(
+      <Login />
+      ).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 
   it('should match the snapshot with all data passed in correctly', () => {
     expect(wrapper).toMatchSnapshot();
@@ -47,12 +55,10 @@ describe('Login', () => {
   })
 
   it('should call the submit user func when clicked', () => {
-    const submitUserMock = jest.fn();
-    const spy = wrapper.spyOn('')
-
-    let submitUser = wrapper.instance().submitUser()
-    wrapper.find(TouchableOpacity).simulate('press')
-    expect(submitUser).toHaveBeenCalled();
+    const spy = jest.spyOn(wrapper.instance(), 'submitUser')
+    wrapper.instance().forceUpdate()
+    wrapper.find('TouchableOpacity').simulate('press')
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should update state and reset error message when setSelected is called', () => {
@@ -114,6 +120,8 @@ describe('Login', () => {
       expect(wrapper.instance().state.passwordConfirmation).toEqual('');
     });
   });
+
+  
 
 
 });

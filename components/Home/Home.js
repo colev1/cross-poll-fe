@@ -7,6 +7,7 @@ import Filter from '../Filter/Filter';
 import { cleanShelters } from '../helpers/helpers';
 import Favorites from '../Favorites/Favorites';
 import Error from '../Error/Error'
+import { APIcalls } from '../APIcalls/APIcalls';
 
 export default class Home extends React.Component {
   constructor(props) {
