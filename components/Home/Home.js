@@ -40,11 +40,14 @@ export default class Home extends React.Component {
     })
   }
 
-  fetchUserZip = () => {
-    fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
-      .then(response => response.json())
-      .then(result => this.fetchByZipCode(result))
-      .catch(error => this.displayError())
+  fetchUserZip = async () => {
+    try {
+      const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
+      const result = await response.json()
+      return this.fetchByZipCode(result)
+    } catch(err) {
+      this.displayError()     
+    }
   }
 
   loadDelete = () => {
@@ -71,13 +74,16 @@ export default class Home extends React.Component {
     this.fetchAllAnimals(url);
   }
 
-  fetchAllAnimals = (url) => {
-    fetch(url)
-      .then(response => response.json())
-      .then(pets => cleanPets(pets.petfinder.pets.pet))
-      .then(cleanPets => this.setState({ allPets: cleanPets }))
-      .then(cleanPets => this.fetchShelter())
-      .catch(error => this.displayError())
+  fetchAllAnimals = async (url) => {
+    try {
+      const response = await fetch(url)
+      const pets = await response.json()
+      const cleanedPets = cleanPets(pets.petfinder.pets.pet)
+      this.setState({ allPets: cleanedPets })
+      this.fetchShelter()
+    } catch(error) {
+      this.displayError()
+    }
   }
 
   fetchByFilters = (filterChoices) => {
