@@ -9,8 +9,14 @@ describe('Home', () => {
   let wrapper;
   let mockToken;
   let mockLocation;
+  let mockFetchUserZip;
   
   beforeEach(() => {
+    window.fetch = jest.fn().mockImplementation(() => Promise.resolve({
+      ok: false,
+      statusText: 'Something went wrong'
+    }))
+
     mockToken = 'aaaaaa'
     mockLocation = {
       zip_code: '80202',
@@ -25,6 +31,19 @@ describe('Home', () => {
 
   it('should match the snapshot with all data passed in correctly', () => { 
     expect(wrapper).toMatchSnapshot(); 
+  })
+
+  describe('component did mount', () => {
+    it.only('calls fetch user zip and fetch favorites', () => {
+      const mockFetchUserZip = jest.fn()
+      const mockFetchFavorites = jest.fn()
+      wrapper.instance().fetchUserZip = mockFetchUserZip;
+      wrapper.instance().fetchFavorites = mockFetchFavorites;
+      wrapper.instance().componentDidMount();
+      expect(mockFetchUserZip).toHaveBeenCalled();
+      expect(mockFetchFavorites).toHaveBeenCalled();
+    })
+
   })
 
   it('should render a pet component', () => {
@@ -85,6 +104,15 @@ describe('Home', () => {
       expect(wrapper.instance().state.showInfo).toEqual(false);
     });
   });
+
+  describe('fetch calls', () => {
+    it('fetch user zip is called with the correct params', async () => {
+      let mockUrl = 'https://adoptr-be.herokuapp.com/api/v1/locations'
+      await wrapper.instance().fetchUserZip()
+      expect(window.fetch).toHaveBeenCalled()
+    })
+  
+  })
 
  
   
