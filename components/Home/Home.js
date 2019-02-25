@@ -106,14 +106,20 @@ export default class Home extends React.Component {
     this.setState({ showFilter: false })
   }
 
-  fetchShelter = () => {
-    const { allPets, petIndex } = this.state;
-    let shelterId = allPets[petIndex].shelterId;
-    fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
-      .then(response => response.json())
-      .then(shelter => cleanShelters(shelter.petfinder.shelter))
-      .then(cleanShelter => this.setState({ shelter: cleanShelter, loading: false }))
-      .catch(error => this.displayError())
+  fetchShelter = async () => {
+    try {
+      const { allPets, petIndex } = this.state;
+      let shelterId = allPets[petIndex].shelterId;
+      const response = await fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
+      const shelter = await response.json()
+      const cleaned = cleanShelters(shelter.petfinder.shelter)
+      this.setState({
+        shelter: cleaned,
+        loading: false
+      })
+    } catch(error) {
+      this.displayError()
+    }
   }
 
   addToFavorites = async (petId) => {
