@@ -116,21 +116,26 @@ export default class Home extends React.Component {
       .catch(error => this.displayError())
   }
 
-  addToFavorites = (petId) => {
-    const postBody = {
-      api_token: this.props.userAPIToken,
-      favorite_id: petId
-    }
-    fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`, {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  addToFavorites = async (petId) => {
+    try {
+      const postBody = {
+        api_token: this.props.userAPIToken,
+        favorite_id: petId
       }
-    })
-      .then(response => response.json())
-      .then(result => this.fetchFavorites())
-      .catch(error => this.displayError())
+
+      const response = await fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`, {
+        method: 'POST',
+        body: JSON.stringify(postBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      await response.json()
+      this.fetchFavorites()
+    } catch(error) {
+      this.displayError()
+    }
   }
 
 

@@ -29,7 +29,7 @@ export const cleanPets = (pets) => pets.map((pet) => {
 });
 
 export const cleanPet = (pet) => {
-  console.log('cleaning pet!')
+
   let cleanedPhotos;
   if (pet.media.photos) {
     cleanedPhotos = cleanPhotos(pet.media.photos.photo);
@@ -55,7 +55,6 @@ export const cleanPet = (pet) => {
     },
     photos: cleanedPhotos,
   };
-  console.log('cleaned pet!')
 
   return cleanPet
 }
