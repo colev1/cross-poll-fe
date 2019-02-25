@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
   image: {
     height: 600,
     width: 400,
+    marginTop: 80,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.8,
@@ -209,12 +210,12 @@ const styles = StyleSheet.create({
   },
   navContainer: {
     // flex: 1,
-    padding: 4,
+    padding: 16,
     flexDirection: 'row',
     // bottom: 200,
     // zIndex: 4,
     justifyContent: 'space-between',
-    width: 360,
+    width: 420,
     backgroundColor: 'white',
     // height: 100
   },

@@ -357,8 +357,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginBottom: 20,
-    marginTop: 200,
+    // marginBottom: 20,
+    marginTop: 60,
   },
   filter: {
     backgroundColor: 'blue'
