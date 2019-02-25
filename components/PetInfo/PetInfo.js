@@ -154,7 +154,8 @@ const styles = StyleSheet.create({
   },
   moreInfoImage: {
     marginTop: 5,
-    // height: 800
+    height: 500,
+    width: 350,
   },
   inputNumber: {
     backgroundColor: 'white',
@@ -166,8 +167,6 @@ const styles = StyleSheet.create({
   },
   borderRad: {
     borderRadius: 30,
-    height: 500,
-    // width: 400
   },
   textModal: {
     position: 'absolute',
@@ -213,42 +212,19 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   contactButton: {
-    // backgroundColor: '#048BA8',
     color: 'white',
-    borderRadius: 24,
-    borderStyle: 'solid',
-    fontSize: 15,
-    // height: 30,
-    // shadowColor: '#000',
-    // shadowOffset: { width: 2, height: 4 },
-    // shadowOpacity: 0.8,
-    // shadowRadius: 4,
-    textAlign: 'left',
-    // width: 300,
-    // margin: 10,
     position: 'absolute',
-    top: 580,
-    left: 90
+    top: 590,
+    left: 120
   },
   textButton: {
     color: 'white',
     fontSize: 15,
-    // height: 30,
     textAlign: 'right',
-    // width: 300,
-    // marginBottom: 130,
     position: 'absolute',
-    top: 580,
+    top: 590,
     left: 190
   },
-  // contactButtonText: {
-  //   textAlign: 'right',
-  //   marginLeft: 20,
-  //   fontSize: 14,
-  //   color: 'white',
-  //   marginTop: 6,
-  //   fontFamily: 'Kohinoor Bangla',
-  // },
   description: {
     width: 360,
     textAlign: 'auto',
@@ -305,13 +281,6 @@ const styles = StyleSheet.create({
     left: 20,
     width: 300,
   },
-  moreInfoImage: {
-    height: 200,
-    width: 350,
-    marginTop: 0
-    // bottom: 600,
-    // position: 'absolute',
-  },
   hidden: {
     display: 'none',
   },
@@ -323,9 +292,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   text: {
-    color: 'white'
+    color: '#048BA8'
   },
   email: {
-    color: 'white'
+    color: '#048BA8'
   }
 })
