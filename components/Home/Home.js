@@ -28,6 +28,7 @@ export default class Home extends React.Component {
       showFilter: false,
       showInfo: false,
       userZipCode: '',
+      displayedComponent: 'home'
     }
   }
 
@@ -38,7 +39,8 @@ export default class Home extends React.Component {
 
   displayError = () => {
     this.setState({
-      error: true
+      error: true,
+      displayedComponent: 'error',
     })
   }
 
@@ -192,25 +194,29 @@ export default class Home extends React.Component {
 
   displayInfo = () => {
     this.setState({
-      showInfo: true
+      showInfo: true,
+      displayedComponent: 'info'
     })
   }
 
   showFilter = () => {
     this.setState({
-      showFilter: true
+      showFilter: true,
+      displayedComponent: 'filter'
     })
   }
 
   displayFavorites = () => {
     this.setState({
-      showFavorites: true
+      showFavorites: true,
+      displayedComponent: 'favorites'
     })
     this.fetchFavorites()
   }
 
   returnHome = () => {
     this.setState({
+      displayedComponent: 'home',
       showInfo: false,
       showFavorites: false
     })
@@ -261,89 +267,79 @@ export default class Home extends React.Component {
   render() {
     const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
     const { userAPIToken, signOut } = this.props;
-    if (this.state.error) {
-      return (
-        <View>
-          <Error />
-          <Nav showFavorites={this.state.showFavorites}
-              displayFavorites={this.displayFavorites}
-              returnHome={this.returnHome}
-              showFilter={this.showFilter}
-              showInfo={this.state.showInfo} />
-        </View>
-      )
+
+    let display;
+    
+    switch(this.state.displayedComponent) {
+      case 'error':
+        display = <Error />
+        break;
+      case 'filter': 
+        display = (<Filter 
+        showFilter={showFilter} 
+        fetchByFilters={this.fetchByFilters} 
+        signOut={signOut} />)
+        break;
+      case 'info':
+        display =  (<Pet 
+        pet={allPets[petIndex]} 
+        changePet={this.changePet} 
+        showInfo={this.state.showInfo} 
+        shelter={shelter}
+        displayInfo={this.displayInfo}
+        userAPIToken={this.props.userAPIToken}
+        userLocation={this.state.userLocation}
+        returnHome={this.returnHome}
+        showFavorites={this.showFavorites}
+        displayError={this.displayError}
+        sendText={this.sendText}
+        emailShelter={this.emailShelter} />)
+        break;
+      case 'favorites':
+        display = (<Favorites 
+          fetchFavorites={this.fetchFavorites} 
+          favorites={favorites} 
+          userAPIToken={userAPIToken} 
+          cleanedFaves={this.state.cleanedFaves}   
+          displayFaves={this.displayFaves}
+          returnHome={this.returnHome}
+          loading={this.state.loading}
+          loadDelete={this.loadDelete}
+          unLoadDelete={this.unLoadDelete}
+          displayError={this.displayError}
+          loadingFaves={this.state.loadingFaves}
+          sendText={this.sendText}
+          emailShelter={this.emailShelter} />)
+        break;
+      default:
+      display = (<Pet pet={allPets[petIndex]} changePet={this.changePet}
+      loading={this.state.loading}
+      sendText={this.sendText}
+      emailShelter={this.emailShelter}
+      displayInfo={this.displayInfo}
+      showInfo={this.state.showInfo}
+      showFilter={this.showFilter}
+      fetchShelter={this.fetchShelter}
+      shelter={shelter}
+      returnHome={this.returnHome}
+      addToFavorites={this.addToFavorites}
+      userAPIToken={this.props.userAPIToken}
+      userLocation={this.state.userLocation}
+      displayError={this.displayError}
+    />)
+      break;
     }
-    if (!showFilter && !showInfo && !showFavorites) {
-      return (
-        <View style={styles.homeContainer}>
-          <Pet pet={allPets[petIndex]} changePet={this.changePet}
-            loading={this.state.loading}
-            sendText={this.sendText}
-            emailShelter={this.emailShelter}
-            displayInfo={this.displayInfo}
-            showInfo={this.state.showInfo}
-            showFilter={this.showFilter}
-            fetchShelter={this.fetchShelter}
-            shelter={shelter}
-            returnHome={this.returnHome}
-            addToFavorites={this.addToFavorites}
-            userAPIToken={this.props.userAPIToken}
-            userLocation={this.state.userLocation}
-            displayError={this.displayError}
-          />
-          <Nav showFavorites={this.state.showFavorites}
+
+    return (
+      <View style={styles.homeContainer}>
+        {display}
+        <Nav showFavorites={this.state.showFavorites}
             displayFavorites={this.displayFavorites}
             returnHome={this.returnHome}
             showFilter={this.showFilter}
             showInfo={this.state.showInfo} />
-        </View>
-      )
-    } else if (showFilter) {
-      return (
-        <View style={styles.homeContainer}>
-          <Filter showFilter={showFilter} fetchByFilters={this.fetchByFilters} signOut={signOut} />
-        </View>
-      )
-    } else if (showInfo) {
-      return (
-        <View style={styles.homeContainer}>
-          <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}
-            displayInfo={this.displayInfo}
-            userAPIToken={this.props.userAPIToken}
-            userLocation={this.state.userLocation}
-            returnHome={this.returnHome}
-            showFavorites={this.showFavorites}
-            displayError={this.displayError}
-            sendText={this.sendText}
-            emailShelter={this.emailShelter} />
-            <Nav showFavorites={this.state.showFavorites}
-            displayFavorites={this.displayFavorites}
-            returnHome={this.returnHome}
-            showFilter={this.showFilter}
-            showInfo={this.state.showInfo} />
-        </View>
-      )
-    } else if (showFavorites) {
-      return (
-        <View style={styles.homeContainer}>
-          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves}   displayFaves={this.displayFaves}
-            returnHome={this.returnHome}
-            loading={this.state.loading}
-            loadDelete={this.loadDelete}
-            unLoadDelete={this.unLoadDelete}
-            displayError={this.displayError}
-            loadingFaves={this.state.loadingFaves}
-            sendText={this.sendText}
-            emailShelter={this.emailShelter} />
-            <Nav 
-              showFavorites={this.state.showFavorites}
-              displayFavorites={this.displayFavorites}
-              returnHome={this.returnHome}
-              showFilter={this.showFilter}
-              showInfo={this.state.showInfo} />
-        </View>
-      )
-    }
+      </View>
+    )
   }
 }
 
@@ -375,7 +371,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    // marginBottom: 20,
     marginTop: 60,
   },
   filter: {

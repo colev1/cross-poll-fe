@@ -5,7 +5,6 @@ import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import { Icon } from 'react-native-elements';
 import { showMessage } from "react-native-flash-message";
-// import LinearGradient from 'react-native-linear-gradient';
 import { LinearGradient } from 'expo';
 
 
@@ -162,12 +161,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: 500,
-    // marginBottom: 40,
-  },
-  cog: {
-    // borderColor: 'black',
-    // borderRadius: 1,
-    // borderWidth: 1,
   },
   image: {
     height: 600,
@@ -215,16 +208,11 @@ const styles = StyleSheet.create({
     marginLeft: 1,
   },
   navContainer: {
-    // flex: 1,
     padding: 24,
     flexDirection: 'row',
-    // bottom: 200,
-    // zIndex: 4,
-    // paddingLeft: 40,
     justifyContent: 'space-around',
     width: 420,
     backgroundColor: 'white',
-    // height: 100
   },
   hamburgerIcon: {
     height: 50,
@@ -232,19 +220,9 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   hamburgerContainer: {
-    // padding: 10,
-    // borderRadius: 50,
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    // width: 70,
-    // height: 70,
-    // borderColor: 'white',
-    // backgroundColor: 'white',
-    // shadowColor: '#000',
-    // shadowOffset: { width: 2, height: 3 },
-    // shadowOpacity: 0.8,
-    // shadowRadius: 2,
   },
   petTitle: {
     fontFamily: 'Kohinoor Bangla',
@@ -252,7 +230,6 @@ const styles = StyleSheet.create({
     fontSize: 36,
     zIndex: 4,
     color: 'white',
-    // marginLeft: 8,
   },
   petDescription: {
     zIndex: 3,
@@ -276,15 +253,14 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   shelterContainer: {
-    position: 'absolute',
+    borderRadius: 4,
     bottom: 30,
     left: 20,
     marginTop: 20,
-    width: 360,
-    borderRadius: 4,
-    zIndex: 3,
-    // backgroundColor: 'rgba(255, 255, 255, .8)',
     paddingLeft: 8,
+    position: 'absolute',
+    width: 360,
+    zIndex: 3,
   },
   scroll: {
     width: 300,
@@ -293,7 +269,6 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   infoButton: {
-    // backgroundColor: '#048BA8',
     position: 'absolute',
     right: 0,
     borderRadius: 16,
@@ -301,11 +276,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
-    // marginBottom: 200,
   },
   infoButtonText: {
     fontSize: 10,
-    // padding: 16,
     textAlign: 'center',
     color: 'white',
     fontFamily: 'Kohinoor Bangla',

@@ -130,10 +130,6 @@ const styles = StyleSheet.create({
   favoritesContainer: {
     backgroundColor: '#E5E5E5',
   },
-  homeContainer: {
-    // flex: 1,
-    // marginTop: -100,
-  },
   favoritePetContainer: {
     backgroundColor: 'white',
     borderBottomColor: '#E5E5E5',
@@ -165,7 +161,6 @@ const styles = StyleSheet.create({
   backButton: {
     textAlign: 'center',
     zIndex: 4,
-    // marginBottom: 80,
   },
   icon: {
     backgroundColor: '#048BA8',
