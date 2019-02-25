@@ -98,7 +98,16 @@ export default class Favorites extends React.Component {
         </View>
       )
     } else if (cleanedFaves.length === 0) {
-      display = <Text style={styles.noFavesMessage}>You don't have any favorites!</Text>
+
+      display = 
+      <View style={styles.noFavesContainer}>
+        <Text style={styles.noFavesMessage}> You don't have any favorites!</Text>
+        <Icon
+          name='ban'
+          type='font-awesome'
+          color='#F49D37'
+        />
+      </View>
     } else {
       display = cleanedFaves.map((favoritePet) => {
         return (
@@ -120,7 +129,7 @@ export default class Favorites extends React.Component {
       })
     }
     return (
-        <ScrollView style={styles.favoritesContainer}>
+        <ScrollView contentContainerStyle={styles.favoritesContainer}>
           {display}
         </ScrollView>
     )
@@ -129,6 +138,8 @@ export default class Favorites extends React.Component {
 const styles = StyleSheet.create({
   favoritesContainer: {
     backgroundColor: '#E5E5E5',
+    flex: 1,
+    justifyContent: 'center',
   },
   favoritePetContainer: {
     backgroundColor: 'white',
@@ -155,8 +166,9 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   noFavesMessage: {
-    fontSize: 40,
-    textAlign: 'center'
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: 'Kohinoor Bangla',
   },
   backButton: {
     textAlign: 'center',
@@ -166,4 +178,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#048BA8',
     position: 'absolute'
   },
+
 });

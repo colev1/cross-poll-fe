@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     fontSize: 28,
+    fontFamily: 'Kohinoor Bangla',
     color: 'black',
     textAlign: 'center',
   }
