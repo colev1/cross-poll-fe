@@ -245,25 +245,29 @@ export default class Home extends React.Component {
     }
   }
 
-  sendText = (textObj) => {
-    const { recipient_phone, pet_name, shelter_name, pet_id } = textObj;
-    let postBody = {
-      api_token: this.props.userAPIToken,
-      recipient_phone,
-      pet_name,
-      shelter_name,
-      pet_id
-    }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  sendText = async (textObj) => {
+    try {
+      const { recipient_phone, pet_name, shelter_name, pet_id } = textObj;
+      let postBody = {
+        api_token: this.props.userAPIToken,
+        recipient_phone,
+        pet_name,
+        shelter_name,
+        pet_id
       }
-    })
-      .then(response => response.json())
-      .then(result => console.log('text sent', result))
-      .catch(error => console.log(error))
+
+      const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
+        method: 'POST',
+        body: JSON.stringify(postBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await response.json()
+      console.log(result)
+    } catch(error) {
+      console.log(error)
+    }
   }
 
 
