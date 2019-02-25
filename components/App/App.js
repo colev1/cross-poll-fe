@@ -24,22 +24,26 @@ export default class App extends React.Component {
     this.showLogin()
   }
 
-  addToFavorites = (petId) => {
-    const postBody = {
-      apiToken: this.state.userAPIToken,
-      favoriteId: petId
-    }
-
-    fetch('https://adoptr-be.herokuapp.com/api/v1/favorites', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  addToFavorites = async (petId) => {
+    try {
+      const postBody = {
+        apiToken: this.state.userAPIToken,
+        favoriteId: petId
       }
-    })
-      .then(response => response.json())
-      .then(result => console.log(result))
-      .catch(error => console.log(error))
+
+      const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/favorites', {
+        method: 'POST',
+        body: JSON.stringify(postBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const result = await response.json()
+      console.log(result)
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   signOut = () => {
