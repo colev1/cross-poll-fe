@@ -8,7 +8,7 @@ export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      showLogin: true,
+      showLogin: false,
       userAPIToken: '',
       userZipCode: '',
       userLocation: {}

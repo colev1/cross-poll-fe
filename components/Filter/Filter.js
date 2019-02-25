@@ -128,7 +128,6 @@ export default class Filter extends React.Component {
             onPress={() => this.props.fetchByFilters(this.state)} >
             <Text style={styles.submitBtn}> find a pet! </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.props.signOut}><Text style={styles.signOut}>Sign Out</Text></TouchableOpacity>
         </View>
       )
     }
@@ -155,8 +154,9 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     width: 300,
-    height: 700,
-    justifyContent: 'space-around'
+    height: 724,
+    justifyContent: 'space-around',
+    paddingBottom: 40,
   },
   selectedRadio: {
     fontWeight: 'bold',
