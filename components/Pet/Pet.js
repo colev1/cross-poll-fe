@@ -113,8 +113,14 @@ export default class Pet extends React.Component {
                   <Text style={styles.petText}>  {this.state.distance} miles away </Text>
                 <TouchableOpacity onPress={this.props.displayInfo}
                   style={this.props.loading ? styles.hidden : styles.infoButton}>
-                  <Text style={styles.infoButtonText}> more information
-                  </Text>
+                  {/* <Text style={styles.infoButtonText}> more information
+                  </Text> */}
+                  <Icon
+                    name='info-circle'
+                    type='font-awesome'
+                    color='#048BA8'
+                    size={32}
+                    iconStyle={styles.home} />
                 </TouchableOpacity>
                 </View>
               </View>
@@ -282,7 +288,9 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   infoButton: {
-    backgroundColor: '#048BA8',
+    // backgroundColor: '#048BA8',
+    position: 'absolute',
+    right: 0,
     borderRadius: 16,
     shadowColor: 'black',
     shadowOffset: { width: 1, height: 2 },
