@@ -37,7 +37,6 @@ export default class Favorites extends React.Component {
   fetchShelter = async (shelterId) => {
     try {
       let url = `http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`
-  
       const response = await fetch(url)
       const shelter = await response.json()
       const cleanShelter = await cleanShelters(shelter.petfinder.shelter)
@@ -121,20 +120,9 @@ export default class Favorites extends React.Component {
       })
     }
     return (
-      <View style={styles.favoritesContainer}>
-        <ScrollView>
+        <ScrollView style={styles.favoritesContainer}>
           {display}
         </ScrollView>
-        <TouchableOpacity onPress={this.props.returnHome} style={styles.backButton}>
-          <Icon
-            name='arrow-circle-left'
-            type='font-awesome'
-            color='#F49D37'
-            size={48}
-            style={styles.arrowLeft}
-          />
-        </TouchableOpacity>
-      </View>
     )
   }
 }
@@ -143,8 +131,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#E5E5E5',
   },
   homeContainer: {
-    flex: 1,
-    marginTop: -100,
+    // flex: 1,
+    // marginTop: -100,
   },
   favoritePetContainer: {
     backgroundColor: 'white',
@@ -177,7 +165,7 @@ const styles = StyleSheet.create({
   backButton: {
     textAlign: 'center',
     zIndex: 4,
-    marginBottom: 80,
+    // marginBottom: 80,
   },
   icon: {
     backgroundColor: '#048BA8',

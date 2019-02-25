@@ -8,6 +8,7 @@ import { cleanShelters } from '../helpers/helpers';
 import Favorites from '../Favorites/Favorites';
 import Error from '../Error/Error'
 import { APIcalls } from '../APIcalls/APIcalls';
+import Nav from '../Nav/Nav'
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -201,7 +202,7 @@ export default class Home extends React.Component {
     })
   }
 
-  showFavorites = () => {
+  displayFavorites = () => {
     this.setState({
       showFavorites: true
     })
@@ -262,7 +263,14 @@ export default class Home extends React.Component {
     const { userAPIToken, signOut } = this.props;
     if (this.state.error) {
       return (
-        <Error />
+        <View>
+          <Error />
+          <Nav showFavorites={this.state.showFavorites}
+              displayFavorites={this.displayFavorites}
+              returnHome={this.returnHome}
+              showFilter={this.showFilter}
+              showInfo={this.state.showInfo} />
+        </View>
       )
     }
     if (!showFilter && !showInfo && !showFavorites) {
@@ -280,15 +288,14 @@ export default class Home extends React.Component {
             returnHome={this.returnHome}
             addToFavorites={this.addToFavorites}
             userAPIToken={this.props.userAPIToken}
-            showFavorites={this.showFavorites}
             userLocation={this.state.userLocation}
             displayError={this.displayError}
           />
-          {/* <TouchableOpacity onPress={this.showInfo}
-            style={this.state.loading ? styles.hidden : styles.infoButton}>
-            <Text style={styles.infoButtonText}> more information
-            </Text>
-          </TouchableOpacity> */}
+          <Nav showFavorites={this.state.showFavorites}
+            displayFavorites={this.displayFavorites}
+            returnHome={this.returnHome}
+            showFilter={this.showFilter}
+            showInfo={this.state.showInfo} />
         </View>
       )
     } else if (showFilter) {
@@ -309,12 +316,17 @@ export default class Home extends React.Component {
             displayError={this.displayError}
             sendText={this.sendText}
             emailShelter={this.emailShelter} />
+            <Nav showFavorites={this.state.showFavorites}
+            displayFavorites={this.displayFavorites}
+            returnHome={this.returnHome}
+            showFilter={this.showFilter}
+            showInfo={this.state.showInfo} />
         </View>
       )
     } else if (showFavorites) {
       return (
-        <View style={styles.favoritesContainer}>
-          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves} displayFaves={this.displayFaves}
+        <View style={styles.homeContainer}>
+          <Favorites fetchFavorites={this.fetchFavorites} favorites={favorites} userAPIToken={userAPIToken} cleanedFaves={this.state.cleanedFaves}   displayFaves={this.displayFaves}
             returnHome={this.returnHome}
             loading={this.state.loading}
             loadDelete={this.loadDelete}
@@ -323,6 +335,12 @@ export default class Home extends React.Component {
             loadingFaves={this.state.loadingFaves}
             sendText={this.sendText}
             emailShelter={this.emailShelter} />
+            <Nav 
+              showFavorites={this.state.showFavorites}
+              displayFavorites={this.displayFavorites}
+              returnHome={this.returnHome}
+              showFilter={this.showFilter}
+              showInfo={this.state.showInfo} />
         </View>
       )
     }
