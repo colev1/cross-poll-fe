@@ -105,7 +105,8 @@ export default class Home extends React.Component {
     const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userLocation.zip_code}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
 
     this.fetchAllAnimals(url)
-    this.setState({ showFilter: false })
+    this.setState({ showFilter: false,
+    displayedComponent: 'home' })
   }
 
   fetchShelter = async () => {
