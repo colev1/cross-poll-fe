@@ -27,22 +27,26 @@ export default class Login extends React.Component {
     }
   }
 
-  submitExistingUser = () => {
-    const { email, password } = this.state;
-    const postBody = {
-      email,
-      password
-    }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/sessions', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  submitExistingUser = async () => {
+    try {
+      const { email, password } = this.state;
+      const postBody = {
+        email,
+        password
       }
-    })
-      .then(response => response.json())
-      .then(result => this.checkForError(result))
-      .catch(error => console.log(error))
+  
+      const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/sessions', {
+          method: 'POST',
+          body: JSON.stringify(postBody),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        const result = await response.json()
+        await this.checkForError(result)
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   checkForError = (result) => {
@@ -56,25 +60,30 @@ export default class Login extends React.Component {
     }
   }
 
-  submitNewUser = () => {
-    const { firstName, lastName, email, password, passwordConfirmation } = this.state;
-    const postBody = {
-      first_name: firstName,
-      last_name: lastName,
-      email,
-      password,
-      password_confirmation: passwordConfirmation
-    }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  submitNewUser = async () => {
+    try {
+      const { firstName, lastName, email, password, passwordConfirmation } = this.state;
+      const postBody = {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password,
+        password_confirmation: passwordConfirmation
       }
-    })
-      .then(response => response.json())
-      .then(result => this.checkForError(result))
-      .catch(error => console.log(error))
+
+      const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/users', {
+        method: 'POST',
+        body: JSON.stringify(postBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const result = await response.json()
+      await this.checkForError(result)
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   setSelected = (selectedOption) => {

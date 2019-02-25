@@ -55,14 +55,20 @@ export default class Pet extends React.Component {
     addToFavorites(pet.id)
   }
 
-  findDistance = () => {
-    const { latitude, longitude } = this.props.shelter;
-    const { userLocation } = this.props;
-    const url = `https://adoptr-be.herokuapp.com/api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`
-    fetch(url)
-      .then(response => response.json())
-      .then(result => this.setState({ distance: result.distance }))
-      .catch(error => this.props.displayError())
+  findDistance = async () => {
+    try {
+      const { latitude, longitude } = this.props.shelter;
+      const { userLocation } = this.props;
+      const url = `https://adoptr-be.herokuapp.com/api/v1/distances?user_lat=${userLocation.latitude}&user_long=${userLocation.longitude}&shelter_lat=${latitude}&shelter_long=${longitude}`
+
+      const response = await fetch (url)
+      const result = await response.json()
+      this.setState({
+        distance: result.distance
+      })
+    } catch(error) {
+      this.props.displayError()
+    }
   }
 
   render() {
