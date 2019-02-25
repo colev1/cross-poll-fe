@@ -84,31 +84,12 @@ export default class Pet extends React.Component {
         )
       } else {
         return (
+          <View style={styles.swiper}>
           <GestureRecognizer
-            style={styles.swiper}
             onSwipe={(direction, state) => this.onSwipe(direction, state)}
             onSwipeRight={(state) => this.onSwipeRight(state)}
             config={config}
           >
-            <View style={styles.navContainer}>
-              <TouchableOpacity onPress={this.props.showFilter}
-                style={styles.hamburgerContainer}>
-                <Icon
-                  name='cog'
-                  type='font-awesome'
-                  color='#048BA8'
-                  size={48}
-                  iconStyle={styles.cog} />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this.props.showFavorites} style={styles.hamburgerContainer}>
-                <Icon
-                  name='heart'
-                  type='font-awesome'
-                  color='#048BA8'
-                  size={48}
-                  iconStyle={styles.heart} />
-              </TouchableOpacity>
-            </View>
             <ImageBackground source={{ uri: image }} style={styles.image}
               imageStyle={styles.borderRad}>
               <View style={styles.shelterContainer}>
@@ -130,10 +111,35 @@ export default class Pet extends React.Component {
                     size={20}
                     iconStyle={styles.home} />
                   <Text style={styles.petText}>  {this.state.distance} miles away </Text>
+                <TouchableOpacity onPress={this.props.displayInfo}
+                  style={this.props.loading ? styles.hidden : styles.infoButton}>
+                  <Text style={styles.infoButtonText}> more information
+                  </Text>
+                </TouchableOpacity>
                 </View>
               </View>
             </ImageBackground>
           </GestureRecognizer>
+            <View style={styles.navContainer}>
+              <TouchableOpacity onPress={this.props.showFilter}
+                style={styles.hamburgerContainer}>
+                <Icon
+                  name='cog'
+                  type='font-awesome'
+                  color='#048BA8'
+                  size={48}
+                  iconStyle={styles.cog} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.props.showFavorites} style={styles.hamburgerContainer}>
+                <Icon
+                  name='heart'
+                  type='font-awesome'
+                  color='#048BA8'
+                  size={48}
+                  iconStyle={styles.heart} />
+              </TouchableOpacity>
+            </View>
+          </View>
         )
       }
     }
@@ -156,10 +162,10 @@ const styles = StyleSheet.create({
   },
   swiper: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: 500,
-    marginBottom: 40,
+    // marginBottom: 40,
   },
   image: {
     height: 600,
@@ -202,12 +208,15 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   navContainer: {
-    flex: 1,
+    // flex: 1,
+    padding: 4,
     flexDirection: 'row',
-    top: 80,
+    // bottom: 200,
+    // zIndex: 4,
     justifyContent: 'space-between',
     width: 360,
-    height: 100
+    backgroundColor: 'white',
+    // height: 100
   },
   hamburgerIcon: {
     height: 50,
@@ -215,7 +224,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   hamburgerContainer: {
-    padding: 10,
+    // padding: 10,
     borderRadius: 50,
     textAlign: 'center',
     justifyContent: 'center',
@@ -270,6 +279,25 @@ const styles = StyleSheet.create({
     height: 80,
     marginLeft: 30,
     marginRight: 10
+  },
+  infoButton: {
+    backgroundColor: '#048BA8',
+    borderRadius: 16,
+    shadowColor: 'black',
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    // marginBottom: 200,
+  },
+  infoButtonText: {
+    fontSize: 10,
+    // padding: 16,
+    textAlign: 'center',
+    color: 'white',
+    fontFamily: 'Kohinoor Bangla',
+  },
+  hidden: {
+    display: 'none'
   },
 })
 

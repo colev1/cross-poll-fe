@@ -189,7 +189,7 @@ export default class Home extends React.Component {
     }
   }
 
-  showInfo = () => {
+  displayInfo = () => {
     this.setState({
       showInfo: true
     })
@@ -272,6 +272,7 @@ export default class Home extends React.Component {
             loading={this.state.loading}
             sendText={this.sendText}
             emailShelter={this.emailShelter}
+            displayInfo={this.displayInfo}
             showInfo={this.state.showInfo}
             showFilter={this.showFilter}
             fetchShelter={this.fetchShelter}
@@ -283,11 +284,11 @@ export default class Home extends React.Component {
             userLocation={this.state.userLocation}
             displayError={this.displayError}
           />
-          <TouchableOpacity onPress={this.showInfo}
+          {/* <TouchableOpacity onPress={this.showInfo}
             style={this.state.loading ? styles.hidden : styles.infoButton}>
             <Text style={styles.infoButtonText}> more information
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       )
     } else if (showFilter) {
@@ -300,6 +301,7 @@ export default class Home extends React.Component {
       return (
         <View style={styles.homeContainer}>
           <Pet pet={allPets[petIndex]} changePet={this.changePet} showInfo={this.state.showInfo} shelter={shelter}
+            displayInfo={this.displayInfo}
             userAPIToken={this.props.userAPIToken}
             userLocation={this.state.userLocation}
             returnHome={this.returnHome}
@@ -335,6 +337,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
+    marginBottom: 200,
   },
   hidden: {
     display: 'none'
@@ -355,6 +358,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginBottom: 20,
+    marginTop: 200,
   },
   filter: {
     backgroundColor: 'blue'
