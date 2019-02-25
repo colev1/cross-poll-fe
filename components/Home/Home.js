@@ -139,12 +139,15 @@ export default class Home extends React.Component {
   }
 
 
-  fetchFavorites = () => {
-    fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`)
-      .then(response => response.json())
-      .then(favorites => this.setState({ favorites: favorites.data }))
-      .then(result => this.displayFaves())
-      .catch(error => this.displayError())
+  fetchFavorites = async () => {
+    try {
+      const response = await fetch(`https://adoptr-be.herokuapp.com/api/v1/favorites?api_token=${this.props.userAPIToken}`)
+      const favorites = await response.json()
+      this.setState({favorites: favorites.data})
+      this.displayFaves()
+    } catch(error) {
+      this.displayError()
+    }
   }
 
   displayFaves = async () => {
