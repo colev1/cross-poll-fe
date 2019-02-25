@@ -10,12 +10,12 @@ export default class Nav extends React.Component {
   render() {
     return (
     <View style={styles.navContainer}>
-      <TouchableOpacity onPress={this.props.showFilter}
+      <TouchableOpacity onPress={this.props.signOut}
         style={styles.hamburgerContainer}>
         <Icon
           name='sign-out'
           type='font-awesome'
-          color='grey'
+          color={this.props.displayedComponent==='login' ? '#048BA8' : 'grey'}
           size={48}
           iconStyle={styles.cog} />
           <Text> sign out </Text>
@@ -25,7 +25,7 @@ export default class Nav extends React.Component {
         <Icon
           name='cog'
           type='font-awesome'
-          color='grey'
+          color={this.props.displayedComponent==='filter' ? '#048BA8' : 'grey'}
           size={48}
           iconStyle={styles.cog} />
           <Text> filters </Text>
@@ -34,7 +34,7 @@ export default class Nav extends React.Component {
         <Icon
           name='home'
           type='font-awesome'
-          color='grey'
+          color={this.props.displayedComponent==='home' ? '#048BA8' : 'grey'}
           size={48}
           iconStyle={styles.heart} />
           <Text> home </Text>
@@ -43,10 +43,10 @@ export default class Nav extends React.Component {
         <Icon
           name='heart'
           type='font-awesome'
-          color='grey'
+          color={this.props.displayedComponent==='favorites' ? '#048BA8' : 'grey'}
           size={48}
-          iconStyle={styles.heart} />
-          <Text> favorites </Text>
+          iconStyle={this.props.displayedComponent === 'favorites' ? styles.chosenNav : styles.unchosenNav} />
+          <Text > favorites </Text>
       </TouchableOpacity>
     </View>
     )

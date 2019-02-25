@@ -155,8 +155,9 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     width: 300,
-    height: 700,
-    justifyContent: 'space-around'
+    height: 724,
+    justifyContent: 'space-around',
+    // marginBottom: 10,
   },
   selectedRadio: {
     fontWeight: 'bold',

@@ -7,7 +7,6 @@ import Filter from '../Filter/Filter';
 import { cleanShelters } from '../helpers/helpers';
 import Favorites from '../Favorites/Favorites';
 import Error from '../Error/Error'
-import { APIcalls } from '../APIcalls/APIcalls';
 import Nav from '../Nav/Nav'
 
 export default class Home extends React.Component {
@@ -263,13 +262,10 @@ export default class Home extends React.Component {
       .catch(error => console.log(error))
   }
 
-
   render() {
     const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
-    const { userAPIToken, signOut } = this.props;
-
+    const { userAPIToken} = this.props;
     let display;
-    
     switch(this.state.displayedComponent) {
       case 'error':
         display = <Error />
@@ -278,7 +274,7 @@ export default class Home extends React.Component {
         display = (<Filter 
         showFilter={showFilter} 
         fetchByFilters={this.fetchByFilters} 
-        signOut={signOut} />)
+        signOut={this.signOut} />)
         break;
       case 'info':
         display =  (<Pet 
@@ -337,7 +333,10 @@ export default class Home extends React.Component {
             displayFavorites={this.displayFavorites}
             returnHome={this.returnHome}
             showFilter={this.showFilter}
-            showInfo={this.state.showInfo} />
+            showInfo={this.state.showInfo} 
+            signOut={this.props.signOut}
+            displayedComponent={this.state.displayedComponent}
+            />
       </View>
     )
   }
