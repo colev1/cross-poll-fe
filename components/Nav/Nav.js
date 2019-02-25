@@ -80,9 +80,11 @@ const styles = StyleSheet.create({
   },
   selectedText: {
     color: '#048BA8',
+    fontFamily: 'Kohinoor Bangla',
   },
   unselectedText: {
     color: 'black',
+    fontFamily: 'Kohinoor Bangla',
   },
   hidden: {
     display: 'none'
