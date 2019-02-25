@@ -221,24 +221,28 @@ export default class Home extends React.Component {
     })
   }
 
-  emailShelter = (name) => {
-    let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
-    let postBody = {
-      api_token: this.props.userAPIToken,
-      shelter_email: 'colevanacore@gmail.com',
-      pet_name: name,
-      message: message
-    }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  emailShelter = async (name) => {
+    try {
+      let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
+      let postBody = {
+        api_token: this.props.userAPIToken,
+        shelter_email: 'colevanacore@gmail.com',
+        pet_name: name,
+        message: message
       }
-    })
-      .then(response => response.json())
-      .then(result => console.log(result))
-      .catch(error => console.log(error))
+
+      const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
+        method: 'POST',
+        body: JSON.stringify(postBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await response.json()
+      console.log(result)
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   sendText = (textObj) => {
