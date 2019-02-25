@@ -103,7 +103,6 @@ export default class Home extends React.Component {
         gender = ''
     }
     const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userLocation.zip_code}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
-
     this.fetchAllAnimals(url)
     this.setState({ showFilter: false,
     displayedComponent: 'home' })
@@ -139,7 +138,6 @@ export default class Home extends React.Component {
           'Content-Type': 'application/json'
         }
       })
-
       await response.json()
       this.fetchFavorites()
     } catch(error) {

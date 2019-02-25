@@ -4,6 +4,7 @@ import Loading from '../Loading/Loading';
 import { Icon } from 'react-native-elements';
 import { showMessage } from "react-native-flash-message";
 import Modal from "react-native-modal";
+import { LinearGradient } from 'expo';
 
 export default class PetInfo extends React.Component {
   constructor(props) {
@@ -77,18 +78,16 @@ export default class PetInfo extends React.Component {
               <Text style={styles.sendButtonText}> send text </Text>
             </TouchableOpacity>
           </Modal>
-          <View style={styles.titlesContainer}>
-            <Text style={styles.petName}> {name} </Text>
-            <Text style={styles.petDescription}>{breed}</Text>
-            <Text style={styles.petDescription}>{age}</Text>
-          </View>
           <ImageBackground source={{ uri: image }}
             style={styles.moreInfoImage}
             imageStyle={styles.borderRad}>
+            <LinearGradient colors={['rgba(0,0,0,0)','rgba(0,0,0,.2)', 'rgba(0,0,0,1)']} style={styles.gradient}></LinearGradient>
+            <View style={styles.titlesContainer}>
+              <Text style={styles.petName}> {name} </Text>
+              <Text style={styles.petDescription}>{breed}</Text>
+              <Text style={styles.petDescription}>{age}</Text>
+            </View>
           </ImageBackground>
-          <ScrollView style={styles.shelterContainer}>
-            <Text style={styles.description}>{description} </Text>
-          </ScrollView>
           <View style={styles.shelterInfo}>
             <Text style={styles.canBeFound}>
               {shelter.name}
@@ -99,22 +98,26 @@ export default class PetInfo extends React.Component {
           <TouchableOpacity
             style={styles.contactButton}
             onPress={this.emailShelter}>
-            <Text style={styles.contactButtonText}> Email {shelter.name} </Text>
+            <Icon
+            name='envelope'
+            type='font-awesome'
+            size={40}
+            iconStyle={styles.text}
+          />
+            {/* <Text style={styles.contactButtonText}> Email {shelter.name} </Text> */}
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.textButton}
             onPress={() => this.setState({
               sendText: true
             })}>
-            <Text style={styles.contactButtonText}> Send a text about {name}! </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.props.returnHome}>
             <Icon
-              name='arrow-circle-left'
-              type='font-awesome'
-              color='#F49D37'
-              size={50}
-              iconStyles={styles.backButton} />
+            name='comment'
+            type='font-awesome'
+  
+            size={40}
+            iconStyle={styles.email}
+          />
           </TouchableOpacity>
         </View>
       )
@@ -129,13 +132,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 80,
+    marginTop: 50
   },
   modalContainer: {
     paddingTop: 100
   },
   petName: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 44,
     color: 'black',
     marginBottom: 0,
@@ -150,7 +153,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   moreInfoImage: {
-    marginTop: 5
+    marginTop: 5,
+    height: 500,
+    width: 350,
   },
   inputNumber: {
     backgroundColor: 'white',
@@ -207,42 +212,18 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   contactButton: {
-    backgroundColor: '#048BA8',
     color: 'white',
-    borderRadius: 24,
-    borderStyle: 'solid',
-    fontSize: 20,
-    height: 30,
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    textAlign: 'center',
-    width: 300,
-    margin: 10,
+    position: 'absolute',
+    top: 590,
+    left: 120
   },
   textButton: {
-    backgroundColor: '#048BA8',
     color: 'white',
-    borderRadius: 24,
-    borderStyle: 'solid',
-    fontSize: 20,
-    height: 30,
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 4 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    textAlign: 'center',
-    width: 300,
-    marginBottom: 16,
-  },
-  contactButtonText: {
-    textAlign: 'center',
-    left: 0,
-    fontSize: 14,
-    color: 'white',
-    marginTop: 6,
-    fontFamily: 'Kohinoor Bangla',
+    fontSize: 15,
+    textAlign: 'right',
+    position: 'absolute',
+    top: 590,
+    left: 190
   },
   description: {
     width: 360,
@@ -263,14 +244,16 @@ const styles = StyleSheet.create({
     fontSize: 28,
     marginTop: 0,
     paddingTop: 0,
-    textAlign: 'center',
+    textAlign: 'left',
     color: 'black',
     fontFamily: 'Kohinoor Bangla',
   },
   shelterInfo: {
-    marginTop: 0,
+    marginTop: 50,
     fontSize: 10,
     textAlign: 'center',
+    position: 'absolute',
+    top: 470
   },
   phone: {
     textAlign: 'center',
@@ -287,7 +270,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 4,
     color: 'black',
-    marginTop: 4,
+    marginTop: 150,
     height: 600,
     textAlign: 'center',
     width: 400,
@@ -298,11 +281,20 @@ const styles = StyleSheet.create({
     left: 20,
     width: 300,
   },
-  moreInfoImage: {
-    height: 200,
-    width: 350,
-  },
   hidden: {
     display: 'none',
   },
+  gradient: {
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    borderRadius: 30,
+  },
+  text: {
+    color: '#048BA8'
+  },
+  email: {
+    color: '#048BA8'
+  }
 })
