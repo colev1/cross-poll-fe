@@ -106,14 +106,20 @@ export default class Home extends React.Component {
     this.setState({ showFilter: false })
   }
 
-  fetchShelter = () => {
-    const { allPets, petIndex } = this.state;
-    let shelterId = allPets[petIndex].shelterId;
-    fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
-      .then(response => response.json())
-      .then(shelter => cleanShelters(shelter.petfinder.shelter))
-      .then(cleanShelter => this.setState({ shelter: cleanShelter, loading: false }))
-      .catch(error => this.displayError())
+  fetchShelter = async () => {
+    try {
+      const { allPets, petIndex } = this.state;
+      let shelterId = allPets[petIndex].shelterId;
+      const response = await fetch(`http://api.petfinder.com/shelter.get?format=json&key=${APIkey}&id=${shelterId}`)
+      const shelter = await response.json()
+      const cleaned = cleanShelters(shelter.petfinder.shelter)
+      this.setState({
+        shelter: cleaned,
+        loading: false
+      })
+    } catch(error) {
+      this.displayError()
+    }
   }
 
   addToFavorites = async (petId) => {
@@ -215,45 +221,53 @@ export default class Home extends React.Component {
     })
   }
 
-  emailShelter = (name) => {
-    let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
-    let postBody = {
-      api_token: this.props.userAPIToken,
-      shelter_email: 'colevanacore@gmail.com',
-      pet_name: name,
-      message: message
-    }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  emailShelter = async (name) => {
+    try {
+      let message = `I am hoping to schedule a meet and greet with ${name} and would love to get in contact with you to schedule a time to do that. I look forward to hearing from you!`
+      let postBody = {
+        api_token: this.props.userAPIToken,
+        shelter_email: 'colevanacore@gmail.com',
+        pet_name: name,
+        message: message
       }
-    })
-      .then(response => response.json())
-      .then(result => console.log(result))
-      .catch(error => console.log(error))
+
+      const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/shelter_notifier', {
+        method: 'POST',
+        body: JSON.stringify(postBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await response.json()
+      console.log(result)
+    } catch(error) {
+      console.log(error)
+    }
   }
 
-  sendText = (textObj) => {
-    const { recipient_phone, pet_name, shelter_name, pet_id } = textObj;
-    let postBody = {
-      api_token: this.props.userAPIToken,
-      recipient_phone,
-      pet_name,
-      shelter_name,
-      pet_id
-    }
-    fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
-      method: 'POST',
-      body: JSON.stringify(postBody),
-      headers: {
-        'Content-Type': 'application/json'
+  sendText = async (textObj) => {
+    try {
+      const { recipient_phone, pet_name, shelter_name, pet_id } = textObj;
+      let postBody = {
+        api_token: this.props.userAPIToken,
+        recipient_phone,
+        pet_name,
+        shelter_name,
+        pet_id
       }
-    })
-      .then(response => response.json())
-      .then(result => console.log('text sent', result))
-      .catch(error => console.log(error))
+
+      const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/texts', {
+        method: 'POST',
+        body: JSON.stringify(postBody),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const result = await response.json()
+      console.log(result)
+    } catch(error) {
+      console.log(error)
+    }
   }
 
 
