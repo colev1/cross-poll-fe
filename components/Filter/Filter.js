@@ -12,7 +12,8 @@ export default class Filter extends React.Component {
       selectedSize: '',
       selectedGender: '',
       selectedLocation: '',
-      showChangeLocation: false
+      showChangeLocation: false,
+      newZipCode: ''
     }
   }
 
@@ -62,6 +63,10 @@ export default class Filter extends React.Component {
     </View>)
   }
 
+  submitNewLocation = () => {
+    console.log('hi')
+  }
+
 
 
   render() {
@@ -87,41 +92,39 @@ export default class Filter extends React.Component {
     if (this.props.showFilter) {
       return (
         <View style={styles.filterContainer}>
-          <View style={styles.title}>
-            <Text style={styles.titleText}>
-              AdoptR
-          </Text>
-            <Icon
-              name='paw'
-              type='font-awesome'
-              color='white'
-              size={36}
-              iconStyle={styles.pawprint}
-            />
-          </View>
+          <View style={styles.submitLocationContainer}>
           <Icon
                     name='map-marker'
                     type='font-awesome'
                     color='black'
                     size={28}
                     iconStyle={styles.locationIcon} />
-          <Text style={styles.sliderTitle}> 
-                    My current location: {this.props.userLocation.zip_code} 
-                    </Text>
-          <TouchableOpacity style={this.state.showChangeLocation ? styles.hidden : styles.changeLocButton}
-          onPress={()=> this.setState({
-            showChangeLocation: true
-          })}>
-          <Text style={this.state.showChangeLocation ? styles.hidden : styles.changeLocText}>
-          change location </Text></TouchableOpacity>
-          <TextInput style={this.state.showChangeLocation ? styles.inputZip : styles.hidden} placeholder='00000'>  </TextInput>
-          {/* <Slider
-            step={1}
-            value={this.state.miles}
-            minimumValue={0}
-            maximumValue={60}
-            onValueChange={this.handleSliderChange}
-          /> */}
+            <Text style={styles.sliderTitle}> 
+                      My current location: {this.props.userLocation.zip_code} 
+                      </Text>
+            {/* <TouchableOpacity style={this.state.showChangeLocation ? styles.hidden : styles.changeLocButton}
+            onPress={()=> this.setState({
+              showChangeLocation: true
+            })}>
+            <Text style={this.state.showChangeLocation ? styles.hidden : styles.changeLocText}>
+            change location </Text></TouchableOpacity> */}
+          </View>
+          {/* <View style={this.state.showChangeLocation ? styles.submitLocationContainer : styles.hidden}>
+            <TextInput style={this.state.showChangeLocation ? styles.inputZip : styles.hidden} placeholder='00000'
+            value={this.state.newZipCode}
+            onChangeText={(value) => this.setState({ newZipCode: value })}> 
+            <Icon
+            name='arrow-right'
+            type='font-awesome'
+            color='black'
+            size={12}
+            iconStyle={styles.locationIcon} /> 
+            </TextInput>
+            <TouchableOpacity style={this.state.showChangeLocation ? styles.submitLocButton : styles.hidden}
+            onPress={this.submitNewLocation}>
+            <Text> submit </Text> 
+            </TouchableOpacity>
+          </View> */}
           <Text style={styles.sliderTitle}> type: </Text>
           <RadioButtons
             style={styles.radioButtons}
@@ -172,7 +175,7 @@ const styles = StyleSheet.create({
   },
   locationIcon: {
     position: 'relative',
-    top: 40,
+    top: 28,
     right: 140,
   },
   inputZip: {
@@ -190,6 +193,14 @@ const styles = StyleSheet.create({
     marginBottom: -20,
     padding: 0,
   },
+  submitLocationContainer: {
+    // flex: 1,
+    // top: 100,
+    // position: 'absolute',
+    // flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
   filterContainer: {
     width: 300,
     height: 724,
@@ -199,11 +210,13 @@ const styles = StyleSheet.create({
   changeLocButton: {
     width: 200,
     // height: 40,
+    marginTop: 40,
     fontSize: 20,
     fontFamily: 'Kohinoor Bangla',
     backgroundColor: 'white'
   },
   changeLocText: {
+    textAlign: 'center',
     fontSize: 20,
     fontFamily: 'Kohinoor Bangla',
   },
@@ -261,6 +274,20 @@ const styles = StyleSheet.create({
   submitBtn: {
     fontSize: 28,
     padding: 16,
+    textAlign: 'center',
+    color: 'white',
+    fontFamily: 'Kohinoor Bangla',
+  },
+  submitLocButton: {
+    backgroundColor: '#048BA8',
+    borderRadius: 16,
+    shadowOffset: { width: 1, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+  },
+  submitLocButtonText: {
+    fontSize: 12,
+    padding: 4,
     textAlign: 'center',
     color: 'white',
     fontFamily: 'Kohinoor Bangla',
