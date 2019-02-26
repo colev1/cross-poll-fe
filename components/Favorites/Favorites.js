@@ -121,7 +121,7 @@ export default class Favorites extends React.Component {
               <Icon
                 name='angle-right'
                 type='font-awesome'
-                color='#F49D37'
+                color='grey'
               />
             </TouchableOpacity>
           </View>
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   favoritesContainer: {
     backgroundColor: '#E5E5E5',
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   favoritePetContainer: {
     backgroundColor: 'white',
@@ -160,7 +160,8 @@ const styles = StyleSheet.create({
   },
   arrowRight: {
     position: 'absolute',
-    right: 10
+    right: 10,
+    fontWeight: 'bold'
   },
   delete: {
     marginLeft: 10
@@ -178,5 +179,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#048BA8',
     position: 'absolute'
   },
+  homeContainer: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 0,
+  }
 
 });

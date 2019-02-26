@@ -89,7 +89,7 @@ export default class PetInfo extends React.Component {
             </View>
           </ImageBackground>
           <View style={styles.shelterInfo}>
-            <Text style={styles.canBeFound}>
+            <Text style={styles.shelterName}>
               {shelter.name}
             </Text>
             <Text style={styles.phone}>{shelter.phone}</Text>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 50
+    marginTop: 10
   },
   modalContainer: {
     paddingTop: 100
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   moreInfoImage: {
     marginTop: 5,
-    height: 500,
+    height: 550,
     width: 400,
   },
   inputNumber: {
@@ -220,29 +220,15 @@ const styles = StyleSheet.create({
   contactButton: {
     color: 'white',
     position: 'absolute',
-    top: 610,
+    top: 650,
     left: 150
   },
   textButton: {
     color: 'white',
     textAlign: 'right',
     position: 'absolute',
-    top: 610,
+    top: 650,
     left: 220
-  },
-  description: {
-    width: 360,
-    textAlign: 'auto',
-    fontSize: 16,
-    margin: 8,
-    fontFamily: 'Kohinoor Bangla',
-    lineHeight: 20,
-  },
-  canBeFound: {
-    textAlign: 'center',
-    marginTop: 5,
-    marginBottom: 0,
-    fontSize: 17
   },
   petDescription: {
     fontSize: 16,
@@ -257,8 +243,14 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: 'center',
     position: 'absolute',
-    top: 470,
+    top: 517,
+    fontFamily: 'Kohinoor Bangla'
+  },
+  shelterName: {
+    textAlign: 'center',
     fontFamily: 'Kohinoor Bangla',
+    fontSize: 17,
+    fontWeight: 'bold'
   },
   phone: {
     textAlign: 'center',
@@ -274,7 +266,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     textAlign: 'center',
     width: 400,
-    marginTop: 360,
+    marginTop: 415,
     zIndex: 5,
     marginLeft: 10,
   },
