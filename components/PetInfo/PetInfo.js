@@ -204,26 +204,18 @@ const styles = StyleSheet.create({
   backButton: {
     marginTop: 5
   },
-  sendButtonText: {
-    textAlign: 'center',
-    borderRadius: 24,
-    fontSize: 14,
-    color: '#048BA8',
-    margin: 20,
-  },
   contactButton: {
     color: 'white',
     position: 'absolute',
-    top: 590,
-    left: 140
+    top: 610,
+    left: 150
   },
   textButton: {
     color: 'white',
-    fontSize: 15,
     textAlign: 'right',
     position: 'absolute',
-    top: 590,
-    left: 210
+    top: 610,
+    left: 220
   },
   description: {
     width: 360,
@@ -237,7 +229,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     marginBottom: 0,
-    fontSize: 15
+    fontSize: 17
   },
   petDescription: {
     fontSize: 16,
@@ -257,17 +249,19 @@ const styles = StyleSheet.create({
   },
   phone: {
     textAlign: 'center',
-    fontFamily: 'Kohinoor Bangla'
+    fontFamily: 'Kohinoor Bangla',
+    fontSize: 17
   },
   cityStateZip: {
     textAlign: 'center',
     fontFamily: 'Kohinoor Bangla',
+    fontSize: 17
   },
   titlesContainer: {
     borderRadius: 4,
     textAlign: 'center',
     width: 400,
-    marginTop: 350,
+    marginTop: 360,
     zIndex: 5,
     marginLeft: 10,
   },
@@ -291,9 +285,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   text: {
-    color: '#048BA8'
+    color: '#048BA8',
+    fontSize: 35
   },
   email: {
-    color: '#048BA8'
+    color: '#048BA8',
+    fontSize: 33
   }
 })
