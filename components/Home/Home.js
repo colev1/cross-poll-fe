@@ -92,6 +92,7 @@ export default class Home extends React.Component {
   fetchByFilters = (filterChoices) => {
     const { selectedAnimal, selectedSize } = filterChoices;
     let gender;
+    let size;
     switch (filterChoices.selectedGender) {
       case 'male':
         gender = 'M'
@@ -102,7 +103,20 @@ export default class Home extends React.Component {
       default:
         gender = ''
     }
-    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userLocation.zip_code}&animal=${selectedAnimal}&size=${selectedSize}&sex=${gender}`
+    switch(filterChoices.selectedSize) {
+      case 'small':
+        size = 'S'
+        break;
+      case 'medium':
+        size = 'M'
+        break;
+      case 'large':
+        size = 'L'
+        break;
+      default:
+        size = ''
+    }
+    const url = `http://api.petfinder.com/pet.find?format=json&key=${APIkey}&location=${this.state.userLocation.zip_code}&animal=${selectedAnimal}&size=${size}&sex=${gender}`
     this.fetchAllAnimals(url)
     this.setState({ showFilter: false,
     displayedComponent: 'home' })

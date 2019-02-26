@@ -66,9 +66,9 @@ export default class Filter extends React.Component {
     ];
 
     const sizeOptions = [
-      "S",
-      "M",
-      "L"
+      "small",
+      "medium",
+      "large"
     ]
 
     const genderOptions = [
@@ -150,7 +150,9 @@ const styles = StyleSheet.create({
   sliderTitle: {
     fontSize: 20,
     fontFamily: 'Kohinoor Bangla',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: -24,
+    padding: 0,
   },
   filterContainer: {
     width: 300,
@@ -159,44 +161,48 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   selectedRadio: {
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     fontSize: 20,
     color: 'white',
-    padding: 4,
+    padding: 12,
     fontFamily: 'Kohinoor Bangla',
   },
   radioButtons: {
+    // borderColor: 'black',
+    // borderWidth: 1,
     alignItems: 'center',
-    width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 2,
-    minWidth: 120
+    
+    // padding: 2,
+    // minWidth: 120
   },
   unselectedRadio: {
+    padding: 12,
     fontSize: 20,
-    padding: 4,
     fontFamily: 'Kohinoor Bangla',
   },
   radioBorder: {
-    borderRadius: 4,
+    // borderRadius: 4,
     borderColor: 'black',
-    margin: 4,
-    padding: 2,
-    height: 60,
+    margin: 1,
+    // width: 100,
+    // padding: 2,
+    // height: 60,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
   },
   selectedRadioBorder: {
     borderRadius: 4,
-    margin: 4,
-    padding: 2,
-    height: 60,
+    // margin: 4,
+    // padding: 2,
+    // width: 100,
+    // height: 60,
     alignItems: 'center',
     shadowColor: 'white',
     shadowOffset: { width: 0, height: 1 },

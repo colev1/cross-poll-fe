@@ -50,7 +50,13 @@ export default class PetInfo extends React.Component {
     if (this.props.pet && this.props.shelter) {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
       const { shelter } = this.props;
-      let image = photos[2]
+
+      let image;
+      if(photos[7]) {
+        image = photos[7]
+      } else {
+        image=photos[2]
+      }
       return (
         <View style={styles.petInfoContainer}>
           <Modal
@@ -153,8 +159,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   moreInfoImage: {
-    marginTop: 5,
-    height: 500,
+    marginTop: -10,
+    height: 520,
     width: 400,
   },
   inputNumber: {

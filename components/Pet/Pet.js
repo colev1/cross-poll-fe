@@ -163,9 +163,10 @@ const styles = StyleSheet.create({
     width: 500,
   },
   image: {
-    height: 600,
+    // flex: 1,
+    height: 660,
     width: 400,
-    marginTop: 80,
+    marginTop: 30,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 4 },
     shadowOpacity: 0.8,
@@ -176,6 +177,7 @@ const styles = StyleSheet.create({
   },
   borderRad: {
     borderRadius: 30,
+    // flex: 1,
   },
   contactButton: {
     backgroundColor: 'white',
