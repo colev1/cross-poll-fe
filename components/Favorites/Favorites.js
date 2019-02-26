@@ -178,5 +178,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#048BA8',
     position: 'absolute'
   },
+  homeContainer: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 10,
+  }
 
 });
