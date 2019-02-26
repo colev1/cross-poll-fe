@@ -23,11 +23,11 @@ Users can swipe through adobtable pets, favorite pets they are interested in, fi
 ### Screenshots 
 ![signup](https://user-images.githubusercontent.com/39889553/53131574-67547e80-352a-11e9-80dc-563408b42d33.png)
 ![signin](https://user-images.githubusercontent.com/39889553/53131578-6885ab80-352a-11e9-8f58-36ea6b164c71.png)
-![swipe](https://user-images.githubusercontent.com/39889553/53131647-98cd4a00-352a-11e9-967f-11d4f1430bf4.png)
-![filter](https://user-images.githubusercontent.com/39889553/53131473-1fcdf280-352a-11e9-89e2-ea8bfde1d6e8.png)
-![moreinfo](https://user-images.githubusercontent.com/39889553/53132027-a3d4aa00-352b-11e9-837a-2b12a00a42cc.png)
-![text](https://user-images.githubusercontent.com/39889553/53131870-3e80b900-352b-11e9-89ec-c10c306ee45d.png)
-![favorites](https://user-images.githubusercontent.com/39889553/53131937-6f60ee00-352b-11e9-81e5-1f824f46f45e.png)
+![swipe](https://user-images.githubusercontent.com/39889553/53447093-b0e11580-39d1-11e9-8552-e834946fd18d.png)
+![filter](https://user-images.githubusercontent.com/39889553/53447167-d79f4c00-39d1-11e9-8eae-9a678c596526.png)
+![moreinfo](https://user-images.githubusercontent.com/39889553/53447128-c5bda900-39d1-11e9-9fc8-053fd67fdfbb.png)
+![text](https://user-images.githubusercontent.com/39889553/53447148-ce15e400-39d1-11e9-8dd7-34657a1ade0c.png)
+![favorites](https://user-images.githubusercontent.com/39889553/53447240-f7367480-39d1-11e9-8536-70f7f38a5df0.png)
 
 ### Contributors:
 
