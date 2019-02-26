@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Slider, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Slider, TouchableOpacity, TextInput } from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons';
 import { Icon } from 'react-native-elements';
 
@@ -10,7 +10,10 @@ export default class Filter extends React.Component {
       miles: '',
       selectedAnimal: '',
       selectedSize: '',
-      selectedGender: ''
+      selectedGender: '',
+      selectedLocation: '',
+      showChangeLocation: false,
+      newZipCode: ''
     }
   }
 
@@ -38,6 +41,12 @@ export default class Filter extends React.Component {
     });
   }
 
+  showCurrLocation = () => {
+    this.setState({
+      showChangeLocation: true
+    })
+  }
+
   renderOption = (option, selected, onSelect, index) => {
     const selectedStyle = selected ? styles.selectedRadio : styles.unselectedRadio
     const selectedBorder = selected ? styles.selectedRadioBorder : styles.radioBorder
@@ -54,6 +63,10 @@ export default class Filter extends React.Component {
     </View>)
   }
 
+  submitNewLocation = () => {
+    console.log('hi')
+  }
+
 
 
   render() {
@@ -66,9 +79,9 @@ export default class Filter extends React.Component {
     ];
 
     const sizeOptions = [
-      "S",
-      "M",
-      "L"
+      "small",
+      "medium",
+      "large"
     ]
 
     const genderOptions = [
@@ -79,26 +92,19 @@ export default class Filter extends React.Component {
     if (this.props.showFilter) {
       return (
         <View style={styles.filterContainer}>
-          <View style={styles.title}>
-            <Text style={styles.titleText}>
-              AdoptR
-          </Text>
+          <View style={styles.submitLocationContainer}>
             <Icon
-              name='paw'
+              name='map-marker'
               type='font-awesome'
-              color='white'
-              size={36}
-              iconStyle={styles.pawprint}
-            />
+              color='black'
+              size={28}
+              iconStyle={styles.locationIcon} />
+      <Text style={styles.sliderTitle}> 
+                My current location: <Text style={styles.blue}>
+                {this.props.userLocation.zip_code} 
+                </Text>
+                </Text>
           </View>
-          <Text style={styles.sliderTitle}>miles: {this.state.miles} </Text>
-          <Slider
-            step={1}
-            value={this.state.miles}
-            minimumValue={0}
-            maximumValue={60}
-            onValueChange={this.handleSliderChange}
-          />
           <Text style={styles.sliderTitle}> type: </Text>
           <RadioButtons
             style={styles.radioButtons}
@@ -147,56 +153,70 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
   },
+  locationIcon: {
+    position: 'relative',
+    top: 8,
+    left: 10,
+  },
+  inputZip: {
+    color: 'grey',
+    fontSize: 20,
+    width: 150,
+    paddingLeft: 16,    borderRadius: 16,
+    fontFamily: 'Kohinoor Bangla',
+    backgroundColor: 'white',
+  },
   sliderTitle: {
     fontSize: 20,
     fontFamily: 'Kohinoor Bangla',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: -30,
+    padding: 0,
+  },
+  submitLocationContainer: {
+    alignItems: 'center',
+    borderBottomColor: 'white',
+    borderBottomWidth: 2,
+    flexDirection: 'row',
+    height: 80,
+    justifyContent: 'space-around',
+    shadowColor: 'black',
+    width: 300,
   },
   filterContainer: {
-    width: 300,
+    width: 400,
     height: 724,
     justifyContent: 'space-around',
+    alignItems: 'center',
     paddingBottom: 40,
   },
   selectedRadio: {
-    fontWeight: 'bold',
     fontSize: 20,
     color: 'white',
-    padding: 4,
+    padding: 12,
     fontFamily: 'Kohinoor Bangla',
   },
   radioButtons: {
     alignItems: 'center',
-    width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 2,
-    minWidth: 120
+  },
+  blue: {
+    color: '#048BA8',
   },
   unselectedRadio: {
+    padding: 12,
     fontSize: 20,
-    padding: 4,
     fontFamily: 'Kohinoor Bangla',
   },
   radioBorder: {
-    borderRadius: 4,
-    borderColor: 'black',
-    margin: 4,
-    padding: 2,
-    height: 60,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
+    borderColor: 'black',
+    justifyContent: 'center',
+    margin: 1,
   },
   selectedRadioBorder: {
-    borderRadius: 4,
-    margin: 4,
-    padding: 2,
-    height: 60,
     alignItems: 'center',
     shadowColor: 'white',
     shadowOffset: { width: 0, height: 1 },
@@ -206,8 +226,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#048BA8'
   },
   submitBtn: {
-    fontSize: 28,
-    padding: 16,
+    fontSize: 20,
+    padding: 8,
     textAlign: 'center',
     color: 'white',
     fontFamily: 'Kohinoor Bangla',
@@ -215,44 +235,10 @@ const styles = StyleSheet.create({
   submitBtnContainer: {
     backgroundColor: '#048BA8',
     borderRadius: 16,
-    marginTop: 40,
     shadowColor: 'black',
     shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
+    width: 166,
   },
-  title: {
-    borderRadius: 24,
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    alignItems: 'center',
-    backgroundColor: '#048BA8',
-    color: 'white',
-    width: 280,
-    flexDirection: 'row',
-    fontFamily: 'Kohinoor Bangla',
-    fontSize: 50,
-    justifyContent: 'center',
-    padding: 10,
-    shadowColor: 'black',
-    textAlign: 'center',
-    zIndex: 3,
-  },
-  titleText: {
-    fontFamily: 'Kohinoor Bangla',
-    fontSize: 52,
-    textAlign: 'center',
-    color: 'white',
-  },
-  pawprint: {
-    color: 'white',
-    marginLeft: 20
-  },
-  signOut: {
-    color: '#048BA8',
-    marginTop: 20,
-    fontWeight: 'bold',
-    textAlign: 'center'
-  }
 });

@@ -50,7 +50,13 @@ export default class PetInfo extends React.Component {
     if (this.props.pet && this.props.shelter) {
       const { name, breed, age, description, photos, shelterId } = this.props.pet;
       const { shelter } = this.props;
-      let image = photos[2]
+
+      let image;
+      if(photos[7]) {
+        image = photos[7]
+      } else {
+        image=photos[2]
+      }
       return (
         <View style={styles.petInfoContainer}>
           <Modal
