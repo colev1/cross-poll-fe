@@ -93,38 +93,18 @@ export default class Filter extends React.Component {
       return (
         <View style={styles.filterContainer}>
           <View style={styles.submitLocationContainer}>
-          <Icon
-                    name='map-marker'
-                    type='font-awesome'
-                    color='black'
-                    size={28}
-                    iconStyle={styles.locationIcon} />
-            <Text style={styles.sliderTitle}> 
-                      My current location: {this.props.userLocation.zip_code} 
-                      </Text>
-            {/* <TouchableOpacity style={this.state.showChangeLocation ? styles.hidden : styles.changeLocButton}
-            onPress={()=> this.setState({
-              showChangeLocation: true
-            })}>
-            <Text style={this.state.showChangeLocation ? styles.hidden : styles.changeLocText}>
-            change location </Text></TouchableOpacity> */}
-          </View>
-          {/* <View style={this.state.showChangeLocation ? styles.submitLocationContainer : styles.hidden}>
-            <TextInput style={this.state.showChangeLocation ? styles.inputZip : styles.hidden} placeholder='00000'
-            value={this.state.newZipCode}
-            onChangeText={(value) => this.setState({ newZipCode: value })}> 
             <Icon
-            name='arrow-right'
-            type='font-awesome'
-            color='black'
-            size={12}
-            iconStyle={styles.locationIcon} /> 
-            </TextInput>
-            <TouchableOpacity style={this.state.showChangeLocation ? styles.submitLocButton : styles.hidden}
-            onPress={this.submitNewLocation}>
-            <Text> submit </Text> 
-            </TouchableOpacity>
-          </View> */}
+              name='map-marker'
+              type='font-awesome'
+              color='black'
+              size={28}
+              iconStyle={styles.locationIcon} />
+      <Text style={styles.sliderTitle}> 
+                My current location: <Text style={styles.blue}>
+                {this.props.userLocation.zip_code} 
+                </Text>
+                </Text>
+          </View>
           <Text style={styles.sliderTitle}> type: </Text>
           <RadioButtons
             style={styles.radioButtons}
@@ -175,8 +155,8 @@ const styles = StyleSheet.create({
   },
   locationIcon: {
     position: 'relative',
-    top: 28,
-    right: 140,
+    top: 8,
+    left: 10,
   },
   inputZip: {
     color: 'grey',
@@ -190,52 +170,39 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Kohinoor Bangla',
     alignSelf: 'center',
-    marginBottom: -20,
+    marginBottom: -30,
     padding: 0,
   },
   submitLocationContainer: {
-    // flex: 1,
-    // top: 100,
-    // position: 'absolute',
-    // flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomColor: 'white',
+    borderBottomWidth: 2,
+    flexDirection: 'row',
+    height: 80,
     justifyContent: 'space-around',
-    alignItems: 'center'
+    shadowColor: 'black',
+    width: 300,
   },
   filterContainer: {
-    width: 300,
+    width: 400,
     height: 724,
     justifyContent: 'space-around',
+    alignItems: 'center',
     paddingBottom: 40,
   },
-  changeLocButton: {
-    width: 200,
-    // height: 40,
-    marginTop: 40,
-    fontSize: 20,
-    fontFamily: 'Kohinoor Bangla',
-    backgroundColor: 'white'
-  },
-  changeLocText: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontFamily: 'Kohinoor Bangla',
-  },
   selectedRadio: {
-    // fontWeight: 'bold',
     fontSize: 20,
     color: 'white',
     padding: 12,
     fontFamily: 'Kohinoor Bangla',
   },
   radioButtons: {
-    // borderColor: 'black',
-    // borderWidth: 1,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    
-    // padding: 2,
-    // minWidth: 120
+  },
+  blue: {
+    color: '#048BA8',
   },
   unselectedRadio: {
     padding: 12,
@@ -243,26 +210,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Kohinoor Bangla',
   },
   radioBorder: {
-    // borderRadius: 4,
-    borderColor: 'black',
-    margin: 1,
-    // width: 100,
-    // padding: 2,
-    // height: 60,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'white',
-    // shadowColor: '#000',
-    // shadowOffset: { width: 0, height: 1 },
-    // shadowOpacity: 0.8,
-    // shadowRadius: 2,
+    borderColor: 'black',
+    justifyContent: 'center',
+    margin: 1,
   },
   selectedRadioBorder: {
-    borderRadius: 4,
-    // margin: 4,
-    // padding: 2,
-    // width: 100,
-    // height: 60,
     alignItems: 'center',
     shadowColor: 'white',
     shadowOffset: { width: 0, height: 1 },
@@ -272,22 +226,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#048BA8'
   },
   submitBtn: {
-    fontSize: 28,
-    padding: 16,
-    textAlign: 'center',
-    color: 'white',
-    fontFamily: 'Kohinoor Bangla',
-  },
-  submitLocButton: {
-    backgroundColor: '#048BA8',
-    borderRadius: 16,
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-  },
-  submitLocButtonText: {
-    fontSize: 12,
-    padding: 4,
+    fontSize: 20,
+    padding: 8,
     textAlign: 'center',
     color: 'white',
     fontFamily: 'Kohinoor Bangla',
@@ -295,47 +235,10 @@ const styles = StyleSheet.create({
   submitBtnContainer: {
     backgroundColor: '#048BA8',
     borderRadius: 16,
-    marginTop: 40,
     shadowColor: 'black',
     shadowOffset: { width: 1, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 4,
+    width: 166,
   },
-  title: {
-    borderRadius: 24,
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    alignItems: 'center',
-    backgroundColor: '#048BA8',
-    color: 'white',
-    width: 280,
-    flexDirection: 'row',
-    fontFamily: 'Kohinoor Bangla',
-    fontSize: 50,
-    justifyContent: 'center',
-    padding: 10,
-    shadowColor: 'black',
-    textAlign: 'center',
-    zIndex: 3,
-  },
-  titleText: {
-    fontFamily: 'Kohinoor Bangla',
-    fontSize: 52,
-    textAlign: 'center',
-    color: 'white',
-  },
-  pawprint: {
-    color: 'white',
-    marginLeft: 20
-  },
-  signOut: {
-    color: '#048BA8',
-    marginTop: 20,
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-  hidden: {
-    display: 'none'
-  }
 });
