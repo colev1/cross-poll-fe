@@ -104,7 +104,6 @@ export default class PetInfo extends React.Component {
             size={40}
             iconStyle={styles.text}
           />
-            {/* <Text style={styles.contactButtonText}> Email {shelter.name} </Text> */}
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.textButton}
@@ -139,10 +138,11 @@ const styles = StyleSheet.create({
   },
   petName: {
     textAlign: 'left',
-    fontSize: 44,
-    color: 'black',
+    color: 'white',
     marginBottom: 0,
     fontFamily: 'Kohinoor Bangla',
+    fontSize: 36,
+    fontWeight: 'bold'
   },
   image: {
     height: 600,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   moreInfoImage: {
     marginTop: 5,
     height: 500,
-    width: 350,
+    width: 400,
   },
   inputNumber: {
     backgroundColor: 'white',
@@ -204,33 +204,24 @@ const styles = StyleSheet.create({
   backButton: {
     marginTop: 5
   },
-  sendButtonText: {
-    textAlign: 'center',
-    borderRadius: 24,
-    fontSize: 14,
-    color: '#048BA8',
-    margin: 20,
-  },
   contactButton: {
     color: 'white',
     position: 'absolute',
-    top: 590,
-    left: 120
+    top: 610,
+    left: 150
   },
   textButton: {
     color: 'white',
-    fontSize: 15,
     textAlign: 'right',
     position: 'absolute',
-    top: 590,
-    left: 190
+    top: 610,
+    left: 220
   },
   description: {
     width: 360,
     textAlign: 'auto',
     fontSize: 16,
     margin: 8,
-    color: 'black',
     fontFamily: 'Kohinoor Bangla',
     lineHeight: 20,
   },
@@ -238,33 +229,41 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
     marginBottom: 0,
-    fontSize: 15
+    fontSize: 17
   },
   petDescription: {
-    fontSize: 28,
-    marginTop: 0,
+    fontSize: 16,
     paddingTop: 0,
     textAlign: 'left',
-    color: 'black',
+    color: 'white',
     fontFamily: 'Kohinoor Bangla',
+    marginLeft: 10
   },
   shelterInfo: {
     marginTop: 50,
     fontSize: 10,
     textAlign: 'center',
     position: 'absolute',
-    top: 470
+    top: 470,
+    fontFamily: 'Kohinoor Bangla',
   },
   phone: {
     textAlign: 'center',
+    fontFamily: 'Kohinoor Bangla',
+    fontSize: 17
   },
   cityStateZip: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Kohinoor Bangla',
+    fontSize: 17
   },
   titlesContainer: {
     borderRadius: 4,
     textAlign: 'center',
     width: 400,
+    marginTop: 360,
+    zIndex: 5,
+    marginLeft: 10,
   },
   shelterContainer: {
     backgroundColor: 'white',
@@ -274,12 +273,6 @@ const styles = StyleSheet.create({
     height: 600,
     textAlign: 'center',
     width: 400,
-  },
-  petBreedAge: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    width: 300,
   },
   hidden: {
     display: 'none',
@@ -292,9 +285,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   text: {
-    color: '#048BA8'
+    color: '#048BA8',
+    fontSize: 35
   },
   email: {
-    color: '#048BA8'
+    color: '#048BA8',
+    fontSize: 33
   }
 })
