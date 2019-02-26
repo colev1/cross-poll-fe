@@ -159,9 +159,10 @@ const styles = StyleSheet.create({
   },
   inputNumber: {
     backgroundColor: 'white',
-    color: '#F49D37',
-    fontSize: 36,
-    width: 240,
+    color: 'grey',
+    fontSize: 20,
+    width: 150,
+    paddingLeft: 16,
     borderRadius: 16,
     fontFamily: 'Kohinoor Bangla',
   },
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
   },
   textModal: {
     position: 'absolute',
-    top: 200,
+    top: 250,
     borderWidth: 1,
     flex: 1,
     justifyContent: 'space-around',
@@ -178,8 +179,8 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     backgroundColor: '#048BA8',
     alignSelf: 'center',
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 130,
     borderRadius: 16,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 4 },
@@ -187,10 +188,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   textFriends: {
-    fontSize: 28,
+    fontSize: 18,
     color: 'white',
     textAlign: 'center',
     fontFamily: 'Kohinoor Bangla',
+    marginTop: 5,
+    fontWeight: 'bold'
   },
   sendTextBtn: {
     backgroundColor: 'white',
@@ -198,8 +201,18 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderStyle: 'solid',
     fontSize: 20,
-    marginTop: 40,
-    width: 200,
+    marginTop: 10,
+    marginBottom: 10,
+    width: 100,
+    padding: 5,
+    paddingRight: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+  },
+  sendButtonText: {
+    textAlign: 'center'
   },
   backButton: {
     marginTop: 5
