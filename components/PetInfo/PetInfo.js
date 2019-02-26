@@ -95,7 +95,7 @@ export default class PetInfo extends React.Component {
             </View>
           </ImageBackground>
           <View style={styles.shelterInfo}>
-            <Text style={styles.canBeFound}>
+            <Text style={styles.shelterName}>
               {shelter.name}
             </Text>
             <Text style={styles.phone}>{shelter.phone}</Text>
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 50
+    marginTop: 10
   },
   modalContainer: {
     paddingTop: 100
@@ -159,15 +159,16 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   moreInfoImage: {
-    marginTop: -10,
-    height: 520,
+    marginTop: 5,
+    height: 550,
     width: 400,
   },
   inputNumber: {
     backgroundColor: 'white',
-    color: '#F49D37',
-    fontSize: 36,
-    width: 240,
+    color: 'grey',
+    fontSize: 20,
+    width: 150,
+    paddingLeft: 16,
     borderRadius: 16,
     fontFamily: 'Kohinoor Bangla',
   },
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
   },
   textModal: {
     position: 'absolute',
-    top: 200,
+    top: 250,
     borderWidth: 1,
     flex: 1,
     justifyContent: 'space-around',
@@ -184,8 +185,8 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     backgroundColor: '#048BA8',
     alignSelf: 'center',
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 130,
     borderRadius: 16,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 4 },
@@ -193,10 +194,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   textFriends: {
-    fontSize: 28,
+    fontSize: 18,
     color: 'white',
     textAlign: 'center',
     fontFamily: 'Kohinoor Bangla',
+    marginTop: 5,
+    fontWeight: 'bold'
   },
   sendTextBtn: {
     backgroundColor: 'white',
@@ -204,8 +207,18 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderStyle: 'solid',
     fontSize: 20,
-    marginTop: 40,
-    width: 200,
+    marginTop: 10,
+    marginBottom: 10,
+    width: 100,
+    padding: 5,
+    paddingRight: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 4 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+  },
+  sendButtonText: {
+    textAlign: 'center'
   },
   backButton: {
     marginTop: 5
@@ -213,29 +226,15 @@ const styles = StyleSheet.create({
   contactButton: {
     color: 'white',
     position: 'absolute',
-    top: 610,
+    top: 650,
     left: 150
   },
   textButton: {
     color: 'white',
     textAlign: 'right',
     position: 'absolute',
-    top: 610,
+    top: 650,
     left: 220
-  },
-  description: {
-    width: 360,
-    textAlign: 'auto',
-    fontSize: 16,
-    margin: 8,
-    fontFamily: 'Kohinoor Bangla',
-    lineHeight: 20,
-  },
-  canBeFound: {
-    textAlign: 'center',
-    marginTop: 5,
-    marginBottom: 0,
-    fontSize: 17
   },
   petDescription: {
     fontSize: 16,
@@ -250,8 +249,14 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: 'center',
     position: 'absolute',
-    top: 470,
+    top: 517,
+    fontFamily: 'Kohinoor Bangla'
+  },
+  shelterName: {
+    textAlign: 'center',
     fontFamily: 'Kohinoor Bangla',
+    fontSize: 17,
+    fontWeight: 'bold'
   },
   phone: {
     textAlign: 'center',
@@ -267,7 +272,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     textAlign: 'center',
     width: 400,
-    marginTop: 360,
+    marginTop: 415,
     zIndex: 5,
     marginLeft: 10,
   },

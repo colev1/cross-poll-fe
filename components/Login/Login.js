@@ -207,8 +207,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    paddingTop: 160,
-    paddingBottom: 140
+    paddingTop: 170,
+    paddingBottom: 140,
+    marginTop: 10
   },
   formSignUp: {
     backgroundColor: 'white',
@@ -270,6 +271,7 @@ const styles = StyleSheet.create({
     top: 60,
     width: 280,
     zIndex: 3,
+
   },
   titleText: {
     fontFamily: 'Kohinoor Bangla',
@@ -295,7 +297,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     width: 280,
     position: 'absolute',
-    bottom: 50,
+    bottom: 65,
   },
   submitButtonText: {
     fontSize: 32,

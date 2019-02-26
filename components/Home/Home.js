@@ -292,7 +292,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { allPets, petIndex, showInfo, showFilter, shelter, showFavorites, favorites } = this.state;
+    const { allPets, petIndex, showFilter, shelter, favorites } = this.state;
     const { userAPIToken} = this.props;
     let display;
     switch(this.state.displayedComponent) {
