@@ -27,7 +27,8 @@ export default class Home extends React.Component {
       showFilter: false,
       showInfo: false,
       userZipCode: '',
-      displayedComponent: 'home'
+      displayedComponent: 'home',
+      userLocation: {}
     }
   }
 
@@ -47,6 +48,7 @@ export default class Home extends React.Component {
     try {
       const response = await fetch('https://adoptr-be.herokuapp.com/api/v1/locations')
       const result = await response.json()
+      console.log("zipCode", result.zip_code)
       return this.fetchByZipCode(result)
     } catch(err) {
       this.displayError()     
@@ -301,6 +303,7 @@ export default class Home extends React.Component {
         display = (<Filter 
         showFilter={showFilter} 
         fetchByFilters={this.fetchByFilters} 
+        userLocation={this.state.userLocation}
         signOut={this.signOut} />)
         break;
       case 'info':

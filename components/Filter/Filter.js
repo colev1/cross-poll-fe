@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Slider, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Slider, TouchableOpacity, TextInput } from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons';
 import { Icon } from 'react-native-elements';
 
@@ -10,7 +10,9 @@ export default class Filter extends React.Component {
       miles: '',
       selectedAnimal: '',
       selectedSize: '',
-      selectedGender: ''
+      selectedGender: '',
+      selectedLocation: '',
+      showChangeLocation: false
     }
   }
 
@@ -36,6 +38,12 @@ export default class Filter extends React.Component {
     this.setState({
       selectedGender
     });
+  }
+
+  showCurrLocation = () => {
+    this.setState({
+      showChangeLocation: true
+    })
   }
 
   renderOption = (option, selected, onSelect, index) => {
@@ -91,14 +99,29 @@ export default class Filter extends React.Component {
               iconStyle={styles.pawprint}
             />
           </View>
-          <Text style={styles.sliderTitle}>miles: {this.state.miles} </Text>
-          <Slider
+          <Icon
+                    name='map-marker'
+                    type='font-awesome'
+                    color='black'
+                    size={28}
+                    iconStyle={styles.locationIcon} />
+          <Text style={styles.sliderTitle}> 
+                    My current location: {this.props.userLocation.zip_code} 
+                    </Text>
+          <TouchableOpacity style={this.state.showChangeLocation ? styles.hidden : styles.changeLocButton}
+          onPress={()=> this.setState({
+            showChangeLocation: true
+          })}>
+          <Text style={this.state.showChangeLocation ? styles.hidden : styles.changeLocText}>
+          change location </Text></TouchableOpacity>
+          <TextInput style={this.state.showChangeLocation ? styles.inputZip : styles.hidden} placeholder='00000'>  </TextInput>
+          {/* <Slider
             step={1}
             value={this.state.miles}
             minimumValue={0}
             maximumValue={60}
             onValueChange={this.handleSliderChange}
-          />
+          /> */}
           <Text style={styles.sliderTitle}> type: </Text>
           <RadioButtons
             style={styles.radioButtons}
@@ -147,11 +170,24 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
   },
+  locationIcon: {
+    position: 'relative',
+    top: 40,
+    right: 140,
+  },
+  inputZip: {
+    color: 'grey',
+    fontSize: 20,
+    width: 150,
+    paddingLeft: 16,    borderRadius: 16,
+    fontFamily: 'Kohinoor Bangla',
+    backgroundColor: 'white',
+  },
   sliderTitle: {
     fontSize: 20,
     fontFamily: 'Kohinoor Bangla',
     alignSelf: 'center',
-    marginBottom: -24,
+    marginBottom: -20,
     padding: 0,
   },
   filterContainer: {
@@ -159,6 +195,17 @@ const styles = StyleSheet.create({
     height: 724,
     justifyContent: 'space-around',
     paddingBottom: 40,
+  },
+  changeLocButton: {
+    width: 200,
+    // height: 40,
+    fontSize: 20,
+    fontFamily: 'Kohinoor Bangla',
+    backgroundColor: 'white'
+  },
+  changeLocText: {
+    fontSize: 20,
+    fontFamily: 'Kohinoor Bangla',
   },
   selectedRadio: {
     // fontWeight: 'bold',
@@ -260,5 +307,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontWeight: 'bold',
     textAlign: 'center'
+  },
+  hidden: {
+    display: 'none'
   }
 });
