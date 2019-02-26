@@ -104,7 +104,6 @@ export default class PetInfo extends React.Component {
             size={40}
             iconStyle={styles.text}
           />
-            {/* <Text style={styles.contactButtonText}> Email {shelter.name} </Text> */}
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.textButton}
@@ -139,10 +138,11 @@ const styles = StyleSheet.create({
   },
   petName: {
     textAlign: 'left',
-    fontSize: 44,
-    color: 'black',
+    color: 'white',
     marginBottom: 0,
     fontFamily: 'Kohinoor Bangla',
+    fontSize: 36,
+    fontWeight: 'bold'
   },
   image: {
     height: 600,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   moreInfoImage: {
     marginTop: 5,
     height: 500,
-    width: 350,
+    width: 400,
   },
   inputNumber: {
     backgroundColor: 'white',
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     color: 'white',
     position: 'absolute',
     top: 590,
-    left: 120
+    left: 140
   },
   textButton: {
     color: 'white',
@@ -223,14 +223,13 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     position: 'absolute',
     top: 590,
-    left: 190
+    left: 210
   },
   description: {
     width: 360,
     textAlign: 'auto',
     fontSize: 16,
     margin: 8,
-    color: 'black',
     fontFamily: 'Kohinoor Bangla',
     lineHeight: 20,
   },
@@ -241,30 +240,36 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   petDescription: {
-    fontSize: 28,
-    marginTop: 0,
+    fontSize: 16,
     paddingTop: 0,
     textAlign: 'left',
-    color: 'black',
+    color: 'white',
     fontFamily: 'Kohinoor Bangla',
+    marginLeft: 10
   },
   shelterInfo: {
     marginTop: 50,
     fontSize: 10,
     textAlign: 'center',
     position: 'absolute',
-    top: 470
+    top: 470,
+    fontFamily: 'Kohinoor Bangla',
   },
   phone: {
     textAlign: 'center',
+    fontFamily: 'Kohinoor Bangla'
   },
   cityStateZip: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Kohinoor Bangla',
   },
   titlesContainer: {
     borderRadius: 4,
     textAlign: 'center',
     width: 400,
+    marginTop: 350,
+    zIndex: 5,
+    marginLeft: 10,
   },
   shelterContainer: {
     backgroundColor: 'white',
@@ -274,12 +279,6 @@ const styles = StyleSheet.create({
     height: 600,
     textAlign: 'center',
     width: 400,
-  },
-  petBreedAge: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    width: 300,
   },
   hidden: {
     display: 'none',
