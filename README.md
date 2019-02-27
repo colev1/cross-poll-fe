@@ -21,8 +21,8 @@ Users can swipe through adobtable pets, favorite pets they are interested in, fi
 * run `expo start`
 
 ### Screenshots 
-![signup](https://user-images.githubusercontent.com/39889553/53131574-67547e80-352a-11e9-80dc-563408b42d33.png)
-![signin](https://user-images.githubusercontent.com/39889553/53131578-6885ab80-352a-11e9-8f58-36ea6b164c71.png)
+![signup](https://user-images.githubusercontent.com/39889553/53525021-231f2c00-3a9e-11e9-9ab3-83568fc096bd.png)
+![signin](https://user-images.githubusercontent.com/39889553/53525025-24505900-3a9e-11e9-8736-afcf7ee6fac3.png)
 ![swipe](https://user-images.githubusercontent.com/39889553/53447093-b0e11580-39d1-11e9-8552-e834946fd18d.png)
 ![filter](https://user-images.githubusercontent.com/39889553/53447167-d79f4c00-39d1-11e9-8eae-9a678c596526.png)
 ![moreinfo](https://user-images.githubusercontent.com/39889553/53447128-c5bda900-39d1-11e9-9fc8-053fd67fdfbb.png)
