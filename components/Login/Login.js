@@ -123,16 +123,16 @@ export default class Login extends React.Component {
     return (
       <View style={styles.form}>
         <View style={styles.title}>
-          <Text style={styles.titleText}>
-            AdoptR
-          </Text>
           <Icon
             name='paw'
             type='font-awesome'
             color='white'
-            size={36}
+            size={80}
             iconStyle={styles.pawprint}
           />
+          <Text style={styles.titleText}>
+            adoptr
+          </Text>
         </View>
         <View style={this.state.selectedOption === 'sign up' ? styles.formSignUp : styles.formSignIn}>
           <RadioButtons
@@ -187,9 +187,13 @@ export default class Login extends React.Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.submitUser()} >
-          <Text style={styles.submitButtonText}  >
-            submit
-          </Text>
+          <Icon
+            name='arrow-circle-right'
+            type='font-awesome'
+            color='#048BA8'
+            size={60}
+            iconStyle={styles.submitButtonText}
+          />
         </TouchableOpacity>
       </View>
     )
@@ -198,10 +202,10 @@ export default class Login extends React.Component {
 
 const styles = StyleSheet.create({
   buttonText: {
-    fontSize: 20
+    fontSize: 20,
   },
   form: {
-    backgroundColor: '#E5E5E5',
+    backgroundColor: 'white',
     fontSize: 50,
     width: '100%',
     flex: 1,
@@ -212,41 +216,41 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   formSignUp: {
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     fontSize: 60,
     width: '96%',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
-    borderRadius: 16,
-    marginTop: 20,
-    paddingTop: 60,
+    // borderRadius: 16,
+    marginTop: 40,
+    paddingTop: 80,
     paddingBottom: 100,
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: .8,
-    shadowRadius: 4,
+    // shadowColor: 'black',
+    // shadowOffset: { width: 1, height: 2 },
+    // shadowOpacity: .8,
+    // shadowRadius: 4,
   },
   formSignIn: {
     alignItems: 'center',
     backgroundColor: 'white',
-    borderRadius: 16,
+    // borderRadius: 16,
     flex: 1,
     fontSize: 60,
-    marginTop: 20,
+    marginTop: 40,
     paddingBottom: 100,
-    paddingTop: 100,
+    paddingTop: 80,
     width: '96%',
     shadowColor: 'black',
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: .8,
-    shadowRadius: 4,
+    // shadowOffset: { width: 1, height: 2 },
+    // shadowOpacity: .8,
+    // shadowRadius: 4,
   },
   input: {
     borderBottomColor: '#048BA8',
     borderStyle: 'solid',
     borderBottomWidth: 2,
-    fontSize: 20,
+    fontSize: 24,
     height: 66,
     textAlign: 'left',
     width: 320,
@@ -254,54 +258,61 @@ const styles = StyleSheet.create({
   },
   title: {
     alignItems: 'center',
-    backgroundColor: '#048BA8',
-    borderRadius: 24,
+    flex: 1,
+    flexDirection: 'column',
+    // backgroundColor: '#048BA8',
+    // borderRadius: 24,
     color: 'white',
-    flexDirection: 'row',
+    // flexDirection: 'row',
     fontFamily: 'Kohinoor Bangla',
     fontSize: 50,
     justifyContent: 'center',
-    padding: 10,
+    alignItems: 'center',
+    // padding: 10,
     position: 'absolute',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
+    // shadowColor: 'black',
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowOpacity: 0.8,
     shadowRadius: 2,
     textAlign: 'center',
     top: 60,
-    width: 280,
-    zIndex: 3,
+    // width: 280,
+    // zIndex: 3,
 
   },
   titleText: {
     fontFamily: 'Kohinoor Bangla',
-    fontSize: 52,
-    textAlign: 'center',
-    color: 'white',
+    // fontFamily: 'Kohinoor Bangla',
+    fontSize: 28,
+    fontWeight: 'bold',
+    // textAlign: 'center',
+    marginLeft: 16,
+    color: '#048BA8',
   },
   pawprint: {
-    color: 'white',
+    color: '#048BA8',
     marginLeft: 20
   },
   hidden: {
     display: 'none'
   },
   button: {
-    backgroundColor: '#048BA8',
+    // backgroundColor: '#048BA8',
     borderColor: 'black',
     borderStyle: 'solid',
-    borderRadius: 16,
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: .8,
-    shadowRadius: 4,
-    width: 280,
+    borderRadius: 50,
+    padding: 8,
+    // shadowColor: 'black',
+    // shadowOffset: { width: 1, height: 2 },
+    // shadowOpacity: .8,
+    // shadowRadius: 4,
+    // width: 280,
     position: 'absolute',
-    bottom: 65,
+    bottom: 100,
   },
   submitButtonText: {
-    fontSize: 32,
-    color: 'white',
+    // fontSize: 32,
+    // color: 'white',
     textAlign: 'center',
     fontFamily: 'Kohinoor Bangla'
   },
@@ -334,6 +345,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     position: 'absolute',
-    bottom: 16
+    bottom: 40
   }
 });
